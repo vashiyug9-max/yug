@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<robot name="Livox_Mid40" xmlns:xacro="http://ros.org/wiki/xacro">
+
+
+  <gazebo reference="livox_frame">
+
+        <sensor name="laser" type="gpu_lidar">
+            <pose relative_to="livox_frame"> 0 0 0 0 0 0 </pose>
+            <topic>scan</topic>
+            <update_rate>10</update_rate>
+            <lidar>
+                <scan>
+                    <horizontal>
+                        <samples>180</samples>
+                        <min_angle>-1.57</min_angle>
+                        <max_angle>1.57</max_angle>
+                        <resolution>1</resolution>
+                    </horizontal>
+                    <vertical>
+                        <samples>180</samples>
+                        <min_angle>-1.57</min_angle>
+                        <max_angle>1.57</max_angle>
+                        <resolution>1</resolution>
+                    </vertical>
+                </scan>
+                <range>
+                    <min>0.3</min>
+                    <max>12</max>
+                </range>
+            </lidar>
+            <always_on>1</always_on>
+            <visualize>true</visualize>
+            <gz_frame_id>livox_laser</gz_frame_id>
+        </sensor>
+  </gazebo>
+
+
+  <gazebo reference="livox_frame">
+
+        <sensor name="3Dlaser" type="gpu_lidar">
+            <pose relative_to="livox_frame"> 0 0 0 0 0 0 </pose>
+            <topic>points</topic>
+            <update_rate>10</update_rate>
+            <lidar>
+                <scan>
+                    <horizontal>
+                        <samples>180</samples>
+                        <min_angle>-1.57</min_angle>
+                        <max_angle>1.57</max_angle>
+                        <resolution>1</resolution>
+                    </horizontal>
+                    <vertical>
+                        <samples>180</samples>
+                        <min_angle>-1.57</min_angle>
+                        <max_angle>1.57</max_angle>
+                        <resolution>1</resolution>
+                    </vertical>
+                </scan>
+                <range>
+                    <min>0.3</min>
+                    <max>12</max>
+                </range>
+            </lidar>
+            <always_on>1</always_on>
+            <visualize>true</visualize>
+            <gz_frame_id>livox_laser</gz_frame_id>
+        </sensor>
+  </gazebo>
+
+
+
+</robot>
