@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+    <ros2_control name="GazeboSimSystem" type="system">
+        <hardware>
+            <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+        </hardware>
+        <joint name="left_middle_to_base">
+            <command_interface name="velocity">
+                <param name="min">-10000</param>
+                <param name="max">10000</param>
+            </command_interface>
+            <state_interface name="velocity"/>
+            <state_interface name="position"/>
+        </joint>
+        <joint name="rigth_middle_to_base">
+            <command_interface name="velocity">
+                <param name="min">-10000</param>
+                <param name="max">10000</param>
+            </command_interface>
+            <state_interface name="velocity"/>
+            <state_interface name="position"/>
+        </joint>
+
+
+        <joint name="left_front_to_base">
+            <command_interface name="velocity">
+                <param name="min">-10000</param>
+                <param name="max">10000</param>
+            </command_interface>
+            <state_interface name="velocity"/>
+            <state_interface name="position"/>
+        </joint>
+        <joint name="right_front_to_base">
+            <command_interface name="velocity">
+                <param name="min">-10000</param>
+                <param name="max">10000</param>
+            </command_interface>
+            <state_interface name="velocity"/>
+            <state_interface name="position"/>
+        </joint>
+
+
+        <joint name="left_back_to_base">
+            <command_interface name="velocity">
+                <param name="min">-10000</param>
+                <param name="max">10000</param>
+            </command_interface>
+            <state_interface name="velocity"/>
+            <state_interface name="position"/>
+        </joint>
+        <joint name="right_back_to_base">
+            <command_interface name="velocity">
+                <param name="min">-10000</param>
+                <param name="max">10000</param>
+            </command_interface>
+            <state_interface name="velocity"/>
+            <state_interface name="position"/>
+        </joint>
+    </ros2_control>
+
+    <gazebo>
+        <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system.so">
+            <parameters>$(find vinebot_description)/config/my_controller.yaml</parameters>
+            <!-- <controller_manager_prefix_node_name>controller_manager</controller_manager_prefix_node_name> -->
+        </plugin>
+    </gazebo>
+
+</robot>
