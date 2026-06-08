@@ -1,0 +1,6 @@
+[console_scripts]
+action = robo_project.action_executive:main
+bridge = robo_project.habitat_bridge_vinebot_2:main
+planner = robo_project.pipeline:main
+runner_node = robo_project.runner_node2:main
+

@@ -1,0 +1,25 @@
+running develop
+running egg_info
+creating robo_project.egg-info
+writing robo_project.egg-info/PKG-INFO
+writing dependency_links to robo_project.egg-info/dependency_links.txt
+writing entry points to robo_project.egg-info/entry_points.txt
+writing requirements to robo_project.egg-info/requires.txt
+writing top-level names to robo_project.egg-info/top_level.txt
+writing manifest file 'robo_project.egg-info/SOURCES.txt'
+reading manifest file 'robo_project.egg-info/SOURCES.txt'
+writing manifest file 'robo_project.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/yug/master_vinebot_ws/install/robo_project/lib/python3.10/site-packages/robo-project.egg-link (link to .)
+Installing action script to /home/yug/master_vinebot_ws/install/robo_project/bin
+Installing bridge script to /home/yug/master_vinebot_ws/install/robo_project/bin
+Installing planner script to /home/yug/master_vinebot_ws/install/robo_project/bin
+Installing runner_node script to /home/yug/master_vinebot_ws/install/robo_project/bin
+
+Installed /home/yug/master_vinebot_ws/build/robo_project
+running symlink_data
+creating /home/yug/master_vinebot_ws/install/robo_project/share/ament_index
+creating /home/yug/master_vinebot_ws/install/robo_project/share/ament_index/resource_index
+creating /home/yug/master_vinebot_ws/install/robo_project/share/ament_index/resource_index/packages
+symbolically linking /home/yug/master_vinebot_ws/build/robo_project/resource/robo_project -> /home/yug/master_vinebot_ws/install/robo_project/share/ament_index/resource_index/packages
+symbolically linking /home/yug/master_vinebot_ws/build/robo_project/package.xml -> /home/yug/master_vinebot_ws/install/robo_project/share/robo_project
