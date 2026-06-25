@@ -4,18 +4,12 @@
 <xacro:arg name="use_nominal_extrinsics" default="false"/>
 
 <xacro:include filename="$(find vinebot_description)/urdf/materials.xacro" />
-<!-- <xacro:include filename="$(find vinebot_description)/urdf/vinebot.trans" /> -->
 <xacro:include filename="$(find vinebot_description)/urdf/vinebot.gazebo" />
-<!-- <xacro:include filename="$(find vinebot_description)/urdf/gazebo_control.xacro" /> -->
 <xacro:include filename="$(find vinebot_description)/urdf/ros2_control.xacro" />
-<!-- <xacro:include filename="$(find vinebot_description)/gazebo/vinebot_detailed_plugins.gazebo" /> -->
 <xacro:include filename="$(find vinebot_description)/urdf/vinebot_d455.urdf.xacro" />
-<!--<xacro:include filename="$(find vinebot_description)/urdf/vinebot_livox_mid40.xacro" />
--->
 <xacro:include filename="$(find vinebot_description)/urdf/imu.xacro" />
 
 
-<!-- base_footprint -->
 <link name="base_footprint">
 	<visual>
 		<origin xyz="0.35 0 0" rpy="0 0 0" />
@@ -27,7 +21,7 @@
 </link>
 
 <joint name="base_footprint_to_base_link" type="fixed">
-	<origin xyz="0 0 ${clearance}" rpy="0 0 0" />
+	<origin xyz="0 0 ${clearance}" rpy="0 0 -1.5708" />
 	<parent link="base_footprint" />
 	<child link="base_link" />
 </joint>
@@ -326,7 +320,6 @@
   </collision>
 </link>
 
-<!-- from -->
 <link name="livox_laser">
   <inertial>
     <origin rpy="0 0 0" xyz="-0.13986365188962635 0.14255852645544653 0.12358394887627916"/>
@@ -347,9 +340,6 @@
     </geometry>
   </collision>
 </link>
-<!-- to -->
-
-
 <link name="imu_link">
     <visual>
         <geometry>
@@ -518,14 +508,7 @@
   <child link="right_motor_with_gear_1"/>
 </joint>
 
-<!-- camera integration -->
-
-<!-- from -->
 <link name="camera_base_link"/>
-
-<!-- <xacro:sensor_d455 parent="camera_base_link" use_nominal_extrinsics="$(arg use_nominal_extrinsics)">
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-</xacro:sensor_d455> -->
 
 <joint name="camera_base_to_box_cover_1" type="fixed">
     <parent link="box_cover_1"/>
@@ -539,19 +522,6 @@
     <origin xyz="0.83 0.11 -0.068" rpy="0 0 0"/>
 </joint>
 
-<!-- to -->
-<!-- Vinebot Livox integration
-<link name="livox_link"/>
-<xacro:Livox_Mid40 parent="livox_link" params="visualize:=True name:=livox">
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-</xacro:Livox_Mid40>
-<joint name="livox_to_box_cover_1" type="fixed">
-  <parent link="box_cover_1"/>
-  <child link="livox_link"/>
-  <origin xyz="0.84 0.11 0.013" rpy="0.0 0.0 0.0"/>
-</joint>
--->
-<!-- from -->
 <link name ="livox_frame"/>
 <joint name="livox_lidar_to_livox_frame" type="fixed">
   <parent link="livox_laser"/>
@@ -559,5 +529,4 @@
   <origin xyz="0.05 0.14 0.07" rpy="0.0 0.0 0.0"/>
 </joint>
 
-<!-- to -->
 </robot>
