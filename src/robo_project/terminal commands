@@ -1,73 +1,31 @@
-terminal 1
+VineBot – Habitat simulation with ML obstacle avoidance
+=======================================================
 
-conda activate habitat
-cd ~/robo_project_ws
-rm -rf build install log
-colcon build                               
-source install/setup.bash
+Before you start (once)
+# - the workspace is at ~/robo_project_ws (otherwise change the "cd" lines below)
+# - conda env "habitat" with habitat_sim, torch and numba; ROS 2 Humble in /opt/ros/humble
+# - the ML checkpoint at ~/robo_project_ws/runs/fusion_full_e1.2/best.pt (not in git, 72 MB)
+# - the scene src/environment/IMR_lab8.glb + .navmesh and the map src/resources/sketch_map_imr_lab8.jpeg
 
-terminal 2
-
-conda activate habitat
-cd ~/robo_project_ws
-python3 src/robo_project/habitat_bridge_vinebot_2.py
-
-terminal 3
-
-cd ~/robo_project_ws
-source install/setup.bash
-ros2 launch vinebot_description robot_launch.py
-
-terminal 4
-
-conda activate habitat
-cd ~/robo_project_ws
-source install/setup.bash
-rviz2 -d src/vinebot_description/config/display_vinebot.rviz
-
-terminal 5
-
-conda activate habitat
-cd ~/robo_project_ws
-rm -rf build install log
-colcon build
-source install/setup.bash
-ros2 run robo_project runner_node
-
-
-terminal 6
-
-conda activate habitat
-cd ~/robo_project_ws
-source install/setup.bash
-ros2 run robo_project motion_planner
-
-
-
-
-
-
-
-
-
-Run order: build once -> Habitat -> robot model -> RViz -> runner (map) -> motion planner (path).
-Wait for each step's "ready" line before starting the next one.
+Run order: build once -> Habitat -> robot model -> RViz -> runner (map) -> ML model -> planner.
+Wait for each step's "ready" line before starting the next one. Stop everything with Ctrl+C.
 
 terminal 1  (build once - do NOT rebuild while the other terminals are running)
 
 conda activate habitat
 cd ~/robo_project_ws
 rm -rf build install log
-colcon build --packages-select robo_project vinebot_description
+colcon build --packages-select robo_project vinebot_description --cmake-args -DPython3_EXECUTABLE=/usr/bin/python3
 source install/setup.bash
 
-terminal 2  (Habitat)
+terminal 2  (Habitat simulation - sim/habitat_bridge.py)
 
 conda activate habitat
 cd ~/robo_project_ws
 source install/setup.bash
-python3 src/robo_project/habitat_bridge_vinebot_2.py
+python3 -m robo_project.sim.habitat_bridge
 # ready when: "Robot spawned at x=-4.10 y=4.90" and "Habitat Bridge fully initialized"
+# publishes the 4 cameras, front depth, the simulated LiDAR (/livox/lidar), /odom and TF.
 # options:  --ros-args -p start_x:=-4.1 -p start_y:=4.9 -p start_yaw:=0.0
 #           -p gpu_device_id:=-1    (no NVIDIA GPU / VM: software rendering)
 #           -p show_window:=false   (no camera window)
@@ -78,55 +36,78 @@ cd ~/robo_project_ws
 source install/setup.bash
 ros2 launch vinebot_description robot_launch.py
 
-terminal 4  (RViz: map, robot, planned path, goal, current waypoint)
+terminal 4  (RViz)
 
 conda activate habitat
 cd ~/robo_project_ws
 source install/setup.bash
 rviz2 -d src/vinebot_description/config/display_vinebot.rviz
+# shows: map, robot, planned path, goal, current waypoint, "ML Obstacle Map" (what the planner
+# avoids), "Fusion Local Grid" (raw 1.2 m model prediction), "LiDAR" (simulated scan)
 
-terminal 5  (runner: publishes /map + follows /planned_path)
+terminal 5  (runner: publishes /map from the sketch + follows /planned_path - ros/runner_node.py)
 
 conda activate habitat
 cd ~/robo_project_ws
 source install/setup.bash
 ros2 run robo_project runner_node
-# ready when: "MAP BROADCAST SUCCESSFUL! Check RViz now."  -> map appears in RViz
+# ready when: "MAP BROADCAST SUCCESSFUL! Check RViz now."
+# map: src/resources/sketch_map_imr_lab8.jpeg
 
-terminal 6  (motion planner: A* from the robot to the goal)
-
-conda activate habitat
-cd ~/robo_project_ws
-source install/setup.bash
-python3 install/robo_project/lib/robo_project/motion_planner
-# run it with the conda python (NOT "ros2 run": that uses /usr/bin/python3, which has no numba,
-# and A* then falls back to the slow pure-Python search: seconds instead of ~10 ms).
-# plans to GOAL_X/GOAL_Y (0,0) at start; the robot drives it in Habitat and RViz.
-# Click "2D Goal Pose" in RViz to send a new goal - it re-plans from the current pose.
-# Obstacles seen by the ML model (terminal 7, /fusion/obstacle_map) are added to the A* map;
-# when one lies on the current path it re-plans at once ("ML model: obstacle on the path").
-# If the robot still gets stuck, runner_node reports it on /blocked_point and it re-plans too.
-# No path at all: the robot is stopped and planning is retried every 2 s.
-
-terminal 7  (fusion ML model: 4 RGB cameras + LiDAR + depth -> ML obstacle map for the planner)
+terminal 6  (ML model: 4 RGB cameras + LiDAR + depth -> obstacle map - ml/fusion/fusion_obstacle_node.py)
 
 conda activate habitat
 cd ~/robo_project_ws
 source install/setup.bash
 ros2 run robo_project fusion_obstacle_node
-# needs runs/fusion_full_e1.2/best.pt in the workspace (copied from still_robo_project_ws)
-# ready when: "Obstacle map 768x1024 ... aligned with /map" (needs runner_node's /map)
-# every prediction (~10/s, ~85 ms each on CPU) is fused into /fusion/obstacle_map (aligned with
-# /map, log-odds over time) -> motion_planner avoids those obstacles.
-# RViz: "ML Obstacle Map" (what the planner avoids), "Fusion Local Grid" (raw 1.2 m prediction),
-# "LiDAR" (simulated scan).
+# needs the checkpoint at runs/fusion_full_e1.2/best.pt
+# ready when: "Obstacle map 768x1024 ... aligned with /map"
+# every prediction (~10/s, ~85 ms each on CPU) is fused into /fusion/obstacle_map.
+
+terminal 7  (A* planner - planning/motion_planner.py)
+
+conda activate habitat
+cd ~/robo_project_ws
+source install/setup.bash
+python3 -m robo_project.planning.motion_planner
+# run it with the conda python (NOT "ros2 run": that uses /usr/bin/python3, which has no numba,
+# and A* then falls back to the slow pure-Python search: seconds instead of ~10 ms).
+# plans to (0,0) at start. Click "2D Goal Pose" in RViz for a new goal.
+# Obstacles from the ML model are added to the A* map; when one lies on the current path it
+# re-plans at once ("ML model: obstacle on the path"). No path at all: the robot is stopped and
+# planning is retried every 2 s. If the robot still gets stuck, runner_node reports it on
+# /blocked_point and the planner re-plans around it.
+
+terminal 8  (optional: record a run, while terminals 2-7 are running; Ctrl+C to stop recording)
+
+cd ~/robo_project_ws
+source install/setup.bash
+mkdir -p bags
+ros2 bag record -o bags/my_run /odom /tf /tf_static /cmd_vel /map /planned_path /blocked_point /goal_pose /fusion/local_grid /fusion/obstacle_map /livox/lidar /camera/front/depth/image_raw
+# ~4 MB/s. Add /camera/{front,right,back,left}/image_raw to also keep the RGB images (~6 MB/s more).
+
+terminal 9  (optional: drive a fixed goal sequence instead of clicking goals in RViz)
+
+conda activate habitat
+cd ~/robo_project_ws
+source install/setup.bash
+python3 src/robo_project/sim/tools/goal_sequencer.py
+
+after recording  (analyse the run; results go to bags/my_run/analysis)
+
+conda activate habitat
+cd ~/robo_project_ws
+source install/setup.bash
+python3 src/robo_project/sim/tools/analyze_collisions.py bags/my_run src/environment/IMR_lab8.navmesh bags/my_run/analysis
+python3 src/robo_project/ml/tools/eval_model.py bags/my_run src/environment/IMR_lab8.navmesh src/robo_project bags/my_run/analysis
+# analyze_collisions: contacts in Habitat + robot body overlapping obstacles, with a map image
+# eval_model: ML model accuracy vs ground truth, compared with LiDAR alone
 
 notes
-# build error "No module named 'catkin_pkg'" (conda python): build with
-#   colcon build --packages-select robo_project vinebot_description --cmake-args -DPython3_EXECUTABLE=/usr/bin/python3
+# build error "No module named 'catkin_pkg'" (conda python): use the --cmake-args flag above.
+# build error "can't copy 'resource/robo_project'": the empty marker file src/robo_project/resource/robo_project
+#   is missing - restore it (git checkout -- src/robo_project/resource/robo_project, or: touch it).
+# fusion_obstacle_node "Fusion checkpoint not found": copy best.pt to runs/fusion_full_e1.2/.
 # rviz2 "symbol lookup error ... libpthread ... GLIBC_PRIVATE": you started it from the VS Code (snap)
 #   terminal; use a normal Ubuntu terminal, or run first:
 #   unset GTK_PATH GTK_EXE_PREFIX LOCPATH GIO_MODULE_DIR GDK_PIXBUF_MODULE_FILE GDK_PIXBUF_MODULEDIR GSETTINGS_SCHEMA_DIR GTK_IM_MODULE_FILE
-
-
-

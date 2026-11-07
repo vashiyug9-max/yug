@@ -12,8 +12,8 @@ def generate_data_files():
         (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.[pxy][yma]*'))),
     ]
 
-    # Include config files and CMN scripts recursively in the installed share folder.
-    dirs_to_include = ['config', 'scripts']
+    # Include config files and the CMN model folder recursively in the installed share folder.
+    dirs_to_include = ['config', 'cmn/model']
 
     for directory in dirs_to_include:
         if not os.path.isdir(directory):
@@ -46,31 +46,28 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            # Existing simulation / planner / ML pose nodes
-            'runner_node = robo_project.runner_node:main',
-            
-            'ml_pose_node = robo_project.ml_pipeline.ml_pose_node:main',
-            'pose_monitor_node = robo_project.ml_pipeline.pose_monitor_node:main',
-            'bridge = robo_project.habitat_bridge_vinebot_2:main',
-            'map_server_node = robo_project.ml_pipeline.map_server_node:main',
+            # One folder per team task: sim/, ml/, localization/, cmn/, planning/;
+            # ros/ holds the glue nodes, common/ the shared helpers.
 
-            # Jay Week-10 localization validation nodes
-            'dataset_gt_replay_node = robo_project.dataset_gt_replay_node:main',
-            'ground_truth_local_occ_node = robo_project.dataset_gt_replay_node:main',
-            'particle_filter_validation_node = robo_project.particle_filter_validation_node:main',
-            'particle_filter_validation_node_working_temp = robo_project.particle_filter_validation_node_WORKING_TEMP_PIPELINE:main',
+            # sim/
+            'bridge = robo_project.sim.habitat_bridge:main',
 
-            # Jay local-occupancy ML utilities
-            'train_local_occupancy = robo_project.ml_local_occ.train_local_occupancy:main',
-            'test_local_occupancy_prediction = robo_project.ml_local_occ.test_local_occupancy_prediction:main',
-            
-            'simple_runner = robo_project.simple_runner:main',
-            'motion_planner = robo_project.motion_planner:main',
-            'fusion_obstacle_node = robo_project.fusion_obstacle_node:main',
-            'check_map_vs_habitat = robo_project.check_map_vs_habitat:main',
-            'check_connectivity = robo_project.check_connectivity:main',
-            'show_1 = robo_project.show_1:main',
-            'show_path_only = robo_project.show_path_only:main',
+            # planning/
+            'motion_planner = robo_project.planning.motion_planner:main',
+
+            # ros/: path follower + map, map server
+            'runner_node = robo_project.ros.runner_node:main',
+            'map_server_node = robo_project.ros.map_server_node:main',
+
+            # ml/: fusion obstacle model, ML pose estimation
+            'fusion_obstacle_node = robo_project.ml.fusion.fusion_obstacle_node:main',
+            'ml_pose_node = robo_project.ml.pose_estimation.ml_pose_node:main',
+            'pose_monitor_node = robo_project.ml.pose_estimation.pose_monitor_node:main',
+
+            # localization/: particle filter validation (Jay Week-10)
+            'dataset_gt_replay_node = robo_project.localization.dataset_gt_replay_node:main',
+            'ground_truth_local_occ_node = robo_project.localization.dataset_gt_replay_node:main',
+            'particle_filter_validation_node = robo_project.localization.particle_filter_validation_node:main',
         ],
     },
 )

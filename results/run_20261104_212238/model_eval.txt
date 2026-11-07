@@ -1,0 +1,12 @@
+bag: /home/yug/robo_project_ws/bags/run_20261104_212238
+frames evaluated: 1606 (skipped 4 without pose/LiDAR match)
+ground truth: navmesh top-down, same label pipeline as training (fusion_data.py)
+
+                           cell3    IoU*  IoU obst  missed obst.  false alarm
+FusionOccNet (all)         96.4%   93.8%     91.5%         1.94%        0.27%
+LiDAR only (no ML)         84.5%   77.6%     69.6%        39.23%        0.68%
+LiDAR+depth rule           84.7%   81.1%     74.5%        29.49%        0.68%
+
+IoU* = training-style (all frames, empty frames count 1.0, comparable to report.json)
+IoU obst = averaged over frames with an obstacle in view (1163 of 1606)
+missed obst. = share of truly occupied cells predicted free; false alarm = share of free cells predicted occupied
