@@ -1,0 +1,3012 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.10">
+  <world name="heightmap_world">
+    <light name="sun" type="directional">
+      <cast_shadows>1</cast_shadows>
+      <pose>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+    <physics name="1ms" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <plugin name="gz::sim::systems::Physics" filename="gz-sim-physics-system" />
+    <plugin name="gz::sim::systems::UserCommands" filename="gz-sim-user-commands-system" />
+    <plugin name="gz::sim::systems::SceneBroadcaster" filename="gz-sim-scene-broadcaster-system" />
+    <plugin name="gz::sim::systems::Contact" filename="gz-sim-contact-system" />
+    <gravity>0 0 -9.8000000000000007</gravity>
+    <magnetic_field>5.5644999999999998e-06 2.2875799999999999e-05 -4.2388400000000002e-05</magnetic_field>
+    <atmosphere type="adiabatic" />
+    <scene>
+      <ambient>0.400000006 0.400000006 0.400000006 1</ambient>
+      <background>0.699999988 0.699999988 0.699999988 1</background>
+      <shadows>false</shadows>
+    </scene>
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.800000012 0.800000012 0.800000012 1</ambient>
+            <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+            <specular>0.800000012 0.800000012 0.800000012 1</specular>
+          </material>
+        </visual>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <gravity>0 0 -9.81</gravity>
+    <!-- <physics name="ode_physics" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <ode>
+        <solver>
+          <type text="quick" />
+        </solver>
+      </ode>
+    </physics> -->
+    <model name="terrain">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <heightmap>
+              <uri>/home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/materials/png/vineyard_arc_slope_heightmap_bumpy_smooth_513.png</uri>
+              <size>100.0 100.0 10.0</size>
+              <pos>0 0 0</pos>
+            </heightmap>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <heightmap>
+              <uri>/home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/materials/png/vineyard_arc_slope_heightmap_bumpy_smooth_513.png</uri>
+              <size>100.0 100.0 10.0</size>
+              <pos>0 0 0</pos>
+              <!-- <texture>
+                <diffuse>INSERT_DIFFUSE_PATH_HERE</diffuse>
+                <normal>INSERT_NORMAL_PATH_HERE</normal>
+                <size>1</size>
+              </texture> -->
+            </heightmap>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    <model name="tree_row_0">
+      <static>true</static>
+      <pose>0 -45.0 0 0 0 0</pose>
+      <link name="tree_0_0">
+        <visual name="tree_0_0_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_0_0_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-35.0 0 7.254901960784314 1.57 0 0</pose>
+      </link>
+      <link name="tree_0_1">
+        <visual name="tree_0_1_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_0_1_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-30.0 0 6.352941176470588 1.57 0 0</pose>
+      </link>
+      <link name="tree_0_2">
+        <visual name="tree_0_2_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_0_2_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-25.0 0 5.647058823529411 1.57 0 0</pose>
+      </link>
+      <link name="tree_0_3">
+        <visual name="tree_0_3_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_0_3_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-20.0 0 4.9411764705882355 1.57 0 0</pose>
+      </link>
+      <link name="tree_0_4">
+        <visual name="tree_0_4_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_0_4_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-15.0 0 4.2745098039215685 1.57 0 0</pose>
+      </link>
+      <link name="tree_0_5">
+        <visual name="tree_0_5_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_0_5_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-10.0 0 3.6470588235294117 1.57 0 0</pose>
+      </link>
+      <link name="tree_0_6">
+        <visual name="tree_0_6_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_0_6_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-5.0 0 3.058823529411765 1.57 0 0</pose>
+      </link>
+      <link name="tree_0_7">
+        <visual name="tree_0_7_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_0_7_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>0.0 0 2.5098039215686274 1.57 0 0</pose>
+      </link>
+      <link name="tree_0_8">
+        <visual name="tree_0_8_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_0_8_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>5.0 0 2.0 1.57 0 0</pose>
+      </link>
+      <link name="tree_0_9">
+        <visual name="tree_0_9_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_0_9_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>10.0 0 1.6470588235294117 1.57 0 0</pose>
+      </link>
+      <link name="tree_0_10">
+        <visual name="tree_0_10_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_0_10_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>15.0 0 1.2941176470588236 1.57 0 0</pose>
+      </link>
+      <link name="tree_0_11">
+        <visual name="tree_0_11_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_0_11_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>20.0 0 0.8627450980392157 1.57 0 0</pose>
+      </link>
+      <link name="tree_0_12">
+        <visual name="tree_0_12_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_0_12_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>25.0 0 0.5882352941176471 1.57 0 0</pose>
+      </link>
+      <link name="tree_0_13">
+        <visual name="tree_0_13_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_0_13_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>30.0 0 0.43137254901960786 1.57 0 0</pose>
+      </link>
+      <link name="tree_0_14">
+        <visual name="tree_0_14_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_0_14_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>35.0 0 0.3137254901960784 1.57 0 0</pose>
+      </link>
+    </model>
+    <model name="tree_row_1">
+      <static>true</static>
+      <pose>0 -35.0 0 0 0 0</pose>
+      <link name="tree_1_0">
+        <visual name="tree_1_0_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_1_0_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-35.0 0 7.254901960784314 1.57 0 0</pose>
+      </link>
+      <link name="tree_1_1">
+        <visual name="tree_1_1_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_1_1_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-30.0 0 6.3921568627450975 1.57 0 0</pose>
+      </link>
+      <link name="tree_1_2">
+        <visual name="tree_1_2_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_1_2_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-25.0 0 5.647058823529411 1.57 0 0</pose>
+      </link>
+      <link name="tree_1_3">
+        <visual name="tree_1_3_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_1_3_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-20.0 0 4.901960784313725 1.57 0 0</pose>
+      </link>
+      <link name="tree_1_4">
+        <visual name="tree_1_4_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_1_4_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-15.0 0 4.313725490196079 1.57 0 0</pose>
+      </link>
+      <link name="tree_1_5">
+        <visual name="tree_1_5_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_1_5_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-10.0 0 3.686274509803922 1.57 0 0</pose>
+      </link>
+      <link name="tree_1_6">
+        <visual name="tree_1_6_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_1_6_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-5.0 0 3.1372549019607843 1.57 0 0</pose>
+      </link>
+      <link name="tree_1_7">
+        <visual name="tree_1_7_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_1_7_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>0.0 0 2.5098039215686274 1.57 0 0</pose>
+      </link>
+      <link name="tree_1_8">
+        <visual name="tree_1_8_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_1_8_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>5.0 0 2.0784313725490198 1.57 0 0</pose>
+      </link>
+      <link name="tree_1_9">
+        <visual name="tree_1_9_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_1_9_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>10.0 0 1.6470588235294117 1.57 0 0</pose>
+      </link>
+      <link name="tree_1_10">
+        <visual name="tree_1_10_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_1_10_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>15.0 0 1.2156862745098038 1.57 0 0</pose>
+      </link>
+      <link name="tree_1_11">
+        <visual name="tree_1_11_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_1_11_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>20.0 0 0.9019607843137255 1.57 0 0</pose>
+      </link>
+      <link name="tree_1_12">
+        <visual name="tree_1_12_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_1_12_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>25.0 0 0.6274509803921569 1.57 0 0</pose>
+      </link>
+      <link name="tree_1_13">
+        <visual name="tree_1_13_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_1_13_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>30.0 0 0.39215686274509803 1.57 0 0</pose>
+      </link>
+      <link name="tree_1_14">
+        <visual name="tree_1_14_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_1_14_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>35.0 0 0.1568627450980392 1.57 0 0</pose>
+      </link>
+    </model>
+    <model name="tree_row_2">
+      <static>true</static>
+      <pose>0 -25.0 0 0 0 0</pose>
+      <link name="tree_2_0">
+        <visual name="tree_2_0_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_2_0_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-35.0 0 7.254901960784314 1.57 0 0</pose>
+      </link>
+      <link name="tree_2_1">
+        <visual name="tree_2_1_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_2_1_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-30.0 0 6.313725490196078 1.57 0 0</pose>
+      </link>
+      <link name="tree_2_2">
+        <visual name="tree_2_2_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_2_2_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-25.0 0 5.647058823529411 1.57 0 0</pose>
+      </link>
+      <link name="tree_2_3">
+        <visual name="tree_2_3_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_2_3_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-20.0 0 4.901960784313725 1.57 0 0</pose>
+      </link>
+      <link name="tree_2_4">
+        <visual name="tree_2_4_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_2_4_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-15.0 0 4.2745098039215685 1.57 0 0</pose>
+      </link>
+      <link name="tree_2_5">
+        <visual name="tree_2_5_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_2_5_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-10.0 0 3.6470588235294117 1.57 0 0</pose>
+      </link>
+      <link name="tree_2_6">
+        <visual name="tree_2_6_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_2_6_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-5.0 0 3.0980392156862746 1.57 0 0</pose>
+      </link>
+      <link name="tree_2_7">
+        <visual name="tree_2_7_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_2_7_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>0.0 0 2.392156862745098 1.57 0 0</pose>
+      </link>
+      <link name="tree_2_8">
+        <visual name="tree_2_8_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_2_8_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>5.0 0 2.0392156862745097 1.57 0 0</pose>
+      </link>
+      <link name="tree_2_9">
+        <visual name="tree_2_9_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_2_9_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>10.0 0 1.5686274509803921 1.57 0 0</pose>
+      </link>
+      <link name="tree_2_10">
+        <visual name="tree_2_10_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_2_10_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>15.0 0 1.2549019607843137 1.57 0 0</pose>
+      </link>
+      <link name="tree_2_11">
+        <visual name="tree_2_11_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_2_11_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>20.0 0 0.9019607843137255 1.57 0 0</pose>
+      </link>
+      <link name="tree_2_12">
+        <visual name="tree_2_12_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_2_12_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>25.0 0 0.6274509803921569 1.57 0 0</pose>
+      </link>
+      <link name="tree_2_13">
+        <visual name="tree_2_13_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_2_13_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>30.0 0 0.3529411764705882 1.57 0 0</pose>
+      </link>
+      <link name="tree_2_14">
+        <visual name="tree_2_14_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_2_14_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>35.0 0 0.23529411764705882 1.57 0 0</pose>
+      </link>
+    </model>
+    <model name="tree_row_3">
+      <static>true</static>
+      <pose>0 -15.0 0 0 0 0</pose>
+      <link name="tree_3_0">
+        <visual name="tree_3_0_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_3_0_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-35.0 0 7.294117647058823 1.57 0 0</pose>
+      </link>
+      <link name="tree_3_1">
+        <visual name="tree_3_1_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_3_1_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-30.0 0 6.509803921568627 1.57 0 0</pose>
+      </link>
+      <link name="tree_3_2">
+        <visual name="tree_3_2_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_3_2_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-25.0 0 5.607843137254902 1.57 0 0</pose>
+      </link>
+      <link name="tree_3_3">
+        <visual name="tree_3_3_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_3_3_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-20.0 0 4.862745098039215 1.57 0 0</pose>
+      </link>
+      <link name="tree_3_4">
+        <visual name="tree_3_4_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_3_4_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-15.0 0 4.196078431372549 1.57 0 0</pose>
+      </link>
+      <link name="tree_3_5">
+        <visual name="tree_3_5_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_3_5_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-10.0 0 3.6470588235294117 1.57 0 0</pose>
+      </link>
+      <link name="tree_3_6">
+        <visual name="tree_3_6_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_3_6_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-5.0 0 3.058823529411765 1.57 0 0</pose>
+      </link>
+      <link name="tree_3_7">
+        <visual name="tree_3_7_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_3_7_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>0.0 0 2.5098039215686274 1.57 0 0</pose>
+      </link>
+      <link name="tree_3_8">
+        <visual name="tree_3_8_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_3_8_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>5.0 0 2.0784313725490198 1.57 0 0</pose>
+      </link>
+      <link name="tree_3_9">
+        <visual name="tree_3_9_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_3_9_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>10.0 0 1.607843137254902 1.57 0 0</pose>
+      </link>
+      <link name="tree_3_10">
+        <visual name="tree_3_10_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_3_10_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>15.0 0 1.2549019607843137 1.57 0 0</pose>
+      </link>
+      <link name="tree_3_11">
+        <visual name="tree_3_11_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_3_11_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>20.0 0 0.8627450980392157 1.57 0 0</pose>
+      </link>
+      <link name="tree_3_12">
+        <visual name="tree_3_12_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_3_12_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>25.0 0 0.6274509803921569 1.57 0 0</pose>
+      </link>
+      <link name="tree_3_13">
+        <visual name="tree_3_13_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_3_13_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>30.0 0 0.43137254901960786 1.57 0 0</pose>
+      </link>
+      <link name="tree_3_14">
+        <visual name="tree_3_14_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_3_14_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>35.0 0 0.23529411764705882 1.57 0 0</pose>
+      </link>
+    </model>
+    <model name="tree_row_4">
+      <static>true</static>
+      <pose>0 -5.0 0 0 0 0</pose>
+      <link name="tree_4_0">
+        <visual name="tree_4_0_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_4_0_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-35.0 0 7.254901960784314 1.57 0 0</pose>
+      </link>
+      <link name="tree_4_1">
+        <visual name="tree_4_1_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_4_1_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-30.0 0 6.3921568627450975 1.57 0 0</pose>
+      </link>
+      <link name="tree_4_2">
+        <visual name="tree_4_2_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_4_2_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-25.0 0 5.647058823529411 1.57 0 0</pose>
+      </link>
+      <link name="tree_4_3">
+        <visual name="tree_4_3_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_4_3_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-20.0 0 4.901960784313725 1.57 0 0</pose>
+      </link>
+      <link name="tree_4_4">
+        <visual name="tree_4_4_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_4_4_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-15.0 0 4.2745098039215685 1.57 0 0</pose>
+      </link>
+      <link name="tree_4_5">
+        <visual name="tree_4_5_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_4_5_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-10.0 0 3.607843137254902 1.57 0 0</pose>
+      </link>
+      <link name="tree_4_6">
+        <visual name="tree_4_6_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_4_6_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-5.0 0 3.019607843137255 1.57 0 0</pose>
+      </link>
+      <link name="tree_4_7">
+        <visual name="tree_4_7_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_4_7_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>0.0 0 2.5098039215686274 1.57 0 0</pose>
+      </link>
+      <link name="tree_4_8">
+        <visual name="tree_4_8_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_4_8_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>5.0 0 2.0392156862745097 1.57 0 0</pose>
+      </link>
+      <link name="tree_4_9">
+        <visual name="tree_4_9_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_4_9_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>10.0 0 1.6470588235294117 1.57 0 0</pose>
+      </link>
+      <link name="tree_4_10">
+        <visual name="tree_4_10_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_4_10_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>15.0 0 1.1764705882352942 1.57 0 0</pose>
+      </link>
+      <link name="tree_4_11">
+        <visual name="tree_4_11_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_4_11_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>20.0 0 0.8235294117647058 1.57 0 0</pose>
+      </link>
+      <link name="tree_4_12">
+        <visual name="tree_4_12_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_4_12_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>25.0 0 0.5882352941176471 1.57 0 0</pose>
+      </link>
+      <link name="tree_4_13">
+        <visual name="tree_4_13_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_4_13_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>30.0 0 0.39215686274509803 1.57 0 0</pose>
+      </link>
+      <link name="tree_4_14">
+        <visual name="tree_4_14_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_4_14_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>35.0 0 0.23529411764705882 1.57 0 0</pose>
+      </link>
+    </model>
+    <model name="tree_row_5">
+      <static>true</static>
+      <pose>0 5.0 0 0 0 0</pose>
+      <link name="tree_5_0">
+        <visual name="tree_5_0_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_5_0_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-35.0 0 7.294117647058823 1.57 0 0</pose>
+      </link>
+      <link name="tree_5_1">
+        <visual name="tree_5_1_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_5_1_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-30.0 0 6.3921568627450975 1.57 0 0</pose>
+      </link>
+      <link name="tree_5_2">
+        <visual name="tree_5_2_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_5_2_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-25.0 0 5.607843137254902 1.57 0 0</pose>
+      </link>
+      <link name="tree_5_3">
+        <visual name="tree_5_3_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_5_3_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-20.0 0 4.901960784313725 1.57 0 0</pose>
+      </link>
+      <link name="tree_5_4">
+        <visual name="tree_5_4_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_5_4_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-15.0 0 4.196078431372549 1.57 0 0</pose>
+      </link>
+      <link name="tree_5_5">
+        <visual name="tree_5_5_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_5_5_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-10.0 0 3.5686274509803924 1.57 0 0</pose>
+      </link>
+      <link name="tree_5_6">
+        <visual name="tree_5_6_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_5_6_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-5.0 0 3.019607843137255 1.57 0 0</pose>
+      </link>
+      <link name="tree_5_7">
+        <visual name="tree_5_7_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_5_7_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>0.0 0 2.549019607843137 1.57 0 0</pose>
+      </link>
+      <link name="tree_5_8">
+        <visual name="tree_5_8_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_5_8_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>5.0 0 2.0392156862745097 1.57 0 0</pose>
+      </link>
+      <link name="tree_5_9">
+        <visual name="tree_5_9_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_5_9_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>10.0 0 1.607843137254902 1.57 0 0</pose>
+      </link>
+      <link name="tree_5_10">
+        <visual name="tree_5_10_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_5_10_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>15.0 0 1.2549019607843137 1.57 0 0</pose>
+      </link>
+      <link name="tree_5_11">
+        <visual name="tree_5_11_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_5_11_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>20.0 0 0.9019607843137255 1.57 0 0</pose>
+      </link>
+      <link name="tree_5_12">
+        <visual name="tree_5_12_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_5_12_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>25.0 0 0.6666666666666666 1.57 0 0</pose>
+      </link>
+      <link name="tree_5_13">
+        <visual name="tree_5_13_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_5_13_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>30.0 0 0.39215686274509803 1.57 0 0</pose>
+      </link>
+      <link name="tree_5_14">
+        <visual name="tree_5_14_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_5_14_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>35.0 0 0.19607843137254902 1.57 0 0</pose>
+      </link>
+    </model>
+    <model name="tree_row_6">
+      <static>true</static>
+      <pose>0 15.0 0 0 0 0</pose>
+      <link name="tree_6_0">
+        <visual name="tree_6_0_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_6_0_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-35.0 0 7.254901960784314 1.57 0 0</pose>
+      </link>
+      <link name="tree_6_1">
+        <visual name="tree_6_1_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_6_1_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-30.0 0 6.3921568627450975 1.57 0 0</pose>
+      </link>
+      <link name="tree_6_2">
+        <visual name="tree_6_2_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_6_2_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-25.0 0 5.647058823529411 1.57 0 0</pose>
+      </link>
+      <link name="tree_6_3">
+        <visual name="tree_6_3_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_6_3_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-20.0 0 4.9411764705882355 1.57 0 0</pose>
+      </link>
+      <link name="tree_6_4">
+        <visual name="tree_6_4_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_6_4_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-15.0 0 4.235294117647059 1.57 0 0</pose>
+      </link>
+      <link name="tree_6_5">
+        <visual name="tree_6_5_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_6_5_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-10.0 0 3.607843137254902 1.57 0 0</pose>
+      </link>
+      <link name="tree_6_6">
+        <visual name="tree_6_6_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_6_6_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-5.0 0 2.9411764705882355 1.57 0 0</pose>
+      </link>
+      <link name="tree_6_7">
+        <visual name="tree_6_7_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_6_7_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>0.0 0 2.4705882352941178 1.57 0 0</pose>
+      </link>
+      <link name="tree_6_8">
+        <visual name="tree_6_8_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_6_8_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>5.0 0 2.0392156862745097 1.57 0 0</pose>
+      </link>
+      <link name="tree_6_9">
+        <visual name="tree_6_9_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_6_9_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>10.0 0 1.607843137254902 1.57 0 0</pose>
+      </link>
+      <link name="tree_6_10">
+        <visual name="tree_6_10_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_6_10_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>15.0 0 1.2549019607843137 1.57 0 0</pose>
+      </link>
+      <link name="tree_6_11">
+        <visual name="tree_6_11_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_6_11_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>20.0 0 0.9803921568627451 1.57 0 0</pose>
+      </link>
+      <link name="tree_6_12">
+        <visual name="tree_6_12_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_6_12_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>25.0 0 0.6666666666666666 1.57 0 0</pose>
+      </link>
+      <link name="tree_6_13">
+        <visual name="tree_6_13_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_6_13_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>30.0 0 0.43137254901960786 1.57 0 0</pose>
+      </link>
+      <link name="tree_6_14">
+        <visual name="tree_6_14_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_6_14_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>35.0 0 0.23529411764705882 1.57 0 0</pose>
+      </link>
+    </model>
+    <model name="tree_row_7">
+      <static>true</static>
+      <pose>0 25.0 0 0 0 0</pose>
+      <link name="tree_7_0">
+        <visual name="tree_7_0_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_7_0_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-35.0 0 7.294117647058823 1.57 0 0</pose>
+      </link>
+      <link name="tree_7_1">
+        <visual name="tree_7_1_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_7_1_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-30.0 0 6.431372549019608 1.57 0 0</pose>
+      </link>
+      <link name="tree_7_2">
+        <visual name="tree_7_2_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_7_2_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-25.0 0 5.647058823529411 1.57 0 0</pose>
+      </link>
+      <link name="tree_7_3">
+        <visual name="tree_7_3_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_7_3_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-20.0 0 4.862745098039215 1.57 0 0</pose>
+      </link>
+      <link name="tree_7_4">
+        <visual name="tree_7_4_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_7_4_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-15.0 0 4.1568627450980395 1.57 0 0</pose>
+      </link>
+      <link name="tree_7_5">
+        <visual name="tree_7_5_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_7_5_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-10.0 0 3.6470588235294117 1.57 0 0</pose>
+      </link>
+      <link name="tree_7_6">
+        <visual name="tree_7_6_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_7_6_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-5.0 0 3.019607843137255 1.57 0 0</pose>
+      </link>
+      <link name="tree_7_7">
+        <visual name="tree_7_7_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_7_7_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>0.0 0 2.5098039215686274 1.57 0 0</pose>
+      </link>
+      <link name="tree_7_8">
+        <visual name="tree_7_8_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_7_8_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>5.0 0 2.0392156862745097 1.57 0 0</pose>
+      </link>
+      <link name="tree_7_9">
+        <visual name="tree_7_9_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_7_9_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>10.0 0 1.5686274509803921 1.57 0 0</pose>
+      </link>
+      <link name="tree_7_10">
+        <visual name="tree_7_10_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_7_10_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>15.0 0 1.2549019607843137 1.57 0 0</pose>
+      </link>
+      <link name="tree_7_11">
+        <visual name="tree_7_11_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_7_11_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>20.0 0 0.9019607843137255 1.57 0 0</pose>
+      </link>
+      <link name="tree_7_12">
+        <visual name="tree_7_12_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_7_12_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>25.0 0 0.6274509803921569 1.57 0 0</pose>
+      </link>
+      <link name="tree_7_13">
+        <visual name="tree_7_13_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_7_13_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>30.0 0 0.3529411764705882 1.57 0 0</pose>
+      </link>
+      <link name="tree_7_14">
+        <visual name="tree_7_14_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_7_14_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>35.0 0 0.1568627450980392 1.57 0 0</pose>
+      </link>
+    </model>
+    <model name="tree_row_8">
+      <static>true</static>
+      <pose>0 35.0 0 0 0 0</pose>
+      <link name="tree_8_0">
+        <visual name="tree_8_0_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_8_0_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-35.0 0 7.333333333333333 1.57 0 0</pose>
+      </link>
+      <link name="tree_8_1">
+        <visual name="tree_8_1_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_8_1_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-30.0 0 6.431372549019608 1.57 0 0</pose>
+      </link>
+      <link name="tree_8_2">
+        <visual name="tree_8_2_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_8_2_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-25.0 0 5.686274509803921 1.57 0 0</pose>
+      </link>
+      <link name="tree_8_3">
+        <visual name="tree_8_3_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_8_3_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-20.0 0 4.9411764705882355 1.57 0 0</pose>
+      </link>
+      <link name="tree_8_4">
+        <visual name="tree_8_4_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_8_4_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-15.0 0 4.352941176470589 1.57 0 0</pose>
+      </link>
+      <link name="tree_8_5">
+        <visual name="tree_8_5_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_8_5_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-10.0 0 3.5686274509803924 1.57 0 0</pose>
+      </link>
+      <link name="tree_8_6">
+        <visual name="tree_8_6_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_8_6_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-5.0 0 3.058823529411765 1.57 0 0</pose>
+      </link>
+      <link name="tree_8_7">
+        <visual name="tree_8_7_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_8_7_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>0.0 0 2.549019607843137 1.57 0 0</pose>
+      </link>
+      <link name="tree_8_8">
+        <visual name="tree_8_8_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_8_8_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>5.0 0 2.0 1.57 0 0</pose>
+      </link>
+      <link name="tree_8_9">
+        <visual name="tree_8_9_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_8_9_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>10.0 0 1.5686274509803921 1.57 0 0</pose>
+      </link>
+      <link name="tree_8_10">
+        <visual name="tree_8_10_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_8_10_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>15.0 0 1.2549019607843137 1.57 0 0</pose>
+      </link>
+      <link name="tree_8_11">
+        <visual name="tree_8_11_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_8_11_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>20.0 0 0.9019607843137255 1.57 0 0</pose>
+      </link>
+      <link name="tree_8_12">
+        <visual name="tree_8_12_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_8_12_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>25.0 0 0.6274509803921569 1.57 0 0</pose>
+      </link>
+      <link name="tree_8_13">
+        <visual name="tree_8_13_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_8_13_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>30.0 0 0.39215686274509803 1.57 0 0</pose>
+      </link>
+      <link name="tree_8_14">
+        <visual name="tree_8_14_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_8_14_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>35.0 0 0.27450980392156865 1.57 0 0</pose>
+      </link>
+    </model>
+    <model name="tree_row_9">
+      <static>true</static>
+      <pose>0 45.0 0 0 0 0</pose>
+      <link name="tree_9_0">
+        <visual name="tree_9_0_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_9_0_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-35.0 0 7.254901960784314 1.57 0 0</pose>
+      </link>
+      <link name="tree_9_1">
+        <visual name="tree_9_1_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_9_1_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-30.0 0 6.431372549019608 1.57 0 0</pose>
+      </link>
+      <link name="tree_9_2">
+        <visual name="tree_9_2_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_9_2_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-25.0 0 5.647058823529411 1.57 0 0</pose>
+      </link>
+      <link name="tree_9_3">
+        <visual name="tree_9_3_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_9_3_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-20.0 0 4.901960784313725 1.57 0 0</pose>
+      </link>
+      <link name="tree_9_4">
+        <visual name="tree_9_4_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_9_4_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-15.0 0 4.235294117647059 1.57 0 0</pose>
+      </link>
+      <link name="tree_9_5">
+        <visual name="tree_9_5_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_9_5_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-10.0 0 3.607843137254902 1.57 0 0</pose>
+      </link>
+      <link name="tree_9_6">
+        <visual name="tree_9_6_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_9_6_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>-5.0 0 3.019607843137255 1.57 0 0</pose>
+      </link>
+      <link name="tree_9_7">
+        <visual name="tree_9_7_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_9_7_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>0.0 0 2.549019607843137 1.57 0 0</pose>
+      </link>
+      <link name="tree_9_8">
+        <visual name="tree_9_8_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_9_8_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>5.0 0 2.0392156862745097 1.57 0 0</pose>
+      </link>
+      <link name="tree_9_9">
+        <visual name="tree_9_9_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_9_9_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>10.0 0 1.6470588235294117 1.57 0 0</pose>
+      </link>
+      <link name="tree_9_10">
+        <visual name="tree_9_10_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_9_10_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>15.0 0 1.3333333333333333 1.57 0 0</pose>
+      </link>
+      <link name="tree_9_11">
+        <visual name="tree_9_11_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_9_11_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>20.0 0 0.9411764705882353 1.57 0 0</pose>
+      </link>
+      <link name="tree_9_12">
+        <visual name="tree_9_12_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_9_12_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>25.0 0 0.6274509803921569 1.57 0 0</pose>
+      </link>
+      <link name="tree_9_13">
+        <visual name="tree_9_13_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_9_13_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>30.0 0 0.39215686274509803 1.57 0 0</pose>
+      </link>
+      <link name="tree_9_14">
+        <visual name="tree_9_14_visual">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="tree_9_14_collision">
+          <geometry>
+            <mesh>
+              <uri>file:///home/vamsi/code/thesis/vineyard_ws/src/vineyard_world/meshes/Tree.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>35.0 0 0.19607843137254902 1.57 0 0</pose>
+      </link>
+    </model>
+  </world>
+</sdf>

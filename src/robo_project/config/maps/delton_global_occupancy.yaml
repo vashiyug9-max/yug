@@ -1,0 +1,7 @@
+image: delton_global_occupancy.npy
+resolution: 0.05
+origin: [0.0, 0.0, 0.0]
+free_value: 1
+occupied_value: 0
+unknown_value: -1
+coordinate_frame: habitat_world

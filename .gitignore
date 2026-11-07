@@ -1,0 +1,16 @@
+# colcon build output
+build/
+install/
+log/
+# python
+__pycache__/
+*.pyc
+*.egg-info/
+# large model files (keep them out of git; see README)
+*.pt
+*.pth
+*.zip
+# recordings
+bags/
+*.db3
+*.mcap

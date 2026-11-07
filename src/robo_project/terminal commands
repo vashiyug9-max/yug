@@ -1,0 +1,132 @@
+terminal 1
+
+conda activate habitat
+cd ~/robo_project_ws
+rm -rf build install log
+colcon build                               
+source install/setup.bash
+
+terminal 2
+
+conda activate habitat
+cd ~/robo_project_ws
+python3 src/robo_project/habitat_bridge_vinebot_2.py
+
+terminal 3
+
+cd ~/robo_project_ws
+source install/setup.bash
+ros2 launch vinebot_description robot_launch.py
+
+terminal 4
+
+conda activate habitat
+cd ~/robo_project_ws
+source install/setup.bash
+rviz2 -d src/vinebot_description/config/display_vinebot.rviz
+
+terminal 5
+
+conda activate habitat
+cd ~/robo_project_ws
+rm -rf build install log
+colcon build
+source install/setup.bash
+ros2 run robo_project runner_node
+
+
+terminal 6
+
+conda activate habitat
+cd ~/robo_project_ws
+source install/setup.bash
+ros2 run robo_project motion_planner
+
+
+
+
+
+
+
+
+
+Run order: build once -> Habitat -> robot model -> RViz -> runner (map) -> motion planner (path).
+Wait for each step's "ready" line before starting the next one.
+
+terminal 1  (build once - do NOT rebuild while the other terminals are running)
+
+conda activate habitat
+cd ~/robo_project_ws
+rm -rf build install log
+colcon build --packages-select robo_project vinebot_description
+source install/setup.bash
+
+terminal 2  (Habitat)
+
+conda activate habitat
+cd ~/robo_project_ws
+source install/setup.bash
+python3 src/robo_project/habitat_bridge_vinebot_2.py
+# ready when: "Robot spawned at x=-4.10 y=4.90" and "Habitat Bridge fully initialized"
+# options:  --ros-args -p start_x:=-4.1 -p start_y:=4.9 -p start_yaw:=0.0
+#           -p gpu_device_id:=-1    (no NVIDIA GPU / VM: software rendering)
+#           -p show_window:=false   (no camera window)
+
+terminal 3  (robot model)
+
+cd ~/robo_project_ws
+source install/setup.bash
+ros2 launch vinebot_description robot_launch.py
+
+terminal 4  (RViz: map, robot, planned path, goal, current waypoint)
+
+conda activate habitat
+cd ~/robo_project_ws
+source install/setup.bash
+rviz2 -d src/vinebot_description/config/display_vinebot.rviz
+
+terminal 5  (runner: publishes /map + follows /planned_path)
+
+conda activate habitat
+cd ~/robo_project_ws
+source install/setup.bash
+ros2 run robo_project runner_node
+# ready when: "MAP BROADCAST SUCCESSFUL! Check RViz now."  -> map appears in RViz
+
+terminal 6  (motion planner: A* from the robot to the goal)
+
+conda activate habitat
+cd ~/robo_project_ws
+source install/setup.bash
+python3 install/robo_project/lib/robo_project/motion_planner
+# run it with the conda python (NOT "ros2 run": that uses /usr/bin/python3, which has no numba,
+# and A* then falls back to the slow pure-Python search: seconds instead of ~10 ms).
+# plans to GOAL_X/GOAL_Y (0,0) at start; the robot drives it in Habitat and RViz.
+# Click "2D Goal Pose" in RViz to send a new goal - it re-plans from the current pose.
+# Obstacles seen by the ML model (terminal 7, /fusion/obstacle_map) are added to the A* map;
+# when one lies on the current path it re-plans at once ("ML model: obstacle on the path").
+# If the robot still gets stuck, runner_node reports it on /blocked_point and it re-plans too.
+# No path at all: the robot is stopped and planning is retried every 2 s.
+
+terminal 7  (fusion ML model: 4 RGB cameras + LiDAR + depth -> ML obstacle map for the planner)
+
+conda activate habitat
+cd ~/robo_project_ws
+source install/setup.bash
+ros2 run robo_project fusion_obstacle_node
+# needs runs/fusion_full_e1.2/best.pt in the workspace (copied from still_robo_project_ws)
+# ready when: "Obstacle map 768x1024 ... aligned with /map" (needs runner_node's /map)
+# every prediction (~10/s, ~85 ms each on CPU) is fused into /fusion/obstacle_map (aligned with
+# /map, log-odds over time) -> motion_planner avoids those obstacles.
+# RViz: "ML Obstacle Map" (what the planner avoids), "Fusion Local Grid" (raw 1.2 m prediction),
+# "LiDAR" (simulated scan).
+
+notes
+# build error "No module named 'catkin_pkg'" (conda python): build with
+#   colcon build --packages-select robo_project vinebot_description --cmake-args -DPython3_EXECUTABLE=/usr/bin/python3
+# rviz2 "symbol lookup error ... libpthread ... GLIBC_PRIVATE": you started it from the VS Code (snap)
+#   terminal; use a normal Ubuntu terminal, or run first:
+#   unset GTK_PATH GTK_EXE_PREFIX LOCPATH GIO_MODULE_DIR GDK_PIXBUF_MODULE_FILE GDK_PIXBUF_MODULEDIR GSETTINGS_SCHEMA_DIR GTK_IM_MODULE_FILE
+
+
+
