@@ -24,6 +24,7 @@ from pathlib import Path
 # Run with the conda python after sourcing install/setup.bash:
 #   python3 -m robo_project.sim.habitat_bridge
 from robo_project.common.rig import CAM_ORDER, load_rig
+from robo_project.sim.lidar_sim import LidarModel, lidar_sensor_specs
 from robo_project.ml.fusion.lidar_local_occ import raycast_ranges, scan_to_points
 
 # m/px of the navmesh top-down view the LiDAR is ray-cast on (same as training)
@@ -99,6 +100,24 @@ class VinebotHabitatBridge(Node):
         # Cameras follow the sensor rig the fusion model was trained with
         self.declare_parameter('rig', '')
         self.rig = load_rig(str(self.get_parameter('rig').value))
+        # lidar_model: "mid360" = real Livox beam pattern at the front mount (3D, misses low obstacles
+        # close to the robot, like the real one); "planar" = old flat 2D scan that sees everything
+        self.declare_parameter('lidar_model', 'mid360')
+        self.lidar_model_name = str(self.get_parameter('lidar_model').value)
+        self.lidar_model = LidarModel(self.rig) if self.lidar_model_name == 'mid360' else None
+        # drive_model: "ideal" = the robot moves exactly with /cmd_vel (default);
+        # "tracked" = the real VineBot's rubber tracks (skid steering, 140 kg): speed changes are limited by
+        # track_lin_accel / track_ang_accel, and turning slips - the robot turns only track_turn_efficiency
+        # of the commanded rate (track scrub). Values are estimates until measured on the real robot.
+        self.declare_parameter('drive_model', 'ideal')
+        self.declare_parameter('track_lin_accel', 0.5)        # m/s^2
+        self.declare_parameter('track_ang_accel', 1.5)        # rad/s^2
+        self.declare_parameter('track_turn_efficiency', 0.75)
+        self.tracked = str(self.get_parameter('drive_model').value) == 'tracked'
+        self.trk_acc = float(self.get_parameter('track_lin_accel').value)
+        self.trk_aacc = float(self.get_parameter('track_ang_accel').value)
+        self.trk_eff = float(self.get_parameter('track_turn_efficiency').value)
+        self.act_lin = self.act_ang = 0.0                      # actual velocities (tracked model)
 
         self.get_logger().info(f"📂 Loading Habitat 3D Scene Model from: {MODEL_PATH}")
 
@@ -180,10 +199,14 @@ class VinebotHabitatBridge(Node):
                 cam.uuid = name + suffix
                 cam.sensor_type = kind
                 cam.resolution = [size, size]
-                cam.position = [0.0, float(cam_cfg["height"]), 0.0]
+                # rig x forward / y left (base_footprint) -> Habitat agent frame: forward = -Z, left = -X
+                cam.position = [-float(cam_cfg.get("y", 0.0)), float(cam_cfg["height"]),
+                                -float(cam_cfg.get("x", 0.0))]
                 cam.orientation = [0.0, float(cam_cfg["yaw"]), 0.0]
                 cam.hfov = float(cam_cfg["hfov_deg"])
                 sensors.append(cam)
+        if self.lidar_model is not None:
+            sensors += lidar_sensor_specs(self.rig)       # 4 depth views at the LiDAR mount
         agent_cfg.sensor_specifications = sensors
 
         cfg = habitat_sim.Configuration(backend_cfg, [agent_cfg])
@@ -235,8 +258,10 @@ class VinebotHabitatBridge(Node):
         floor_y = float(self.agent.get_state().position[1])
         self.topdown = np.asarray(self.sim.pathfinder.get_topdown_view(LIDAR_TOPDOWN_RES, floor_y))
 
-    def lidar_points(self):
+    def lidar_points(self, obs=None):
         """Simulated 360 deg LiDAR -> Nx3 points in base_footprint."""
+        if self.lidar_model is not None and obs is not None:
+            return self.lidar_model.points(obs).astype(np.float32)
         state = self.agent.get_state()
         row_m = float(state.position[2]) - self.topdown_z_min
         col_m = float(state.position[0]) - self.topdown_x_min
@@ -266,10 +291,18 @@ class VinebotHabitatBridge(Node):
         state = self.agent.get_state()
         habitat_yaw = habitat_yaw_of(state.rotation)
 
-        if self.cmd_lin != 0.0 or self.cmd_ang != 0.0:
-            habitat_yaw += self.cmd_ang * dt
+        if self.tracked:
+            step = lambda cur, want, a: cur + max(-a * dt, min(a * dt, want - cur))
+            self.act_lin = step(self.act_lin, self.cmd_lin, self.trk_acc)
+            self.act_ang = step(self.act_ang, self.cmd_ang * self.trk_eff, self.trk_aacc)
+            lin, ang = self.act_lin, self.act_ang
+        else:
+            lin, ang = self.cmd_lin, self.cmd_ang
+
+        if lin != 0.0 or ang != 0.0:
+            habitat_yaw += ang * dt
             start = np.array(state.position, dtype=np.float32)
-            fwd = self.cmd_lin * dt
+            fwd = lin * dt
             # Habitat forward for yaw t is (-sin t, 0, -cos t)
             target = start + np.array([-math.sin(habitat_yaw) * fwd, 0.0, -math.cos(habitat_yaw) * fwd],
                                       dtype=np.float32)
@@ -304,8 +337,8 @@ class VinebotHabitatBridge(Node):
         odom_msg.pose.pose.position.z = 0.0
         odom_msg.pose.pose.orientation.z = math.sin(yaw / 2.0)
         odom_msg.pose.pose.orientation.w = math.cos(yaw / 2.0)
-        odom_msg.twist.twist.linear.x = self.cmd_lin
-        odom_msg.twist.twist.angular.z = self.cmd_ang
+        odom_msg.twist.twist.linear.x = self.act_lin if self.tracked else self.cmd_lin
+        odom_msg.twist.twist.angular.z = self.act_ang if self.tracked else self.cmd_ang
         self.odom_pub.publish(odom_msg)
 
         # Broadcast the exact same pose to the TF Tree for RViz
@@ -347,7 +380,7 @@ class VinebotHabitatBridge(Node):
                 depth.header.frame_id = "camera_front"
                 self.depth_pub.publish(depth)
             header = Header(stamp=stamp, frame_id="base_footprint")
-            self.cloud_pub.publish(create_cloud_xyz32(header, self.lidar_points()))
+            self.cloud_pub.publish(create_cloud_xyz32(header, self.lidar_points(obs)))
 
         if self.show_window and "front" in obs:
             # Rig images are small (224 px): show them 2x

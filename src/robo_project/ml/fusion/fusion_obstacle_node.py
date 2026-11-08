@@ -29,6 +29,9 @@ Parameters:
   l_max            log-odds clamp (default 7.0: ~2 confident frames to flip a cell)
   l_occ            a cell is an obstacle above this log-odds (default 1.0)
   l_free           ...and free below this (default -1.0)
+  lidar_map        also fuse the raw LiDAR beyond the model's square (default true)
+  lidar_map_range  m, how far (default 4.0); lidar_hit / lidar_free: log-odds per hit / free ray
+  lidar_free_max_height  m (0.25): LiDAR free space only where its lowest beam is below this height
 """
 
 import math
@@ -45,7 +48,7 @@ from sensor_msgs.msg import Image, PointCloud2
 from sensor_msgs_py.point_cloud2 import read_points_numpy
 
 from robo_project.ml.fusion.fusion_model import FusionInputs, FusionPredictor, default_fusion_model
-from robo_project.common.rig import CAM_ORDER, load_rig
+from robo_project.common.rig import CAM_ORDER, load_rig, rig_signature, lidar_to_base, drop_self_hits
 
 
 def stamp_ns(stamp) -> int:
@@ -87,6 +90,11 @@ class FusionObstacleNode(Node):
         p("l_max", 7.0)
         p("l_occ", 1.0)
         p("l_free", -1.0)
+        p("lidar_map", True)
+        p("lidar_map_range", 4.0)
+        p("lidar_hit", 2.0)
+        p("lidar_free", 0.7)
+        p("lidar_free_max_height", 0.25)
         g = lambda n: self.get_parameter(n).value
 
         path = str(g("model_path")) or default_fusion_model()
@@ -94,7 +102,29 @@ class FusionObstacleNode(Node):
             raise FileNotFoundError("Fusion checkpoint not found; pass model_path:=/path/to/best.pt")
         self.model = FusionPredictor(path, str(g("device")) or None)
         self.extent = self.model.extent
-        self.inputs = FusionInputs(load_rig(str(g("rig"))), self.extent)
+        self.rig = load_rig(str(g("rig")))
+        self.inputs = FusionInputs(self.rig, self.extent)
+        trained_for = self.model.cfg.get("rig_sensors")
+        if trained_for is None:
+            self.get_logger().warn("This checkpoint does not record its sensor rig (old model): it was trained "
+                                   "with all sensors at 1.0 m - check it matches config/vinebot_rig.yaml.")
+        elif trained_for != rig_signature(self.rig):
+            self.get_logger().warn(f"Model was trained for another sensor rig than {self.rig['path']}: "
+                                   "predictions will be worse. Re-train with ml/fusion/collect_data.py + train_fusion.py.")
+        # Long-range LiDAR layer: the model only sees +-extent/2 around the robot centre (0.6 m for
+        # the 1.2 m model - the real robot's bumper is at 0.575 m), the LiDAR sees far. Beyond the
+        # model's square, cells along each LiDAR ray are marked free up to the first hit and the hit
+        # occupied, out to lidar_map_range; inside the square the model decides.
+        self.lidar_map = bool(g("lidar_map"))
+        self.lidar_range = float(g("lidar_map_range"))
+        self.lidar_hit, self.lidar_free = float(g("lidar_hit")), float(g("lidar_free"))
+        lid = self.rig.get("lidar", {})
+        self.lidar_xy = (float(lid.get("x", 0.0)), float(lid.get("y", 0.0)))
+        self.band = self.rig.get("obstacle_band", [0.10, 1.80])
+        self.lidar_z = float(lid.get("height", 0.45))
+        prof = lid.get("min_elevation_deg")
+        self.min_el = np.radians(np.asarray(prof, np.float64)) if prof else None
+        self.lidar_free_max_h = float(g("lidar_free_max_height"))
         self.use = {"cams": bool(g("use_cameras")), "lidar": bool(g("use_lidar")), "depth": bool(g("use_depth"))}
         self.period = 1.0 / max(float(g("rate")), 0.1)
         pc = float(g("p_clip"))
@@ -113,6 +143,7 @@ class FusionObstacleNode(Node):
         self.t_pred = 0.0
         self.waiting_ns, self.waiting_since = -1, 0.0
         self.n_incomplete = 0             # frames predicted with a sensor missing (timeout)
+        self.warned_frame = False
 
         self.map_info = None              # geometry of /map
         self.logodds = None               # H x W float32
@@ -185,15 +216,22 @@ class FusionObstacleNode(Node):
         if self.use["cams"]:
             # only images of this same frame (the bridge stamps all sensors of a frame alike)
             rgb = {c: decode_rgb(m) for c, (t, m) in self.rgb.items() if t == ns}
-        lidar_grid = depth_grid = None
+        lidar_grid = depth_grid = pts = None
         if self.use["lidar"] and self.cloud is not None and self.cloud[0] == ns:
             cmsg = self.cloud[1]
+            pts = read_points_numpy(cmsg, field_names=("x", "y", "z"), skip_nans=True).astype(np.float64)
             if cmsg.header.frame_id not in ("", "base_footprint"):
-                self.get_logger().warn(f"/livox/lidar in frame '{cmsg.header.frame_id}', expected base_footprint",
-                                       throttle_duration_sec=10.0)
-            else:
-                pts = read_points_numpy(cmsg, field_names=("x", "y", "z"), skip_nans=True).astype(np.float64)
-                lidar_grid = self.inputs.lidar_grid(pts)
+                # real robot: the Livox driver publishes in the sensor's own frame (livox_frame);
+                # move the points to base_footprint with the measured mounting in vinebot_rig.yaml
+                pts = lidar_to_base(pts, self.rig)
+                if not self.warned_frame:
+                    lid = self.rig["lidar"]
+                    self.get_logger().info(f"/livox/lidar in frame '{cmsg.header.frame_id}': transformed to "
+                                           f"base_footprint with the rig LiDAR mounting (height {lid['height']} m, "
+                                           f"yaw {lid.get('yaw_deg', 0.0)} deg)")
+                    self.warned_frame = True
+            pts = drop_self_hits(pts, self.rig)        # returns from the robot's own masts / mounts
+            lidar_grid = self.inputs.lidar_grid(pts)
         if self.use["depth"] and self.depth is not None and self.depth[0] == ns:
             depth_grid = self.inputs.depth_grid(decode_depth(self.depth[1]))
 
@@ -205,7 +243,10 @@ class FusionObstacleNode(Node):
 
         pose = self.pose_at(ns)
         if pose is not None and self.logodds is not None:
-            if self.integrate(free, pose):
+            changed = self.integrate(free, pose)
+            if self.lidar_map and pts is not None:
+                changed = self.integrate_lidar(pts, pose) or changed
+            if changed:
                 self.publish_map()
 
     def integrate(self, free: np.ndarray, pose) -> bool:
@@ -241,6 +282,71 @@ class FusionObstacleNode(Node):
         old_occ = st == 100
         new = np.where(win > self.l_occ, 100, np.where(win < self.l_free, 0, st)).astype(np.int8)
         st[:] = new
+        return bool(((st == 100) != old_occ).any())
+
+    def integrate_lidar(self, pts: np.ndarray, pose, n_bearings: int = 720, hit_tol: float = 0.05) -> bool:
+        """LiDAR layer (up to lidar_range): along each
+        bearing, the cell at the nearest obstacle return is occupied (everywhere) and the cells before it
+        are free (outside the model's square only),
+        cells behind it are left alone. Returns True if an obstacle cell changed."""
+        sx, sy = self.lidar_xy
+        x, y, z = pts[:, 0], pts[:, 1], pts[:, 2]
+        keep = (z >= self.band[0]) & (z <= self.band[1]) & np.isfinite(x) & np.isfinite(y)
+        # blind zone around the sensor (self-returns of the mount; Mid-360 ~0.1 m). Not the whole
+        # body box: with one return per bearing, dropping a close wall would mark the space behind it free.
+        keep &= np.hypot(x - sx, y - sy) >= 0.15
+        x, y = x[keep], y[keep]
+        nearest = np.full(n_bearings, np.inf)
+        if len(x):
+            b = ((np.arctan2(y - sy, x - sx) + np.pi) / (2 * np.pi) * n_bearings).astype(int) % n_bearings
+            np.minimum.at(nearest, b, np.hypot(x - sx, y - sy))
+            filled = nearest.copy()                      # fill single empty bins between returns
+            for k in (1, 2):
+                cand = np.minimum(np.roll(nearest, k), np.roll(nearest, -k))
+                upd = ~np.isfinite(filled) & np.isfinite(cand)
+                filled[upd] = cand[upd]
+            nearest = filled
+
+        info = self.map_info
+        res, ox, oy = info.resolution, info.origin.position.x, info.origin.position.y
+        H, W = self.logodds.shape
+        rx, ry, yaw = pose
+        R = self.lidar_range
+        c0, c1 = max(0, int((rx - R - ox) / res)), min(W, int((rx + R - ox) / res) + 1)
+        r0, r1 = max(0, int((ry - R - oy) / res)), min(H, int((ry + R - oy) / res) + 1)
+        if c0 >= c1 or r0 >= r1:
+            return False
+        wx = ox + (np.arange(c0, c1)[None, :] + 0.5) * res - rx
+        wy = oy + (np.arange(r0, r1)[:, None] + 0.5) * res - ry
+        c, s = math.cos(yaw), math.sin(yaw)
+        fx = c * wx + s * wy                                 # forward (base frame)
+        ly = -s * wx + c * wy                                # left
+        half = self.extent / 2
+        outside_model = ~((np.abs(fx) < half) & (np.abs(ly) < half))
+        dx, dy = fx - sx, ly - sy
+        rng = np.hypot(dx, dy)
+        b = ((np.arctan2(dy, dx) + np.pi) / (2 * np.pi) * n_bearings).astype(int) % n_bearings
+        near = nearest[b]
+        in_range = rng <= R
+        # LiDAR hits are real surfaces: add them everywhere, also inside the model's square (obstacles of
+        # model and LiDAR combined). Free space from the LiDAR only outside the square (inside, the model
+        # decides - it also sees what the LiDAR misses, e.g. low or thin obstacles).
+        hit = in_range & (np.abs(rng - near) <= hit_tol)
+        free = outside_model & in_range & (rng < near - hit_tol)
+        # The real Mid-360 looks only 4-7 deg down (rig lidar.min_elevation_deg): close to the robot its
+        # lowest beam passes OVER low obstacles. A cell is free only where that beam is low enough to have
+        # seen an obstacle of lidar_free_max_height (otherwise "no return" says nothing about low objects).
+        if self.min_el is not None:
+            sector = ((np.degrees(np.arctan2(dy, dx)) + 180.0) // 10).astype(int) % len(self.min_el)
+            beam_z = self.lidar_z + rng * np.tan(self.min_el[sector])
+            free &= beam_z <= self.lidar_free_max_h
+
+        win = self.logodds[r0:r1, c0:c1]
+        win[free] = np.maximum(win[free] - self.lidar_free, -self.l_max)
+        win[hit] = np.minimum(win[hit] + self.lidar_hit, self.l_max)
+        st = self.state[r0:r1, c0:c1]
+        old_occ = st == 100
+        st[:] = np.where(win > self.l_occ, 100, np.where(win < self.l_free, 0, st)).astype(np.int8)
         return bool(((st == 100) != old_occ).any())
 
     def publish_local(self, free: np.ndarray, stamp):

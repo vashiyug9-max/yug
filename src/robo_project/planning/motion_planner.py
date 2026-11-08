@@ -22,7 +22,8 @@ GOAL_Y = 0.0   # meters
 
 # Walls are grown by this much before planning, so the path keeps the robot
 # body away from them instead of hugging the wall line.
-INFLATION_M = 0.20
+# Real robot: 1.15 m x 0.60 m (config/vinebot_rig.yaml) -> half-width 0.30 m + 0.05 m margin.
+INFLATION_M = 0.35
 
 # Obstacles reported by runner_node on /blocked_point (things that exist in
 # Habitat but not on the hand-drawn map) are added as discs of this radius.
@@ -32,7 +33,7 @@ BLOCKED_RADIUS_M = 0.25
 # /map) are added to the A* map like walls.  When one lies on the remaining path, re-plan at once.
 # Path points closer than ML_CHECK_MIN_DIST_M to the robot are not checked (the robot may already
 # be inside a wall's inflation; the new path starts from the nearest free cell anyway).
-ML_CHECK_MIN_DIST_M = 0.30
+ML_CHECK_MIN_DIST_M = INFLATION_M + 0.05
 REPLAN_MIN_PERIOD_S = 0.5   # at most one ML-triggered re-plan per this period
 NO_PATH_RETRY_S = 2.0       # no path: stop the robot and try again after this
 
@@ -55,6 +56,12 @@ STUCK_REPEATS = 3
 # cell: the robot tries the most likely gap, the model shows on the way whether the wall is real,
 # and the planner re-plans. Walls further out (the void outside the drawing) stay blocked.
 SOFT_WALL_BAND_M = 1.0
+# Goal clearance: the robot is 1.15 x 0.60 m, so its corners are 0.65 m from its centre. A goal closer
+# than that to an obstacle makes the body hit it when the robot turns / parks there (seen in the tests at
+# goals 0.5-0.6 m from a wall). Such goals are moved up to GOAL_SHIFT_MAX_M to the nearest spot with
+# GOAL_CLEARANCE_M of room (or the roomiest spot nearby).
+GOAL_CLEARANCE_M = 0.70
+GOAL_SHIFT_MAX_M = 0.50
 SOFT_WALL_COST = 20.0
 
 
@@ -314,6 +321,8 @@ class MotionPlanner(Node):
         passable = np.isfinite(cost).astype(np.uint8)
         s_row, s_col = self._snap_to_free(passable, start_row, start_col)
         g_row, g_col = self._snap_to_free(passable, goal_row, goal_col)
+        g_row, g_col = self._safe_goal(free, passable, g_row, g_col)
+        self._publish_effective_goal(g_row, g_col)
         path = run_astar_cost(cost, PosePixels(s_row, s_col), PosePixels(g_row, g_col))
         nav_map = astar_map                # map the path is smoothed / checked on
         if path:
@@ -438,6 +447,55 @@ class MotionPlanner(Node):
         msg.poses.append(ps)
         self.last_path_msg = msg
         self.path_pub.publish(msg)
+
+    def _publish_effective_goal(self, r, c):
+        """/motion_planner_goal = where the robot will actually stop: the clicked goal, moved out of an
+        obstacle (snap) and away from walls (_safe_goal) if needed. RViz shows it as "Goal"."""
+        x, y = self.pixel_to_world(r, c)
+        if math.hypot(x - self.goal_x, y - self.goal_y) < 0.03:      # unchanged (within a map cell)
+            x, y = self.goal_x, self.goal_y
+        self.goal_msg.pose.position.x, self.goal_msg.pose.position.y = x, y
+        self.goal_msg.header.stamp = self.get_clock().now().to_msg()
+        self.goal_pub.publish(self.goal_msg)
+
+    def _safe_goal(self, free, passable, r, c):
+        """Move the goal cell (r, c) to where the whole robot body fits (GOAL_CLEARANCE_M from every
+        obstacle), at most GOAL_SHIFT_MAX_M away; else to the roomiest reachable cell in that radius."""
+        res = self.map_resolution
+        R = int(round(GOAL_SHIFT_MAX_M / res))
+        H, W = free.shape
+        r0, r1, c0, c1 = max(0, r - R), min(H, r + R + 1), max(0, c - R), min(W, c + R + 1)
+        # clearance of each cell, computed on a padded window so obstacles just outside count too
+        pad = int(round(GOAL_CLEARANCE_M / res)) + 1
+        pr0, pr1, pc0, pc1 = max(0, r0 - pad), min(H, r1 + pad), max(0, c0 - pad), min(W, c1 + pad)
+        clear = cv2.distanceTransform(free[pr0:pr1, pc0:pc1], cv2.DIST_L2, 5) * res
+        clear = clear[r0 - pr0:r1 - pr0, c0 - pc0:c1 - pc0]
+        here = float(clear[r - r0, c - c0])
+        if here >= GOAL_CLEARANCE_M:
+            return r, c
+        rr, cc = np.mgrid[r0:r1, c0:c1]
+        dist = np.hypot(rr - r, cc - c) * res
+        ok = (dist <= GOAL_SHIFT_MAX_M) & (passable[r0:r1, c0:c1] > 0)
+        good = ok & (clear >= GOAL_CLEARANCE_M)
+        if good.any():
+            k = np.argmin(np.where(good, dist, np.inf))
+        elif ok.any():
+            k = np.argmax(np.where(ok, clear - 0.1 * dist, -np.inf))
+        else:
+            return r, c
+        nr, nc = int(rr.flat[k]), int(cc.flat[k])
+        if float(clear.flat[k]) <= here + 0.02:
+            return r, c
+        gx, gy = self.pixel_to_world(r, c)
+        nx, ny = self.pixel_to_world(nr, nc)
+        if getattr(self, "_goal_shift_logged", None) == (r, c, nr, nc):
+            return nr, nc
+        self._goal_shift_logged = (r, c, nr, nc)
+        self.get_logger().warn(
+            f"Goal ({gx:.2f},{gy:.2f}) is only {here:.2f} m from an obstacle - the 1.15 x 0.60 m robot needs "
+            f"{GOAL_CLEARANCE_M:.2f} m to park and turn there. Driving to ({nx:.2f},{ny:.2f}) instead "
+            f"({float(dist.flat[k]):.2f} m away, {float(clear.flat[k]):.2f} m of room).")
+        return nr, nc
 
     def _snap_to_free(self, astar_map, r, c, max_radius=100):
         """Snap to nearest cell where value != 0 (free, per this map's convention)."""

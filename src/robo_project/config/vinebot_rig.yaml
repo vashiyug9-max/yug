@@ -1,34 +1,52 @@
 # VineBot sensor rig, shared by the Habitat simulation, data collection, training and the robot.
 # Base frame: base_footprint (x forward, y left, z up, origin on the ground under the robot centre).
 #
-# !!! PLACEHOLDERS !!!  Heights, yaws, FOVs and the left/right/back topics are NOT measured yet.
-# Update them when the real values are known, then re-collect data and re-train: the camera
-# model learns this exact layout.
+# MEASURED on the real robot (2026-11, team measurement):
+#   robot 1.15 m long x 0.60 m wide; front D455 at 0.31 m height, 0.18 m behind the front edge;
+#   left / right / back cameras at 0.40 m height, in the middle of their side; LiDAR at 0.45 m,
+#   at the front above the D455 (photos + real recording, 2026-11-08).
+#   x / y below assume base_footprint is the centre of the 1.15 x 0.60 m footprint.
+# Still NOT measured: the FOVs of the left / right / back cameras and their topics.
+#
+# The fusion model runs/fusion_real_rig_e3.0 was trained for this rig. (The older runs/fusion_full_e1.2
+# used the placeholder rig with all sensors at 1.0 m: config/vinebot_rig_training_1m.yaml.)
+
+robot:
+  length: 1.15                  # m
+  width: 0.60                   # m
 
 cameras:
   front:                        # Intel RealSense D455 (RGB-D)
     yaw_deg: 0.0
-    height: 1.0                 # m above the ground            (PLACEHOLDER)
+    x: 0.395                    # m forward of the centre (1.15 / 2 - 0.18)
+    y: 0.0
+    height: 0.31                # m above the ground
     hfov_deg: 87.0              # D455 depth/colour horizontal FOV, aligned depth
     depth: true
     rgb_topic: /camera/camera/color/image_raw
     depth_topic: /camera/camera/aligned_depth_to_color/image_raw
     info_topic: /camera/camera/color/camera_info
-  left:                         # RGB only                      (model / FOV PLACEHOLDER)
+  left:                         # RGB only                      (model / FOV not measured)
     yaw_deg: 90.0
-    height: 1.0
+    x: 0.0
+    y: 0.30                     # middle of the left side
+    height: 0.40
     hfov_deg: 90.0
     depth: false
     rgb_topic: /camera/left/image_raw
   right:
     yaw_deg: -90.0
-    height: 1.0
+    x: 0.0
+    y: -0.30                    # middle of the right side
+    height: 0.40
     hfov_deg: 90.0
     depth: false
     rgb_topic: /camera/right/image_raw
   back:
     yaw_deg: 180.0
-    height: 1.0
+    x: -0.575                   # middle of the back
+    y: 0.0
+    height: 0.40
     hfov_deg: 90.0
     depth: false
     rgb_topic: /camera/back/image_raw
@@ -36,9 +54,29 @@ cameras:
 image_size: 224                 # each camera image is resized to image_size x image_size for the model
 depth_max: 6.0                  # m, D455 depth beyond this is ignored
 
-lidar:                          # Livox Mid-360
-  height: 1.0                   # m above the ground            (PLACEHOLDER)
+lidar:                          # Livox Mid-360 (serial 47MDM6B0020566)
+  # Position: at the FRONT, on the D455 camera post, directly above the D455 (project photos);
+  # self-returns of the deck 0.18-0.5 m behind the sensor in the real recording confirm it.
+  x: 0.395                      # m forward of the centre = CAD model (URDF livox_frame: 0.395, -0.002, 0.452)
+  y: 0.0
+  height: 0.45                  # m above the ground (team measurement; CAD 0.452)
+  yaw_deg: 90.0                 # rotation fusion_obstacle_node applies to /livox/lidar points that are NOT in
+                                # base_footprint: the sensor is mounted turned 90 deg left (Livox Viewer
+                                # extrinsic of the real recording; ml/tools/real_lidar_check.py verifies it).
+                                # If the livox_ros_driver2 config already applies this extrinsic (yaw 90 in
+                                # MID360_config.json), the points arrive rotated: set 0 here.
   max_range: 15.0
-  n_rays: 720                   # simulation only
+  n_rays: 720                   # bearings of the stored training scans
+  # Real beam pattern, measured from the recording (ml/tools/real_lidar_check.py): lowest elevation
+  # (deg) of returns per 10-deg azimuth sector, robot axes (0 = forward, +90 = left), sectors from
+  # -180 deg. The low edge is -7.4 deg on the right and only -3.6 deg straight ahead (mount tilted
+  # ~2 deg?); behind, the robot's own deck / e-stop block the low beams (+32 deg at 150-160 deg).
+  # The simulation uses this, so the model learns what the real LiDAR cannot see.
+  min_elevation_deg: [-4.2, -3.9, 0.1, -6.3, -6.7, -7.1, -7.3, -7.4, -7.4, -7.3, -7.1, -6.9,
+                      -6.6, -6.1, -5.6, -5.1, -4.6, -4.0, -3.6, -3.9, -4.3, -4.7, -5.0, -5.3,
+                      -5.5, -5.8, -5.9, -6.0, -6.0, -6.0, -5.9, -5.7, -5.4, 32.4, -1.6, -2.2]
+  max_elevation_deg: 52.0       # Mid-360 upper field of view
+  range_noise: 0.02             # m (1 sigma, Mid-360 spec)
+  points_per_scan: 20000        # ~200k points/s at 10 Hz
 
 obstacle_band: [0.10, 1.80]     # m above the ground counted as obstacles (z_min, z_max)

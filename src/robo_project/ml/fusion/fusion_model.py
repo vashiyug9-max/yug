@@ -70,13 +70,21 @@ class FusionOccNet(nn.Module):
 
 # ── input preparation shared by training, evaluation and the ROS node ────────
 
+# Checkpoints in <workspace>/runs, best first:
+#   fusion_mid360_e3.0   measured rig + realistic Livox Mid-360 at the front mount (sim/lidar_sim.py), 3 m grid
+#   fusion_real_rig_e3.0 measured cameras, LiDAR simulated as a flat 2D scan at the robot centre, 3 m grid
+#   fusion_full_e1.2     original model (placeholder rig at 1.0 m, 1.2 m grid)
+DEFAULT_MODELS = ("fusion_mid360_e3.0", "fusion_real_rig_e3.0", "fusion_full_e1.2")
+
+
 def default_fusion_model() -> str:
-    """The trained checkpoint shipped in the workspace (runs/fusion_full_e1.2/best.pt), or ''."""
+    """The best trained checkpoint found in the workspace (see DEFAULT_MODELS), or ''."""
     from pathlib import Path
-    for parent in Path(__file__).resolve().parents:
-        cand = parent / "runs" / "fusion_full_e1.2" / "best.pt"
-        if cand.exists():
-            return str(cand)
+    for run in DEFAULT_MODELS:
+        for parent in Path(__file__).resolve().parents:
+            cand = parent / "runs" / run / "best.pt"
+            if cand.exists():
+                return str(cand)
     return ""
 
 
@@ -116,20 +124,25 @@ class FusionInputs:
         band = rig.get("obstacle_band", [0.10, 1.80])
         self.front = rig["cameras"]["front"]
         self.lidar_z = float(rig["lidar"]["height"])
+        self.lidar_xy = (float(rig["lidar"].get("x", 0.0)), float(rig["lidar"].get("y", 0.0)))
         self.depth_max = float(rig["depth_max"])
         self.lidar_occ = RangeLocalOcc(grid, extent, band[0], band[1], float(rig["lidar"]["max_range"]))
         self.depth_occ = RangeLocalOcc(grid, extent, band[0], band[1], self.depth_max, fov=self.front["hfov"])
 
-    def lidar_grid(self, pts_base: np.ndarray, sensor_xy=(0.0, 0.0), sensor_z: float = None) -> np.ndarray:
-        """Nx3 points in the base frame (x forward, y left, z up from the ground) -> grid."""
+    def lidar_grid(self, pts_base: np.ndarray, sensor_xy=None, sensor_z: float = None) -> np.ndarray:
+        """Nx3 points in the base frame (x forward, y left, z up from the ground) -> grid. Rays start at
+        the LiDAR (rig x / y: at the front of the real robot), as in training."""
         z = self.lidar_z if sensor_z is None else sensor_z
-        return self.lidar_occ.compute(pts_base, sensor_xy, z)[0]
+        return self.lidar_occ.compute(pts_base, self.lidar_xy if sensor_xy is None else sensor_xy, z)[0]
 
     def depth_grid(self, depth: np.ndarray) -> np.ndarray:
         """Front depth image in metres -> grid (0.5 outside the camera FOV)."""
         from robo_project.ml.fusion.lidar_local_occ import depth_to_points
-        pts = depth_to_points(depth, self.front["hfov"], float(self.front["height"]), max_depth=self.depth_max)
-        return self.depth_occ.compute(pts)[0]
+        # the camera can sit ahead of the robot centre (rig x): points and rays start at the camera
+        cam_x = float(self.front.get("x", 0.0))
+        pts = depth_to_points(depth, self.front["hfov"], float(self.front["height"]), cam_x=cam_x,
+                              max_depth=self.depth_max)
+        return self.depth_occ.compute(pts, (cam_x, 0.0))[0]
 
 
 def binarize_cells(free: np.ndarray, n: int = 3) -> np.ndarray:

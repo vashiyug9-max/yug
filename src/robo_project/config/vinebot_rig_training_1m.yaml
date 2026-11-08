@@ -1,0 +1,44 @@
+# VineBot sensor rig, shared by the Habitat simulation, data collection, training and the robot.
+# Base frame: base_footprint (x forward, y left, z up, origin on the ground under the robot centre).
+#
+# !!! PLACEHOLDERS !!!  Heights, yaws, FOVs and the left/right/back topics are NOT measured yet.
+# Update them when the real values are known, then re-collect data and re-train: the camera
+# model learns this exact layout.
+
+cameras:
+  front:                        # Intel RealSense D455 (RGB-D)
+    yaw_deg: 0.0
+    height: 1.0                 # m above the ground            (PLACEHOLDER)
+    hfov_deg: 87.0              # D455 depth/colour horizontal FOV, aligned depth
+    depth: true
+    rgb_topic: /camera/camera/color/image_raw
+    depth_topic: /camera/camera/aligned_depth_to_color/image_raw
+    info_topic: /camera/camera/color/camera_info
+  left:                         # RGB only                      (model / FOV PLACEHOLDER)
+    yaw_deg: 90.0
+    height: 1.0
+    hfov_deg: 90.0
+    depth: false
+    rgb_topic: /camera/left/image_raw
+  right:
+    yaw_deg: -90.0
+    height: 1.0
+    hfov_deg: 90.0
+    depth: false
+    rgb_topic: /camera/right/image_raw
+  back:
+    yaw_deg: 180.0
+    height: 1.0
+    hfov_deg: 90.0
+    depth: false
+    rgb_topic: /camera/back/image_raw
+
+image_size: 224                 # each camera image is resized to image_size x image_size for the model
+depth_max: 6.0                  # m, D455 depth beyond this is ignored
+
+lidar:                          # Livox Mid-360
+  height: 1.0                   # m above the ground            (PLACEHOLDER)
+  max_range: 15.0
+  n_rays: 720                   # simulation only
+
+obstacle_band: [0.10, 1.80]     # m above the ground counted as obstacles (z_min, z_max)

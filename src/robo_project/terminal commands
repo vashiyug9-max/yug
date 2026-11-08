@@ -4,7 +4,7 @@ VineBot – Habitat simulation with ML obstacle avoidance
 Before you start (once)
 # - the workspace is at ~/robo_project_ws (otherwise change the "cd" lines below)
 # - conda env "habitat" with habitat_sim, torch and numba; ROS 2 Humble in /opt/ros/humble
-# - the ML checkpoint at ~/robo_project_ws/runs/fusion_full_e1.2/best.pt (not in git, 72 MB)
+# - the ML checkpoint at ~/robo_project_ws/runs/fusion_mid360_e3.0/best.pt (not in git, 72 MB)
 # - the scene src/environment/IMR_lab8.glb + .navmesh and the map src/resources/sketch_map_imr_lab8.jpeg
 
 Run order: build once -> Habitat -> robot model -> RViz -> runner (map) -> ML model -> planner.
@@ -26,6 +26,11 @@ source install/setup.bash
 python3 -m robo_project.sim.habitat_bridge
 # ready when: "Robot spawned at x=-4.10 y=4.90" and "Habitat Bridge fully initialized"
 # publishes the 4 cameras, front depth, the simulated LiDAR (/livox/lidar), /odom and TF.
+# LiDAR: realistic Mid-360 at the front mount (beam pattern measured on the real robot: it does not
+#   see low obstacles close to the robot). -p lidar_model:=planar = old flat scan that sees everything.
+# drive: -p drive_model:=tracked  = the real rubber tracks (skid steering, 140 kg): speed changes take time
+#   (track_lin_accel 0.5 m/s^2, track_ang_accel 1.5 rad/s^2) and turns slip (track_turn_efficiency 0.75 =
+#   the robot turns 75% of the commanded rate). Estimates - measure them on the robot. Default "ideal".
 # options:  --ros-args -p start_x:=-4.1 -p start_y:=4.9 -p start_yaw:=0.0
 #           -p gpu_device_id:=-1    (no NVIDIA GPU / VM: software rendering)
 #           -p show_window:=false   (no camera window)
@@ -43,7 +48,12 @@ cd ~/robo_project_ws
 source install/setup.bash
 rviz2 -d src/vinebot_description/config/display_vinebot.rviz
 # shows: map, robot, planned path, goal, current waypoint, "ML Obstacle Map" (what the planner
-# avoids), "Fusion Local Grid" (raw 1.2 m model prediction), "LiDAR" (simulated scan)
+# avoids), "Fusion Local Grid" (raw 3 m model prediction), "LiDAR" (simulated scan),
+# "Sensor Rig (measured)" (needs the rig display below)
+# 3D view following the robot (to see the camera heights): use display_vinebot_3d.rviz instead
+#
+# rig display (optional, another terminal): footprint, cameras and LiDAR at their measured heights
+#   python3 src/robo_project/sim/tools/rig_viz.py
 
 terminal 5  (runner: publishes /map from the sketch + follows /planned_path - ros/runner_node.py)
 
@@ -60,9 +70,15 @@ conda activate habitat
 cd ~/robo_project_ws
 source install/setup.bash
 ros2 run robo_project fusion_obstacle_node
-# needs the checkpoint at runs/fusion_full_e1.2/best.pt
 # ready when: "Obstacle map 768x1024 ... aligned with /map"
 # every prediction (~10/s, ~85 ms each on CPU) is fused into /fusion/obstacle_map.
+# model: runs/fusion_mid360_e3.0/best.pt (measured rig in config/vinebot_rig.yaml incl. the realistic
+#   Livox Mid-360 at the front, 3 m grid). Falls back to runs/fusion_real_rig_e3.0, then fusion_full_e1.2.
+# Besides the model's 3 m grid, the raw LiDAR is fused into the map out to 4 m
+#   (-p lidar_map_range:=4.0, -p lidar_map:=false to switch off). LiDAR free space only where its lowest
+#   beam could see a 25 cm obstacle (-p lidar_free_max_height:=0.25).
+# Real robot: /livox/lidar in the sensor frame (livox_frame) is moved to base_footprint with the rig
+#   LiDAR mounting (x 0.395, height 0.45, yaw 90) and the robot's own returns are removed.
 
 terminal 7  (A* planner - planning/motion_planner.py)
 
@@ -102,6 +118,53 @@ python3 src/robo_project/sim/tools/analyze_collisions.py bags/my_run src/environ
 python3 src/robo_project/ml/tools/eval_model.py bags/my_run src/environment/IMR_lab8.navmesh src/robo_project bags/my_run/analysis
 # analyze_collisions: contacts in Habitat + robot body overlapping obstacles, with a map image
 # eval_model: ML model accuracy vs ground truth, compared with LiDAR alone
+
+regression test  (whole stack headless: 6 goals + the former freeze spot, recorded and analysed, ~10 min)
+
+conda activate habitat
+cd ~/robo_project_ws
+src/robo_project/sim/tools/run_regression.sh results/my_test
+src/robo_project/sim/tools/run_regression.sh results/my_test_tracked "-p drive_model:=tracked"
+# stop the other terminals first (the script kills leftover nodes). Prints per goal REACHED/TIMEOUT,
+# stalls / NO PATH / contacts, body overlap (analyze_collisions) and model accuracy (eval_model).
+# Goals closer than 0.70 m to an obstacle are moved up to 0.5 m by the planner so the 1.15 x 0.60 m body
+# fits ("Driving to ... instead"); RViz "Goal" shows where the robot will really park.
+
+check a real LiDAR recording  (LVX2 file from Livox Viewer 2, e.g. ~/Downloads/lidar_data)
+
+conda activate habitat
+cd ~/robo_project_ws
+source install/setup.bash
+python3 src/robo_project/ml/tools/real_lidar_check.py ~/Downloads/lidar_data results/real_lidar
+# runs the points through what fusion_obstacle_node does on the real robot (rig mounting -> base_footprint,
+# self-returns removed, obstacle band, 3 m model grid). results/real_lidar/report.txt: floor height
+# (checks the LiDAR height), tilt, lowest visible obstacle per distance; frames.png: pictures.
+
+retrain the ML model  (after the sensor rig changes - config/vinebot_rig.yaml; ml/fusion/)
+
+# once: a separate conda env with GPU torch. PYTHONNOUSERSITE=1 + empty PYTHONPATH are needed because a
+# CPU-only torch in ~/.local and the ROS python paths would otherwise shadow the env's packages.
+conda create -y -n fusion_train python=3.10
+conda activate fusion_train
+export PYTHONNOUSERSITE=1 PYTHONPATH=
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu126
+pip install opencv-python-headless numpy pyyaml
+
+# 1. collect samples in Habitat with the rig (conda env habitat, ~38 samples/s, ~42 KB each)
+#    LiDAR = realistic Mid-360 at the front mount (sim/lidar_sim.py, beam pattern from the real recording)
+conda activate habitat
+cd ~/robo_project_ws
+source install/setup.bash
+python3 -m robo_project.ml.fusion.collect_data --scenes src/environment/IMR_lab8.glb src/environment/Denmark.glb --samples-per-scene 20000 --out data/fusion_mid360
+
+# 2. train on the GPU (fine-tune from the previous model; ~80 samples/s on the RTX 3050)
+conda activate fusion_train
+cd ~/robo_project_ws
+export PYTHONNOUSERSITE=1 PYTHONPATH=$HOME/robo_project_ws/src
+python -m robo_project.ml.fusion.train_fusion --data data/fusion_mid360 --extent 3.0 --rig src/robo_project/config/vinebot_rig.yaml --init-from runs/fusion_real_rig_e3.0/best.pt --no-imagenet --epochs 6 --batch 32 --workers 10 --out runs/fusion_mid360_e3.0
+# writes best.pt, report.json (validation scores incl. LiDAR-only baseline) and examples.png.
+# fusion_obstacle_node picks runs/fusion_mid360_e3.0/best.pt automatically (else fusion_real_rig_e3.0, fusion_full_e1.2),
+# and warns when the model was trained for another rig than config/vinebot_rig.yaml.
 
 notes
 # build error "No module named 'catkin_pkg'" (conda python): use the --cmake-args flag above.

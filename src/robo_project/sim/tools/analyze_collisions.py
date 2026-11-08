@@ -7,7 +7,7 @@ Two independent checks:
     which clips motion at the navmesh edge. /odom carries the commanded velocity actually applied
     (twist.linear.x), so commanded vs. actual displacement reveals every contact / wall slide.
  2. BODY OVERLAP - Habitat models the robot as a 0.10 m-radius cylinder (navmesh agent_radius).
-    The real VineBot footprint (0.86 x 0.53 m, base_footprint at the middle axle) is checked
+    The real VineBot footprint (1.15 x 0.60 m, base_footprint at its centre) is checked
     against the scene's obstacles = navigable area grown back by agent_radius.
 
 usage: analyze_collisions.py <bag_dir> <navmesh> <out_dir>
@@ -23,8 +23,8 @@ from rclpy.serialization import deserialize_message
 from rosidl_runtime_py.utilities import get_message
 
 RES = 0.02                                   # m/px of the top-down view
-FOOT_X = (-0.451, 0.409)                     # VineBot body in base_footprint (from the URDF mesh bounds)
-FOOT_Y = (-0.264, 0.266)
+FOOT_X = (-0.575, 0.575)                     # VineBot body in base_footprint: measured 1.15 m long ...
+FOOT_Y = (-0.30, 0.30)                       # ... and 0.60 m wide (config/vinebot_rig.yaml)
 WIN_S = 0.5                                  # sim-contact window
 MIN_CMD_M = 0.03                             # ...with at least this much commanded forward motion
 CONTACT_RATIO = 0.5                          # ...and less than this fraction actually driven
@@ -139,7 +139,7 @@ def main():
     for a, b in sim_events:
         i = np.searchsorted(T, a)
         lines.append(f"   t={a:7.1f}-{b:7.1f} s  at ({X[i]:.2f},{Y[i]:.2f})")
-    lines += ["", f"2. BODY OVERLAP (0.86 x 0.53 m footprint inside scene obstacles by > {PEN_TOL * 100:.0f} cm)",
+    lines += ["", f"2. BODY OVERLAP (1.15 x 0.60 m footprint inside scene obstacles by > {PEN_TOL * 100:.0f} cm)",
               f"   events: {len(body_events)}, time overlapping: {body_hit.mean() * 100:.1f}% of the run, "
               f"max depth {pen.max() * 100:.1f} cm",
               f"   min body clearance when not overlapping: "

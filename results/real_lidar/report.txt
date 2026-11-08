@@ -1,0 +1,13 @@
+file /home/yug/Downloads/lidar_data: 3483 frames, 174.2 s, devices [{'serial': '47MDM6B0020566', 'extrinsic_rpy_deg': (0.0, 0.0, 90.0), 'extrinsic_xyz': (0.0, 0.0, 0.0)}]
+rig /home/yug/robo_project_ws/src/robo_project/config/vinebot_rig.yaml: lidar height 0.45 m, yaw 90.0 deg
+self-returns removed (inside the 1.15 x 0.6 m body): 0.56% of the points
+mounting yaw check: robot's own returns at dx -0.22 m, dy +0.12 m from the LiDAR -> behind it, as on the robot: yaw OK
+beam pattern (lowest elevation per 10-deg sector from -180 deg, 0 = forward) - rig lidar.min_elevation_deg:
+   [-4.2, -3.9, 0.1, -6.3, -6.7, -7.1, -7.3, -7.4, -7.4, -7.3, -7.1, -6.9, -6.6, -6.1, -5.6, -5.1, -4.6, -4.0, -3.6, -3.9, -4.3, -4.7, -5.0, -5.3, -5.5, -5.8, -5.9, -6.0, -6.0, -6.0, -5.9, -5.7, -5.4, 32.4, -1.6, -2.2]
+straight ahead the lowest beam is -3.6 deg -> the LiDAR sees obstacles only ABOVE:
+   0.5 m ahead of the LiDAR:   42 cm
+   1.0 m ahead of the LiDAR:   39 cm
+   1.5 m ahead of the LiDAR:   36 cm
+   2.0 m ahead of the LiDAR:   32 cm
+   3.0 m ahead of the LiDAR:   26 cm
+   lower obstacles close to the robot are only seen by the cameras / front depth.

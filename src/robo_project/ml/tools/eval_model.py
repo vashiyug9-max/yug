@@ -30,7 +30,7 @@ from robo_project.ml.fusion.lidar_local_occ import ego_crop                     
 from robo_project.common.rig import load_rig                                   # noqa: E402
 from sensor_msgs_py.point_cloud2 import read_points_numpy               # noqa: E402
 
-FINE_RES, LABEL_EXTENT, LABEL_RES, EXTENT, G = 0.025, 6.0, 0.05, 1.2, 64
+FINE_RES, LABEL_EXTENT, LABEL_RES, G = 0.025, 6.0, 0.05, 64
 
 
 def read(topics):
@@ -79,6 +79,10 @@ topdown = np.asarray(pf.get_topdown_view(FINE_RES, floor_y)).astype(np.float32)
 x_min, z_min = float(lower[0]), float(lower[2])
 
 rig = load_rig(str(pkg / "config" / "vinebot_rig.yaml"))
+grids = data["/fusion/local_grid"]
+if not grids:
+    sys.exit("no /fusion/local_grid in the bag")
+EXTENT = float(grids[0].info.resolution * grids[0].info.width)   # model grid side (1.2 m, 3.0 m, ...)
 fi = FusionInputs(rig, EXTENT)
 n_lab = int(round(LABEL_EXTENT / LABEL_RES))
 n_crop = int(round(EXTENT / LABEL_RES))
@@ -111,7 +115,7 @@ for m in data["/fusion/local_grid"]:
     res["rule"].append(metrics(rule_fuse(lg, dg), label))
 
 out_dir.mkdir(parents=True, exist_ok=True)
-lines = [f"bag: {bag}", f"frames evaluated: {len(res['model'])} (skipped {skipped} without pose/LiDAR match)",
+lines = [f"bag: {bag}", f"model grid: {EXTENT:.1f} m", f"frames evaluated: {len(res['model'])} (skipped {skipped} without pose/LiDAR match)",
          f"ground truth: navmesh top-down, same label pipeline as training (fusion_data.py)", "",
          f"{'':24s}{'cell3':>8s}{'IoU*':>8s}{'IoU obst':>10s}{'missed obst.':>14s}{'false alarm':>13s}"]
 names = {"model": "FusionOccNet (all)", "lidar": "LiDAR only (no ML)", "rule": "LiDAR+depth rule"}

@@ -14,3 +14,5 @@ __pycache__/
 bags/
 *.db3
 *.mcap
+# training data (regenerate with collect_data.py)
+data/

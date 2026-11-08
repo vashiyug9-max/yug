@@ -1,0 +1,17 @@
+35933 training / 4067 validation samples, extent 3.0 m
+Fine-tuning from runs/fusion_real_rig_e3.0/best.pt
+epoch   1  loss 0.0848  val cell3 99.1%  iou 92.4%  (315s)
+epoch   2  loss 0.0788  val cell3 98.9%  iou 92.4%  (314s)
+epoch   3  loss 0.0768  val cell3 99.0%  iou 92.7%  (314s)
+epoch   4  loss 0.0733  val cell3 99.2%  iou 93.2%  (314s)
+epoch   5  loss 0.0698  val cell3 99.3%  iou 93.5%  (315s)
+epoch   6  loss 0.0675  val cell3 99.3%  iou 93.5%  (314s)
+
+Validation (cell3 = 3x3 accuracy used by CMN, iou = occupied IoU)
+  model (all sensors)                  cell3  99.3%  iou  93.5%
+  baseline: LiDAR only                 cell3  91.2%  iou  70.8%
+  baseline: rule fusion LiDAR+depth    cell3  91.6%  iou  71.5%
+  model without lidar                  cell3  99.0%  iou  90.9%
+  model without cams                   cell3  96.2%  iou  87.6%
+  model without depth                  cell3  99.3%  iou  93.4%
+Saved runs/fusion_mid360_e3.0/best.pt, runs/fusion_mid360_e3.0/report.json and runs/fusion_mid360_e3.0/examples.png
