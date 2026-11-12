@@ -10,7 +10,7 @@ from geometry_msgs.msg import Twist, PoseStamped, PointStamped, TransformStamped
 from nav_msgs.msg import Odometry, OccupancyGrid, Path
 from tf2_ros import TransformBroadcaster
 
-import yaml, os, time, math
+import yaml, os, time, math, threading
 from ament_index_python.packages import get_package_share_directory
 import numpy as np
 
@@ -32,7 +32,44 @@ LIN_VEL = 0.3                # m/s when driving
 MIN_LIN_VEL = 0.1            # m/s: slow down to this when approaching the goal
 MAX_ANG_VEL = 0.8            # rad/s
 ANG_GAIN = 1.5               # angular.z = ANG_GAIN * heading error (clamped)
-TURN_IN_PLACE_ERR = 0.35     # rad (~20 deg): turn on the spot above this heading error
+# Turning on the spot (the robot stops driving) only for sharp turns: start above TURN_IN_PLACE_ERR, then keep
+# turning until the heading error is below TURN_IN_PLACE_EXIT (hysteresis: no stop-go flicker). Smaller corners
+# are taken while driving, slower the larger the heading error (full speed below SLOW_TURN_ERR).
+# (was: on the spot above 20 deg -> a short stop at almost every path corner)
+# 2026-11-12 (2): corners of 40-75 deg are also driven, as a tight slow curve (speed fraction down to
+# MIN_TURN_SPEED_FRAC) - no stop - if the live grid shows room for it; else / above 75 deg: on the spot.
+TURN_IN_PLACE_ERR = 1.31     # rad (~75 deg)
+TURN_IN_PLACE_EXIT = 0.26    # rad (~15 deg)
+SLOW_TURN_ERR = 0.17         # rad (~10 deg): full speed below this heading error
+CURVE_CHECK_ERR = 0.70       # rad (~40 deg): above this the curve is only driven if the turn area is free
+CURVE_SPEED_FRAC = 0.35      # speed fraction at CURVE_CHECK_ERR ...
+MIN_TURN_SPEED_FRAC = 0.15   # ... and at TURN_IN_PLACE_ERR (0.045 m/s: a curve of ~6 cm radius)
+
+# ── Room to turn on the spot ──────────────────────────────────────────────────
+# Turning on the spot sweeps (part of) a circle of radius hypot(0.575, 0.30) = 0.65 m (1.15 x 0.60 m body,
+# base_footprint at its centre). Before such a turn the runner computes the area the body really sweeps for
+# that turn on the LIVE ML local grid /fusion/local_grid (robot frame: right even when the localized pose is
+# off). Short way blocked -> the long way round if that is free. Both blocked (tight parking spot, dead end)
+# -> manoeuvre: a small search over 0.5 s moves (forward / back / on the spot x left / straight / right) on the
+# grid with the real body outline finds the shortest collision-free sequence that ends facing the next waypoint
+# (a multi-point turn); it is re-planned every move with the newest grid.
+# (without this every body overlap in the tests happened while turning on the spot in a tight spot)
+BODY_HALF_L, BODY_HALF_W = 0.575, 0.30
+PIVOT_RADIUS_M = math.hypot(BODY_HALF_L, BODY_HALF_W) + 0.08
+LOCAL_GRID_MAX_AGE_S = 1.0
+LOCAL_OCC_MIN = 50           # occupancy value counted as obstacle (model: >= 50% occupied)
+BODY_MARGIN_M = 0.03         # safety margin around the body for these checks
+PIVOT_BLOCK_CELLS = 3        # >= this many obstacle cells swept = blocked (ML noise tolerance)
+MANOEUVRE_V, MANOEUVRE_W = 0.15, 0.6          # m/s, rad/s of the manoeuvre moves
+MANOEUVRE_STEP_S = 0.5       # duration of one move
+MANOEUVRE_MARGINS_M = (0.04, 0.0)   # body outline margins tried for the manoeuvre (the 4.7 cm cells add ~2 cm):
+                                    # with 4 cm if possible, the bare outline only if there is no other way
+MANOEUVRE_MAX_EXPAND = 3000  # search effort limit
+MANOEUVRE_MAX_DIST_M = 1.0   # stay within this distance of where the manoeuvre started
+RECOVERY_MAX_S = 30.0        # give up (turn on the spot anyway) after this long
+FRONT_GUARD_M = 0.12         # obstacle this close in front of the bumper (full width) -> no forward driving:
+FRONT_GUARD_REPORT_S = 3.0   # turn towards the waypoint; still blocked after this -> report it to the planner
+FRONT_GUARD_CELLS = 3
 
 # ── Stall detection ───────────────────────────────────────────────────────────
 # The hand-drawn map is only approximate: Habitat can have an obstacle where
@@ -96,8 +133,18 @@ class RunnerNode(Node):
         self.ml_info = None
         self.create_subscription(OccupancyGrid, '/fusion/obstacle_map', self._ml_map_callback, 2,
                                  callback_group=self.cb_group)
+        self.local_grid = None   # (wall time, info, H x W int16) of /fusion/local_grid (robot frame)
+        self.create_subscription(OccupancyGrid, '/fusion/local_grid', self._local_grid_callback, 2,
+                                 callback_group=self.cb_group)
         self.path = []
         self.waypoint_idx = 0
+        self._pivoting = False
+        self._pivot_dir = None
+        self._recovery_t0 = None
+        self._move = None
+        self._plan = []
+        self._front_since = None
+        self._loop_lock = threading.Lock()
         self.robot_yaw = 0.0
         self.path_goal_reached = False
         self.create_timer(0.1, self.path_follow_loop, callback_group=self.cb_group)
@@ -304,10 +351,24 @@ class RunnerNode(Node):
         self.path = new_path
         self.waypoint_idx = 0
         self.path_goal_reached = False
+        self._pivoting = False
+        self._pivot_dir = None
+        self._recovery_t0 = None
+        self._move = None
+        self._plan = []
         self._reset_stall()
         print(f"Path received from motion_planner: {len(self.path)} waypoints. Following now.", flush=True)
 
     def path_follow_loop(self):
+        # one control step at a time (the timer is in a reentrant group; a manoeuvre search can take ~0.5 s)
+        if not self._loop_lock.acquire(blocking=False):
+            return
+        try:
+            self._path_follow_step()
+        finally:
+            self._loop_lock.release()
+
+    def _path_follow_step(self):
         if not self.path or self.path_goal_reached:
             return
         odom_msg = self.latest_odom_msg_for_tf
@@ -387,9 +448,73 @@ class RunnerNode(Node):
         if self._check_stall(rx, ry, ryaw):
             return
 
-        if abs(angle_err) > TURN_IN_PLACE_ERR:
+        sharp = abs(angle_err) > TURN_IN_PLACE_ERR or (
+            abs(angle_err) > CURVE_CHECK_ERR and not self._pivoting
+            and self._choose_turn(angle_err) != math.copysign(1.0, angle_err))   # no room for the curve
+        if sharp:
+            if not self._pivoting:
+                self._pivoting = True
+                self._pivot_dir = self._choose_turn(angle_err)
+                if self._pivot_dir == 0:                 # both ways would hit something: recovery first
+                    self._recovery_t0 = time.time()
+                    print(f"↩️  No room to turn on the spot at ({rx:.2f},{ry:.2f}) - manoeuvring "
+                          f"(multi-point turn).", flush=True)
+        elif abs(angle_err) < TURN_IN_PLACE_EXIT:
+            self._pivoting = False
+            self._pivot_dir = None
+            self._recovery_t0 = None
+        if self._pivoting and self._recovery_t0 is not None:
+            d = self._choose_turn(angle_err)
+            if d == 0 and time.time() - self._recovery_t0 < RECOVERY_MAX_S:
+                now = time.time()
+                if self._move is None or now >= self._move[2]:
+                    c, s_ = math.cos(ryaw), math.sin(ryaw)
+                    wxr, wyr = c * (wx - rx) + s_ * (wy - ry), -s_ * (wx - rx) + c * (wy - ry)
+                    if not self._plan or not self._move_free(*self._plan[0]):
+                        self._publish_cmd_vel(0.0, 0.0)          # stand still while searching
+                        self._plan = self._plan_manoeuvre(wxr, wyr) or []
+                        if self._plan:
+                            print(f"   manoeuvre: {len(self._plan)} moves "
+                                  f"({' '.join(self._move_name(v, w) for v, w in self._plan)})", flush=True)
+                    if self._plan:
+                        v, w = self._plan.pop(0)
+                        self._move = (v, w, now + MANOEUVRE_STEP_S)
+                    else:
+                        self._move = None
+                if self._move is not None:
+                    self._drive_prev = None
+                    self._publish_cmd_vel(self._move[0], self._move[1])
+                    return
+            print(f"   manoeuvre done after {time.time() - self._recovery_t0:.1f} s - turning now.", flush=True)
+            self._recovery_t0 = None
+            self._move = None
+            self._plan = []
+            self._pivot_dir = d if d else self._choose_turn(angle_err, force=True)
+        if self._pivoting and self._pivot_dir and abs(angle_err) > 0.6 and \
+                math.copysign(1.0, angle_err) != self._pivot_dir:
+            ang = self._pivot_dir * MAX_ANG_VEL           # the long way round (the short way is blocked)
+        if self._pivoting:
             self._publish_cmd_vel(0.0, ang)
         else:
+            # GUARD 3 (live ML grid, robot frame): obstacle right in front of the bumper -> no forward driving.
+            # Turn towards the waypoint if that is free; blocked for FRONT_GUARD_REPORT_S -> report the obstacle
+            # at its real position (from the grid) so the planner goes around it.
+            hit = self._front_obstacle()
+            if hit is not None:
+                now = time.time()
+                self._front_since = self._front_since or now
+                turn = ang if abs(angle_err) > 0.05 and self._choose_turn(angle_err) == math.copysign(1.0, angle_err) \
+                    else 0.0
+                self._publish_cmd_vel(0.0, turn)
+                self._log_throttled("front", f"🚧 Obstacle within {FRONT_GUARD_M:.2f} m in front of the bumper at "
+                                             f"({rx:.2f},{ry:.2f}) - not driving forward.")
+                if now - self._front_since > FRONT_GUARD_REPORT_S:
+                    c, s_ = math.cos(ryaw), math.sin(ryaw)
+                    ox_, oy_ = rx + c * hit[0] - s_ * hit[1], ry + s_ * hit[0] + c * hit[1]
+                    self._front_since = None
+                    self._report_blocked_at(ox_, oy_)
+                return
+            self._front_since = None
             # GUARD 2: the cell just ahead is wall/void -> don't step into it.
             ahead_x = rx + FORWARD_LOOKAHEAD_M * math.cos(ryaw)
             ahead_y = ry + FORWARD_LOOKAHEAD_M * math.sin(ryaw)
@@ -401,9 +526,17 @@ class RunnerNode(Node):
                     f"({rx:.2f},{ry:.2f}) is not free. Not driving forward.")
                 self._report_blocked(rx, ry, ryaw)
                 return
-            lin = LIN_VEL
+            err = abs(angle_err)
+            if err <= SLOW_TURN_ERR:
+                frac = 1.0
+            elif err <= CURVE_CHECK_ERR:
+                frac = 1.0 - (1.0 - CURVE_SPEED_FRAC) * (err - SLOW_TURN_ERR) / (CURVE_CHECK_ERR - SLOW_TURN_ERR)
+            else:
+                frac = CURVE_SPEED_FRAC - (CURVE_SPEED_FRAC - MIN_TURN_SPEED_FRAC) * \
+                    min(1.0, (err - CURVE_CHECK_ERR) / (TURN_IN_PLACE_ERR - CURVE_CHECK_ERR))
+            lin = LIN_VEL * frac
             if self.waypoint_idx == len(self.path) - 1:
-                lin = max(MIN_LIN_VEL, min(LIN_VEL, dist))  # slow down for the goal
+                lin = max(MIN_LIN_VEL, min(lin, dist))  # slow down for the goal
             self._publish_cmd_vel(lin, ang)
             self._drive_prev = (time.time(), rx, ry, ryaw, lin)
 
@@ -433,6 +566,18 @@ class RunnerNode(Node):
         self._report_blocked(rx, ry, ryaw)
         return True
 
+    def _report_blocked_at(self, x: float, y: float):
+        """Stop, publish an obstacle at world point (x, y) and wait for a new path."""
+        self._publish_cmd_vel(0.0, 0.0)
+        msg = PointStamped()
+        msg.header.frame_id = 'map'
+        msg.header.stamp = self.get_clock().now().to_msg()
+        msg.point.x, msg.point.y = float(x), float(y)
+        self.blocked_pub.publish(msg)
+        print(f"   Reported obstacle at ({x:.2f},{y:.2f}) — asking motion_planner to re-plan.", flush=True)
+        self.path = []
+        self._reset_stall()
+
     def _report_blocked(self, rx: float, ry: float, direction: float):
         """Stop, publish the blocked spot in `direction` from the robot and wait for a new path."""
         self._publish_cmd_vel(0.0, 0.0)
@@ -447,6 +592,188 @@ class RunnerNode(Node):
         # Pause following until the re-planned path arrives (path_callback).
         self.path = []
         self._reset_stall()
+
+    def _local_grid_callback(self, msg: OccupancyGrid):
+        if msg.header.frame_id not in ('base_footprint', 'base_link'):
+            return
+        a = np.asarray(msg.data, dtype=np.int16).reshape(msg.info.height, msg.info.width)
+        self.local_grid = (time.time(), msg.info, a)
+
+    def _front_obstacle(self):
+        """Robot-frame centre (x, y) of the obstacle cells within FRONT_GUARD_M in front of the bumper (full width)
+        on the live local grid, or None (no such obstacle / no fresh grid)."""
+        g = self.local_grid
+        if g is None or time.time() - g[0] > LOCAL_GRID_MAX_AGE_S:
+            return None
+        _, info, a = g
+        res, ox, oy = info.resolution, info.origin.position.x, info.origin.position.y
+        X, Y = np.meshgrid(ox + (np.arange(a.shape[1]) + 0.5) * res, oy + (np.arange(a.shape[0]) + 0.5) * res)
+        sel = (a >= LOCAL_OCC_MIN) & (X >= BODY_HALF_L) & (X <= BODY_HALF_L + FRONT_GUARD_M) & \
+            (np.abs(Y) <= BODY_HALF_W + 0.02)
+        if int(sel.sum()) < FRONT_GUARD_CELLS:
+            return None
+        return float(X[sel].mean()), float(Y[sel].mean())
+
+    def _grid_obstacles(self, radius):
+        """Robot-frame (x, y) of the obstacle cells of the fresh live local grid within radius, minus the cells
+        already under the body (+margin); None without a fresh grid."""
+        g = self.local_grid
+        if g is None or time.time() - g[0] > LOCAL_GRID_MAX_AGE_S:
+            return None
+        _, info, a = g
+        res, ox, oy = info.resolution, info.origin.position.x, info.origin.position.y
+        c0, c1 = max(0, int((-radius - ox) / res)), min(info.width - 1, int((radius - ox) / res))
+        r0, r1 = max(0, int((-radius - oy) / res)), min(info.height - 1, int((radius - oy) / res))
+        occ = a[r0:r1 + 1, c0:c1 + 1] >= LOCAL_OCC_MIN
+        X, Y = np.meshgrid(ox + (np.arange(c0, c1 + 1) + 0.5) * res, oy + (np.arange(r0, r1 + 1) + 0.5) * res)
+        keep = occ & ~self._in_body(X, Y) & (np.hypot(X, Y) <= radius)
+        return X[keep], Y[keep]
+
+    @staticmethod
+    def _in_body(x, y):
+        return (np.abs(x) <= BODY_HALF_L + BODY_MARGIN_M) & (np.abs(y) <= BODY_HALF_W + BODY_MARGIN_M)
+
+    def _turn_hits(self, err):
+        """Obstacle cells swept by the body when turning on the spot by err (short way) and the long way round;
+        (None, None) without a fresh grid."""
+        pts = self._grid_obstacles(PIVOT_RADIUS_M)
+        if pts is None:
+            return None, None
+        px, py = pts
+        if px.size == 0:
+            return 0, 0
+        out = []
+        for turn in (err, err - math.copysign(2 * math.pi, err)):
+            hit = np.zeros(px.size, bool)
+            for th in np.linspace(0.0, turn, max(2, int(abs(turn) / math.radians(5)) + 1)):
+                c, s_ = math.cos(th), math.sin(th)           # cell in the frame of the body turned by th
+                hit |= self._in_body(c * px + s_ * py, -s_ * px + c * py)
+            out.append(int(hit.sum()))
+        return out[0], out[1]
+
+    def _choose_turn(self, err, force=False):
+        """Direction to turn on the spot: +1 left / -1 right; the short way if it is free, else the long way if
+        that is free; 0 = both blocked, or with force the way with fewer obstacle cells."""
+        short, long_ = self._turn_hits(err)
+        sdir = math.copysign(1.0, err)
+        if short is None or short < PIVOT_BLOCK_CELLS:
+            return sdir
+        if long_ < PIVOT_BLOCK_CELLS or (force and long_ < short):
+            if not force:
+                self._log_throttled("longway", "   short way round is blocked - turning the other way.")
+            return -sdir
+        return sdir if force else 0
+
+    @staticmethod
+    def _outline_checker(occ, info, margin=0.0):
+        """collides(x, y, th): body outline (+margin) at robot-frame pose (x, y, th) touches >= 2 obstacle cells."""
+        res, ox, oy = info.resolution, info.origin.position.x, info.origin.position.y
+        H, W = occ.shape
+        hl, hw = BODY_HALF_L + margin, BODY_HALF_W + margin
+        sx = np.arange(-hl, hl + 1e-9, 0.04)
+        sy = np.arange(-hw, hw + 1e-9, 0.04)
+        bx = np.concatenate([sx, sx, np.full(sy.size, -hl), np.full(sy.size, hl)])
+        by = np.concatenate([np.full(sx.size, -hw), np.full(sx.size, hw), sy, sy])
+
+        def collides(x, y, th):
+            c, s_ = math.cos(th), math.sin(th)
+            gx = np.floor((x + c * bx - s_ * by - ox) / res).astype(int)
+            gy = np.floor((y + s_ * bx + c * by - oy) / res).astype(int)
+            ok = (gx >= 0) & (gx < W) & (gy >= 0) & (gy < H)
+            return int(occ[gy[ok], gx[ok]].sum()) >= 2
+        return collides
+
+    def _move_free(self, v, w):
+        """True if the move (v, w) for MANOEUVRE_STEP_S is collision-free on the newest local grid."""
+        g = self.local_grid
+        if g is None or time.time() - g[0] > LOCAL_GRID_MAX_AGE_S:
+            return False
+        _, info, a = g
+        res, ox, oy = info.resolution, info.origin.position.x, info.origin.position.y
+        X, Y = np.meshgrid(ox + (np.arange(a.shape[1]) + 0.5) * res, oy + (np.arange(a.shape[0]) + 0.5) * res)
+        collides = self._outline_checker((a >= LOCAL_OCC_MIN) & ~self._in_body(X, Y), info)
+        x = y = th = 0.0
+        for _ in range(4):
+            dt = MANOEUVRE_STEP_S / 4
+            x += v * dt * math.cos(th)
+            y += v * dt * math.sin(th)
+            th += w * dt
+            if collides(x, y, th):
+                return False
+        return True
+
+    @staticmethod
+    def _move_name(v, w):
+        return ("fwd" if v > 0 else "back" if v < 0 else "turn") + ("-L" if w > 0 else "-R" if w < 0 else "")
+
+    def _plan_manoeuvre(self, wxr, wyr):
+        """Shortest collision-free sequence of moves (v, w) after which the robot faces the waypoint (wxr, wyr)
+        (robot frame), searched on the live local grid with the body outline; None if none is found."""
+        import heapq
+        g = self.local_grid
+        if g is None or time.time() - g[0] > LOCAL_GRID_MAX_AGE_S:
+            return None
+        _, info, a = g
+        res, ox, oy = info.resolution, info.origin.position.x, info.origin.position.y
+        H, W = a.shape
+        occ = a >= LOCAL_OCC_MIN
+        X, Y = np.meshgrid(ox + (np.arange(W) + 0.5) * res, oy + (np.arange(H) + 0.5) * res)
+        occ &= ~self._in_body(X, Y)                       # cells already under the body: ignored
+        for margin in MANOEUVRE_MARGINS_M:
+            plan = self._search_manoeuvre(self._outline_checker(occ, info, margin), wxr, wyr)
+            if plan:
+                return plan
+        return None
+
+    def _search_manoeuvre(self, collides, wxr, wyr):
+        import heapq
+        def facing(x, y, th):
+            return abs(self._wrap_angle(math.atan2(wyr - y, wxr - x) - th)) < TURN_IN_PLACE_EXIT
+
+        moves = [(v, w) for v in (MANOEUVRE_V, 0.0, -MANOEUVRE_V) for w in (MANOEUVRE_W, 0.0, -MANOEUVRE_W)
+                 if (v, w) != (0.0, 0.0)]
+        sub = 4
+        dt = MANOEUVRE_STEP_S / sub
+        key = lambda x, y, th: (round(x / 0.05), round(y / 0.05), round(self._wrap_angle(th) / math.radians(10)))
+        h = lambda x, y, th: abs(self._wrap_angle(math.atan2(wyr - y, wxr - x) - th)) / MANOEUVRE_W
+        start = (0.0, 0.0, 0.0)
+        openq = [(h(*start), 0.0, 0, start, None)]
+        nodes = {0: (start, None, None)}                  # id -> (state, parent id, move)
+        seen = {key(*start)}
+        nid, expanded = 0, 0
+        while openq and expanded < MANOEUVRE_MAX_EXPAND:
+            _, cost, cur, (x, y, th), _ = heapq.heappop(openq)
+            if facing(x, y, th):
+                plan = []
+                while nodes[cur][1] is not None:
+                    plan.append(nodes[cur][2])
+                    cur = nodes[cur][1]
+                return plan[::-1]
+            expanded += 1
+            for v, w in moves:
+                nx, ny, nth = x, y, th
+                bad = False
+                for _ in range(sub):
+                    nx += v * dt * math.cos(nth)
+                    ny += v * dt * math.sin(nth)
+                    nth += w * dt
+                    if collides(nx, ny, nth):
+                        bad = True
+                        break
+                if bad or math.hypot(nx, ny) > MANOEUVRE_MAX_DIST_M:
+                    continue
+                k = key(nx, ny, nth)
+                if k in seen:
+                    continue
+                seen.add(k)
+                prev_move = nodes[cur][2]
+                step = MANOEUVRE_STEP_S * (1.5 if v < 0 else 1.0)
+                if prev_move is not None and prev_move[0] * v < 0:
+                    step += 0.5                            # changing between forward and backward
+                nid += 1
+                nodes[nid] = ((nx, ny, nth), cur, (v, w))
+                heapq.heappush(openq, (cost + step + h(nx, ny, nth), cost + step, nid, (nx, ny, nth), None))
+        return None
 
     # ── Keep-inside-the-room guard ───────────────────────────────────────────
 

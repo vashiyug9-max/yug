@@ -1,0 +1,23 @@
+[INFO] [1794429453.630852204] [motion_planner]: motion_planner started. Waiting for /map and /odom...
+[INFO] [1794429453.631203676] [motion_planner]: Goal: x=0.0m, y=0.0m
+[INFO] [1794429454.119283049] [motion_planner]: Map received: 768x1024 res=0.019999999552965164m origin=(-7.68,-10.24)
+Traceback (most recent call last):
+  File "/home/yug/miniconda3/envs/habitat/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/yug/miniconda3/envs/habitat/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/planning/motion_planner.py", line 554, in <module>
+    main()
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/planning/motion_planner.py", line 544, in main
+    rclpy.spin(node)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+    executor.spin_once()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+    raise ExternalShutdownException()
+rclpy.executors.ExternalShutdownException

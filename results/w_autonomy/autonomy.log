@@ -1,0 +1,957 @@
+[INFO] [launch]: All log files can be found below /home/yug/.ros/log/2026-11-11-23-29-54-906840-yug-52452
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [sketch_pf_node-1]: process started with pid [52494]
+[INFO] [runner_node-2]: process started with pid [52496]
+[INFO] [fusion_obstacle_node-3]: process started with pid [52498]
+[INFO] [python3-4]: process started with pid [52500]
+[python3-4] [INFO] [1794436195.352635642] [motion_planner]: motion_planner started. Waiting for /map and /odom...
+[python3-4] [INFO] [1794436195.352991885] [motion_planner]: Goal: x=0.0m, y=0.0m
+[sketch_pf_node-1] [INFO] [1794436195.389769814] [sketch_pf]: Sketch PF: 600 particles, odometry /wheel_odom, start (-4.10, 4.90, 0 deg). Waiting for /map ...
+[sketch_pf_node-1] [INFO] [1794436195.398323302] [sketch_pf]: PF started at (-4.10, 4.90, 0 deg)
+[runner_node-2] 
+[runner_node-2] ==================================================
+[runner_node-2] 🚀 RUNNER NODE INITIALIZING (NO ML / NO LOCALIZATION)...
+[runner_node-2] ==================================================
+[runner_node-2] 
+[sketch_pf_node-1] [WARN] [1794436195.433376507] [sketch_pf]: New publisher discovered on topic '/map', offering incompatible QoS. No messages will be received from it. Last incompatible policy: DURABILITY
+[runner_node-2] [WARN] [1794436195.455201452] [runner_node]: New subscription discovered on topic '/map', requesting incompatible QoS. No messages will be sent to it. Last incompatible policy: DURABILITY
+[runner_node-2] ⏳ Loading map in the background...
+[fusion_obstacle_node-3] [INFO] [1794436196.919066020] [fusion_obstacle_node]: Fusion model /home/yug/robo_project_ws/robo_project_ws/runs/fusion_mid360_e3.0/best.pt on cpu, local grid 3.0 m, sensors ['cams', 'lidar', 'depth']. Waiting for /map ...
+[fusion_obstacle_node-3] [INFO] [1794436203.000143328] [fusion_obstacle_node]: 53 predictions (0 with a sensor missing), 70 ms each, 0 obstacle cells in the map
+[runner_node-2] [INFO] [1794436214.487535784] [robo_project]: ✅ SUCCESS: Resized and loaded raw physical sketch from /home/yug/robo_project_ws/robo_project_ws/src/resources/sketch_map_imr_lab8.jpeg
+[runner_node-2] ✅ BACKGROUND LOAD COMPLETE! Map is now actively broadcasting.
+[runner_node-2] 🗺️ MAP BROADCAST SUCCESSFUL! Check RViz now.
+[fusion_obstacle_node-3] [INFO] [1794436215.544531613] [fusion_obstacle_node]: Obstacle map 768x1024 @ 0.019999999552965164 m aligned with /map. Publishing /fusion/obstacle_map
+[python3-4] [INFO] [1794436215.551417001] [motion_planner]: Map received: 768x1024 res=0.019999999552965164m origin=(-7.68,-10.24)
+[sketch_pf_node-1] [INFO] [1794436215.574711845] [sketch_pf]: Map 768x1024 @ 0.019999999552965164 m, origin (-7.68, -10.24); sketch blurred with sigma 0.4 m
+[python3-4] [INFO] [1794436215.728056178] [motion_planner]: Start: world=(-4.10,4.90) -> pixel=(757,178) value=0
+[python3-4] [INFO] [1794436215.728598517] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[python3-4] [WARN] [1794436216.062317899] [motion_planner]: Path crosses 1.82 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436216.098131085] [motion_planner]: Path found: 387 cells, smoothed to 8 waypoints in 347 ms (6176 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436216.098928925] [motion_planner]: Path published on /planned_path with 8 waypoints.
+[runner_node-2] Path received from motion_planner: 8 waypoints. Following now.
+[runner_node-2] Waypoint 1/8 reached.
+[runner_node-2] [steer] robot=(-4.10,4.90) yaw=-0° -> target=(-3.68,5.48) dist=0.72m angle_to_wp=54° angle_err=54°
+[python3-4] [WARN] [1794436216.863829096] [motion_planner]: ML model: obstacle on the path at (-2.39,5.42). Re-planning.
+[python3-4] [INFO] [1794436216.927845381] [motion_planner]: Start: world=(-4.08,4.89) -> pixel=(756,180) value=0
+[python3-4] [INFO] [1794436216.928150404] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[python3-4] [WARN] [1794436216.991899116] [motion_planner]: Path crosses 2.18 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436217.040524306] [motion_planner]: Path found: 390 cells, smoothed to 13 waypoints in 99 ms (10056 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436217.042819268] [motion_planner]: Path published on /planned_path with 13 waypoints.
+[runner_node-2] Path received from motion_planner: 13 waypoints. Following now.
+[runner_node-2] [steer] robot=(-3.99,4.94) yaw=47° -> target=(-3.76,5.42) dist=0.53m angle_to_wp=64° angle_err=17°
+[runner_node-2] [steer] robot=(-3.81,5.16) yaw=69° -> target=(-3.76,5.42) dist=0.26m angle_to_wp=80° angle_err=11°
+[python3-4] [WARN] [1794436218.290726913] [motion_planner]: ML model: obstacle on the path at (-1.12,4.59). Re-planning.
+[python3-4] [INFO] [1794436218.328033783] [motion_planner]: Start: world=(-3.79,5.18) -> pixel=(771,194) value=0
+[python3-4] [INFO] [1794436218.328584738] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[runner_node-2] Waypoint 2/13 reached.
+[python3-4] [WARN] [1794436218.400482605] [motion_planner]: Path crosses 2.32 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436218.448476782] [motion_planner]: Path found: 389 cells, smoothed to 17 waypoints in 98 ms (12652 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436218.449756960] [motion_planner]: Path published on /planned_path with 17 waypoints.
+[runner_node-2] Path received from motion_planner: 17 waypoints. Following now.
+[runner_node-2] [steer] robot=(-3.64,5.36) yaw=56° -> target=(-3.40,5.68) dist=0.39m angle_to_wp=53° angle_err=-3°
+[sketch_pf_node-1] [INFO] [1794436219.665655249] [sketch_pf]: PF update 20: (-3.32, 4.94, 55 deg), spread 0.05 m, Neff 301
+[runner_node-2] Waypoint 3/17 reached.
+[runner_node-2] [steer] robot=(-3.52,5.45) yaw=33° -> target=(-2.66,5.62) dist=0.88m angle_to_wp=11° angle_err=-22°
+[runner_node-2] [steer] robot=(-3.21,5.51) yaw=14° -> target=(-2.66,5.62) dist=0.56m angle_to_wp=11° angle_err=-3°
+[runner_node-2] Waypoint 4/17 reached.
+[runner_node-2] [steer] robot=(-2.89,5.54) yaw=13° -> target=(-2.60,5.62) dist=0.30m angle_to_wp=15° angle_err=1°
+[runner_node-2] [steer] robot=(-2.54,5.57) yaw=7° -> target=(-2.26,5.60) dist=0.28m angle_to_wp=6° angle_err=-1°
+[sketch_pf_node-1] [INFO] [1794436223.586124017] [sketch_pf]: PF update 40: (-2.32, 5.17, 7 deg), spread 0.06 m, Neff 517
+[runner_node-2] Waypoint 7/17 reached.
+[runner_node-2] [steer] robot=(-2.20,5.56) yaw=-2° -> target=(-1.00,4.82) dist=1.41m angle_to_wp=-32° angle_err=-29°
+[runner_node-2] [steer] robot=(-1.94,5.41) yaw=-28° -> target=(-1.00,4.82) dist=1.11m angle_to_wp=-32° angle_err=-5°
+[runner_node-2] [steer] robot=(-1.63,5.20) yaw=-32° -> target=(-1.00,4.82) dist=0.73m angle_to_wp=-31° angle_err=0°
+[sketch_pf_node-1] [INFO] [1794436227.704790922] [sketch_pf]: PF update 60: (-1.23, 4.72, -32 deg), spread 0.08 m, Neff 486
+[runner_node-2] [steer] robot=(-1.32,5.00) yaw=-31° -> target=(-1.00,4.82) dist=0.37m angle_to_wp=-29° angle_err=2°
+[runner_node-2] Waypoint 14/17 reached.
+[runner_node-2] [steer] robot=(-1.02,4.77) yaw=-38° -> target=(-0.68,4.46) dist=0.46m angle_to_wp=-43° angle_err=-5°
+[runner_node-2] Waypoint 15/17 reached.
+[runner_node-2] [steer] robot=(-0.74,4.49) yaw=-50° -> target=(-0.02,3.36) dist=1.34m angle_to_wp=-58° angle_err=-7°
+[runner_node-2] [steer] robot=(-0.54,4.21) yaw=-57° -> target=(-0.02,3.36) dist=0.99m angle_to_wp=-58° angle_err=-2°
+[runner_node-2] [steer] robot=(-0.34,3.89) yaw=-58° -> target=(-0.02,3.36) dist=0.62m angle_to_wp=-58° angle_err=-0°
+[sketch_pf_node-1] [INFO] [1794436232.242722428] [sketch_pf]: PF update 80: (-0.25, 3.69, -58 deg), spread 0.10 m, Neff 538
+[runner_node-2] Waypoint 16/17 reached.
+[runner_node-2] [steer] robot=(-0.14,3.56) yaw=-58° -> target=(-0.00,-0.00) dist=3.56m angle_to_wp=-88° angle_err=-30°
+[fusion_obstacle_node-3] [INFO] [1794436233.993271561] [fusion_obstacle_node]: 318 predictions (0 with a sensor missing), 71 ms each, 31385 obstacle cells in the map
+[runner_node-2] [steer] robot=(-0.07,3.31) yaw=-82° -> target=(-0.00,-0.00) dist=3.31m angle_to_wp=-89° angle_err=-7°
+[runner_node-2] [steer] robot=(-0.01,2.93) yaw=-88° -> target=(-0.00,-0.00) dist=2.93m angle_to_wp=-90° angle_err=-2°
+[runner_node-2] [steer] robot=(0.02,2.59) yaw=-89° -> target=(-0.00,-0.00) dist=2.59m angle_to_wp=-91° angle_err=-1°
+[sketch_pf_node-1] [INFO] [1794436236.601011975] [sketch_pf]: PF update 100: (0.09, 2.52, -89 deg), spread 0.10 m, Neff 558
+[runner_node-2] [steer] robot=(0.05,2.23) yaw=-91° -> target=(-0.00,-0.00) dist=2.23m angle_to_wp=-91° angle_err=-1°
+[runner_node-2] [steer] robot=(0.08,1.86) yaw=-92° -> target=(-0.00,-0.00) dist=1.86m angle_to_wp=-93° angle_err=-1°
+[runner_node-2] [steer] robot=(0.08,1.55) yaw=-92° -> target=(-0.00,-0.00) dist=1.55m angle_to_wp=-93° angle_err=-1°
+[runner_node-2] [steer] robot=(0.08,1.23) yaw=-93° -> target=(-0.00,-0.00) dist=1.23m angle_to_wp=-94° angle_err=-1°
+[sketch_pf_node-1] [INFO] [1794436241.009324755] [sketch_pf]: PF update 120: (0.08, 1.19, -93 deg), spread 0.09 m, Neff 304
+[runner_node-2] [steer] robot=(0.07,0.89) yaw=-94° -> target=(-0.00,-0.00) dist=0.90m angle_to_wp=-95° angle_err=-1°
+[runner_node-2] [steer] robot=(0.05,0.59) yaw=-95° -> target=(-0.00,-0.00) dist=0.60m angle_to_wp=-95° angle_err=-1°
+[runner_node-2] [steer] robot=(0.03,0.27) yaw=-95° -> target=(-0.00,-0.00) dist=0.27m angle_to_wp=-95° angle_err=-0°
+[runner_node-2] Waypoint 17/17 reached.
+[runner_node-2] GOAL REACHED! Robot stopped at (0.01,0.09).
+[runner_node-2] 🎯 Goal received from RViz: (4.38, -3.89) — waiting for motion_planner to re-plan.
+[python3-4] [INFO] [1794436245.982698022] [motion_planner]: New goal from RViz: x=4.38m, y=-3.89m. Re-planning.
+[runner_node-2] 🎯 Goal received from RViz: (4.38, -3.89) — waiting for motion_planner to re-plan.
+[runner_node-2] 🎯 Goal received from RViz: (4.38, -3.89) — waiting for motion_planner to re-plan.
+[python3-4] [INFO] [1794436246.008988195] [motion_planner]: New goal from RViz: x=4.38m, y=-3.89m. Re-planning.
+[python3-4] [INFO] [1794436246.010313224] [motion_planner]: New goal from RViz: x=4.38m, y=-3.89m. Re-planning.
+[python3-4] [INFO] [1794436246.129069307] [motion_planner]: Start: world=(0.00,0.09) -> pixel=(516,384) value=0
+[python3-4] [INFO] [1794436246.129768166] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[python3-4] [WARN] [1794436246.177024351] [motion_planner]: Goal (4.38,-3.90) is only 0.54 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.40,-3.52) instead (0.38 m away, 0.64 m of room).
+[python3-4] [WARN] [1794436246.225405200] [motion_planner]: Path crosses 2.48 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436246.266258799] [motion_planner]: Path found: 291 cells, smoothed to 39 waypoints in 118 ms (38189 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436246.267453256] [motion_planner]: Path published on /planned_path with 39 waypoints.
+[runner_node-2] Path received from motion_planner: 39 waypoints. Following now.
+[runner_node-2] Waypoint 1/39 reached.
+[runner_node-2] [steer] robot=(0.00,0.09) yaw=-95° -> target=(2.00,-3.20) dist=3.85m angle_to_wp=-59° angle_err=36°
+[sketch_pf_node-1] [INFO] [1794436246.961157140] [sketch_pf]: PF update 140: (0.01, 0.08, -76 deg), spread 0.09 m, Neff 395
+[runner_node-2] [steer] robot=(0.08,-0.10) yaw=-65° -> target=(2.00,-3.20) dist=3.65m angle_to_wp=-58° angle_err=6°
+[runner_node-2] [steer] robot=(0.22,-0.37) yaw=-59° -> target=(2.00,-3.20) dist=3.34m angle_to_wp=-58° angle_err=1°
+[python3-4] [WARN] [1794436249.188128152] [motion_planner]: ML model: obstacle on the path at (2.46,-3.22). Re-planning.
+[python3-4] [INFO] [1794436249.328231608] [motion_planner]: Start: world=(0.34,-0.61) -> pixel=(481,400) value=0
+[python3-4] [INFO] [1794436249.328916771] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[python3-4] [WARN] [1794436249.421195090] [motion_planner]: Path crosses 2.62 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[runner_node-2] [steer] robot=(0.35,-0.64) yaw=-59° -> target=(2.00,-3.20) dist=3.04m angle_to_wp=-57° angle_err=1°
+[python3-4] [INFO] [1794436249.463459839] [motion_planner]: Path found: 258 cells, smoothed to 38 waypoints in 117 ms (38271 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436249.465584949] [motion_planner]: Path published on /planned_path with 38 waypoints.
+[runner_node-2] Path received from motion_planner: 38 waypoints. Following now.
+[runner_node-2] Waypoint 1/38 reached.
+[runner_node-2] [steer] robot=(0.49,-0.95) yaw=-58° -> target=(2.00,-3.26) dist=2.76m angle_to_wp=-57° angle_err=2°
+[sketch_pf_node-1] [INFO] [1794436251.389895907] [sketch_pf]: PF update 160: (0.49, -1.21, -60 deg), spread 0.10 m, Neff 336
+[runner_node-2] [steer] robot=(0.63,-1.26) yaw=-57° -> target=(2.00,-3.26) dist=2.42m angle_to_wp=-56° angle_err=2°
+[python3-4] [WARN] [1794436251.717405747] [motion_planner]: ML model: obstacle on the path at (4.06,-3.12). Re-planning.
+[python3-4] [INFO] [1794436251.733535960] [motion_planner]: Start: world=(0.65,-1.28) -> pixel=(448,416) value=0
+[python3-4] [INFO] [1794436251.734114858] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[python3-4] [WARN] [1794436251.833468470] [motion_planner]: Path crosses 2.32 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436251.862632491] [motion_planner]: Path found: 236 cells, smoothed to 51 waypoints in 108 ms (38869 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436251.864047978] [motion_planner]: Path published on /planned_path with 51 waypoints.
+[runner_node-2] Path received from motion_planner: 51 waypoints. Following now.
+[runner_node-2] Waypoint 1/51 reached.
+[python3-4] [WARN] [1794436252.392678502] [motion_planner]: ML model: obstacle on the path at (3.08,-3.30). Re-planning.
+[python3-4] [INFO] [1794436252.535546227] [motion_planner]: Start: world=(0.74,-1.50) -> pixel=(436,421) value=0
+[python3-4] [INFO] [1794436252.536096794] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[python3-4] [WARN] [1794436252.620617983] [motion_planner]: Path crosses 2.32 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436252.650565982] [motion_planner]: Path found: 230 cells, smoothed to 63 waypoints in 87 ms (38638 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436252.654665802] [motion_planner]: Path published on /planned_path with 63 waypoints.
+[runner_node-2] Path received from motion_planner: 63 waypoints. Following now.
+[runner_node-2] [steer] robot=(0.77,-1.56) yaw=-61° -> target=(1.74,-3.44) dist=2.11m angle_to_wp=-63° angle_err=-2°
+[runner_node-2] [steer] robot=(0.88,-1.85) yaw=-62° -> target=(1.74,-3.44) dist=1.81m angle_to_wp=-62° angle_err=0°
+[runner_node-2] [steer] robot=(1.00,-2.12) yaw=-61° -> target=(1.74,-3.44) dist=1.52m angle_to_wp=-61° angle_err=0°
+[python3-4] [WARN] [1794436255.818356847] [motion_planner]: ML model: obstacle on the path at (2.28,-3.62). Re-planning.
+[runner_node-2] [steer] robot=(1.13,-2.40) yaw=-60° -> target=(1.74,-3.44) dist=1.20m angle_to_wp=-60° angle_err=-0°
+[sketch_pf_node-1] [INFO] [1794436255.925519989] [sketch_pf]: PF update 180: (1.05, -2.35, -59 deg), spread 0.14 m, Neff 501
+[python3-4] [INFO] [1794436255.938166559] [motion_planner]: Start: world=(1.14,-2.42) -> pixel=(391,441) value=0
+[python3-4] [INFO] [1794436255.938615846] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[python3-4] [WARN] [1794436256.021539023] [motion_planner]: Path crosses 1.84 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436256.048669229] [motion_planner]: Path found: 231 cells, smoothed to 24 waypoints in 93 ms (40124 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436256.049702359] [motion_planner]: Path published on /planned_path with 24 waypoints.
+[runner_node-2] Path received from motion_planner: 24 waypoints. Following now.
+[runner_node-2] Waypoint 1/24 reached.
+[runner_node-2] [steer] robot=(1.25,-2.65) yaw=-67° -> target=(1.54,-3.52) dist=0.91m angle_to_wp=-71° angle_err=-5°
+[runner_node-2] [steer] robot=(1.34,-2.90) yaw=-70° -> target=(1.54,-3.52) dist=0.65m angle_to_wp=-72° angle_err=-2°
+[runner_node-2] [steer] robot=(1.44,-3.18) yaw=-72° -> target=(1.54,-3.52) dist=0.35m angle_to_wp=-73° angle_err=-1°
+[runner_node-2] Waypoint 2/24 reached.
+[runner_node-2] [steer] robot=(1.54,-3.39) yaw=-58° -> target=(1.94,-3.86) dist=0.61m angle_to_wp=-50° angle_err=8°
+[sketch_pf_node-1] [INFO] [1794436260.524312044] [sketch_pf]: PF update 200: (1.60, -3.38, -53 deg), spread 0.10 m, Neff 358
+[runner_node-2] [steer] robot=(1.72,-3.60) yaw=-51° -> target=(1.94,-3.86) dist=0.34m angle_to_wp=-50° angle_err=1°
+[runner_node-2] Waypoint 3/24 reached.
+[python3-4] [WARN] [1794436261.935209636] [motion_planner]: ML model: obstacle on the path at (3.72,-4.48). Re-planning.
+[python3-4] [INFO] [1794436261.935910453] [motion_planner]: Start: world=(1.87,-3.71) -> pixel=(326,477) value=0
+[python3-4] [INFO] [1794436261.936173071] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[python3-4] [INFO] [1794436262.019009187] [motion_planner]: Path found: 128 cells, smoothed to 2 waypoints in 70 ms (42940 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436262.020422398] [motion_planner]: Path published on /planned_path with 2 waypoints.
+[runner_node-2] Path received from motion_planner: 2 waypoints. Following now.
+[runner_node-2] [steer] robot=(1.90,-3.73) yaw=-32° -> target=(4.40,-3.52) dist=2.51m angle_to_wp=5° angle_err=36°
+[runner_node-2] [steer] robot=(2.06,-3.71) yaw=-3° -> target=(4.40,-3.52) dist=2.34m angle_to_wp=5° angle_err=8°
+[runner_node-2] [steer] robot=(2.35,-3.66) yaw=4° -> target=(4.40,-3.52) dist=2.05m angle_to_wp=4° angle_err=0°
+[sketch_pf_node-1] [INFO] [1794436264.248711203] [sketch_pf]: PF update 220: (2.35, -3.56, 4 deg), spread 0.09 m, Neff 366
+[fusion_obstacle_node-3] [INFO] [1794436264.943200933] [fusion_obstacle_node]: 583 predictions (0 with a sensor missing), 71 ms each, 45292 obstacle cells in the map
+[runner_node-2] [steer] robot=(2.69,-3.60) yaw=4° -> target=(4.40,-3.52) dist=1.72m angle_to_wp=3° angle_err=-1°
+[runner_node-2] [steer] robot=(3.02,-3.54) yaw=3° -> target=(4.40,-3.52) dist=1.38m angle_to_wp=1° angle_err=-2°
+[runner_node-2] [steer] robot=(3.38,-3.48) yaw=1° -> target=(4.40,-3.52) dist=1.02m angle_to_wp=-2° angle_err=-3°
+[runner_node-2] [steer] robot=(3.68,-3.45) yaw=-2° -> target=(4.40,-3.52) dist=0.73m angle_to_wp=-6° angle_err=-3°
+[sketch_pf_node-1] [INFO] [1794436268.825908849] [sketch_pf]: PF update 240: (3.78, -3.14, 0 deg), spread 0.07 m, Neff 511
+[runner_node-2] [steer] robot=(3.99,-3.43) yaw=-7° -> target=(4.40,-3.52) dist=0.42m angle_to_wp=-13° angle_err=-6°
+[runner_node-2] [steer] robot=(4.27,-3.44) yaw=-19° -> target=(4.40,-3.52) dist=0.15m angle_to_wp=-31° angle_err=-12°
+[runner_node-2] Waypoint 2/2 reached.
+[runner_node-2] GOAL REACHED! Robot stopped at (4.34,-3.44).
+[python3-4] [INFO] [1794436272.062812825] [motion_planner]: New goal from RViz: x=5.00m, y=0.72m. Re-planning.
+[runner_node-2] 🎯 Goal received from RViz: (5.00, 0.72) — waiting for motion_planner to re-plan.
+[runner_node-2] 🎯 Goal received from RViz: (5.00, 0.72) — waiting for motion_planner to re-plan.
+[python3-4] [INFO] [1794436272.065669131] [motion_planner]: New goal from RViz: x=5.00m, y=0.72m. Re-planning.
+[python3-4] [INFO] [1794436272.067158516] [motion_planner]: New goal from RViz: x=5.00m, y=0.72m. Re-planning.
+[runner_node-2] 🎯 Goal received from RViz: (5.00, 0.72) — waiting for motion_planner to re-plan.
+[python3-4] [INFO] [1794436272.128013407] [motion_planner]: Start: world=(4.34,-3.44) -> pixel=(339,600) value=0
+[python3-4] [INFO] [1794436272.128493579] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [WARN] [1794436272.185263222] [motion_planner]: Goal (4.98,0.74) is only 0.34 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.84,0.80) instead (0.15 m away, 0.47 m of room).
+[python3-4] [WARN] [1794436272.238217297] [motion_planner]: Path crosses 2.94 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436272.281011626] [motion_planner]: Path found: 447 cells, smoothed to 40 waypoints in 136 ms (48998 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436272.283162506] [motion_planner]: Path published on /planned_path with 40 waypoints.
+[runner_node-2] Path received from motion_planner: 40 waypoints. Following now.
+[runner_node-2] Waypoint 1/40 reached.
+[runner_node-2] [steer] robot=(4.34,-3.44) yaw=-33° -> target=(1.64,-3.32) dist=2.70m angle_to_wp=177° angle_err=-150°
+[runner_node-2] [steer] robot=(4.32,-3.40) yaw=-84° -> target=(1.64,-3.32) dist=2.68m angle_to_wp=178° angle_err=-97°
+[sketch_pf_node-1] [INFO] [1794436273.615793073] [sketch_pf]: PF update 260: (4.20, -3.17, -87 deg), spread 0.07 m, Neff 538
+[runner_node-2] [steer] robot=(4.30,-3.36) yaw=-133° -> target=(1.64,-3.32) dist=2.66m angle_to_wp=179° angle_err=-48°
+[python3-4] [WARN] [1794436275.378302597] [motion_planner]: ML model: obstacle on the path at (2.22,-0.22). Re-planning.
+[python3-4] [INFO] [1794436275.527716151] [motion_planner]: Start: world=(4.12,-3.34) -> pixel=(344,590) value=0
+[python3-4] [INFO] [1794436275.528190333] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[runner_node-2] [steer] robot=(4.13,-3.34) yaw=-172° -> target=(1.64,-3.32) dist=2.49m angle_to_wp=179° angle_err=-8°
+[python3-4] [WARN] [1794436275.626495870] [motion_planner]: Path crosses 3.62 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436275.661178558] [motion_planner]: Path found: 425 cells, smoothed to 40 waypoints in 118 ms (46114 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436275.663665469] [motion_planner]: Path published on /planned_path with 40 waypoints.
+[runner_node-2] Path received from motion_planner: 40 waypoints. Following now.
+[runner_node-2] Waypoint 1/40 reached.
+[runner_node-2] [steer] robot=(3.75,-3.30) yaw=174° -> target=(1.70,-3.04) dist=2.06m angle_to_wp=173° angle_err=-1°
+[sketch_pf_node-1] [INFO] [1794436276.785770522] [sketch_pf]: PF update 280: (3.61, -3.12, 173 deg), spread 0.06 m, Neff 343
+[runner_node-2] [steer] robot=(3.43,-3.23) yaw=173° -> target=(1.70,-3.04) dist=1.74m angle_to_wp=174° angle_err=1°
+[runner_node-2] [steer] robot=(3.06,-3.15) yaw=174° -> target=(1.70,-3.04) dist=1.37m angle_to_wp=175° angle_err=2°
+[runner_node-2] [steer] robot=(2.71,-3.08) yaw=175° -> target=(1.70,-3.04) dist=1.01m angle_to_wp=177° angle_err=2°
+[python3-4] [WARN] [1794436280.122465453] [motion_planner]: ML model: obstacle on the path at (3.12,0.13). Re-planning.
+[python3-4] [INFO] [1794436280.127595990] [motion_planner]: Start: world=(2.61,-3.06) -> pixel=(358,514) value=0
+[python3-4] [INFO] [1794436280.127865481] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [ERROR] [1794436280.304134555] [motion_planner]: A* found NO PATH between start and goal (they are not connected on the inflated map, 39837 ML obstacle cells). Stopping the robot, retrying in 2 s.
+[runner_node-2] Path received from motion_planner: 1 waypoints. Following now.
+[runner_node-2] Waypoint 1/1 reached.
+[runner_node-2] GOAL REACHED! Robot stopped at (2.55,-3.06).
+[python3-4] [INFO] [1794436282.328255924] [motion_planner]: Start: world=(2.54,-3.05) -> pixel=(359,510) value=0
+[python3-4] [INFO] [1794436282.329323860] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [ERROR] [1794436282.512784516] [motion_planner]: A* found NO PATH between start and goal (they are not connected on the inflated map, 37144 ML obstacle cells). Stopping the robot, retrying in 2 s.
+[runner_node-2] Path received from motion_planner: 1 waypoints. Following now.
+[runner_node-2] Waypoint 1/1 reached.
+[runner_node-2] GOAL REACHED! Robot stopped at (2.54,-3.05).
+[python3-4] [INFO] [1794436284.529402587] [motion_planner]: Start: world=(2.54,-3.05) -> pixel=(359,510) value=0
+[python3-4] [INFO] [1794436284.530050768] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [ERROR] [1794436284.708326029] [motion_planner]: A* found NO PATH between start and goal (they are not connected on the inflated map, 34738 ML obstacle cells). Stopping the robot, retrying in 2 s.
+[runner_node-2] Path received from motion_planner: 1 waypoints. Following now.
+[runner_node-2] Waypoint 1/1 reached.
+[runner_node-2] GOAL REACHED! Robot stopped at (2.54,-3.05).
+[python3-4] [INFO] [1794436286.727853629] [motion_planner]: Start: world=(2.54,-3.05) -> pixel=(359,510) value=0
+[python3-4] [INFO] [1794436286.728195939] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [ERROR] [1794436286.877422447] [motion_planner]: A* found NO PATH between start and goal (they are not connected on the inflated map, 32795 ML obstacle cells). Stopping the robot, retrying in 2 s.
+[runner_node-2] Path received from motion_planner: 1 waypoints. Following now.
+[runner_node-2] Waypoint 1/1 reached.
+[runner_node-2] GOAL REACHED! Robot stopped at (2.54,-3.05).
+[python3-4] [INFO] [1794436288.927989640] [motion_planner]: Start: world=(2.54,-3.05) -> pixel=(359,510) value=0
+[python3-4] [INFO] [1794436288.928533080] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [ERROR] [1794436289.081260018] [motion_planner]: A* found NO PATH between start and goal (they are not connected on the inflated map, 30791 ML obstacle cells). Stopping the robot, retrying in 2 s.
+[runner_node-2] Path received from motion_planner: 1 waypoints. Following now.
+[runner_node-2] Waypoint 1/1 reached.
+[runner_node-2] GOAL REACHED! Robot stopped at (2.54,-3.05).
+[python3-4] [INFO] [1794436291.128105770] [motion_planner]: Start: world=(2.54,-3.05) -> pixel=(359,510) value=0
+[python3-4] [INFO] [1794436291.128513825] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [ERROR] [1794436291.275307737] [motion_planner]: A* found NO PATH between start and goal (they are not connected on the inflated map, 28834 ML obstacle cells). Stopping the robot, retrying in 2 s.
+[runner_node-2] Path received from motion_planner: 1 waypoints. Following now.
+[runner_node-2] Waypoint 1/1 reached.
+[runner_node-2] GOAL REACHED! Robot stopped at (2.54,-3.05).
+[python3-4] [INFO] [1794436293.328422029] [motion_planner]: Start: world=(2.54,-3.05) -> pixel=(359,510) value=0
+[python3-4] [INFO] [1794436293.328832901] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [ERROR] [1794436293.511210874] [motion_planner]: A* found NO PATH between start and goal (they are not connected on the inflated map, 27824 ML obstacle cells). Stopping the robot, retrying in 2 s.
+[runner_node-2] Path received from motion_planner: 1 waypoints. Following now.
+[runner_node-2] Waypoint 1/1 reached.
+[runner_node-2] GOAL REACHED! Robot stopped at (2.54,-3.05).
+[fusion_obstacle_node-3] [INFO] [1794436294.953259220] [fusion_obstacle_node]: 841 predictions (0 with a sensor missing), 71 ms each, 27396 obstacle cells in the map
+[python3-4] [INFO] [1794436295.529093543] [motion_planner]: Start: world=(2.54,-3.05) -> pixel=(359,510) value=0
+[python3-4] [INFO] [1794436295.529633409] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [ERROR] [1794436295.694040154] [motion_planner]: A* found NO PATH between start and goal (they are not connected on the inflated map, 27038 ML obstacle cells). Stopping the robot, retrying in 2 s.
+[runner_node-2] Path received from motion_planner: 1 waypoints. Following now.
+[runner_node-2] Waypoint 1/1 reached.
+[runner_node-2] GOAL REACHED! Robot stopped at (2.54,-3.05).
+[python3-4] [INFO] [1794436297.727729484] [motion_planner]: Start: world=(2.54,-3.05) -> pixel=(359,510) value=0
+[python3-4] [INFO] [1794436297.728018118] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [ERROR] [1794436297.932062383] [motion_planner]: A* found NO PATH between start and goal (they are not connected on the inflated map, 25927 ML obstacle cells). Stopping the robot, retrying in 2 s.
+[runner_node-2] Path received from motion_planner: 1 waypoints. Following now.
+[runner_node-2] Waypoint 1/1 reached.
+[runner_node-2] GOAL REACHED! Robot stopped at (2.54,-3.05).
+[python3-4] [INFO] [1794436299.935573450] [motion_planner]: Start: world=(2.54,-3.05) -> pixel=(359,510) value=0
+[python3-4] [INFO] [1794436299.935944561] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [ERROR] [1794436300.106731416] [motion_planner]: A* found NO PATH between start and goal (they are not connected on the inflated map, 24896 ML obstacle cells). Stopping the robot, retrying in 2 s.
+[runner_node-2] Path received from motion_planner: 1 waypoints. Following now.
+[runner_node-2] Waypoint 1/1 reached.
+[runner_node-2] GOAL REACHED! Robot stopped at (2.54,-3.05).
+[python3-4] [INFO] [1794436302.133440890] [motion_planner]: Start: world=(2.54,-3.05) -> pixel=(359,510) value=0
+[python3-4] [INFO] [1794436302.133763148] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [ERROR] [1794436302.302251617] [motion_planner]: A* found NO PATH between start and goal (they are not connected on the inflated map, 22918 ML obstacle cells). Stopping the robot, retrying in 2 s.
+[runner_node-2] Path received from motion_planner: 1 waypoints. Following now.
+[runner_node-2] Waypoint 1/1 reached.
+[runner_node-2] GOAL REACHED! Robot stopped at (2.54,-3.05).
+[python3-4] [INFO] [1794436304.332493963] [motion_planner]: Start: world=(2.54,-3.05) -> pixel=(359,510) value=0
+[python3-4] [INFO] [1794436304.332918106] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [ERROR] [1794436304.495370511] [motion_planner]: A* found NO PATH between start and goal (they are not connected on the inflated map, 21455 ML obstacle cells). Stopping the robot, retrying in 2 s.
+[runner_node-2] Path received from motion_planner: 1 waypoints. Following now.
+[runner_node-2] Waypoint 1/1 reached.
+[runner_node-2] GOAL REACHED! Robot stopped at (2.54,-3.05).
+[python3-4] [INFO] [1794436306.528100312] [motion_planner]: Start: world=(2.54,-3.05) -> pixel=(359,510) value=0
+[python3-4] [INFO] [1794436306.528696409] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [WARN] [1794436306.691258285] [motion_planner]: Path crosses 4.72 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436306.730557494] [motion_planner]: Path found: 455 cells, smoothed to 67 waypoints in 177 ms (20277 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436306.732237659] [motion_planner]: Path published on /planned_path with 67 waypoints.
+[runner_node-2] Path received from motion_planner: 67 waypoints. Following now.
+[runner_node-2] Waypoint 1/67 reached.
+[runner_node-2] [steer] robot=(2.54,-3.05) yaw=176° -> target=(1.46,-2.48) dist=1.22m angle_to_wp=152° angle_err=-24°
+[sketch_pf_node-1] [INFO] [1794436307.485949753] [sketch_pf]: PF update 300: (2.32, -2.84, 161 deg), spread 0.06 m, Neff 328
+[runner_node-2] [steer] robot=(2.26,-2.92) yaw=156° -> target=(1.46,-2.48) dist=0.91m angle_to_wp=151° angle_err=-4°
+[runner_node-2] [steer] robot=(1.96,-2.74) yaw=152° -> target=(1.46,-2.48) dist=0.56m angle_to_wp=152° angle_err=-0°
+[runner_node-2] Waypoint 2/67 reached.
+[runner_node-2] [steer] robot=(1.67,-2.58) yaw=153° -> target=(1.20,-2.12) dist=0.66m angle_to_wp=135° angle_err=-18°
+[runner_node-2] [steer] robot=(1.38,-2.36) yaw=135° -> target=(1.20,-2.12) dist=0.30m angle_to_wp=126° angle_err=-9°
+[runner_node-2] Waypoint 3/67 reached.
+[sketch_pf_node-1] [INFO] [1794436311.622778870] [sketch_pf]: PF update 320: (1.26, -2.30, 114 deg), spread 0.09 m, Neff 594
+[runner_node-2] [steer] robot=(1.25,-2.20) yaw=105° -> target=(0.92,1.54) dist=3.75m angle_to_wp=95° angle_err=-10°
+[runner_node-2] [steer] robot=(1.16,-1.86) yaw=96° -> target=(0.92,1.54) dist=3.41m angle_to_wp=94° angle_err=-2°
+[runner_node-2] [steer] robot=(1.12,-1.53) yaw=94° -> target=(0.92,1.54) dist=3.08m angle_to_wp=94° angle_err=-1°
+[python3-4] [WARN] [1794436314.176576931] [motion_planner]: ML model: obstacle on the path at (2.92,1.84). Re-planning.
+[python3-4] [INFO] [1794436314.327978051] [motion_planner]: Start: world=(1.11,-1.47) -> pixel=(438,439) value=0
+[python3-4] [INFO] [1794436314.328534400] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [WARN] [1794436314.431364628] [motion_planner]: Path crosses 4.44 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436314.482689790] [motion_planner]: Path found: 292 cells, smoothed to 38 waypoints in 132 ms (22307 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436314.484297204] [motion_planner]: Path published on /planned_path with 38 waypoints.
+[runner_node-2] Path received from motion_planner: 38 waypoints. Following now.
+[runner_node-2] Waypoint 1/38 reached.
+[runner_node-2] [steer] robot=(1.09,-1.22) yaw=96° -> target=(0.92,-0.00) dist=1.23m angle_to_wp=98° angle_err=1°
+[python3-4] [WARN] [1794436315.513276198] [motion_planner]: ML model: obstacle on the path at (2.30,0.82). Re-planning.
+[python3-4] [INFO] [1794436315.528389519] [motion_planner]: Start: world=(1.07,-1.13) -> pixel=(455,437) value=0
+[python3-4] [INFO] [1794436315.528826616] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [WARN] [1794436315.629347753] [motion_planner]: Path crosses 4.14 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436315.679327802] [motion_planner]: Path found: 278 cells, smoothed to 39 waypoints in 128 ms (23305 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436315.680874238] [motion_planner]: Path published on /planned_path with 39 waypoints.
+[runner_node-2] Path received from motion_planner: 39 waypoints. Following now.
+[runner_node-2] Waypoint 1/39 reached.
+[sketch_pf_node-1] [INFO] [1794436316.161502833] [sketch_pf]: PF update 340: (1.05, -1.00, 101 deg), spread 0.09 m, Neff 315
+[runner_node-2] [steer] robot=(1.04,-0.92) yaw=103° -> target=(0.88,-0.48) dist=0.47m angle_to_wp=109° angle_err=6°
+[runner_node-2] Waypoint 5/39 reached.
+[runner_node-2] [steer] robot=(0.95,-0.64) yaw=104° -> target=(0.92,0.46) dist=1.10m angle_to_wp=91° angle_err=-13°
+[python3-4] [WARN] [1794436317.457581944] [motion_planner]: ML model: obstacle on the path at (2.71,0.83). Re-planning.
+[python3-4] [INFO] [1794436317.527683310] [motion_planner]: Start: world=(0.93,-0.55) -> pixel=(484,430) value=0
+[python3-4] [INFO] [1794436317.528016289] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [WARN] [1794436317.603224226] [motion_planner]: Path crosses 3.38 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436317.646318418] [motion_planner]: Path found: 250 cells, smoothed to 41 waypoints in 106 ms (24071 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436317.647953109] [motion_planner]: Path published on /planned_path with 41 waypoints.
+[runner_node-2] Path received from motion_planner: 41 waypoints. Following now.
+[python3-4] [WARN] [1794436318.132760228] [motion_planner]: ML model: obstacle on the path at (3.13,1.07). Re-planning.
+[python3-4] [INFO] [1794436318.133950367] [motion_planner]: Start: world=(0.91,-0.38) -> pixel=(493,429) value=0
+[python3-4] [INFO] [1794436318.134380274] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [WARN] [1794436318.215616454] [motion_planner]: Path crosses 2.52 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436318.241784337] [motion_planner]: Path found: 241 cells, smoothed to 19 waypoints in 85 ms (23998 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436318.242890299] [motion_planner]: Path published on /planned_path with 19 waypoints.
+[runner_node-2] Path received from motion_planner: 19 waypoints. Following now.
+[runner_node-2] Waypoint 1/19 reached.
+[runner_node-2] [steer] robot=(0.90,-0.31) yaw=92° -> target=(0.92,0.50) dist=0.81m angle_to_wp=89° angle_err=-3°
+[python3-4] [WARN] [1794436318.691388148] [motion_planner]: ML model: obstacle on the path at (4.19,0.85). Re-planning.
+[python3-4] [INFO] [1794436318.727798331] [motion_planner]: Start: world=(0.90,-0.20) -> pixel=(502,429) value=0
+[python3-4] [INFO] [1794436318.730599476] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [WARN] [1794436318.793321598] [motion_planner]: Path crosses 2.28 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436318.821439822] [motion_planner]: Path found: 232 cells, smoothed to 29 waypoints in 77 ms (24474 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436318.822940750] [motion_planner]: Path published on /planned_path with 29 waypoints.
+[runner_node-2] Path received from motion_planner: 29 waypoints. Following now.
+[runner_node-2] [steer] robot=(0.90,0.02) yaw=89° -> target=(0.92,0.50) dist=0.48m angle_to_wp=88° angle_err=-1°
+[runner_node-2] Waypoint 2/29 reached.
+[runner_node-2] [steer] robot=(0.90,0.27) yaw=78° -> target=(1.42,0.94) dist=0.84m angle_to_wp=52° angle_err=-26°
+[python3-4] [WARN] [1794436320.580091260] [motion_planner]: ML model: obstacle on the path at (4.11,1.05). Re-planning.
+[sketch_pf_node-1] [INFO] [1794436320.690830197] [sketch_pf]: PF update 360: (0.90, 0.27, 79 deg), spread 0.11 m, Neff 395
+[python3-4] [INFO] [1794436320.728842428] [motion_planner]: Start: world=(0.90,0.27) -> pixel=(525,429) value=0
+[python3-4] [INFO] [1794436320.729276400] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [WARN] [1794436320.796276409] [motion_planner]: Path crosses 1.68 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436320.836607462] [motion_planner]: Path found: 209 cells, smoothed to 33 waypoints in 84 ms (25142 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436320.838571851] [motion_planner]: Path published on /planned_path with 33 waypoints.
+[runner_node-2] Path received from motion_planner: 33 waypoints. Following now.
+[runner_node-2] [steer] robot=(0.98,0.43) yaw=57° -> target=(1.84,1.24) dist=1.18m angle_to_wp=43° angle_err=-13°
+[python3-4] [WARN] [1794436322.432252582] [motion_planner]: ML model: obstacle on the path at (4.76,0.88). Re-planning.
+[python3-4] [INFO] [1794436322.527874418] [motion_planner]: Start: world=(1.16,0.64) -> pixel=(543,442) value=0
+[python3-4] [INFO] [1794436322.528265618] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [WARN] [1794436322.576252498] [motion_planner]: Goal (4.78,0.94) is only 0.38 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.48,1.34) instead (0.50 m away, 0.62 m of room).
+[python3-4] [WARN] [1794436322.585957068] [motion_planner]: Path crosses 0.78 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436322.635360200] [motion_planner]: Path found: 168 cells, smoothed to 7 waypoints in 93 ms (26132 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436322.636549739] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[runner_node-2] Path received from motion_planner: 7 waypoints. Following now.
+[runner_node-2] Waypoint 1/7 reached.
+[runner_node-2] [steer] robot=(1.19,0.66) yaw=44° -> target=(1.38,0.86) dist=0.28m angle_to_wp=46° angle_err=2°
+[runner_node-2] [steer] robot=(1.39,0.76) yaw=25° -> target=(3.08,1.38) dist=1.80m angle_to_wp=20° angle_err=-5°
+[sketch_pf_node-1] [INFO] [1794436324.405563478] [sketch_pf]: PF update 380: (1.52, 0.78, 22 deg), spread 0.10 m, Neff 441
+[runner_node-2] [steer] robot=(1.66,0.85) yaw=21° -> target=(3.08,1.38) dist=1.52m angle_to_wp=20° angle_err=-0°
+[fusion_obstacle_node-3] [INFO] [1794436324.958146376] [fusion_obstacle_node]: 1098 predictions (0 with a sensor missing), 71 ms each, 28673 obstacle cells in the map
+[runner_node-2] [steer] robot=(1.93,0.93) yaw=21° -> target=(3.08,1.38) dist=1.24m angle_to_wp=22° angle_err=1°
+[runner_node-2] [steer] robot=(2.21,0.99) yaw=22° -> target=(3.08,1.38) dist=0.95m angle_to_wp=24° angle_err=2°
+[runner_node-2] [steer] robot=(2.52,1.09) yaw=25° -> target=(3.08,1.38) dist=0.63m angle_to_wp=27° angle_err=3°
+[python3-4] [WARN] [1794436328.519641502] [motion_planner]: ML model: obstacle on the path at (3.08,1.38). Re-planning.
+[python3-4] [INFO] [1794436328.528029836] [motion_planner]: Start: world=(2.72,1.15) -> pixel=(569,519) value=0
+[python3-4] [INFO] [1794436328.528412160] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [WARN] [1794436328.603993262] [motion_planner]: Goal (4.92,0.80) is only 0.38 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.74,1.14) instead (0.38 m away, 0.74 m of room).
+[python3-4] [WARN] [1794436328.609593649] [motion_planner]: Path crosses 1.40 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436328.644043639] [motion_planner]: Path found: 103 cells, smoothed to 2 waypoints in 91 ms (30337 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436328.644911046] [motion_planner]: Path published on /planned_path with 2 waypoints.
+[runner_node-2] Path received from motion_planner: 2 waypoints. Following now.
+[runner_node-2] Waypoint 1/2 reached.
+[runner_node-2] [steer] robot=(2.78,1.17) yaw=21° -> target=(4.74,1.14) dist=1.96m angle_to_wp=-1° angle_err=-22°
+[sketch_pf_node-1] [INFO] [1794436329.051724930] [sketch_pf]: PF update 400: (2.80, 1.10, 22 deg), spread 0.08 m, Neff 563
+[runner_node-2] [steer] robot=(3.07,1.16) yaw=3° -> target=(4.74,1.14) dist=1.67m angle_to_wp=-1° angle_err=-3°
+[runner_node-2] [steer] robot=(3.41,1.13) yaw=0° -> target=(4.74,1.14) dist=1.33m angle_to_wp=0° angle_err=0°
+[runner_node-2] [steer] robot=(3.76,1.09) yaw=2° -> target=(4.74,1.14) dist=0.99m angle_to_wp=3° angle_err=1°
+[python3-4] [WARN] [1794436332.611459184] [motion_planner]: ML model: obstacle on the path at (4.46,1.12). Re-planning.
+[python3-4] [INFO] [1794436332.739677210] [motion_planner]: Start: world=(3.94,1.08) -> pixel=(565,581) value=0
+[python3-4] [INFO] [1794436332.740013310] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[python3-4] [WARN] [1794436332.800618046] [motion_planner]: Goal (5.00,0.72) is only 0.56 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.84,0.84) instead (0.20 m away, 0.69 m of room).
+[python3-4] [WARN] [1794436332.807745245] [motion_planner]: Path crosses 0.76 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436332.849964957] [motion_planner]: Path found: 46 cells, smoothed to 9 waypoints in 89 ms (33662 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436332.851478371] [motion_planner]: Path published on /planned_path with 9 waypoints.
+[runner_node-2] Path received from motion_planner: 9 waypoints. Following now.
+[runner_node-2] Waypoint 1/9 reached.
+[runner_node-2] [steer] robot=(4.00,1.06) yaw=-6° -> target=(4.18,0.88) dist=0.25m angle_to_wp=-46° angle_err=-40°
+[sketch_pf_node-1] [INFO] [1794436333.208530955] [sketch_pf]: PF update 420: (4.00, 1.04, -4 deg), spread 0.07 m, Neff 315
+[runner_node-2] [steer] robot=(4.25,0.97) yaw=-14° -> target=(4.84,0.84) dist=0.61m angle_to_wp=-12° angle_err=1°
+[runner_node-2] [steer] robot=(4.55,0.89) yaw=-12° -> target=(4.84,0.84) dist=0.30m angle_to_wp=-10° angle_err=1°
+[runner_node-2] [steer] robot=(4.74,0.85) yaw=-9° -> target=(4.84,0.84) dist=0.10m angle_to_wp=-8° angle_err=1°
+[runner_node-2] Waypoint 9/9 reached.
+[runner_node-2] GOAL REACHED! Robot stopped at (4.75,0.85).
+[python3-4] [INFO] [1794436337.586169699] [motion_planner]: New goal from RViz: x=-3.74m, y=5.32m. Re-planning.
+[runner_node-2] 🎯 Goal received from RViz: (-3.74, 5.32) — waiting for motion_planner to re-plan.
+[python3-4] [INFO] [1794436337.587012554] [motion_planner]: New goal from RViz: x=-3.74m, y=5.32m. Re-planning.
+[runner_node-2] 🎯 Goal received from RViz: (-3.74, 5.32) — waiting for motion_planner to re-plan.
+[python3-4] [INFO] [1794436337.587667361] [motion_planner]: New goal from RViz: x=-3.74m, y=5.32m. Re-planning.
+[runner_node-2] 🎯 Goal received from RViz: (-3.74, 5.32) — waiting for motion_planner to re-plan.
+[python3-4] [INFO] [1794436337.727725941] [motion_planner]: Start: world=(4.74,0.85) -> pixel=(554,621) value=0
+[python3-4] [INFO] [1794436337.728028032] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[python3-4] [WARN] [1794436337.799521437] [motion_planner]: Path crosses 2.34 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436337.846634870] [motion_planner]: Path found: 470 cells, smoothed to 9 waypoints in 106 ms (37576 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436337.847630913] [motion_planner]: Path published on /planned_path with 9 waypoints.
+[runner_node-2] Path received from motion_planner: 9 waypoints. Following now.
+[runner_node-2] Waypoint 1/9 reached.
+[runner_node-2] [steer] robot=(4.74,0.85) yaw=-9° -> target=(4.10,0.78) dist=0.65m angle_to_wp=-174° angle_err=-164°
+[sketch_pf_node-1] [INFO] [1794436338.922604432] [sketch_pf]: PF update 440: (4.70, 0.86, -50 deg), spread 0.08 m, Neff 330
+[runner_node-2] [steer] robot=(4.70,0.86) yaw=-58° -> target=(4.10,0.78) dist=0.61m angle_to_wp=-173° angle_err=-114°
+[runner_node-2] [steer] robot=(4.65,0.87) yaw=-110° -> target=(4.10,0.78) dist=0.56m angle_to_wp=-171° angle_err=-61°
+[runner_node-2] [steer] robot=(4.60,0.88) yaw=-151° -> target=(4.10,0.78) dist=0.51m angle_to_wp=-169° angle_err=-18°
+[sketch_pf_node-1] [INFO] [1794436341.266702399] [sketch_pf]: PF update 460: (4.58, 0.88, -152 deg), spread 0.07 m, Neff 366
+[runner_node-2] Waypoint 3/9 reached.
+[runner_node-2] [steer] robot=(4.29,0.79) yaw=-171° -> target=(1.10,1.24) dist=3.22m angle_to_wp=172° angle_err=-17°
+[runner_node-2] [steer] robot=(3.97,0.78) yaw=175° -> target=(1.10,1.24) dist=2.91m angle_to_wp=171° angle_err=-4°
+[runner_node-2] [steer] robot=(3.62,0.82) yaw=172° -> target=(1.10,1.24) dist=2.56m angle_to_wp=171° angle_err=-1°
+[python3-4] [WARN] [1794436345.254142481] [motion_planner]: ML model: obstacle on the path at (0.49,1.86). Re-planning.
+[python3-4] [INFO] [1794436345.327920120] [motion_planner]: Start: world=(3.28,0.87) -> pixel=(555,547) value=0
+[python3-4] [INFO] [1794436345.328499764] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[runner_node-2] [steer] robot=(3.28,0.87) yaw=171° -> target=(1.10,1.24) dist=2.21m angle_to_wp=170° angle_err=-0°
+[python3-4] [WARN] [1794436345.404858828] [motion_planner]: Path crosses 1.38 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436345.458440789] [motion_planner]: Path found: 419 cells, smoothed to 7 waypoints in 109 ms (44031 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436345.459909283] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[runner_node-2] Path received from motion_planner: 7 waypoints. Following now.
+[runner_node-2] Waypoint 1/7 reached.
+[sketch_pf_node-1] [INFO] [1794436345.821712537] [sketch_pf]: PF update 480: (3.15, 0.88, 172 deg), spread 0.07 m, Neff 289
+[runner_node-2] [steer] robot=(2.96,0.89) yaw=177° -> target=(2.24,0.90) dist=0.72m angle_to_wp=179° angle_err=3°
+[runner_node-2] [steer] robot=(2.61,0.90) yaw=179° -> target=(2.24,0.90) dist=0.37m angle_to_wp=179° angle_err=0°
+[runner_node-2] Waypoint 2/7 reached.
+[runner_node-2] [steer] robot=(2.30,0.92) yaw=167° -> target=(0.18,1.70) dist=2.26m angle_to_wp=160° angle_err=-7°
+[runner_node-2] [steer] robot=(1.98,1.03) yaw=160° -> target=(0.18,1.70) dist=1.92m angle_to_wp=160° angle_err=-1°
+[sketch_pf_node-1] [INFO] [1794436350.531634994] [sketch_pf]: PF update 500: (1.75, 1.14, 159 deg), spread 0.09 m, Neff 593
+[runner_node-2] [steer] robot=(1.68,1.17) yaw=159° -> target=(0.18,1.70) dist=1.59m angle_to_wp=160° angle_err=1°
+[python3-4] [WARN] [1794436351.101431538] [motion_planner]: ML model: obstacle on the path at (-1.16,4.36). Re-planning.
+[python3-4] [INFO] [1794436351.128238226] [motion_planner]: Start: world=(1.55,1.23) -> pixel=(573,461) value=0
+[python3-4] [INFO] [1794436351.128651211] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[python3-4] [WARN] [1794436351.210673629] [motion_planner]: Path crosses 0.64 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436351.249298177] [motion_planner]: Path found: 354 cells, smoothed to 6 waypoints in 99 ms (44844 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436351.250633617] [motion_planner]: Path published on /planned_path with 6 waypoints.
+[runner_node-2] Path received from motion_planner: 6 waypoints. Following now.
+[runner_node-2] Waypoint 1/6 reached.
+[runner_node-2] [steer] robot=(1.41,1.29) yaw=161° -> target=(0.08,1.68) dist=1.38m angle_to_wp=164° angle_err=3°
+[runner_node-2] [steer] robot=(1.12,1.42) yaw=164° -> target=(0.08,1.68) dist=1.07m angle_to_wp=166° angle_err=2°
+[python3-4] [WARN] [1794436353.099233310] [motion_planner]: ML model: obstacle on the path at (-0.94,4.48). Re-planning.
+[python3-4] [INFO] [1794436353.129652896] [motion_planner]: Start: world=(1.02,1.47) -> pixel=(585,434) value=0
+[python3-4] [INFO] [1794436353.130851540] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[python3-4] [WARN] [1794436353.220208798] [motion_planner]: Path crosses 0.72 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436353.268715278] [motion_planner]: Path found: 341 cells, smoothed to 6 waypoints in 110 ms (44498 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436353.270080430] [motion_planner]: Path published on /planned_path with 6 waypoints.
+[runner_node-2] Path received from motion_planner: 6 waypoints. Following now.
+[runner_node-2] Waypoint 1/6 reached.
+[runner_node-2] [steer] robot=(0.82,1.54) yaw=162° -> target=(0.12,1.80) dist=0.75m angle_to_wp=160° angle_err=-2°
+[runner_node-2] [steer] robot=(0.55,1.67) yaw=161° -> target=(0.12,1.80) dist=0.45m angle_to_wp=163° angle_err=2°
+[sketch_pf_node-1] [INFO] [1794436355.040527333] [sketch_pf]: PF update 520: (0.58, 1.69, 160 deg), spread 0.11 m, Neff 381
+[python3-4] [WARN] [1794436355.406147723] [motion_planner]: ML model: obstacle on the path at (-0.80,4.77). Re-planning.
+[python3-4] [INFO] [1794436355.527708427] [motion_planner]: Start: world=(0.40,1.74) -> pixel=(598,403) value=0
+[python3-4] [INFO] [1794436355.528287850] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[python3-4] [WARN] [1794436355.591363923] [motion_planner]: Path crosses 1.86 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436355.622163513] [motion_planner]: Path found: 317 cells, smoothed to 33 waypoints in 82 ms (44620 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436355.623605047] [motion_planner]: Path published on /planned_path with 33 waypoints.
+[runner_node-2] Path received from motion_planner: 33 waypoints. Following now.
+[runner_node-2] Waypoint 1/33 reached.
+[runner_node-2] [steer] robot=(0.38,1.76) yaw=150° -> target=(-0.46,2.78) dist=1.32m angle_to_wp=129° angle_err=-21°
+[fusion_obstacle_node-3] [INFO] [1794436356.002153241] [fusion_obstacle_node]: 1363 predictions (0 with a sensor missing), 72 ms each, 44932 obstacle cells in the map
+[python3-4] [WARN] [1794436356.136254578] [motion_planner]: ML model: obstacle on the path at (-1.49,5.49). Re-planning.
+[python3-4] [INFO] [1794436356.136948231] [motion_planner]: Start: world=(0.36,1.77) -> pixel=(600,402) value=0
+[python3-4] [INFO] [1794436356.137200432] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[python3-4] [WARN] [1794436356.233893884] [motion_planner]: Path crosses 2.04 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436356.262240353] [motion_planner]: Path found: 320 cells, smoothed to 48 waypoints in 109 ms (44163 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436356.263903923] [motion_planner]: Path published on /planned_path with 48 waypoints.
+[runner_node-2] Path received from motion_planner: 48 waypoints. Following now.
+[python3-4] [WARN] [1794436356.736439397] [motion_planner]: ML model: obstacle on the path at (-1.29,5.54). Re-planning.
+[python3-4] [INFO] [1794436356.737087410] [motion_planner]: Start: world=(0.26,1.90) -> pixel=(606,396) value=0
+[python3-4] [INFO] [1794436356.737328600] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[python3-4] [WARN] [1794436356.830429165] [motion_planner]: Path crosses 2.46 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436356.860781996] [motion_planner]: Path found: 328 cells, smoothed to 70 waypoints in 111 ms (44754 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436356.864389381] [motion_planner]: Path published on /planned_path with 70 waypoints.
+[runner_node-2] Path received from motion_planner: 70 waypoints. Following now.
+[runner_node-2] Waypoint 1/70 reached.
+[runner_node-2] [steer] robot=(0.23,1.95) yaw=130° -> target=(-0.24,3.50) dist=1.62m angle_to_wp=107° angle_err=-23°
+[python3-4] [WARN] [1794436357.311116059] [motion_planner]: ML model: obstacle on the path at (-1.21,5.71). Re-planning.
+[python3-4] [INFO] [1794436357.327906825] [motion_planner]: Start: world=(0.20,2.04) -> pixel=(614,394) value=0
+[python3-4] [INFO] [1794436357.328405246] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[python3-4] [WARN] [1794436357.448036272] [motion_planner]: Path crosses 2.56 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436357.479915733] [motion_planner]: Path found: 328 cells, smoothed to 78 waypoints in 127 ms (44090 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436357.483240162] [motion_planner]: Path published on /planned_path with 78 waypoints.
+[runner_node-2] Path received from motion_planner: 78 waypoints. Following now.
+[python3-4] [WARN] [1794436357.908922108] [motion_planner]: ML model: obstacle on the path at (-1.18,5.72). Re-planning.
+[python3-4] [INFO] [1794436357.927744253] [motion_planner]: Start: world=(0.15,2.23) -> pixel=(623,391) value=0
+[python3-4] [INFO] [1794436357.928088501] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[runner_node-2] [steer] robot=(0.16,2.27) yaw=105° -> target=(-0.30,4.96) dist=2.73m angle_to_wp=100° angle_err=-5°
+[python3-4] [WARN] [1794436358.042339793] [motion_planner]: Path crosses 2.70 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436358.073801217] [motion_planner]: Path found: 329 cells, smoothed to 77 waypoints in 129 ms (44587 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436358.076406607] [motion_planner]: Path published on /planned_path with 77 waypoints.
+[runner_node-2] Path received from motion_planner: 77 waypoints. Following now.
+[runner_node-2] Waypoint 1/77 reached.
+[python3-4] [WARN] [1794436358.511009649] [motion_planner]: ML model: obstacle on the path at (-0.26,4.97). Re-planning.
+[python3-4] [INFO] [1794436358.529811079] [motion_planner]: Start: world=(0.14,2.42) -> pixel=(633,391) value=0
+[python3-4] [INFO] [1794436358.531542733] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[python3-4] [WARN] [1794436358.685190818] [motion_planner]: Path crosses 2.96 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436358.716866121] [motion_planner]: Path found: 336 cells, smoothed to 81 waypoints in 160 ms (44041 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436358.719044242] [motion_planner]: Path published on /planned_path with 81 waypoints.
+[runner_node-2] Path received from motion_planner: 81 waypoints. Following now.
+[runner_node-2] [steer] robot=(0.14,2.57) yaw=97° -> target=(-0.04,5.16) dist=2.59m angle_to_wp=94° angle_err=-3°
+[python3-4] [WARN] [1794436359.079529708] [motion_planner]: ML model: obstacle on the path at (-0.99,5.69). Re-planning.
+[python3-4] [INFO] [1794436359.128597727] [motion_planner]: Start: world=(0.13,2.61) -> pixel=(642,390) value=0
+[python3-4] [INFO] [1794436359.129130998] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[sketch_pf_node-1] [INFO] [1794436359.165039648] [sketch_pf]: PF update 540: (0.19, 2.60, 97 deg), spread 0.12 m, Neff 312
+[python3-4] [WARN] [1794436359.178458161] [motion_planner]: Goal (-3.74,5.32) is only 0.74 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.80,5.36) instead (0.07 m away, 0.81 m of room).
+[python3-4] [WARN] [1794436359.241575911] [motion_planner]: Path crosses 3.06 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436359.280758879] [motion_planner]: Path found: 333 cells, smoothed to 96 waypoints in 133 ms (43604 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436359.282711096] [motion_planner]: Path published on /planned_path with 96 waypoints.
+[runner_node-2] Path received from motion_planner: 96 waypoints. Following now.
+[runner_node-2] Waypoint 1/96 reached.
+[runner_node-2] [steer] robot=(0.14,2.87) yaw=94° -> target=(-0.00,5.16) dist=2.29m angle_to_wp=94° angle_err=-1°
+[python3-4] [WARN] [1794436360.671161809] [motion_planner]: ML model: obstacle on the path at (-2.17,5.89). Re-planning.
+[python3-4] [INFO] [1794436360.727957595] [motion_planner]: Start: world=(0.15,3.09) -> pixel=(666,391) value=0
+[python3-4] [INFO] [1794436360.728599526] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[python3-4] [WARN] [1794436360.855986137] [motion_planner]: Path crosses 3.20 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436360.886077048] [motion_planner]: Path found: 325 cells, smoothed to 80 waypoints in 129 ms (44287 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436360.888369032] [motion_planner]: Path published on /planned_path with 80 waypoints.
+[runner_node-2] Path received from motion_planner: 80 waypoints. Following now.
+[runner_node-2] Waypoint 1/80 reached.
+[runner_node-2] [steer] robot=(0.15,3.20) yaw=94° -> target=(0.08,5.22) dist=2.02m angle_to_wp=92° angle_err=-2°
+[runner_node-2] [steer] robot=(0.14,3.51) yaw=93° -> target=(0.08,5.22) dist=1.71m angle_to_wp=92° angle_err=-1°
+[runner_node-2] [steer] robot=(0.12,3.79) yaw=93° -> target=(0.08,5.22) dist=1.43m angle_to_wp=92° angle_err=-1°
+[sketch_pf_node-1] [INFO] [1794436363.586284372] [sketch_pf]: PF update 560: (0.06, 3.73, 94 deg), spread 0.23 m, Neff 395
+[runner_node-2] [steer] robot=(0.08,4.08) yaw=92° -> target=(0.08,5.22) dist=1.14m angle_to_wp=90° angle_err=-2°
+[runner_node-2] [steer] robot=(0.05,4.36) yaw=91° -> target=(0.08,5.22) dist=0.86m angle_to_wp=88° angle_err=-3°
+[runner_node-2] [steer] robot=(0.02,4.67) yaw=88° -> target=(0.08,5.22) dist=0.55m angle_to_wp=84° angle_err=-4°
+[python3-4] [WARN] [1794436366.885496640] [motion_planner]: ML model: obstacle on the path at (-2.03,6.07). Re-planning.
+[python3-4] [INFO] [1794436366.928048040] [motion_planner]: Start: world=(0.02,4.82) -> pixel=(752,384) value=0
+[python3-4] [INFO] [1794436366.928496898] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[python3-4] [WARN] [1794436366.973155279] [motion_planner]: Goal (-3.74,5.32) is only 0.70 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.84,5.34) instead (0.10 m away, 0.80 m of room).
+[python3-4] [WARN] [1794436366.982897138] [motion_planner]: Path crosses 1.66 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436367.012875534] [motion_planner]: Path found: 220 cells, smoothed to 28 waypoints in 70 ms (45246 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436367.014220990] [motion_planner]: Path published on /planned_path with 28 waypoints.
+[runner_node-2] Path received from motion_planner: 28 waypoints. Following now.
+[runner_node-2] Waypoint 1/28 reached.
+[runner_node-2] [steer] robot=(-0.01,4.95) yaw=100° -> target=(-1.12,6.42) dist=1.84m angle_to_wp=127° angle_err=27°
+[sketch_pf_node-1] [INFO] [1794436367.943462460] [sketch_pf]: PF update 580: (-0.53, 4.62, 117 deg), spread 0.12 m, Neff 509
+[runner_node-2] [steer] robot=(-0.17,5.14) yaw=123° -> target=(-1.12,6.42) dist=1.60m angle_to_wp=126° angle_err=3°
+[runner_node-2] [steer] robot=(-0.39,5.37) yaw=126° -> target=(-1.12,6.42) dist=1.28m angle_to_wp=125° angle_err=-1°
+[runner_node-2] [steer] robot=(-0.62,5.62) yaw=125° -> target=(-1.12,6.42) dist=0.95m angle_to_wp=122° angle_err=-3°
+[runner_node-2] [steer] robot=(-0.82,5.85) yaw=122° -> target=(-1.12,6.42) dist=0.64m angle_to_wp=118° angle_err=-3°
+[sketch_pf_node-1] [INFO] [1794436372.397372375] [sketch_pf]: PF update 600: (-1.58, 5.51, 124 deg), spread 0.09 m, Neff 367
+[runner_node-2] [steer] robot=(-1.02,6.12) yaw=116° -> target=(-1.12,6.42) dist=0.31m angle_to_wp=108° angle_err=-8°
+[runner_node-2] Waypoint 3/28 reached.
+[runner_node-2] [steer] robot=(-1.23,6.35) yaw=132° -> target=(-1.42,6.54) dist=0.27m angle_to_wp=136° angle_err=4°
+[runner_node-2] [steer] robot=(-1.36,6.36) yaw=169° -> target=(-2.80,6.32) dist=1.44m angle_to_wp=-178° angle_err=13°
+[runner_node-2] [steer] robot=(-1.72,6.35) yaw=179° -> target=(-2.80,6.32) dist=1.09m angle_to_wp=-178° angle_err=2°
+[sketch_pf_node-1] [INFO] [1794436376.233662051] [sketch_pf]: PF update 620: (-2.42, 5.81, -180 deg), spread 0.06 m, Neff 452
+[runner_node-2] [steer] robot=(-2.09,6.32) yaw=-179° -> target=(-2.80,6.32) dist=0.71m angle_to_wp=-180° angle_err=-1°
+[runner_node-2] [steer] robot=(-2.42,6.30) yaw=179° -> target=(-2.80,6.32) dist=0.38m angle_to_wp=177° angle_err=-2°
+[runner_node-2] Waypoint 5/28 reached.
+[runner_node-2] [steer] robot=(-2.72,6.24) yaw=-164° -> target=(-3.04,6.08) dist=0.36m angle_to_wp=-153° angle_err=11°
+[runner_node-2] Waypoint 6/28 reached.
+[runner_node-2] [steer] robot=(-3.03,6.09) yaw=-147° -> target=(-3.20,5.90) dist=0.25m angle_to_wp=-133° angle_err=14°
+[runner_node-2] Waypoint 20/28 reached.
+[sketch_pf_node-1] [INFO] [1794436380.508610077] [sketch_pf]: PF update 640: (-3.57, 5.55, -140 deg), spread 0.09 m, Neff 411
+[runner_node-2] [steer] robot=(-3.30,5.83) yaw=-131° -> target=(-3.84,5.34) dist=0.73m angle_to_wp=-138° angle_err=-7°
+[runner_node-2] [steer] robot=(-3.57,5.55) yaw=-138° -> target=(-3.84,5.34) dist=0.34m angle_to_wp=-142° angle_err=-4°
+[runner_node-2] [steer] robot=(-3.75,5.39) yaw=-144° -> target=(-3.84,5.34) dist=0.11m angle_to_wp=-151° angle_err=-6°
+[runner_node-2] Waypoint 28/28 reached.
+[runner_node-2] GOAL REACHED! Robot stopped at (-3.76,5.37).
+[python3-4] [INFO] [1794436384.263168345] [motion_planner]: New goal from RViz: x=-3.33m, y=-4.04m. Re-planning.
+[python3-4] [INFO] [1794436384.264879132] [motion_planner]: New goal from RViz: x=-3.33m, y=-4.04m. Re-planning.
+[runner_node-2] 🎯 Goal received from RViz: (-3.33, -4.04) — waiting for motion_planner to re-plan.
+[python3-4] [INFO] [1794436384.267053624] [motion_planner]: New goal from RViz: x=-3.33m, y=-4.04m. Re-planning.
+[runner_node-2] 🎯 Goal received from RViz: (-3.33, -4.04) — waiting for motion_planner to re-plan.
+[runner_node-2] 🎯 Goal received from RViz: (-3.33, -4.04) — waiting for motion_planner to re-plan.
+[python3-4] [INFO] [1794436384.327891261] [motion_planner]: Start: world=(-3.76,5.37) -> pixel=(780,195) value=0
+[python3-4] [INFO] [1794436384.328215683] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[python3-4] [WARN] [1794436384.386733380] [motion_planner]: Goal (-3.34,-4.04) is only 0.34 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.38,-3.58) instead (0.46 m away, 0.80 m of room).
+[python3-4] [WARN] [1794436384.415556711] [motion_planner]: Path crosses 1.62 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436384.457987465] [motion_planner]: Path found: 672 cells, smoothed to 8 waypoints in 114 ms (55184 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436384.459281620] [motion_planner]: Path published on /planned_path with 8 waypoints.
+[runner_node-2] Path received from motion_planner: 8 waypoints. Following now.
+[runner_node-2] Waypoint 1/8 reached.
+[runner_node-2] [steer] robot=(-3.76,5.37) yaw=-145° -> target=(-1.76,5.56) dist=2.01m angle_to_wp=5° angle_err=150°
+[runner_node-2] [steer] robot=(-3.78,5.34) yaw=-94° -> target=(-1.76,5.56) dist=2.03m angle_to_wp=6° angle_err=100°
+[sketch_pf_node-1] [INFO] [1794436385.900359935] [sketch_pf]: PF update 660: (-3.92, 4.94, -85 deg), spread 0.09 m, Neff 434
+[runner_node-2] [steer] robot=(-3.80,5.29) yaw=-45° -> target=(-1.76,5.56) dist=2.05m angle_to_wp=8° angle_err=52°
+[fusion_obstacle_node-3] [INFO] [1794436387.018049627] [fusion_obstacle_node]: 1629 predictions (0 with a sensor missing), 72 ms each, 55470 obstacle cells in the map
+[runner_node-2] [steer] robot=(-3.72,5.23) yaw=-2° -> target=(-1.76,5.56) dist=1.98m angle_to_wp=9° angle_err=11°
+[python3-4] [WARN] [1794436388.103502194] [motion_planner]: ML model: obstacle on the path at (-0.81,5.00). Re-planning.
+[python3-4] [INFO] [1794436388.128238603] [motion_planner]: Start: world=(-3.60,5.22) -> pixel=(772,204) value=0
+[python3-4] [INFO] [1794436388.128717158] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[python3-4] [WARN] [1794436388.229825075] [motion_planner]: Path crosses 1.56 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436388.266767815] [motion_planner]: Path found: 679 cells, smoothed to 9 waypoints in 115 ms (54087 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436388.267637525] [motion_planner]: Path published on /planned_path with 9 waypoints.
+[runner_node-2] Path received from motion_planner: 9 waypoints. Following now.
+[runner_node-2] Waypoint 1/9 reached.
+[runner_node-2] [steer] robot=(-3.42,5.22) yaw=12° -> target=(-2.12,5.68) dist=1.38m angle_to_wp=19° angle_err=8°
+[sketch_pf_node-1] [INFO] [1794436388.749186063] [sketch_pf]: PF update 680: (-3.50, 4.93, 10 deg), spread 0.09 m, Neff 523
+[runner_node-2] [steer] robot=(-3.09,5.26) yaw=19° -> target=(-2.12,5.68) dist=1.06m angle_to_wp=23° angle_err=4°
+[runner_node-2] [steer] robot=(-2.81,5.34) yaw=23° -> target=(-2.12,5.68) dist=0.77m angle_to_wp=27° angle_err=3°
+[runner_node-2] [steer] robot=(-2.50,5.44) yaw=28° -> target=(-2.12,5.68) dist=0.45m angle_to_wp=33° angle_err=4°
+[runner_node-2] Waypoint 2/9 reached.
+[runner_node-2] [steer] robot=(-2.29,5.51) yaw=21° -> target=(-1.58,5.56) dist=0.72m angle_to_wp=4° angle_err=-17°
+[sketch_pf_node-1] [INFO] [1794436393.211470785] [sketch_pf]: PF update 700: (-2.27, 5.31, 19 deg), spread 0.07 m, Neff 505
+[runner_node-2] [steer] robot=(-1.99,5.52) yaw=6° -> target=(-1.58,5.56) dist=0.41m angle_to_wp=5° angle_err=-0°
+[runner_node-2] Waypoint 3/9 reached.
+[runner_node-2] [steer] robot=(-1.68,5.50) yaw=-7° -> target=(-0.44,5.12) dist=1.30m angle_to_wp=-17° angle_err=-10°
+[runner_node-2] [steer] robot=(-1.34,5.36) yaw=-16° -> target=(-0.44,5.12) dist=0.93m angle_to_wp=-15° angle_err=0°
+[python3-4] [WARN] [1794436396.778975414] [motion_planner]: ML model: obstacle on the path at (-0.28,1.75). Re-planning.
+[python3-4] [INFO] [1794436396.928948483] [motion_planner]: Start: world=(-1.13,5.28) -> pixel=(776,327) value=0
+[python3-4] [INFO] [1794436396.929588467] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[python3-4] [WARN] [1794436397.029538774] [motion_planner]: Path crosses 0.88 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436397.083111675] [motion_planner]: Path found: 529 cells, smoothed to 6 waypoints in 129 ms (43433 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436397.084494666] [motion_planner]: Path published on /planned_path with 6 waypoints.
+[runner_node-2] Path received from motion_planner: 6 waypoints. Following now.
+[runner_node-2] Waypoint 1/6 reached.
+[runner_node-2] [steer] robot=(-1.06,5.24) yaw=-25° -> target=(-0.20,4.08) dist=1.45m angle_to_wp=-53° angle_err=-28°
+[sketch_pf_node-1] [INFO] [1794436397.574443858] [sketch_pf]: PF update 720: (-1.01, 4.99, -31 deg), spread 0.07 m, Neff 575
+[runner_node-2] [steer] robot=(-0.87,5.03) yaw=-50° -> target=(-0.20,4.08) dist=1.16m angle_to_wp=-55° angle_err=-5°
+[runner_node-2] [steer] robot=(-0.68,4.74) yaw=-54° -> target=(-0.20,4.08) dist=0.81m angle_to_wp=-54° angle_err=-0°
+[runner_node-2] [steer] robot=(-0.49,4.46) yaw=-54° -> target=(-0.20,4.08) dist=0.48m angle_to_wp=-52° angle_err=1°
+[runner_node-2] Waypoint 2/6 reached.
+[runner_node-2] [steer] robot=(-0.34,4.22) yaw=-65° -> target=(-0.04,1.44) dist=2.80m angle_to_wp=-84° angle_err=-19°
+[sketch_pf_node-1] [INFO] [1794436401.505363960] [sketch_pf]: PF update 740: (-0.31, 4.06, -62 deg), spread 0.08 m, Neff 534
+[runner_node-2] [steer] robot=(-0.25,3.86) yaw=-81° -> target=(-0.04,1.44) dist=2.42m angle_to_wp=-85° angle_err=-4°
+[runner_node-2] [steer] robot=(-0.19,3.47) yaw=-85° -> target=(-0.04,1.44) dist=2.04m angle_to_wp=-86° angle_err=-1°
+[runner_node-2] [steer] robot=(-0.15,3.13) yaw=-86° -> target=(-0.04,1.44) dist=1.70m angle_to_wp=-86° angle_err=-1°
+[runner_node-2] [steer] robot=(-0.11,2.76) yaw=-86° -> target=(-0.04,1.44) dist=1.32m angle_to_wp=-87° angle_err=-1°
+[sketch_pf_node-1] [INFO] [1794436405.828180378] [sketch_pf]: PF update 760: (-0.09, 2.73, -86 deg), spread 0.09 m, Neff 520
+[runner_node-2] [steer] robot=(-0.07,2.39) yaw=-87° -> target=(-0.04,1.44) dist=0.95m angle_to_wp=-88° angle_err=-1°
+[runner_node-2] [steer] robot=(-0.06,2.05) yaw=-88° -> target=(-0.04,1.44) dist=0.61m angle_to_wp=-88° angle_err=-0°
+[runner_node-2] [steer] robot=(-0.04,1.70) yaw=-89° -> target=(-0.04,1.44) dist=0.26m angle_to_wp=-91° angle_err=-1°
+[runner_node-2] Waypoint 3/6 reached.
+[runner_node-2] [steer] robot=(-0.04,1.40) yaw=-98° -> target=(-0.82,-2.72) dist=4.19m angle_to_wp=-101° angle_err=-3°
+[python3-4] [WARN] [1794436410.153239014] [motion_planner]: ML model: obstacle on the path at (-0.80,-2.62). Re-planning.
+[python3-4] [INFO] [1794436410.327851888] [motion_planner]: Start: world=(-0.05,1.28) -> pixel=(575,381) value=0
+[python3-4] [INFO] [1794436410.328311968] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[sketch_pf_node-1] [INFO] [1794436410.361313409] [sketch_pf]: PF update 780: (-0.05, 1.29, -99 deg), spread 0.09 m, Neff 553
+[python3-4] [WARN] [1794436410.387383236] [motion_planner]: Path crosses 0.84 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436410.417307705] [motion_planner]: Path found: 349 cells, smoothed to 6 waypoints in 75 ms (42348 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436410.418443456] [motion_planner]: Path published on /planned_path with 6 waypoints.
+[runner_node-2] Path received from motion_planner: 6 waypoints. Following now.
+[runner_node-2] Waypoint 1/6 reached.
+[runner_node-2] [steer] robot=(-0.07,1.06) yaw=-93° -> target=(-0.06,0.60) dist=0.46m angle_to_wp=-89° angle_err=4°
+[python3-4] [WARN] [1794436411.327820052] [motion_planner]: ML model: obstacle on the path at (-0.86,-3.16). Re-planning.
+[python3-4] [INFO] [1794436411.332888675] [motion_planner]: Start: world=(-0.07,0.97) -> pixel=(560,380) value=0
+[python3-4] [INFO] [1794436411.333742242] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[python3-4] [WARN] [1794436411.418195857] [motion_planner]: Path crosses 1.10 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436411.451393383] [motion_planner]: Path found: 350 cells, smoothed to 6 waypoints in 95 ms (43434 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436411.452962246] [motion_planner]: Path published on /planned_path with 6 waypoints.
+[runner_node-2] Path received from motion_planner: 6 waypoints. Following now.
+[runner_node-2] Waypoint 1/6 reached.
+[runner_node-2] [steer] robot=(-0.07,0.73) yaw=-89° -> target=(-0.06,0.38) dist=0.35m angle_to_wp=-88° angle_err=1°
+[python3-4] [WARN] [1794436412.152103170] [motion_planner]: ML model: obstacle on the path at (-1.07,-3.60). Re-planning.
+[python3-4] [INFO] [1794436412.327855286] [motion_planner]: Start: world=(-0.07,0.67) -> pixel=(545,380) value=0
+[python3-4] [INFO] [1794436412.328184694] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[python3-4] [WARN] [1794436412.422661905] [motion_planner]: Path crosses 0.98 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436412.458437757] [motion_planner]: Path found: 351 cells, smoothed to 5 waypoints in 116 ms (44041 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436412.459421462] [motion_planner]: Path published on /planned_path with 5 waypoints.
+[runner_node-2] Path received from motion_planner: 5 waypoints. Following now.
+[runner_node-2] Waypoint 1/5 reached.
+[runner_node-2] [steer] robot=(-0.08,0.38) yaw=-95° -> target=(-0.60,-3.56) dist=3.98m angle_to_wp=-98° angle_err=-3°
+[runner_node-2] [steer] robot=(-0.13,0.04) yaw=-97° -> target=(-0.60,-3.56) dist=3.63m angle_to_wp=-97° angle_err=-0°
+[sketch_pf_node-1] [INFO] [1794436414.960881598] [sketch_pf]: PF update 800: (-0.15, -0.10, -98 deg), spread 0.10 m, Neff 379
+[runner_node-2] [steer] robot=(-0.18,-0.30) yaw=-98° -> target=(-0.60,-3.56) dist=3.29m angle_to_wp=-97° angle_err=0°
+[python3-4] [WARN] [1794436416.015462119] [motion_planner]: ML model: obstacle on the path at (-2.57,-3.77). Re-planning.
+[python3-4] [INFO] [1794436416.136984330] [motion_planner]: Start: world=(-0.22,-0.51) -> pixel=(486,373) value=0
+[python3-4] [INFO] [1794436416.137261434] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[python3-4] [WARN] [1794436416.187939919] [motion_planner]: Goal (-3.34,-4.04) is only 0.34 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.58,-3.68) instead (0.43 m away, 0.65 m of room).
+[python3-4] [WARN] [1794436416.210939567] [motion_planner]: Path crosses 2.76 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436416.242815516] [motion_planner]: Path found: 305 cells, smoothed to 36 waypoints in 91 ms (45224 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436416.244161651] [motion_planner]: Path published on /planned_path with 36 waypoints.
+[runner_node-2] Path received from motion_planner: 36 waypoints. Following now.
+[runner_node-2] Waypoint 1/36 reached.
+[runner_node-2] [steer] robot=(-0.24,-0.61) yaw=-98° -> target=(-0.66,-3.68) dist=3.10m angle_to_wp=-98° angle_err=-0°
+[python3-4] [WARN] [1794436417.057255310] [motion_planner]: ML model: obstacle on the path at (-3.11,-3.99). Re-planning.
+[python3-4] [INFO] [1794436417.127804189] [motion_planner]: Start: world=(-0.27,-0.82) -> pixel=(470,370) value=0
+[python3-4] [INFO] [1794436417.128138819] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[python3-4] [WARN] [1794436417.183476403] [motion_planner]: Goal (-3.34,-4.04) is only 0.34 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.76,-3.78) instead (0.49 m away, 0.47 m of room).
+[python3-4] [WARN] [1794436417.218281966] [motion_planner]: Path crosses 2.96 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436417.262710033] [motion_planner]: Path found: 299 cells, smoothed to 33 waypoints in 116 ms (45500 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436417.264000381] [motion_planner]: Path published on /planned_path with 33 waypoints.
+[runner_node-2] Path received from motion_planner: 33 waypoints. Following now.
+[runner_node-2] Waypoint 1/33 reached.
+[runner_node-2] [steer] robot=(-0.29,-0.91) yaw=-98° -> target=(-0.66,-3.66) dist=2.77m angle_to_wp=-98° angle_err=0°
+[fusion_obstacle_node-3] [INFO] [1794436417.940895069] [fusion_obstacle_node]: 1896 predictions (0 with a sensor missing), 72 ms each, 46150 obstacle cells in the map
+[runner_node-2] [steer] robot=(-0.35,-1.22) yaw=-98° -> target=(-0.66,-3.66) dist=2.46m angle_to_wp=-97° angle_err=1°
+[python3-4] [WARN] [1794436419.262260203] [motion_planner]: ML model: obstacle on the path at (-3.70,-3.86). Re-planning.
+[python3-4] [INFO] [1794436419.327899664] [motion_planner]: Start: world=(-0.41,-1.47) -> pixel=(438,363) value=0
+[python3-4] [INFO] [1794436419.328287838] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[sketch_pf_node-1] [INFO] [1794436419.381892720] [sketch_pf]: PF update 820: (-0.42, -1.44, -98 deg), spread 0.10 m, Neff 359
+[python3-4] [WARN] [1794436419.394918116] [motion_planner]: Goal (-3.34,-4.04) is only 0.34 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.56,-4.02) instead (0.22 m away, 0.44 m of room).
+[python3-4] [WARN] [1794436419.419835200] [motion_planner]: Path crosses 2.34 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436419.454893157] [motion_planner]: Path found: 255 cells, smoothed to 20 waypoints in 103 ms (46477 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436419.456387264] [motion_planner]: Path published on /planned_path with 20 waypoints.
+[runner_node-2] Path received from motion_planner: 20 waypoints. Following now.
+[runner_node-2] Waypoint 1/20 reached.
+[runner_node-2] [steer] robot=(-0.43,-1.53) yaw=-97° -> target=(-0.70,-3.70) dist=2.19m angle_to_wp=-97° angle_err=0°
+[runner_node-2] [steer] robot=(-0.50,-1.81) yaw=-98° -> target=(-0.70,-3.70) dist=1.90m angle_to_wp=-96° angle_err=1°
+[runner_node-2] [steer] robot=(-0.57,-2.10) yaw=-97° -> target=(-0.70,-3.70) dist=1.61m angle_to_wp=-95° angle_err=2°
+[runner_node-2] [steer] robot=(-0.63,-2.38) yaw=-95° -> target=(-0.70,-3.70) dist=1.33m angle_to_wp=-93° angle_err=2°
+[runner_node-2] [steer] robot=(-0.69,-2.69) yaw=-93° -> target=(-0.70,-3.70) dist=1.01m angle_to_wp=-91° angle_err=2°
+[sketch_pf_node-1] [INFO] [1794436423.866020071] [sketch_pf]: PF update 840: (-0.71, -2.71, -93 deg), spread 0.12 m, Neff 319
+[runner_node-2] [steer] robot=(-0.73,-2.98) yaw=-90° -> target=(-0.70,-3.70) dist=0.72m angle_to_wp=-88° angle_err=3°
+[runner_node-2] [steer] robot=(-0.75,-3.27) yaw=-87° -> target=(-0.70,-3.70) dist=0.43m angle_to_wp=-83° angle_err=4°
+[runner_node-2] Waypoint 2/20 reached.
+[runner_node-2] [steer] robot=(-0.75,-3.46) yaw=-101° -> target=(-1.14,-4.06) dist=0.71m angle_to_wp=-123° angle_err=-22°
+[runner_node-2] [steer] robot=(-0.87,-3.68) yaw=-120° -> target=(-1.14,-4.06) dist=0.46m angle_to_wp=-126° angle_err=-6°
+[sketch_pf_node-1] [INFO] [1794436428.111602881] [sketch_pf]: PF update 860: (-0.91, -3.74, -122 deg), spread 0.14 m, Neff 302
+[runner_node-2] Waypoint 3/20 reached.
+[runner_node-2] [steer] robot=(-1.01,-3.86) yaw=-139° -> target=(-2.58,-4.10) dist=1.59m angle_to_wp=-171° angle_err=-32°
+[runner_node-2] [steer] robot=(-1.22,-3.88) yaw=-166° -> target=(-2.58,-4.10) dist=1.38m angle_to_wp=-171° angle_err=-5°
+[runner_node-2] [steer] robot=(-1.57,-3.90) yaw=-170° -> target=(-2.58,-4.10) dist=1.03m angle_to_wp=-169° angle_err=1°
+[runner_node-2] [steer] robot=(-1.92,-3.92) yaw=-168° -> target=(-2.58,-4.10) dist=0.69m angle_to_wp=-165° angle_err=3°
+[sketch_pf_node-1] [INFO] [1794436432.127439423] [sketch_pf]: PF update 880: (-1.94, -3.79, -173 deg), spread 0.06 m, Neff 461
+[runner_node-2] [steer] robot=(-2.22,-3.95) yaw=-164° -> target=(-2.58,-4.10) dist=0.38m angle_to_wp=-157° angle_err=7°
+[runner_node-2] Waypoint 4/20 reached.
+[runner_node-2] [steer] robot=(-2.55,-4.02) yaw=-162° -> target=(-2.80,-4.08) dist=0.25m angle_to_wp=-166° angle_err=-4°
+[runner_node-2] Waypoint 9/20 reached.
+[runner_node-2] [steer] robot=(-2.86,-4.03) yaw=-177° -> target=(-3.12,-4.02) dist=0.26m angle_to_wp=178° angle_err=-5°
+[runner_node-2] Waypoint 16/20 reached.
+[runner_node-2] [steer] robot=(-3.19,-4.01) yaw=-173° -> target=(-3.44,-4.04) dist=0.25m angle_to_wp=-173° angle_err=-0°
+[sketch_pf_node-1] [INFO] [1794436436.706859669] [sketch_pf]: PF update 900: (-3.24, -3.84, -173 deg), spread 0.09 m, Neff 247
+[runner_node-2] [steer] robot=(-3.42,-4.01) yaw=-174° -> target=(-3.56,-4.02) dist=0.14m angle_to_wp=-174° angle_err=0°
+[runner_node-2] Waypoint 20/20 reached.
+[runner_node-2] GOAL REACHED! Robot stopped at (-3.47,-4.00).
+[runner_node-2] 🎯 Goal received from RViz: (-3.84, 5.59) — waiting for motion_planner to re-plan.
+[python3-4] [INFO] [1794436438.671068738] [motion_planner]: New goal from RViz: x=-3.84m, y=5.59m. Re-planning.
+[runner_node-2] 🎯 Goal received from RViz: (-3.84, 5.59) — waiting for motion_planner to re-plan.
+[python3-4] [INFO] [1794436438.672164462] [motion_planner]: New goal from RViz: x=-3.84m, y=5.59m. Re-planning.
+[runner_node-2] 🎯 Goal received from RViz: (-3.84, 5.59) — waiting for motion_planner to re-plan.
+[python3-4] [INFO] [1794436438.673095602] [motion_planner]: New goal from RViz: x=-3.84m, y=5.59m. Re-planning.
+[python3-4] [INFO] [1794436438.727775332] [motion_planner]: Start: world=(-3.47,-4.00) -> pixel=(312,210) value=0
+[python3-4] [INFO] [1794436438.728169061] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[python3-4] [WARN] [1794436438.786549044] [motion_planner]: Goal (-3.84,5.58) is only 0.64 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.84,5.40) instead (0.18 m away, 0.82 m of room).
+[python3-4] [WARN] [1794436438.817176843] [motion_planner]: Path crosses 1.22 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436438.851235996] [motion_planner]: Path found: 641 cells, smoothed to 9 waypoints in 108 ms (44341 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436438.852080239] [motion_planner]: Path published on /planned_path with 9 waypoints.
+[runner_node-2] Path received from motion_planner: 9 waypoints. Following now.
+[runner_node-2] Waypoint 1/9 reached.
+[runner_node-2] [steer] robot=(-3.47,-4.00) yaw=-173° -> target=(-1.28,-3.40) dist=2.27m angle_to_wp=15° angle_err=-172°
+[runner_node-2] [steer] robot=(-3.44,-3.97) yaw=138° -> target=(-1.28,-3.40) dist=2.23m angle_to_wp=15° angle_err=-123°
+[runner_node-2] [steer] robot=(-3.40,-3.93) yaw=87° -> target=(-1.28,-3.40) dist=2.18m angle_to_wp=14° angle_err=-73°
+[sketch_pf_node-1] [INFO] [1794436441.144756075] [sketch_pf]: PF update 920: (-3.24, -3.80, 91 deg), spread 0.04 m, Neff 278
+[runner_node-2] [steer] robot=(-3.36,-3.90) yaw=41° -> target=(-1.28,-3.40) dist=2.14m angle_to_wp=14° angle_err=-27°
+[runner_node-2] [steer] robot=(-3.06,-3.75) yaw=17° -> target=(-1.28,-3.40) dist=1.81m angle_to_wp=11° angle_err=-5°
+[runner_node-2] [steer] robot=(-2.71,-3.65) yaw=12° -> target=(-1.28,-3.40) dist=1.45m angle_to_wp=10° angle_err=-2°
+[sketch_pf_node-1] [INFO] [1794436444.373801053] [sketch_pf]: PF update 940: (-2.66, -3.55, 13 deg), spread 0.06 m, Neff 287
+[runner_node-2] [steer] robot=(-2.39,-3.55) yaw=10° -> target=(-1.28,-3.40) dist=1.12m angle_to_wp=8° angle_err=-3°
+[python3-4] [WARN] [1794436446.151522104] [motion_planner]: ML model: obstacle on the path at (-0.68,-2.14). Re-planning.
+[python3-4] [INFO] [1794436446.328013927] [motion_planner]: Start: world=(-2.07,-3.46) -> pixel=(339,280) value=0
+[python3-4] [INFO] [1794436446.328364708] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[python3-4] [WARN] [1794436446.401690293] [motion_planner]: Path crosses 1.28 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436446.434326778] [motion_planner]: Path found: 568 cells, smoothed to 9 waypoints in 92 ms (41247 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436446.435610019] [motion_planner]: Path published on /planned_path with 9 waypoints.
+[runner_node-2] Path received from motion_planner: 9 waypoints. Following now.
+[runner_node-2] Waypoint 1/9 reached.
+[runner_node-2] [steer] robot=(-2.03,-3.45) yaw=7° -> target=(-1.00,-3.10) dist=1.09m angle_to_wp=19° angle_err=12°
+[runner_node-2] [steer] robot=(-1.71,-3.32) yaw=18° -> target=(-1.00,-3.10) dist=0.74m angle_to_wp=17° angle_err=-0°
+[runner_node-2] [steer] robot=(-1.42,-3.19) yaw=16° -> target=(-1.00,-3.10) dist=0.43m angle_to_wp=13° angle_err=-4°
+[fusion_obstacle_node-3] [INFO] [1794436448.938438629] [fusion_obstacle_node]: 2162 predictions (0 with a sensor missing), 72 ms each, 39712 obstacle cells in the map
+[sketch_pf_node-1] [INFO] [1794436449.051786016] [sketch_pf]: PF update 960: (-1.32, -3.00, 16 deg), spread 0.12 m, Neff 598
+[runner_node-2] Waypoint 2/9 reached.
+[runner_node-2] [steer] robot=(-1.20,-3.08) yaw=25° -> target=(-0.66,-2.68) dist=0.67m angle_to_wp=37° angle_err=11°
+[runner_node-2] [steer] robot=(-0.91,-2.86) yaw=35° -> target=(-0.66,-2.68) dist=0.31m angle_to_wp=35° angle_err=0°
+[runner_node-2] Waypoint 3/9 reached.
+[runner_node-2] [steer] robot=(-0.74,-2.63) yaw=53° -> target=(-0.28,-1.84) dist=0.92m angle_to_wp=60° angle_err=7°
+[runner_node-2] [steer] robot=(-0.57,-2.30) yaw=59° -> target=(-0.28,-1.84) dist=0.55m angle_to_wp=58° angle_err=-1°
+[sketch_pf_node-1] [INFO] [1794436453.234310217] [sketch_pf]: PF update 980: (-0.52, -2.18, 58 deg), spread 0.13 m, Neff 296
+[runner_node-2] Waypoint 4/9 reached.
+[runner_node-2] [steer] robot=(-0.42,-2.02) yaw=56° -> target=(0.04,0.98) dist=3.04m angle_to_wp=81° angle_err=25°
+[python3-4] [WARN] [1794436454.059293226] [motion_planner]: ML model: obstacle on the path at (-0.05,1.67). Re-planning.
+[python3-4] [INFO] [1794436454.127842561] [motion_planner]: Start: world=(-0.41,-1.97) -> pixel=(413,363) value=0
+[python3-4] [INFO] [1794436454.128230649] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[python3-4] [WARN] [1794436454.194520262] [motion_planner]: Path crosses 0.82 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436454.237694217] [motion_planner]: Path found: 455 cells, smoothed to 6 waypoints in 93 ms (32944 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436454.239073561] [motion_planner]: Path published on /planned_path with 6 waypoints.
+[runner_node-2] Path received from motion_planner: 6 waypoints. Following now.
+[runner_node-2] [steer] robot=(-0.37,-1.75) yaw=77° -> target=(0.36,1.94) dist=3.76m angle_to_wp=79° angle_err=2°
+[runner_node-2] [steer] robot=(-0.33,-1.39) yaw=79° -> target=(0.36,1.94) dist=3.40m angle_to_wp=78° angle_err=-1°
+[runner_node-2] [steer] robot=(-0.29,-1.03) yaw=79° -> target=(0.36,1.94) dist=3.04m angle_to_wp=78° angle_err=-1°
+[sketch_pf_node-1] [INFO] [1794436457.307307886] [sketch_pf]: PF update 1000: (-0.29, -0.97, 79 deg), spread 0.13 m, Neff 560
+[runner_node-2] [steer] robot=(-0.25,-0.71) yaw=78° -> target=(0.36,1.94) dist=2.72m angle_to_wp=77° angle_err=-1°
+[python3-4] [WARN] [1794436458.048070298] [motion_planner]: ML model: obstacle on the path at (-0.11,3.30). Re-planning.
+[python3-4] [INFO] [1794436458.135474461] [motion_planner]: Start: world=(-0.24,-0.68) -> pixel=(478,371) value=0
+[python3-4] [INFO] [1794436458.135853706] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[python3-4] [WARN] [1794436458.200438549] [motion_planner]: Path crosses 0.84 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436458.235713860] [motion_planner]: Path found: 407 cells, smoothed to 6 waypoints in 86 ms (28487 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436458.237575687] [motion_planner]: Path published on /planned_path with 6 waypoints.
+[runner_node-2] Path received from motion_planner: 6 waypoints. Following now.
+[runner_node-2] Waypoint 1/6 reached.
+[runner_node-2] [steer] robot=(-0.18,-0.37) yaw=79° -> target=(0.28,1.98) dist=2.40m angle_to_wp=79° angle_err=0°
+[python3-4] [WARN] [1794436459.795622815] [motion_planner]: ML model: obstacle on the path at (-0.11,3.68). Re-planning.
+[python3-4] [INFO] [1794436459.928080325] [motion_planner]: Start: world=(-0.13,-0.15) -> pixel=(504,377) value=0
+[python3-4] [INFO] [1794436459.929485316] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[python3-4] [WARN] [1794436460.020081346] [motion_planner]: Path crosses 0.84 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436460.051840787] [motion_planner]: Path found: 402 cells, smoothed to 6 waypoints in 99 ms (29083 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436460.053592162] [motion_planner]: Path published on /planned_path with 6 waypoints.
+[runner_node-2] Path received from motion_planner: 6 waypoints. Following now.
+[runner_node-2] Waypoint 1/6 reached.
+[runner_node-2] [steer] robot=(-0.11,-0.09) yaw=79° -> target=(0.28,2.00) dist=2.12m angle_to_wp=79° angle_err=1°
+[runner_node-2] [steer] robot=(-0.02,0.22) yaw=79° -> target=(0.28,2.00) dist=1.80m angle_to_wp=80° angle_err=1°
+[python3-4] [WARN] [1794436461.798137580] [motion_planner]: ML model: obstacle on the path at (0.00,4.00). Re-planning.
+[python3-4] [INFO] [1794436461.927946842] [motion_planner]: Start: world=(0.04,0.41) -> pixel=(532,385) value=0
+[python3-4] [INFO] [1794436461.928404798] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[sketch_pf_node-1] [INFO] [1794436461.982520060] [sketch_pf]: PF update 1020: (0.05, 0.38, 79 deg), spread 0.13 m, Neff 571
+[python3-4] [WARN] [1794436462.018582552] [motion_planner]: Path crosses 0.84 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436462.068859711] [motion_planner]: Path found: 423 cells, smoothed to 5 waypoints in 117 ms (29708 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436462.069932724] [motion_planner]: Path published on /planned_path with 5 waypoints.
+[runner_node-2] Path received from motion_planner: 5 waypoints. Following now.
+[runner_node-2] Waypoint 1/5 reached.
+[runner_node-2] [steer] robot=(0.08,0.52) yaw=80° -> target=(0.38,2.32) dist=1.82m angle_to_wp=80° angle_err=1°
+[runner_node-2] [steer] robot=(0.14,0.81) yaw=80° -> target=(0.38,2.32) dist=1.53m angle_to_wp=81° angle_err=1°
+[runner_node-2] [steer] robot=(0.17,1.12) yaw=81° -> target=(0.38,2.32) dist=1.22m angle_to_wp=80° angle_err=-1°
+[python3-4] [WARN] [1794436464.465144234] [motion_planner]: ML model: obstacle on the path at (-1.04,5.07). Re-planning.
+[python3-4] [INFO] [1794436464.528899949] [motion_planner]: Start: world=(0.17,1.15) -> pixel=(569,392) value=0
+[python3-4] [INFO] [1794436464.529336450] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[python3-4] [WARN] [1794436464.611680947] [motion_planner]: Path crosses 1.38 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436464.641398210] [motion_planner]: Path found: 393 cells, smoothed to 6 waypoints in 88 ms (31565 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436464.642316836] [motion_planner]: Path published on /planned_path with 6 waypoints.
+[runner_node-2] Path received from motion_planner: 6 waypoints. Following now.
+[runner_node-2] Waypoint 1/6 reached.
+[python3-4] [WARN] [1794436465.081098472] [motion_planner]: ML model: obstacle on the path at (-0.72,5.24). Re-planning.
+[python3-4] [INFO] [1794436465.127868351] [motion_planner]: Start: world=(0.18,1.32) -> pixel=(578,392) value=0
+[python3-4] [INFO] [1794436465.128264484] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[python3-4] [WARN] [1794436465.194786729] [motion_planner]: Path crosses 2.12 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[python3-4] [INFO] [1794436465.237302503] [motion_planner]: Path found: 384 cells, smoothed to 30 waypoints in 89 ms (31727 ML obstacle cells on the map)
+[python3-4] [INFO] [1794436465.239322848] [motion_planner]: Path published on /planned_path with 30 waypoints.
+[runner_node-2] Path received from motion_planner: 30 waypoints. Following now.
+[runner_node-2] [steer] robot=(0.20,1.43) yaw=70° -> target=(0.52,2.04) dist=0.69m angle_to_wp=62° angle_err=-8°
+[runner_node-2] [steer] robot=(0.28,1.70) yaw=62° -> target=(0.52,2.04) dist=0.41m angle_to_wp=55° angle_err=-7°
+[sketch_pf_node-1] [INFO] [1794436466.682657199] [sketch_pf]: PF update 1040: (0.23, 1.69, 62 deg), spread 0.14 m, Neff 581
+[runner_node-2] Waypoint 2/30 reached.
+[runner_node-2] [steer] robot=(0.35,1.87) yaw=67° -> target=(0.56,4.56) dist=2.70m angle_to_wp=86° angle_err=18°
+[runner_node-2] [steer] robot=(0.38,2.17) yaw=84° -> target=(0.56,4.56) dist=2.39m angle_to_wp=86° angle_err=2°
+[runner_node-2] [steer] robot=(0.38,2.45) yaw=86° -> target=(0.56,4.56) dist=2.12m angle_to_wp=85° angle_err=-1°
+[runner_node-2] [steer] robot=(0.38,2.72) yaw=85° -> target=(0.56,4.56) dist=1.85m angle_to_wp=84° angle_err=-1°
+[sketch_pf_node-1] [INFO] [1794436470.648179134] [sketch_pf]: PF update 1060: (0.35, 2.65, 85 deg), spread 0.08 m, Neff 417
+[runner_node-2] [steer] robot=(0.39,3.00) yaw=84° -> target=(0.56,4.56) dist=1.57m angle_to_wp=84° angle_err=-0°
+[runner_node-2] [steer] robot=(0.41,3.31) yaw=83° -> target=(0.56,4.56) dist=1.26m angle_to_wp=83° angle_err=0°
+[runner_node-2] [steer] robot=(0.45,3.58) yaw=83° -> target=(0.56,4.56) dist=0.98m angle_to_wp=84° angle_err=1°
+[runner_node-2] [steer] robot=(0.50,3.87) yaw=84° -> target=(0.56,4.56) dist=0.69m angle_to_wp=85° angle_err=1°
+[sketch_pf_node-1] [INFO] [1794436475.220169560] [sketch_pf]: PF update 1080: (0.53, 3.99, 84 deg), spread 0.15 m, Neff 589
+[runner_node-2] [steer] robot=(0.56,4.17) yaw=86° -> target=(0.56,4.56) dist=0.39m angle_to_wp=90° angle_err=4°
+[runner_node-2] Waypoint 3/30 reached.
+[runner_node-2] [steer] robot=(0.60,4.33) yaw=110° -> target=(0.10,5.00) dist=0.83m angle_to_wp=127° angle_err=17°
+[runner_node-2] [steer] robot=(0.50,4.60) yaw=126° -> target=(0.10,5.00) dist=0.57m angle_to_wp=135° angle_err=9°
+[runner_node-2] [steer] robot=(0.34,4.81) yaw=137° -> target=(0.10,5.00) dist=0.30m angle_to_wp=142° angle_err=5°
+[fusion_obstacle_node-3] [INFO] [1794436479.019132144] [fusion_obstacle_node]: 2421 predictions (0 with a sensor missing), 72 ms each, 37642 obstacle cells in the map
+[runner_node-2] Waypoint 4/30 reached.
+[sketch_pf_node-1] [INFO] [1794436479.146410238] [sketch_pf]: PF update 1100: (0.31, 4.81, 140 deg), spread 0.22 m, Neff 289
+[runner_node-2] [steer] robot=(0.07,4.99) yaw=142° -> target=(-0.62,5.56) dist=0.89m angle_to_wp=141° angle_err=-1°
+[runner_node-2] [steer] robot=(-0.20,5.17) yaw=140° -> target=(-0.62,5.56) dist=0.58m angle_to_wp=137° angle_err=-3°
+[runner_node-2] Waypoint 5/30 reached.
+[runner_node-2] [steer] robot=(-0.49,5.36) yaw=134° -> target=(-0.66,5.58) dist=0.28m angle_to_wp=129° angle_err=-5°
+[runner_node-2] [steer] robot=(-0.69,5.52) yaw=145° -> target=(-1.38,5.66) dist=0.71m angle_to_wp=168° angle_err=24°
+[sketch_pf_node-1] [INFO] [1794436483.662278602] [sketch_pf]: PF update 1120: (-1.16, 5.13, 163 deg), spread 0.07 m, Neff 491
+[runner_node-2] [steer] robot=(-1.01,5.58) yaw=166° -> target=(-1.38,5.66) dist=0.38m angle_to_wp=167° angle_err=1°
+[runner_node-2] Waypoint 16/30 reached.
+[runner_node-2] [steer] robot=(-1.35,5.60) yaw=177° -> target=(-1.60,5.54) dist=0.26m angle_to_wp=-166° angle_err=17°
+[runner_node-2] [steer] robot=(-1.72,5.55) yaw=-176° -> target=(-3.84,5.40) dist=2.13m angle_to_wp=-176° angle_err=0°
+[runner_node-2] [steer] robot=(-2.05,5.50) yaw=-177° -> target=(-3.84,5.40) dist=1.79m angle_to_wp=-177° angle_err=0°
+[sketch_pf_node-1] [INFO] [1794436488.135626576] [sketch_pf]: PF update 1140: (-2.52, 5.24, -178 deg), spread 0.09 m, Neff 308
+[runner_node-2] [steer] robot=(-2.41,5.46) yaw=-178° -> target=(-3.84,5.40) dist=1.43m angle_to_wp=-178° angle_err=0°
+[runner_node-2] [steer] robot=(-2.78,5.42) yaw=-179° -> target=(-3.84,5.40) dist=1.06m angle_to_wp=-179° angle_err=-0°
+[runner_node-2] [steer] robot=(-3.13,5.39) yaw=-180° -> target=(-3.84,5.40) dist=0.71m angle_to_wp=179° angle_err=-1°
+[runner_node-2] [steer] robot=(-3.49,5.37) yaw=178° -> target=(-3.84,5.40) dist=0.35m angle_to_wp=175° angle_err=-3°
+[runner_node-2] [steer] robot=(-3.74,5.36) yaw=170° -> target=(-3.84,5.40) dist=0.11m angle_to_wp=160° angle_err=-9°
+[runner_node-2] Waypoint 30/30 reached.
+[runner_node-2] GOAL REACHED! Robot stopped at (-3.75,5.37).
+[sketch_pf_node-1] [INFO] [1794436492.903218763] [sketch_pf]: PF update 1160: (-3.72, 5.36, 169 deg), spread 0.10 m, Neff 246
+[python3-4] Traceback (most recent call last):
+[python3-4]   File "/home/yug/miniconda3/envs/habitat/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+[python3-4]     return _run_code(code, main_globals, None,
+[python3-4]   File "/home/yug/miniconda3/envs/habitat/lib/python3.10/runpy.py", line 86, in _run_code
+[python3-4]     exec(code, run_globals)
+[python3-4]   File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/planning/motion_planner.py", line 588, in <module>
+[python3-4]     main()
+[python3-4]   File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/planning/motion_planner.py", line 578, in main
+[python3-4]     rclpy.spin(node)
+[python3-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[python3-4]     executor.spin_once()
+[python3-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+[python3-4]     self._spin_once_impl(timeout_sec)
+[python3-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+[python3-4]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[python3-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+[python3-4]     return next(self._cb_iter)
+[python3-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+[python3-4]     raise ExternalShutdownException()
+[python3-4] rclpy.executors.ExternalShutdownException
+[sketch_pf_node-1] Traceback (most recent call last):
+[sketch_pf_node-1]   File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/robo_project/sketch_pf_node", line 33, in <module>
+[sketch_pf_node-1]     sys.exit(load_entry_point('robo-project==0.1.0', 'console_scripts', 'sketch_pf_node')())
+[sketch_pf_node-1]   File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/localization/sketch_pf_node.py", line 321, in main
+[sketch_pf_node-1]     rclpy.spin(node)
+[sketch_pf_node-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[sketch_pf_node-1]     executor.spin_once()
+[sketch_pf_node-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+[sketch_pf_node-1]     self._spin_once_impl(timeout_sec)
+[sketch_pf_node-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+[sketch_pf_node-1]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[sketch_pf_node-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+[sketch_pf_node-1]     return next(self._cb_iter)
+[sketch_pf_node-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+[sketch_pf_node-1]     raise ExternalShutdownException()
+[sketch_pf_node-1] rclpy.executors.ExternalShutdownException
+[runner_node-2] Traceback (most recent call last):
+[runner_node-2]   File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/robo_project/runner_node", line 33, in <module>
+[runner_node-2]     sys.exit(load_entry_point('robo-project==0.1.0', 'console_scripts', 'runner_node')())
+[runner_node-2]   File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/ros/runner_node.py", line 502, in main
+[runner_node-2]     rclpy.shutdown()
+[runner_node-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+[runner_node-2]     _shutdown(context=context)
+[runner_node-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+[runner_node-2]     return context.shutdown()
+[runner_node-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+[runner_node-2]     self.__context.shutdown()
+[runner_node-2] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241
+[fusion_obstacle_node-3] Traceback (most recent call last):
+[fusion_obstacle_node-3]   File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/robo_project/fusion_obstacle_node", line 33, in <module>
+[fusion_obstacle_node-3]     sys.exit(load_entry_point('robo-project==0.1.0', 'console_scripts', 'fusion_obstacle_node')())
+[fusion_obstacle_node-3]   File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/ml/fusion/fusion_obstacle_node.py", line 416, in main
+[fusion_obstacle_node-3]     rclpy.spin(node)
+[fusion_obstacle_node-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[fusion_obstacle_node-3]     executor.spin_once()
+[fusion_obstacle_node-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+[fusion_obstacle_node-3]     self._spin_once_impl(timeout_sec)
+[fusion_obstacle_node-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 805, in _spin_once_impl
+[fusion_obstacle_node-3]     raise handler.exception()
+[fusion_obstacle_node-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/task.py", line 272, in _execute_coroutine_step
+[fusion_obstacle_node-3]     result = coro.send(None)
+[fusion_obstacle_node-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 488, in handler
+[fusion_obstacle_node-3]     await call_coroutine(entity, arg)
+[fusion_obstacle_node-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 396, in _execute_timer
+[fusion_obstacle_node-3]     await await_or_execute(tmr.callback)
+[fusion_obstacle_node-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 110, in await_or_execute
+[fusion_obstacle_node-3]     return callback(*args)
+[fusion_obstacle_node-3]   File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/ml/fusion/fusion_obstacle_node.py", line 256, in tick
+[fusion_obstacle_node-3]     self.publish_local(free, self.rgb["front"][1].header.stamp)
+[fusion_obstacle_node-3]   File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/ml/fusion/fusion_obstacle_node.py", line 378, in publish_local
+[fusion_obstacle_node-3]     self.grid_pub.publish(msg)
+[fusion_obstacle_node-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/publisher.py", line 70, in publish
+[fusion_obstacle_node-3]     self.__publisher.publish(msg)
+[fusion_obstacle_node-3] rclpy._rclpy_pybind11.RCLError: Failed to publish: publisher's context is invalid, at ./src/rcl/publisher.c:389
+[ERROR] [sketch_pf_node-1]: process has died [pid 52494, exit code 1, cmd '/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/robo_project/sketch_pf_node --ros-args --params-file /tmp/launch_params__4xdvger'].
+[ERROR] [runner_node-2]: process has died [pid 52496, exit code 1, cmd '/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/robo_project/runner_node --ros-args -r /odom:=/localization/odom'].
+[ERROR] [python3-4]: process has died [pid 52500, exit code 1, cmd '/home/yug/miniconda3/envs/habitat/bin/python3 -m robo_project.planning.motion_planner --ros-args -r /odom:=/localization/odom'].
+[ERROR] [fusion_obstacle_node-3]: process has died [pid 52498, exit code 1, cmd '/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/robo_project/fusion_obstacle_node --ros-args --params-file /tmp/launch_params_ft26ofdz -r /odom:=/localization/odom -r /camera/front/image_raw:=/camera/front/image_raw -r /camera/front/depth/image_raw:=/camera/front/depth/image_raw -r /camera/left/image_raw:=/camera/left/image_raw -r /camera/right/image_raw:=/camera/right/image_raw -r /camera/back/image_raw:=/camera/back/image_raw -r /livox/lidar:=/livox/lidar'].

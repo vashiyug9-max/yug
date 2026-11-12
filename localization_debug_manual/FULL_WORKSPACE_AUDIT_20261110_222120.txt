@@ -1,0 +1,249 @@
+
+=================================================================
+1. WORKSPACE
+=================================================================
+/home/jd1152/robotics_project/robo_project_ws
+
+=================================================================
+2. TOP LEVEL DIRECTORY SIZES
+=================================================================
+297M	/home/jd1152/robotics_project/robo_project_ws/.git
+4.0K	/home/jd1152/robotics_project/robo_project_ws/.gitattributes
+4.0K	/home/jd1152/robotics_project/robo_project_ws/.gitignore
+724K	/home/jd1152/robotics_project/robo_project_ws/build
+80K	/home/jd1152/robotics_project/robo_project_ws/cmn_full_navigation_preview
+4.9G	/home/jd1152/robotics_project/robo_project_ws/data
+28M	/home/jd1152/robotics_project/robo_project_ws/install
+4.0K	/home/jd1152/robotics_project/robo_project_ws/localization_debug_349
+312K	/home/jd1152/robotics_project/robo_project_ws/localization_debug_manual
+9.6M	/home/jd1152/robotics_project/robo_project_ws/localization_step308_staging_20261108
+8.0M	/home/jd1152/robotics_project/robo_project_ws/localization_transfer_step308.zip
+980K	/home/jd1152/robotics_project/robo_project_ws/log
+1.3M	/home/jd1152/robotics_project/robo_project_ws/results
+276M	/home/jd1152/robotics_project/robo_project_ws/runs
+277M	/home/jd1152/robotics_project/robo_project_ws/src
+
+=================================================================
+3. ALL PROJECT PYTHON FILES
+=================================================================
+src/robo_project/__init__.py
+src/robo_project/cmn/__init__.py
+src/robo_project/cmn/cmn_interface.py
+src/robo_project/cmn/cmn_motion_planner.py
+src/robo_project/cmn/cmn_ported.py
+src/robo_project/cmn/cmn_visualizer.py
+src/robo_project/cmn/model/__init__.py
+src/robo_project/cmn/model/local_occupancy_predictor.py
+src/robo_project/cmn/pure_pursuit.py
+src/robo_project/cmn/run_model_on_saved_pano.py
+src/robo_project/cmn/topo_map.py
+src/robo_project/cmn/vinebot_interface.py
+src/robo_project/cmn/visualizer.py
+src/robo_project/common/__init__.py
+src/robo_project/common/basic_types.py
+src/robo_project/common/map_handler.py
+src/robo_project/common/rig.py
+src/robo_project/common/rotated_rect_crop.py
+src/robo_project/launch/cmn_full_navigation_preview.launch.py
+src/robo_project/launch/cmn_localization_debug.launch.py
+src/robo_project/launch/ml_pose.launch.py
+src/robo_project/launch/run.launch.py
+src/robo_project/localization/__init__.py
+src/robo_project/localization/live_global_pose_node.py
+src/robo_project/localization/localization_error_monitor_node.py
+src/robo_project/localization/localization_map_step342.py
+src/robo_project/localization/particle_filter.py
+src/robo_project/localization/particle_filter_step308_candidate.py
+src/robo_project/ml/__init__.py
+src/robo_project/ml/fusion/__init__.py
+src/robo_project/ml/fusion/collect_data.py
+src/robo_project/ml/fusion/fusion_data.py
+src/robo_project/ml/fusion/fusion_model.py
+src/robo_project/ml/fusion/fusion_obstacle_node.py
+src/robo_project/ml/fusion/lidar_local_occ.py
+src/robo_project/ml/fusion/train_fusion.py
+src/robo_project/ml/pose_estimation/__init__.py
+src/robo_project/ml/pose_estimation/dataset_loader.py
+src/robo_project/ml/pose_estimation/dataset_loader_v2.py
+src/robo_project/ml/pose_estimation/infer.py
+src/robo_project/ml/pose_estimation/ml_navigation_node.py
+src/robo_project/ml/pose_estimation/ml_pose_node.py
+src/robo_project/ml/pose_estimation/model.py
+src/robo_project/ml/pose_estimation/pose_monitor_node.py
+src/robo_project/ml/pose_estimation/test_loader.py
+src/robo_project/ml/pose_estimation/train.py
+src/robo_project/ml/tools/eval_model.py
+src/robo_project/ml/tools/eval_model_no_cameras.py
+src/robo_project/ml/tools/real_lidar_check.py
+src/robo_project/planning/__init__.py
+src/robo_project/planning/astar.py
+src/robo_project/planning/fast_astar.py
+src/robo_project/planning/motion_planner.py
+src/robo_project/ros/__init__.py
+src/robo_project/ros/localization_motion_gate.py
+src/robo_project/ros/localization_navigation_bridge.py
+src/robo_project/ros/map_server_node.py
+src/robo_project/ros/pose_topic_bridge.py
+src/robo_project/ros/runner_node.py
+src/robo_project/setup.py
+src/robo_project/sim/__init__.py
+src/robo_project/sim/habitat_bridge.py
+src/robo_project/sim/lidar_sim.py
+src/robo_project/sim/tools/analyze_collisions.py
+src/robo_project/sim/tools/goal_sequencer.py
+src/robo_project/sim/tools/one_goal.py
+src/robo_project/sim/tools/rig_viz.py
+src/vinebot_description/launch/launch_sim.launch.py
+src/vinebot_description/launch/robot_launch.py
+src/vinebot_description/launch/rtab_launch.py
+src/vineyard_world/launch/find_pixal.py
+src/vineyard_world/launch/heighmap_generator.py
+src/vineyard_world/launch/sdf_generator.py
+TOTAL PYTHON FILES:
+73
+
+=================================================================
+4. ROS EXECUTABLE REGISTRATIONS
+=================================================================
+49: 'localization_navigation_bridge = robo_project.ros.localization_navigation_bridge:main',
+50: 'localization_motion_gate = robo_project.ros.localization_motion_gate:main',
+52: 'live_global_pose_node = robo_project.localization.live_global_pose_node:main',
+53: 'localization_error_monitor_node = robo_project.localization.localization_error_monitor_node:main',
+59: 'bridge = robo_project.sim.habitat_bridge:main',
+62: 'motion_planner = robo_project.planning.motion_planner:main',
+65: 'runner_node = robo_project.ros.runner_node:main',
+66: 'map_server_node = robo_project.ros.map_server_node:main',
+69: 'fusion_obstacle_node = robo_project.ml.fusion.fusion_obstacle_node:main',
+70: 'ml_pose_node = robo_project.ml.pose_estimation.ml_pose_node:main',
+71: 'pose_monitor_node = robo_project.ml.pose_estimation.pose_monitor_node:main',
+
+=================================================================
+5. ALL LAUNCH FILES
+=================================================================
+src/robo_project/launch/cmn_full_navigation_preview.launch.py
+src/robo_project/launch/cmn_localization_debug.launch.py
+src/robo_project/launch/ml_pose.launch.py
+src/robo_project/launch/run.launch.py
+src/vinebot_description/launch/launch_sim.launch.py
+src/vinebot_description/launch/robot_launch.py
+src/vinebot_description/launch/rtab_launch.py
+
+=================================================================
+6. LOCALIZATION DEPENDENCIES
+=================================================================
+
+MODULE:
+particle_filter
+  reference:
+src/robo_project/cmn/cmn_interface.py
+  reference:
+src/robo_project/localization/particle_filter_step308_candidate.py
+  reference:
+src/robo_project/localization/live_global_pose_node.py
+
+MODULE:
+particle_filter_step308_candidate
+  reference:
+src/robo_project/localization/live_global_pose_node.py
+
+MODULE:
+localization_map_step342
+  reference:
+src/robo_project/ros/localization_navigation_bridge.py
+  reference:
+src/robo_project/localization/live_global_pose_node.py
+
+MODULE:
+dataset_gt_replay_node
+
+MODULE:
+particle_filter_validation_node
+
+MODULE:
+fusion_grid_adapter_step334
+
+MODULE:
+live_global_pose_node
+  reference:
+src/robo_project/setup.py
+  reference:
+src/robo_project/launch/cmn_full_navigation_preview.launch.py
+  reference:
+src/robo_project/launch/cmn_localization_debug.launch.py
+
+MODULE:
+cmn_interface
+
+=================================================================
+7. IDENTICAL SOURCE FILES
+=================================================================
+
+IDENTICAL CONTENT:
+  
+src/robo_project/__init__.py
+  
+src/robo_project/common/__init__.py
+  
+src/robo_project/sim/__init__.py
+  
+src/robo_project/planning/__init__.py
+  
+src/robo_project/ros/__init__.py
+  
+src/robo_project/cmn/__init__.py
+  
+src/robo_project/cmn/model/__init__.py
+  
+src/robo_project/localization/__init__.py
+  
+src/robo_project/ml/__init__.py
+  
+src/robo_project/ml/pose_estimation/__init__.py
+  
+src/robo_project/ml/fusion/__init__.py
+
+=================================================================
+8. LARGE PROJECT ASSETS
+=================================================================
+    55.35 MB  src/environment/IMR_lab8.glb
+    13.74 MB  src/environment/Denmark.glb
+     1.46 MB  src/robo_project/config/maps/delton_global_occupancy.npy
+    42.71 MB  src/robo_project/ml/pose_estimation/pose_estimator_habitat_v2.pth
+    42.71 MB  src/robo_project/ml/pose_estimation/pose_estimator.pth
+    68.43 MB  runs/fusion_real_rig_e3.0/best.pt
+    68.43 MB  runs/fusion_full_e1.2/best.pt
+    68.43 MB  runs/fusion_mid360_e3.0/last.pt
+    68.43 MB  runs/fusion_mid360_e3.0/best.pt
+     7.96 MB  localization_transfer_step308.zip
+
+=================================================================
+9. CONDA ENVIRONMENTS
+=================================================================
+# conda environments:
+#
+# * -> active
+# + -> frozen
+base                     /home/jd1152/miniconda3
+habitat                  /home/jd1152/miniconda3/envs/habitat
+habitat_display          /home/jd1152/miniconda3/envs/habitat_display
+habitat_ros310           /home/jd1152/miniconda3/envs/habitat_ros310
+habitat_ros310_np1       /home/jd1152/miniconda3/envs/habitat_ros310_np1
+robo_ml                  /home/jd1152/miniconda3/envs/robo_ml
+
+=================================================================
+10. ACTIVE ROBOTICS PROCESSES
+=================================================================
+
+=================================================================
+11. CLEANUP CANDIDATE DIRECTORIES
+=================================================================
+cmn_full_navigation_preview
+localization_debug_349
+localization_debug_manual
+localization_step308_staging_20261108
+
+=================================================================
+AUDIT COMPLETE
+=================================================================
+No project files or environments deleted.
+References and identical hashes do not prove a file is unused.

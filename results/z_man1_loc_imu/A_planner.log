@@ -1,0 +1,359 @@
+[INFO] [1794511466.634959359] [motion_planner]: motion_planner started. Waiting for /map and /odom...
+[INFO] [1794511466.635396252] [motion_planner]: Goal: x=0.0m, y=0.0m
+[INFO] [1794511467.670244034] [motion_planner]: Map received: 768x1024 res=0.019999999552965164m origin=(-7.68,-10.24)
+[INFO] [1794511469.194506525] [motion_planner]: Start: world=(-4.10,4.90) -> pixel=(757,178) value=0
+[INFO] [1794511469.194805347] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[WARN] [1794511469.548229893] [motion_planner]: Path crosses 0.92 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511469.606046020] [motion_planner]: Path found: 380 cells, smoothed to 5 waypoints in 400 ms (0 ML obstacle cells on the map)
+[INFO] [1794511469.606800660] [motion_planner]: Path published on /planned_path with 5 waypoints.
+[WARN] [1794511469.763556286] [motion_planner]: ML model: obstacle on the path at (-3.68,4.92). Re-planning.
+[INFO] [1794511469.794222041] [motion_planner]: Start: world=(-4.06,4.90) -> pixel=(757,180) value=0
+[INFO] [1794511469.794724635] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[WARN] [1794511469.866237049] [motion_planner]: Path crosses 1.80 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511469.897613204] [motion_planner]: Path found: 389 cells, smoothed to 8 waypoints in 84 ms (7602 ML obstacle cells on the map)
+[INFO] [1794511469.899952121] [motion_planner]: Path published on /planned_path with 8 waypoints.
+[WARN] [1794511473.589453451] [motion_planner]: ML model: obstacle on the path at (-1.13,4.48). Re-planning.
+[INFO] [1794511473.594626908] [motion_planner]: Start: world=(-3.68,5.36) -> pixel=(779,200) value=0
+[INFO] [1794511473.595125786] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[WARN] [1794511473.689505951] [motion_planner]: Path crosses 1.16 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511473.721314146] [motion_planner]: Path found: 374 cells, smoothed to 6 waypoints in 102 ms (13812 ML obstacle cells on the map)
+[INFO] [1794511473.722466781] [motion_planner]: Path published on /planned_path with 6 waypoints.
+[INFO] [1794511500.674922880] [motion_planner]: New goal from RViz: x=4.38m, y=-3.89m. Re-planning.
+[INFO] [1794511500.676466383] [motion_planner]: New goal from RViz: x=4.38m, y=-3.89m. Re-planning.
+[INFO] [1794511500.678315173] [motion_planner]: New goal from RViz: x=4.38m, y=-3.89m. Re-planning.
+[INFO] [1794511500.795030178] [motion_planner]: Start: world=(0.01,0.10) -> pixel=(516,384) value=0
+[INFO] [1794511500.795912809] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[WARN] [1794511500.864459000] [motion_planner]: Goal (4.38,-3.90) is only 0.54 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.40,-3.52) instead (0.38 m away, 0.64 m of room).
+[WARN] [1794511500.886405080] [motion_planner]: Path crosses 2.46 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511500.935208879] [motion_planner]: Path found: 289 cells, smoothed to 31 waypoints in 118 ms (39252 ML obstacle cells on the map)
+[INFO] [1794511500.937162317] [motion_planner]: Path published on /planned_path with 31 waypoints.
+[WARN] [1794511505.084603789] [motion_planner]: ML model: obstacle on the path at (2.46,-3.20). Re-planning.
+[INFO] [1794511505.200909884] [motion_planner]: Start: world=(0.51,-1.00) -> pixel=(461,409) value=0
+[INFO] [1794511505.201240673] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[WARN] [1794511505.269070414] [motion_planner]: Path crosses 2.42 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511505.309996215] [motion_planner]: Path found: 237 cells, smoothed to 28 waypoints in 96 ms (39691 ML obstacle cells on the map)
+[INFO] [1794511505.311927657] [motion_planner]: Path published on /planned_path with 28 waypoints.
+[WARN] [1794511509.063950319] [motion_planner]: ML model: obstacle on the path at (1.90,-3.11). Re-planning.
+[INFO] [1794511509.194430297] [motion_planner]: Start: world=(1.09,-2.09) -> pixel=(407,438) value=0
+[INFO] [1794511509.194754428] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[WARN] [1794511509.249124764] [motion_planner]: Goal (4.38,-3.90) is only 0.64 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.22,-3.84) instead (0.17 m away, 0.80 m of room).
+[WARN] [1794511509.257367555] [motion_planner]: Path crosses 0.34 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511509.287617715] [motion_planner]: Path found: 188 cells, smoothed to 4 waypoints in 79 ms (40391 ML obstacle cells on the map)
+[INFO] [1794511509.288568637] [motion_planner]: Path published on /planned_path with 4 waypoints.
+[INFO] [1794511523.281939614] [motion_planner]: New goal from RViz: x=5.00m, y=0.72m. Re-planning.
+[INFO] [1794511523.298985850] [motion_planner]: New goal from RViz: x=5.00m, y=0.72m. Re-planning.
+[INFO] [1794511523.300903990] [motion_planner]: New goal from RViz: x=5.00m, y=0.72m. Re-planning.
+[INFO] [1794511523.400654567] [motion_planner]: Start: world=(4.16,-3.76) -> pixel=(323,592) value=0
+[INFO] [1794511523.400992630] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794511523.448941030] [motion_planner]: Goal (5.00,0.72) is only 0.32 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.84,0.80) instead (0.18 m away, 0.48 m of room).
+[WARN] [1794511523.471711142] [motion_planner]: Path crosses 2.58 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511523.502628988] [motion_planner]: Path found: 414 cells, smoothed to 32 waypoints in 90 ms (50965 ML obstacle cells on the map)
+[INFO] [1794511523.503885962] [motion_planner]: Path published on /planned_path with 32 waypoints.
+[WARN] [1794511535.030539184] [motion_planner]: ML model: obstacle on the path at (1.68,-0.63). Re-planning.
+[INFO] [1794511535.195137198] [motion_planner]: Start: world=(1.91,-3.22) -> pixel=(351,479) value=0
+[INFO] [1794511535.195561541] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794511535.264074571] [motion_planner]: Path crosses 2.40 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511535.296409825] [motion_planner]: Path found: 313 cells, smoothed to 30 waypoints in 84 ms (38789 ML obstacle cells on the map)
+[INFO] [1794511535.298202954] [motion_planner]: Path published on /planned_path with 30 waypoints.
+[WARN] [1794511537.343353475] [motion_planner]: ML model: obstacle on the path at (1.66,-0.18). Re-planning.
+[INFO] [1794511537.394601296] [motion_planner]: Start: world=(1.59,-2.62) -> pixel=(381,463) value=0
+[INFO] [1794511537.395005661] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794511537.485944119] [motion_planner]: Path crosses 2.44 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511537.536721582] [motion_planner]: Path found: 299 cells, smoothed to 35 waypoints in 120 ms (33929 ML obstacle cells on the map)
+[INFO] [1794511537.539097217] [motion_planner]: Path published on /planned_path with 35 waypoints.
+[WARN] [1794511540.385197401] [motion_planner]: ML model: obstacle on the path at (1.62,0.09). Re-planning.
+[INFO] [1794511540.394356586] [motion_planner]: Start: world=(1.37,-1.62) -> pixel=(430,452) value=0
+[INFO] [1794511540.394650690] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794511540.458971516] [motion_planner]: Path crosses 3.22 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511540.493156000] [motion_planner]: Path found: 267 cells, smoothed to 31 waypoints in 87 ms (30499 ML obstacle cells on the map)
+[INFO] [1794511540.494628943] [motion_planner]: Path published on /planned_path with 31 waypoints.
+[WARN] [1794511542.864910946] [motion_planner]: ML model: obstacle on the path at (2.70,0.53). Re-planning.
+[INFO] [1794511542.994424003] [motion_planner]: Start: world=(1.18,-0.84) -> pixel=(469,442) value=0
+[INFO] [1794511542.994768236] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794511543.088988537] [motion_planner]: Path crosses 3.14 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511543.120070202] [motion_planner]: Path found: 254 cells, smoothed to 54 waypoints in 112 ms (28235 ML obstacle cells on the map)
+[INFO] [1794511543.122086375] [motion_planner]: Path published on /planned_path with 54 waypoints.
+[WARN] [1794511543.668264596] [motion_planner]: ML model: obstacle on the path at (4.38,0.80). Re-planning.
+[INFO] [1794511543.794384636] [motion_planner]: Start: world=(1.12,-0.61) -> pixel=(481,439) value=0
+[INFO] [1794511543.794836269] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794511543.862992346] [motion_planner]: Path crosses 2.34 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511543.894341483] [motion_planner]: Path found: 226 cells, smoothed to 17 waypoints in 86 ms (27800 ML obstacle cells on the map)
+[INFO] [1794511543.895343619] [motion_planner]: Path published on /planned_path with 17 waypoints.
+[WARN] [1794511545.465717322] [motion_planner]: ML model: obstacle on the path at (3.88,1.10). Re-planning.
+[INFO] [1794511545.595045617] [motion_planner]: Start: world=(1.00,-0.18) -> pixel=(502,433) value=0
+[INFO] [1794511545.596023864] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794511545.673280336] [motion_planner]: Path crosses 1.72 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511545.708291540] [motion_planner]: Path found: 210 cells, smoothed to 37 waypoints in 92 ms (28575 ML obstacle cells on the map)
+[INFO] [1794511545.709950864] [motion_planner]: Path published on /planned_path with 37 waypoints.
+[WARN] [1794511546.206211364] [motion_planner]: ML model: obstacle on the path at (4.45,1.11). Re-planning.
+[INFO] [1794511546.207232073] [motion_planner]: Start: world=(1.01,-0.10) -> pixel=(507,434) value=0
+[INFO] [1794511546.207687304] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794511546.268045239] [motion_planner]: Goal (5.00,0.72) is only 0.32 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.88,0.84) instead (0.17 m away, 0.45 m of room).
+[WARN] [1794511546.279925224] [motion_planner]: Path crosses 1.64 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511546.316437548] [motion_planner]: Path found: 209 cells, smoothed to 36 waypoints in 91 ms (29037 ML obstacle cells on the map)
+[INFO] [1794511546.317622480] [motion_planner]: Path published on /planned_path with 36 waypoints.
+[WARN] [1794511546.805052878] [motion_planner]: ML model: obstacle on the path at (4.80,0.88). Re-planning.
+[INFO] [1794511546.805737342] [motion_planner]: Start: world=(1.07,0.05) -> pixel=(514,437) value=0
+[INFO] [1794511546.805999633] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794511546.859283715] [motion_planner]: Goal (4.90,0.80) is only 0.37 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.56,1.14) instead (0.48 m away, 0.46 m of room).
+[WARN] [1794511546.868029182] [motion_planner]: Path crosses 1.38 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511546.909241542] [motion_planner]: Path found: 188 cells, smoothed to 16 waypoints in 90 ms (29490 ML obstacle cells on the map)
+[INFO] [1794511546.910773698] [motion_planner]: Path published on /planned_path with 16 waypoints.
+[WARN] [1794511548.434097712] [motion_planner]: ML model: obstacle on the path at (4.50,1.28). Re-planning.
+[INFO] [1794511548.594502013] [motion_planner]: Start: world=(1.37,0.44) -> pixel=(534,452) value=0
+[INFO] [1794511548.595182830] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794511548.708150032] [motion_planner]: Path crosses 3.02 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511548.742923895] [motion_planner]: Path found: 247 cells, smoothed to 43 waypoints in 135 ms (31216 ML obstacle cells on the map)
+[INFO] [1794511548.744733342] [motion_planner]: Path published on /planned_path with 43 waypoints.
+[WARN] [1794511549.163119692] [motion_planner]: ML model: obstacle on the path at (5.06,1.64). Re-planning.
+[INFO] [1794511549.195262653] [motion_planner]: Start: world=(1.49,0.55) -> pixel=(539,458) value=0
+[INFO] [1794511549.195923136] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794511549.320284259] [motion_planner]: Path crosses 3.22 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511549.350254406] [motion_planner]: Path found: 254 cells, smoothed to 47 waypoints in 141 ms (32054 ML obstacle cells on the map)
+[INFO] [1794511549.351715458] [motion_planner]: Path published on /planned_path with 47 waypoints.
+[WARN] [1794511549.752712460] [motion_planner]: ML model: obstacle on the path at (5.14,1.66). Re-planning.
+[INFO] [1794511549.794781652] [motion_planner]: Start: world=(1.62,0.66) -> pixel=(545,464) value=0
+[INFO] [1794511549.795220499] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794511550.039384932] [motion_planner]: Parking spot (5.42,0.46) is not reachable with the robot's clearance; driving to the nearest reachable spot (4.48,1.38) instead (1.32 m away).
+[INFO] [1794511550.090942458] [motion_planner]: Path found: 145 cells, smoothed to 7 waypoints in 273 ms (32975 ML obstacle cells on the map)
+[INFO] [1794511550.092098006] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794511550.362673614] [motion_planner]: ML model: obstacle on the path at (3.98,1.36). Re-planning.
+[INFO] [1794511550.394713587] [motion_planner]: Start: world=(1.75,0.76) -> pixel=(550,471) value=0
+[INFO] [1794511550.395174539] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794511550.571552845] [motion_planner]: Parking spot (5.58,0.70) is not reachable with the robot's clearance; driving to the nearest reachable spot (4.68,1.58) instead (1.26 m away).
+[INFO] [1794511550.603582010] [motion_planner]: Path found: 148 cells, smoothed to 46 waypoints in 195 ms (33463 ML obstacle cells on the map)
+[INFO] [1794511550.605200681] [motion_planner]: Path published on /planned_path with 46 waypoints.
+[WARN] [1794511550.966901377] [motion_planner]: ML model: obstacle on the path at (4.52,1.46). Re-planning.
+[INFO] [1794511550.994579997] [motion_planner]: Start: world=(1.80,0.79) -> pixel=(551,474) value=0
+[INFO] [1794511550.995288989] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794511551.074184887] [motion_planner]: Goal (4.40,1.30) is only 0.37 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.36,1.78) instead (0.48 m away, 0.70 m of room).
+[WARN] [1794511551.080039528] [motion_planner]: Path crosses 1.50 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511551.116343554] [motion_planner]: Path found: 129 cells, smoothed to 4 waypoints in 99 ms (34480 ML obstacle cells on the map)
+[INFO] [1794511551.117656297] [motion_planner]: Path published on /planned_path with 4 waypoints.
+[WARN] [1794511558.224698456] [motion_planner]: ML model: obstacle on the path at (4.28,1.72). Re-planning.
+[INFO] [1794511558.395191713] [motion_planner]: Start: world=(3.79,1.44) -> pixel=(584,573) value=100
+[INFO] [1794511558.396756672] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794511558.477472768] [motion_planner]: Goal (4.60,1.12) is only 0.36 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.44,1.42) instead (0.34 m away, 0.70 m of room).
+[WARN] [1794511558.485470127] [motion_planner]: Path crosses 0.48 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511558.534122016] [motion_planner]: Path found: 34 cells, smoothed to 7 waypoints in 110 ms (42036 ML obstacle cells on the map)
+[INFO] [1794511558.535177116] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[INFO] [1794511562.211024863] [motion_planner]: New goal from RViz: x=-3.74m, y=5.32m. Re-planning.
+[INFO] [1794511562.212690547] [motion_planner]: New goal from RViz: x=-3.74m, y=5.32m. Re-planning.
+[INFO] [1794511562.215919659] [motion_planner]: New goal from RViz: x=-3.74m, y=5.32m. Re-planning.
+[INFO] [1794511562.394567514] [motion_planner]: Start: world=(4.36,1.36) -> pixel=(579,602) value=100
+[INFO] [1794511562.395084478] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794511562.462403853] [motion_planner]: Path crosses 2.72 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511562.500058300] [motion_planner]: Path found: 517 cells, smoothed to 12 waypoints in 88 ms (45034 ML obstacle cells on the map)
+[INFO] [1794511562.501246359] [motion_planner]: Path published on /planned_path with 12 waypoints.
+[WARN] [1794511578.562124911] [motion_planner]: ML model: obstacle on the path at (2.45,1.02). Re-planning.
+[INFO] [1794511578.594828853] [motion_planner]: Start: world=(3.50,0.96) -> pixel=(560,558) value=0
+[INFO] [1794511578.595347927] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794511578.665961534] [motion_planner]: Path crosses 2.12 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511578.706830691] [motion_planner]: Path found: 458 cells, smoothed to 13 waypoints in 97 ms (48622 ML obstacle cells on the map)
+[INFO] [1794511578.708232611] [motion_planner]: Path published on /planned_path with 13 waypoints.
+[WARN] [1794511591.208092550] [motion_planner]: ML model: obstacle on the path at (-2.64,5.09). Re-planning.
+[INFO] [1794511591.394399695] [motion_planner]: Start: world=(-0.10,1.58) -> pixel=(591,379) value=0
+[INFO] [1794511591.394752310] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794511591.461571501] [motion_planner]: Path crosses 0.86 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511591.501734752] [motion_planner]: Path found: 265 cells, smoothed to 6 waypoints in 94 ms (44957 ML obstacle cells on the map)
+[INFO] [1794511591.503454471] [motion_planner]: Path published on /planned_path with 6 waypoints.
+[WARN] [1794511592.002669823] [motion_planner]: ML model: obstacle on the path at (-2.30,5.15). Re-planning.
+[INFO] [1794511592.003358103] [motion_planner]: Start: world=(-0.17,1.68) -> pixel=(595,375) value=0
+[INFO] [1794511592.003610592] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794511592.068807667] [motion_planner]: Path crosses 1.42 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511592.116945244] [motion_planner]: Path found: 276 cells, smoothed to 14 waypoints in 101 ms (45658 ML obstacle cells on the map)
+[INFO] [1794511592.118104714] [motion_planner]: Path published on /planned_path with 14 waypoints.
+[WARN] [1794511592.728837601] [motion_planner]: ML model: obstacle on the path at (-2.51,5.58). Re-planning.
+[INFO] [1794511592.795943505] [motion_planner]: Start: world=(-0.26,1.88) -> pixel=(606,371) value=0
+[INFO] [1794511592.796496758] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794511592.862160436] [motion_planner]: Path crosses 1.62 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511592.907851183] [motion_planner]: Path found: 276 cells, smoothed to 30 waypoints in 92 ms (45612 ML obstacle cells on the map)
+[INFO] [1794511592.909790913] [motion_planner]: Path published on /planned_path with 30 waypoints.
+[WARN] [1794511595.903989178] [motion_planner]: ML model: obstacle on the path at (-2.25,5.59). Re-planning.
+[INFO] [1794511596.003986494] [motion_planner]: Start: world=(-0.45,2.89) -> pixel=(656,361) value=0
+[INFO] [1794511596.004306719] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794511596.060888332] [motion_planner]: Path crosses 1.56 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511596.106172717] [motion_planner]: Path found: 236 cells, smoothed to 31 waypoints in 90 ms (46038 ML obstacle cells on the map)
+[INFO] [1794511596.107690337] [motion_planner]: Path published on /planned_path with 31 waypoints.
+[WARN] [1794511597.983306822] [motion_planner]: ML model: obstacle on the path at (-2.49,5.81). Re-planning.
+[INFO] [1794511597.995256654] [motion_planner]: Start: world=(-0.56,3.51) -> pixel=(687,355) value=0
+[INFO] [1794511597.995799892] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794511598.084822739] [motion_planner]: Path crosses 1.62 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511598.112817900] [motion_planner]: Path found: 218 cells, smoothed to 38 waypoints in 95 ms (47965 ML obstacle cells on the map)
+[INFO] [1794511598.115296568] [motion_planner]: Path published on /planned_path with 38 waypoints.
+[WARN] [1794511601.390136569] [motion_planner]: ML model: obstacle on the path at (-2.57,5.91). Re-planning.
+[INFO] [1794511601.394874598] [motion_planner]: Start: world=(-0.71,4.47) -> pixel=(735,348) value=0
+[INFO] [1794511601.396204051] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794511601.468454323] [motion_planner]: Goal (-3.74,5.32) is only 0.60 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.62,5.56) instead (0.27 m away, 0.80 m of room).
+[WARN] [1794511601.477894074] [motion_planner]: Path crosses 1.26 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511601.504116260] [motion_planner]: Path found: 169 cells, smoothed to 8 waypoints in 88 ms (48751 ML obstacle cells on the map)
+[INFO] [1794511601.504907879] [motion_planner]: Path published on /planned_path with 8 waypoints.
+[WARN] [1794511605.724877590] [motion_planner]: ML model: obstacle on the path at (-3.46,5.72). Re-planning.
+[INFO] [1794511605.794668848] [motion_planner]: Start: world=(-1.34,5.19) -> pixel=(771,317) value=0
+[INFO] [1794511605.795150289] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794511605.854500014] [motion_planner]: Goal (-3.78,5.28) is only 0.38 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-4.10,5.66) instead (0.50 m away, 0.77 m of room).
+[WARN] [1794511605.864092469] [motion_planner]: Path crosses 0.56 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511605.913828302] [motion_planner]: Path found: 139 cells, smoothed to 4 waypoints in 100 ms (50160 ML obstacle cells on the map)
+[INFO] [1794511605.914943365] [motion_planner]: Path published on /planned_path with 4 waypoints.
+[INFO] [1794511617.085181572] [motion_planner]: New goal from RViz: x=-3.33m, y=-4.04m. Re-planning.
+[INFO] [1794511617.086433741] [motion_planner]: New goal from RViz: x=-3.33m, y=-4.04m. Re-planning.
+[INFO] [1794511617.087456135] [motion_planner]: New goal from RViz: x=-3.33m, y=-4.04m. Re-planning.
+[INFO] [1794511617.194811251] [motion_planner]: Start: world=(-4.01,5.69) -> pixel=(796,183) value=0
+[INFO] [1794511617.196048881] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[WARN] [1794511617.244607380] [motion_planner]: Goal (-3.34,-4.04) is only 0.34 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.38,-3.58) instead (0.46 m away, 0.80 m of room).
+[WARN] [1794511617.272602952] [motion_planner]: Path crosses 1.12 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511617.311625360] [motion_planner]: Path found: 645 cells, smoothed to 7 waypoints in 100 ms (57298 ML obstacle cells on the map)
+[INFO] [1794511617.312658927] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794511622.693754789] [motion_planner]: ML model: obstacle on the path at (-0.83,4.35). Re-planning.
+[INFO] [1794511622.818174615] [motion_planner]: Start: world=(-3.27,5.44) -> pixel=(783,220) value=0
+[INFO] [1794511622.819060358] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[WARN] [1794511622.919366784] [motion_planner]: Path crosses 1.76 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511622.947947183] [motion_planner]: Path found: 622 cells, smoothed to 8 waypoints in 106 ms (56202 ML obstacle cells on the map)
+[INFO] [1794511622.948743823] [motion_planner]: Path published on /planned_path with 8 waypoints.
+[WARN] [1794511628.485679327] [motion_planner]: ML model: obstacle on the path at (-0.58,3.29). Re-planning.
+[INFO] [1794511628.594300083] [motion_planner]: Start: world=(-1.50,4.98) -> pixel=(760,309) value=0
+[INFO] [1794511628.594605941] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[WARN] [1794511628.690030438] [motion_planner]: Path crosses 1.44 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511628.719058213] [motion_planner]: Path found: 531 cells, smoothed to 7 waypoints in 112 ms (46634 ML obstacle cells on the map)
+[INFO] [1794511628.719774308] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794511634.922361929] [motion_planner]: ML model: obstacle on the path at (-0.47,2.41). Re-planning.
+[INFO] [1794511634.995507729] [motion_planner]: Start: world=(-0.44,3.57) -> pixel=(690,362) value=0
+[INFO] [1794511634.995850694] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[WARN] [1794511635.060967783] [motion_planner]: Path crosses 1.18 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511635.091659610] [motion_planner]: Path found: 443 cells, smoothed to 11 waypoints in 82 ms (42948 ML obstacle cells on the map)
+[INFO] [1794511635.092572798] [motion_planner]: Path published on /planned_path with 11 waypoints.
+[WARN] [1794511642.288556568] [motion_planner]: ML model: obstacle on the path at (-0.93,-2.82). Re-planning.
+[INFO] [1794511642.400385864] [motion_planner]: Start: world=(-0.21,1.28) -> pixel=(576,373) value=0
+[INFO] [1794511642.401228753] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[WARN] [1794511642.494340707] [motion_planner]: Path crosses 0.78 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511642.537447763] [motion_planner]: Path found: 346 cells, smoothed to 12 waypoints in 114 ms (41026 ML obstacle cells on the map)
+[INFO] [1794511642.538938691] [motion_planner]: Path published on /planned_path with 12 waypoints.
+[WARN] [1794511643.183583921] [motion_planner]: ML model: obstacle on the path at (-0.84,-3.07). Re-planning.
+[INFO] [1794511643.195523024] [motion_planner]: Start: world=(-0.18,1.04) -> pixel=(563,374) value=0
+[INFO] [1794511643.196059275] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[WARN] [1794511643.281236624] [motion_planner]: Path crosses 0.68 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511643.322159522] [motion_planner]: Path found: 350 cells, smoothed to 9 waypoints in 103 ms (42204 ML obstacle cells on the map)
+[INFO] [1794511643.323861462] [motion_planner]: Path published on /planned_path with 9 waypoints.
+[WARN] [1794511644.035808259] [motion_planner]: ML model: obstacle on the path at (-1.17,-3.52). Re-planning.
+[INFO] [1794511644.195148223] [motion_planner]: Start: world=(-0.13,0.74) -> pixel=(549,377) value=0
+[INFO] [1794511644.195663685] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[WARN] [1794511644.252141479] [motion_planner]: Path crosses 1.02 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511644.282123668] [motion_planner]: Path found: 350 cells, smoothed to 6 waypoints in 71 ms (42759 ML obstacle cells on the map)
+[INFO] [1794511644.282923152] [motion_planner]: Path published on /planned_path with 6 waypoints.
+[WARN] [1794511647.088346799] [motion_planner]: ML model: obstacle on the path at (-1.97,-3.72). Re-planning.
+[INFO] [1794511647.201387761] [motion_planner]: Start: world=(-0.18,-0.19) -> pixel=(502,375) value=0
+[INFO] [1794511647.201754197] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[WARN] [1794511647.266375046] [motion_planner]: Path crosses 0.90 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511647.295154563] [motion_planner]: Path found: 310 cells, smoothed to 5 waypoints in 78 ms (43966 ML obstacle cells on the map)
+[INFO] [1794511647.296121529] [motion_planner]: Path published on /planned_path with 5 waypoints.
+[WARN] [1794511649.335913167] [motion_planner]: ML model: obstacle on the path at (-2.49,-3.90). Re-planning.
+[INFO] [1794511649.394451442] [motion_planner]: Start: world=(-0.30,-0.87) -> pixel=(468,368) value=0
+[INFO] [1794511649.394756342] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[WARN] [1794511649.442528101] [motion_planner]: Goal (-3.34,-4.04) is only 0.34 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.50,-3.72) instead (0.36 m away, 0.69 m of room).
+[WARN] [1794511649.457289147] [motion_planner]: Path crosses 2.00 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511649.496710754] [motion_planner]: Path found: 282 cells, smoothed to 37 waypoints in 89 ms (44465 ML obstacle cells on the map)
+[INFO] [1794511649.498354558] [motion_planner]: Path published on /planned_path with 37 waypoints.
+[WARN] [1794511656.026430735] [motion_planner]: ML model: obstacle on the path at (-2.94,-3.92). Re-planning.
+[INFO] [1794511656.195472065] [motion_planner]: Start: world=(-0.63,-2.90) -> pixel=(366,352) value=0
+[INFO] [1794511656.196033383] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[WARN] [1794511656.245083174] [motion_planner]: Goal (-3.34,-4.04) is only 0.68 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.44,-4.12) instead (0.13 m away, 0.80 m of room).
+[WARN] [1794511656.252099769] [motion_planner]: Path crosses 0.86 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511656.297385396] [motion_planner]: Path found: 169 cells, smoothed to 5 waypoints in 82 ms (44745 ML obstacle cells on the map)
+[INFO] [1794511656.298604968] [motion_planner]: Path published on /planned_path with 5 waypoints.
+[INFO] [1794511669.015537330] [motion_planner]: New goal from RViz: x=-3.84m, y=5.59m. Re-planning.
+[INFO] [1794511669.016736562] [motion_planner]: New goal from RViz: x=-3.84m, y=5.59m. Re-planning.
+[INFO] [1794511669.018236473] [motion_planner]: New goal from RViz: x=-3.84m, y=5.59m. Re-planning.
+[INFO] [1794511669.195080225] [motion_planner]: Start: world=(-3.35,-4.10) -> pixel=(306,216) value=0
+[INFO] [1794511669.195694727] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[WARN] [1794511669.263797575] [motion_planner]: Goal (-3.84,5.58) is only 0.67 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.84,5.44) instead (0.14 m away, 0.81 m of room).
+[WARN] [1794511669.301618289] [motion_planner]: Path crosses 1.26 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511669.350799580] [motion_planner]: Path found: 636 cells, smoothed to 8 waypoints in 134 ms (48881 ML obstacle cells on the map)
+[INFO] [1794511669.351645572] [motion_planner]: Path published on /planned_path with 8 waypoints.
+[WARN] [1794511677.849364131] [motion_planner]: ML model: obstacle on the path at (-0.92,-2.34). Re-planning.
+[INFO] [1794511677.994754420] [motion_planner]: Start: world=(-1.82,-3.59) -> pixel=(332,292) value=0
+[INFO] [1794511677.995498861] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[WARN] [1794511678.078445650] [motion_planner]: Path crosses 1.82 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511678.118674639] [motion_planner]: Path found: 560 cells, smoothed to 9 waypoints in 105 ms (41242 ML obstacle cells on the map)
+[INFO] [1794511678.119988126] [motion_planner]: Path published on /planned_path with 9 waypoints.
+[WARN] [1794511683.275924214] [motion_planner]: ML model: obstacle on the path at (-0.22,1.14). Re-planning.
+[INFO] [1794511683.394809608] [motion_planner]: Start: world=(-0.79,-2.46) -> pixel=(388,344) value=0
+[INFO] [1794511683.395193563] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[WARN] [1794511683.456481758] [motion_planner]: Goal (-3.84,5.58) is only 0.65 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.84,5.42) instead (0.16 m away, 0.81 m of room).
+[WARN] [1794511683.481984067] [motion_planner]: Path crosses 1.20 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511683.516323958] [motion_planner]: Path found: 481 cells, smoothed to 7 waypoints in 104 ms (32822 ML obstacle cells on the map)
+[INFO] [1794511683.518393402] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794511684.429183304] [motion_planner]: ML model: obstacle on the path at (0.70,1.76). Re-planning.
+[INFO] [1794511684.594481131] [motion_planner]: Start: world=(-0.66,-2.08) -> pixel=(408,350) value=0
+[INFO] [1794511684.594859384] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[WARN] [1794511684.645181354] [motion_planner]: Goal (-3.84,5.58) is only 0.64 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.84,5.40) instead (0.18 m away, 0.82 m of room).
+[WARN] [1794511684.672186638] [motion_planner]: Path crosses 1.60 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511684.710291545] [motion_planner]: Path found: 457 cells, smoothed to 25 waypoints in 100 ms (32750 ML obstacle cells on the map)
+[INFO] [1794511684.711417654] [motion_planner]: Path published on /planned_path with 25 waypoints.
+[WARN] [1794511686.220664003] [motion_planner]: ML model: obstacle on the path at (0.63,2.33). Re-planning.
+[INFO] [1794511686.394923363] [motion_planner]: Start: world=(-0.46,-1.52) -> pixel=(436,360) value=0
+[INFO] [1794511686.395917706] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[WARN] [1794511686.474236397] [motion_planner]: Path crosses 1.48 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511686.526036510] [motion_planner]: Path found: 441 cells, smoothed to 24 waypoints in 107 ms (30261 ML obstacle cells on the map)
+[INFO] [1794511686.527762384] [motion_planner]: Path published on /planned_path with 24 waypoints.
+[WARN] [1794511688.288915501] [motion_planner]: ML model: obstacle on the path at (0.63,2.81). Re-planning.
+[INFO] [1794511688.395017915] [motion_planner]: Start: world=(-0.26,-0.89) -> pixel=(467,370) value=0
+[INFO] [1794511688.395686669] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[WARN] [1794511688.487878060] [motion_planner]: Path crosses 1.78 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511688.519625310] [motion_planner]: Path found: 440 cells, smoothed to 28 waypoints in 101 ms (28208 ML obstacle cells on the map)
+[INFO] [1794511688.521787937] [motion_planner]: Path published on /planned_path with 28 waypoints.
+[WARN] [1794511689.465866508] [motion_planner]: ML model: obstacle on the path at (0.63,3.39). Re-planning.
+[INFO] [1794511689.594909997] [motion_planner]: Start: world=(-0.14,-0.52) -> pixel=(485,376) value=0
+[INFO] [1794511689.596256303] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[WARN] [1794511689.692601101] [motion_planner]: Path crosses 1.88 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511689.733016115] [motion_planner]: Path found: 439 cells, smoothed to 28 waypoints in 111 ms (27966 ML obstacle cells on the map)
+[INFO] [1794511689.734693384] [motion_planner]: Path published on /planned_path with 28 waypoints.
+[WARN] [1794511691.003193847] [motion_planner]: ML model: obstacle on the path at (0.61,3.77). Re-planning.
+[INFO] [1794511691.003831443] [motion_planner]: Start: world=(0.01,-0.11) -> pixel=(506,384) value=0
+[INFO] [1794511691.004077289] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[WARN] [1794511691.095002235] [motion_planner]: Path crosses 1.22 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511691.124485042] [motion_planner]: Path found: 447 cells, smoothed to 5 waypoints in 105 ms (27819 ML obstacle cells on the map)
+[INFO] [1794511691.125259743] [motion_planner]: Path published on /planned_path with 5 waypoints.
+[WARN] [1794511694.392178267] [motion_planner]: ML model: obstacle on the path at (-0.55,4.69). Re-planning.
+[INFO] [1794511694.394203407] [motion_planner]: Start: world=(0.41,0.88) -> pixel=(556,404) value=0
+[INFO] [1794511694.394472232] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[WARN] [1794511694.453427192] [motion_planner]: Path crosses 0.96 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511694.488537886] [motion_planner]: Path found: 404 cells, smoothed to 6 waypoints in 82 ms (29115 ML obstacle cells on the map)
+[INFO] [1794511694.489228096] [motion_planner]: Path published on /planned_path with 6 waypoints.
+[WARN] [1794511695.198469418] [motion_planner]: ML model: obstacle on the path at (-0.61,5.21). Re-planning.
+[INFO] [1794511695.200084406] [motion_planner]: Start: world=(0.48,1.09) -> pixel=(566,407) value=0
+[INFO] [1794511695.200429353] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[WARN] [1794511695.262784110] [motion_planner]: Path crosses 1.62 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511695.292836333] [motion_planner]: Path found: 393 cells, smoothed to 7 waypoints in 78 ms (30318 ML obstacle cells on the map)
+[INFO] [1794511695.294044364] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794511700.850402608] [motion_planner]: ML model: obstacle on the path at (-1.11,5.53). Re-planning.
+[INFO] [1794511700.994451757] [motion_planner]: Start: world=(0.67,2.88) -> pixel=(656,417) value=0
+[INFO] [1794511700.994817008] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[WARN] [1794511701.055523271] [motion_planner]: Path crosses 1.48 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511701.082736779] [motion_planner]: Path found: 304 cells, smoothed to 12 waypoints in 74 ms (32246 ML obstacle cells on the map)
+[INFO] [1794511701.083545679] [motion_planner]: Path published on /planned_path with 12 waypoints.
+[WARN] [1794511705.731457194] [motion_planner]: ML model: obstacle on the path at (-1.87,5.48). Re-planning.
+[INFO] [1794511705.794493297] [motion_planner]: Start: world=(0.49,4.29) -> pixel=(726,408) value=0
+[INFO] [1794511705.794901215] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[WARN] [1794511705.868727156] [motion_planner]: Path crosses 0.88 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794511705.905673645] [motion_planner]: Path found: 223 cells, smoothed to 6 waypoints in 89 ms (34986 ML obstacle cells on the map)
+[INFO] [1794511705.906709673] [motion_planner]: Path published on /planned_path with 6 waypoints.
+Traceback (most recent call last):
+  File "/home/yug/miniconda3/envs/habitat/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/yug/miniconda3/envs/habitat/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/planning/motion_planner.py", line 603, in <module>
+    main()
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/planning/motion_planner.py", line 593, in main
+    rclpy.spin(node)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+    executor.spin_once()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+    raise ExternalShutdownException()
+rclpy.executors.ExternalShutdownException

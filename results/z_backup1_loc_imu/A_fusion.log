@@ -1,0 +1,39 @@
+[INFO] [1794510092.550409373] [fusion_obstacle_node]: Fusion model /home/yug/robo_project_ws/robo_project_ws/runs/fusion_mid360_e3.0/best.pt on cpu, local grid 3.0 m, sensors ['cams', 'lidar', 'depth']. Waiting for /map ...
+[INFO] [1794510093.103818827] [fusion_obstacle_node]: Obstacle map 768x1024 @ 0.019999999552965164 m aligned with /map. Publishing /fusion/obstacle_map
+[INFO] [1794510098.624897711] [fusion_obstacle_node]: 51 predictions (0 with a sensor missing), 68 ms each, 11288 obstacle cells in the map
+[INFO] [1794510128.649695401] [fusion_obstacle_node]: 310 predictions (0 with a sensor missing), 69 ms each, 39768 obstacle cells in the map
+[INFO] [1794510158.673667569] [fusion_obstacle_node]: 569 predictions (0 with a sensor missing), 69 ms each, 34355 obstacle cells in the map
+[INFO] [1794510189.650719855] [fusion_obstacle_node]: 833 predictions (0 with a sensor missing), 70 ms each, 21417 obstacle cells in the map
+[INFO] [1794510220.587090851] [fusion_obstacle_node]: 1095 predictions (0 with a sensor missing), 71 ms each, 31334 obstacle cells in the map
+[INFO] [1794510250.646206856] [fusion_obstacle_node]: 1352 predictions (0 with a sensor missing), 71 ms each, 38269 obstacle cells in the map
+[INFO] [1794510281.568186834] [fusion_obstacle_node]: 1616 predictions (0 with a sensor missing), 72 ms each, 46165 obstacle cells in the map
+[INFO] [1794510311.608456195] [fusion_obstacle_node]: 1874 predictions (0 with a sensor missing), 72 ms each, 43658 obstacle cells in the map
+[INFO] [1794510342.632383751] [fusion_obstacle_node]: 2139 predictions (0 with a sensor missing), 72 ms each, 41665 obstacle cells in the map
+[INFO] [1794510372.658716272] [fusion_obstacle_node]: 2393 predictions (0 with a sensor missing), 73 ms each, 37304 obstacle cells in the map
+Traceback (most recent call last):
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/robo_project/fusion_obstacle_node", line 33, in <module>
+    sys.exit(load_entry_point('robo-project==0.1.0', 'console_scripts', 'fusion_obstacle_node')())
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/ml/fusion/fusion_obstacle_node.py", line 416, in main
+    rclpy.spin(node)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+    executor.spin_once()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 805, in _spin_once_impl
+    raise handler.exception()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/task.py", line 272, in _execute_coroutine_step
+    result = coro.send(None)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 488, in handler
+    await call_coroutine(entity, arg)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 396, in _execute_timer
+    await await_or_execute(tmr.callback)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 110, in await_or_execute
+    return callback(*args)
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/ml/fusion/fusion_obstacle_node.py", line 264, in tick
+    self.publish_map()
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/ml/fusion/fusion_obstacle_node.py", line 399, in publish_map
+    self.obst_pub.publish(msg)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/publisher.py", line 70, in publish
+    self.__publisher.publish(msg)
+rclpy._rclpy_pybind11.RCLError: Failed to publish: publisher's context is invalid, at ./src/rcl/publisher.c:389
+[ros2run]: Process exited with failure 1

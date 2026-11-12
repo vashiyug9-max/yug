@@ -1,0 +1,54 @@
+
+==================================================
+🚀 RUNNER NODE INITIALIZING (NO ML / NO LOCALIZATION)...
+==================================================
+
+[WARN] [1794457830.478315624] [runner_node]: New subscription discovered on topic '/map', requesting incompatible QoS. No messages will be sent to it. Last incompatible policy: DURABILITY
+⏳ Loading map in the background...
+[INFO] [1794457844.988760361] [robo_project]: ✅ SUCCESS: Resized and loaded raw physical sketch from /home/yug/robo_project_ws/robo_project_ws/src/resources/sketch_map_imr_lab8.jpeg
+✅ BACKGROUND LOAD COMPLETE! Map is now actively broadcasting.
+🗺️ MAP BROADCAST SUCCESSFUL! Check RViz now.
+Path received from motion_planner: 54 waypoints. Following now.
+Waypoint 1/54 reached.
+[steer] robot=(-4.29,2.12) yaw=-47° -> target=(-4.54,3.14) dist=1.05m angle_to_wp=104° angle_err=151°
+Path received from motion_planner: 54 waypoints. Following now.
+[steer] robot=(-4.25,2.12) yaw=4° -> target=(-4.54,3.26) dist=1.17m angle_to_wp=104° angle_err=100°
+🎯 Goal received from RViz: (-3.84, -0.78) — waiting for motion_planner to re-plan.
+🎯 Goal received from RViz: (-3.84, -0.78) — waiting for motion_planner to re-plan.
+🎯 Goal received from RViz: (-3.84, -0.78) — waiting for motion_planner to re-plan.
+[steer] robot=(-4.20,2.13) yaw=53° -> target=(-4.54,3.26) dist=1.18m angle_to_wp=107° angle_err=54°
+Path received from motion_planner: 12 waypoints. Following now.
+Waypoint 1/12 reached.
+[steer] robot=(-4.15,2.13) yaw=102° -> target=(-4.48,1.84) dist=0.44m angle_to_wp=-139° angle_err=119°
+[steer] robot=(-4.10,2.13) yaw=148° -> target=(-4.48,1.84) dist=0.48m angle_to_wp=-142° angle_err=69°
+[steer] robot=(-4.05,2.14) yaw=-167° -> target=(-4.48,1.84) dist=0.52m angle_to_wp=-145° angle_err=22°
+[steer] robot=(-4.23,2.02) yaw=-148° -> target=(-4.48,1.84) dist=0.31m angle_to_wp=-144° angle_err=5°
+Waypoint 10/12 reached.
+[steer] robot=(-4.24,1.99) yaw=-112° -> target=(-4.34,-0.90) dist=2.89m angle_to_wp=-92° angle_err=20°
+[steer] robot=(-4.24,1.76) yaw=-96° -> target=(-4.34,-0.90) dist=2.66m angle_to_wp=-92° angle_err=4°
+[steer] robot=(-4.23,1.43) yaw=-93° -> target=(-4.34,-0.90) dist=2.34m angle_to_wp=-93° angle_err=0°
+[steer] robot=(-4.20,1.13) yaw=-93° -> target=(-4.34,-0.90) dist=2.03m angle_to_wp=-94° angle_err=-1°
+[steer] robot=(-4.19,0.82) yaw=-94° -> target=(-4.34,-0.90) dist=1.73m angle_to_wp=-95° angle_err=-1°
+[steer] robot=(-4.18,0.48) yaw=-96° -> target=(-4.34,-0.90) dist=1.39m angle_to_wp=-97° angle_err=-1°
+[steer] robot=(-4.18,0.19) yaw=-97° -> target=(-4.34,-0.90) dist=1.10m angle_to_wp=-98° angle_err=-1°
+[steer] robot=(-4.19,-0.14) yaw=-100° -> target=(-4.34,-0.90) dist=0.77m angle_to_wp=-101° angle_err=-1°
+[steer] robot=(-4.22,-0.47) yaw=-103° -> target=(-4.34,-0.90) dist=0.45m angle_to_wp=-106° angle_err=-3°
+Path received from motion_planner: 6 waypoints. Following now.
+Waypoint 1/6 reached.
+[steer] robot=(-4.18,-0.51) yaw=-66° -> target=(-3.96,-0.78) dist=0.35m angle_to_wp=-50° angle_err=16°
+[steer] robot=(-4.03,-0.67) yaw=-54° -> target=(-3.96,-0.78) dist=0.13m angle_to_wp=-56° angle_err=-2°
+Waypoint 6/6 reached.
+GOAL REACHED! Robot stopped at (-4.01,-0.70).
+Traceback (most recent call last):
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/robo_project/runner_node", line 33, in <module>
+    sys.exit(load_entry_point('robo-project==0.1.0', 'console_scripts', 'runner_node')())
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/ros/runner_node.py", line 518, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241
+[ros2run]: Process exited with failure 1

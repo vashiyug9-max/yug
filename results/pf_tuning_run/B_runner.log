@@ -1,0 +1,45 @@
+
+==================================================
+🚀 RUNNER NODE INITIALIZING (NO ML / NO LOCALIZATION)...
+==================================================
+
+⏳ Loading map in the background...
+[INFO] [1794425171.004626970] [robo_project]: ✅ SUCCESS: Resized and loaded raw physical sketch from /home/yug/robo_project_ws/robo_project_ws/src/resources/sketch_map_imr_lab8.jpeg
+✅ BACKGROUND LOAD COMPLETE! Map is now actively broadcasting.
+🗺️ MAP BROADCAST SUCCESSFUL! Check RViz now.
+🎯 Goal received from RViz: (-3.84, -0.78) — waiting for motion_planner to re-plan.
+🎯 Goal received from RViz: (-3.84, -0.78) — waiting for motion_planner to re-plan.
+🎯 Goal received from RViz: (-3.84, -0.78) — waiting for motion_planner to re-plan.
+Path received from motion_planner: 69 waypoints. Following now.
+Waypoint 1/69 reached.
+[steer] robot=(-4.29,2.12) yaw=-47° -> target=(-3.82,2.16) dist=0.47m angle_to_wp=5° angle_err=52°
+Path received from motion_planner: 6 waypoints. Following now.
+Path received from motion_planner: 3 waypoints. Following now.
+[steer] robot=(-4.29,2.12) yaw=-76° -> target=(-4.50,0.40) dist=1.73m angle_to_wp=-97° angle_err=-21°
+Path received from motion_planner: 4 waypoints. Following now.
+Waypoint 1/4 reached.
+[steer] robot=(-4.29,1.82) yaw=-95° -> target=(-4.48,0.76) dist=1.08m angle_to_wp=-100° angle_err=-5°
+[steer] robot=(-4.33,1.53) yaw=-100° -> target=(-4.48,0.76) dist=0.79m angle_to_wp=-101° angle_err=-1°
+[steer] robot=(-4.38,1.23) yaw=-101° -> target=(-4.48,0.76) dist=0.48m angle_to_wp=-102° angle_err=-0°
+Waypoint 3/4 reached.
+[steer] robot=(-4.44,0.91) yaw=-98° -> target=(-4.52,-0.80) dist=1.71m angle_to_wp=-93° angle_err=6°
+[steer] robot=(-4.47,0.62) yaw=-93° -> target=(-4.52,-0.80) dist=1.42m angle_to_wp=-92° angle_err=1°
+[steer] robot=(-4.49,0.28) yaw=-92° -> target=(-4.52,-0.80) dist=1.09m angle_to_wp=-92° angle_err=0°
+[steer] robot=(-4.50,-0.04) yaw=-92° -> target=(-4.52,-0.80) dist=0.76m angle_to_wp=-92° angle_err=0°
+[steer] robot=(-4.51,-0.35) yaw=-92° -> target=(-4.52,-0.80) dist=0.45m angle_to_wp=-92° angle_err=0°
+[steer] robot=(-4.52,-0.64) yaw=-92° -> target=(-4.52,-0.80) dist=0.16m angle_to_wp=-92° angle_err=0°
+Waypoint 4/4 reached.
+GOAL REACHED! Robot stopped at (-4.52,-0.71).
+Traceback (most recent call last):
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/robo_project/runner_node", line 33, in <module>
+    sys.exit(load_entry_point('robo-project==0.1.0', 'console_scripts', 'runner_node')())
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/ros/runner_node.py", line 502, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241
+[ros2run]: Process exited with failure 1

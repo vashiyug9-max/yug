@@ -1,0 +1,830 @@
+[INFO] [1794432160.779962220] [motion_planner]: motion_planner started. Waiting for /map and /odom...
+[INFO] [1794432160.780403132] [motion_planner]: Goal: x=0.0m, y=0.0m
+[INFO] [1794432160.852865287] [motion_planner]: Map received: 768x1024 res=0.019999999552965164m origin=(-7.68,-10.24)
+[INFO] [1794432160.938187233] [motion_planner]: Start: world=(-4.10,4.90) -> pixel=(757,178) value=0
+[INFO] [1794432160.938539544] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[INFO] [1794432161.300623674] [motion_planner]: Path found: 363 cells, smoothed to 26 waypoints in 343 ms (7392 ML obstacle cells on the map)
+[INFO] [1794432161.301646348] [motion_planner]: Path published on /planned_path with 26 waypoints.
+[WARN] [1794432161.651243573] [motion_planner]: ML model: obstacle on the path at (-2.97,5.40). Re-planning.
+[INFO] [1794432161.738304084] [motion_planner]: Start: world=(-4.09,4.90) -> pixel=(756,179) value=0
+[INFO] [1794432161.738701386] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[INFO] [1794432161.799936152] [motion_planner]: Path found: 362 cells, smoothed to 26 waypoints in 48 ms (8704 ML obstacle cells on the map)
+[INFO] [1794432161.801381734] [motion_planner]: Path published on /planned_path with 26 waypoints.
+[WARN] [1794432162.255048253] [motion_planner]: ML model: obstacle on the path at (-2.69,5.34). Re-planning.
+[INFO] [1794432162.342718600] [motion_planner]: Start: world=(-3.93,4.95) -> pixel=(759,187) value=0
+[INFO] [1794432162.343232304] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[INFO] [1794432162.424061909] [motion_planner]: Path found: 357 cells, smoothed to 22 waypoints in 59 ms (10099 ML obstacle cells on the map)
+[INFO] [1794432162.425019235] [motion_planner]: Path published on /planned_path with 22 waypoints.
+[WARN] [1794432163.489807351] [motion_planner]: ML model: obstacle on the path at (-1.34,4.50). Re-planning.
+[INFO] [1794432163.538396141] [motion_planner]: Start: world=(-3.62,5.15) -> pixel=(769,203) value=0
+[INFO] [1794432163.539228390] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[INFO] [1794432163.620693116] [motion_planner]: Path found: 347 cells, smoothed to 26 waypoints in 58 ms (11299 ML obstacle cells on the map)
+[INFO] [1794432163.621754640] [motion_planner]: Path published on /planned_path with 26 waypoints.
+[WARN] [1794432164.410983434] [motion_planner]: ML model: obstacle on the path at (-1.08,4.36). Re-planning.
+[INFO] [1794432164.538147848] [motion_planner]: Start: world=(-3.39,5.29) -> pixel=(776,214) value=0
+[INFO] [1794432164.538580276] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[INFO] [1794432164.598364934] [motion_planner]: Path found: 337 cells, smoothed to 26 waypoints in 46 ms (12687 ML obstacle cells on the map)
+[INFO] [1794432164.603112161] [motion_planner]: Path published on /planned_path with 26 waypoints.
+[WARN] [1794432165.111659748] [motion_planner]: ML model: obstacle on the path at (-2.87,5.33). Re-planning.
+[INFO] [1794432165.138187042] [motion_planner]: Start: world=(-3.26,5.33) -> pixel=(778,221) value=0
+[INFO] [1794432165.138538848] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[WARN] [1794432165.194704914] [motion_planner]: Robot at (-3.26,5.33) is within 0.35 m of a wall: leaving straight to (-2.80,5.30) first.
+[INFO] [1794432165.195985437] [motion_planner]: Path found: 310 cells, smoothed to 20 waypoints in 44 ms (13462 ML obstacle cells on the map)
+[INFO] [1794432165.197442681] [motion_planner]: Path published on /planned_path with 20 waypoints.
+[WARN] [1794432166.191386261] [motion_planner]: ML model: obstacle on the path at (-0.86,4.23). Re-planning.
+[INFO] [1794432166.338952922] [motion_planner]: Start: world=(-2.90,5.31) -> pixel=(777,238) value=0
+[INFO] [1794432166.339559164] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[INFO] [1794432166.407973770] [motion_planner]: Path found: 316 cells, smoothed to 21 waypoints in 44 ms (14811 ML obstacle cells on the map)
+[INFO] [1794432166.408928042] [motion_planner]: Path published on /planned_path with 21 waypoints.
+[WARN] [1794432166.966778076] [motion_planner]: ML model: obstacle on the path at (-1.06,4.42). Re-planning.
+[INFO] [1794432167.138360106] [motion_planner]: Start: world=(-2.63,5.26) -> pixel=(774,252) value=0
+[INFO] [1794432167.138798577] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[INFO] [1794432167.188097794] [motion_planner]: Path found: 304 cells, smoothed to 19 waypoints in 35 ms (15954 ML obstacle cells on the map)
+[INFO] [1794432167.190577103] [motion_planner]: Path published on /planned_path with 19 waypoints.
+[WARN] [1794432167.792378708] [motion_planner]: ML model: obstacle on the path at (-0.94,4.36). Re-planning.
+[INFO] [1794432167.938202104] [motion_planner]: Start: world=(-2.37,5.18) -> pixel=(771,265) value=0
+[INFO] [1794432167.938546706] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[INFO] [1794432168.005571575] [motion_planner]: Path found: 292 cells, smoothed to 32 waypoints in 50 ms (17394 ML obstacle cells on the map)
+[INFO] [1794432168.007154843] [motion_planner]: Path published on /planned_path with 32 waypoints.
+[WARN] [1794432168.517046017] [motion_planner]: ML model: obstacle on the path at (-1.01,4.42). Re-planning.
+[INFO] [1794432168.538698189] [motion_planner]: Start: world=(-2.18,5.11) -> pixel=(767,274) value=0
+[INFO] [1794432168.539392182] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[WARN] [1794432168.609931309] [motion_planner]: Robot at (-2.18,5.11) is within 0.35 m of a wall: leaving straight to (-1.78,4.92) first.
+[INFO] [1794432168.611825783] [motion_planner]: Path found: 264 cells, smoothed to 30 waypoints in 51 ms (18404 ML obstacle cells on the map)
+[INFO] [1794432168.612844793] [motion_planner]: Path published on /planned_path with 30 waypoints.
+[WARN] [1794432169.110853704] [motion_planner]: ML model: obstacle on the path at (-0.80,4.28). Re-planning.
+[INFO] [1794432169.138368826] [motion_planner]: Start: world=(-2.00,5.03) -> pixel=(763,283) value=0
+[INFO] [1794432169.138872191] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[INFO] [1794432169.193316070] [motion_planner]: Path found: 277 cells, smoothed to 29 waypoints in 39 ms (19497 ML obstacle cells on the map)
+[INFO] [1794432169.194382807] [motion_planner]: Path published on /planned_path with 29 waypoints.
+[WARN] [1794432169.660520526] [motion_planner]: ML model: obstacle on the path at (-0.60,3.95). Re-planning.
+[INFO] [1794432169.738291732] [motion_planner]: Start: world=(-1.82,4.92) -> pixel=(758,293) value=0
+[INFO] [1794432169.738641029] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[INFO] [1794432169.798221125] [motion_planner]: Path found: 267 cells, smoothed to 26 waypoints in 44 ms (20505 ML obstacle cells on the map)
+[INFO] [1794432169.799691899] [motion_planner]: Path published on /planned_path with 26 waypoints.
+[WARN] [1794432170.357023480] [motion_planner]: ML model: obstacle on the path at (-0.63,4.09). Re-planning.
+[INFO] [1794432170.538317839] [motion_planner]: Start: world=(-1.60,4.77) -> pixel=(750,304) value=0
+[INFO] [1794432170.538770349] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[INFO] [1794432170.586808300] [motion_planner]: Path found: 255 cells, smoothed to 23 waypoints in 34 ms (21547 ML obstacle cells on the map)
+[INFO] [1794432170.589154672] [motion_planner]: Path published on /planned_path with 23 waypoints.
+[WARN] [1794432171.084876519] [motion_planner]: ML model: obstacle on the path at (-0.56,3.97). Re-planning.
+[INFO] [1794432171.138298249] [motion_planner]: Start: world=(-1.42,4.65) -> pixel=(744,312) value=0
+[INFO] [1794432171.138673045] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[INFO] [1794432171.183854516] [motion_planner]: Path found: 247 cells, smoothed to 16 waypoints in 31 ms (22272 ML obstacle cells on the map)
+[INFO] [1794432171.184847714] [motion_planner]: Path published on /planned_path with 16 waypoints.
+[WARN] [1794432173.370348312] [motion_planner]: ML model: obstacle on the path at (-0.56,3.92). Re-planning.
+[INFO] [1794432173.538313011] [motion_planner]: Start: world=(-0.76,4.19) -> pixel=(721,346) value=0
+[INFO] [1794432173.538719085] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[INFO] [1794432173.589056627] [motion_planner]: Path found: 210 cells, smoothed to 4 waypoints in 37 ms (24558 ML obstacle cells on the map)
+[INFO] [1794432173.590067352] [motion_planner]: Path published on /planned_path with 4 waypoints.
+[INFO] [1794432188.059446558] [motion_planner]: New goal from RViz: x=4.38m, y=-3.89m. Re-planning.
+[INFO] [1794432188.060656250] [motion_planner]: New goal from RViz: x=4.38m, y=-3.89m. Re-planning.
+[INFO] [1794432188.061741052] [motion_planner]: New goal from RViz: x=4.38m, y=-3.89m. Re-planning.
+[INFO] [1794432188.142040140] [motion_planner]: Start: world=(0.02,0.09) -> pixel=(516,384) value=0
+[INFO] [1794432188.142349303] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[WARN] [1794432188.179218974] [motion_planner]: Goal (4.38,-3.90) is only 0.54 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.40,-3.52) instead (0.38 m away, 0.64 m of room).
+[WARN] [1794432188.217859671] [motion_planner]: Path crosses 0.58 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794432188.219927249] [motion_planner]: Path found: 273 cells, smoothed to 8 waypoints in 65 ms (37182 ML obstacle cells on the map)
+[INFO] [1794432188.220721164] [motion_planner]: Path published on /planned_path with 8 waypoints.
+[WARN] [1794432188.732156982] [motion_planner]: ML model: obstacle on the path at (2.66,-3.24). Re-planning.
+[INFO] [1794432188.738071594] [motion_planner]: Start: world=(0.01,0.10) -> pixel=(517,384) value=0
+[INFO] [1794432188.738413121] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[WARN] [1794432188.829283117] [motion_planner]: Path crosses 0.48 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794432188.832135714] [motion_planner]: Path found: 270 cells, smoothed to 8 waypoints in 79 ms (37163 ML obstacle cells on the map)
+[INFO] [1794432188.833489428] [motion_planner]: Path published on /planned_path with 8 waypoints.
+[WARN] [1794432192.023062954] [motion_planner]: ML model: obstacle on the path at (2.28,-3.12). Re-planning.
+[INFO] [1794432192.138041140] [motion_planner]: Start: world=(0.48,-0.77) -> pixel=(473,407) value=0
+[INFO] [1794432192.138380546] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[INFO] [1794432192.224392885] [motion_planner]: Path found: 226 cells, smoothed to 7 waypoints in 64 ms (36836 ML obstacle cells on the map)
+[INFO] [1794432192.225362853] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794432192.719962199] [motion_planner]: ML model: obstacle on the path at (2.12,-3.00). Re-planning.
+[INFO] [1794432192.738771890] [motion_planner]: Start: world=(0.56,-0.93) -> pixel=(465,412) value=0
+[INFO] [1794432192.739196273] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[INFO] [1794432192.825785414] [motion_planner]: Path found: 220 cells, smoothed to 7 waypoints in 64 ms (36633 ML obstacle cells on the map)
+[INFO] [1794432192.827051151] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794432193.321100145] [motion_planner]: ML model: obstacle on the path at (2.08,-3.00). Re-planning.
+[INFO] [1794432193.345201483] [motion_planner]: Start: world=(0.66,-1.09) -> pixel=(457,416) value=0
+[INFO] [1794432193.345671374] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[INFO] [1794432193.415312705] [motion_planner]: Path found: 214 cells, smoothed to 7 waypoints in 47 ms (36210 ML obstacle cells on the map)
+[INFO] [1794432193.416049566] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794432194.140805759] [motion_planner]: ML model: obstacle on the path at (2.02,-2.97). Re-planning.
+[INFO] [1794432194.141472572] [motion_planner]: Start: world=(0.77,-1.30) -> pixel=(447,422) value=0
+[INFO] [1794432194.141743717] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[INFO] [1794432194.199221250] [motion_planner]: Path found: 209 cells, smoothed to 9 waypoints in 45 ms (36826 ML obstacle cells on the map)
+[INFO] [1794432194.200492747] [motion_planner]: Path published on /planned_path with 9 waypoints.
+[WARN] [1794432194.839333531] [motion_planner]: ML model: obstacle on the path at (2.02,-3.08). Re-planning.
+[INFO] [1794432194.938721581] [motion_planner]: Start: world=(0.90,-1.52) -> pixel=(436,429) value=0
+[INFO] [1794432194.939289565] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[INFO] [1794432194.989937986] [motion_planner]: Path found: 200 cells, smoothed to 9 waypoints in 36 ms (36714 ML obstacle cells on the map)
+[INFO] [1794432194.990705547] [motion_planner]: Path published on /planned_path with 9 waypoints.
+[WARN] [1794432195.575779854] [motion_planner]: ML model: obstacle on the path at (2.00,-3.10). Re-planning.
+[INFO] [1794432195.738401515] [motion_planner]: Start: world=(1.01,-1.73) -> pixel=(425,434) value=0
+[INFO] [1794432195.738925170] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[INFO] [1794432195.809622828] [motion_planner]: Path found: 191 cells, smoothed to 11 waypoints in 44 ms (36741 ML obstacle cells on the map)
+[INFO] [1794432195.810858338] [motion_planner]: Path published on /planned_path with 11 waypoints.
+[WARN] [1794432196.325341534] [motion_planner]: ML model: obstacle on the path at (1.98,-3.12). Re-planning.
+[INFO] [1794432196.348693959] [motion_planner]: Start: world=(1.10,-1.89) -> pixel=(417,438) value=0
+[INFO] [1794432196.349187866] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[INFO] [1794432196.411393428] [motion_planner]: Path found: 185 cells, smoothed to 13 waypoints in 40 ms (36708 ML obstacle cells on the map)
+[INFO] [1794432196.412258519] [motion_planner]: Path published on /planned_path with 13 waypoints.
+[WARN] [1794432196.889540071] [motion_planner]: ML model: obstacle on the path at (1.86,-3.00). Re-planning.
+[INFO] [1794432196.938309674] [motion_planner]: Start: world=(1.19,-2.05) -> pixel=(409,443) value=0
+[INFO] [1794432196.938732542] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[WARN] [1794432196.988732398] [motion_planner]: Goal (4.38,-3.90) is only 0.64 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.22,-3.82) instead (0.18 m away, 0.80 m of room).
+[INFO] [1794432196.995873290] [motion_planner]: Path found: 173 cells, smoothed to 5 waypoints in 36 ms (37548 ML obstacle cells on the map)
+[INFO] [1794432196.996833830] [motion_planner]: Path published on /planned_path with 5 waypoints.
+[WARN] [1794432197.468977073] [motion_planner]: ML model: obstacle on the path at (1.86,-3.12). Re-planning.
+[INFO] [1794432197.538439247] [motion_planner]: Start: world=(1.27,-2.20) -> pixel=(402,447) value=0
+[INFO] [1794432197.539308017] [motion_planner]: Goal:  world=(4.38,-3.89) -> pixel=(317,603) value=0
+[INFO] [1794432197.596293653] [motion_planner]: Path found: 171 cells, smoothed to 6 waypoints in 38 ms (38000 ML obstacle cells on the map)
+[INFO] [1794432197.597016909] [motion_planner]: Path published on /planned_path with 6 waypoints.
+[INFO] [1794432211.485225990] [motion_planner]: New goal from RViz: x=5.00m, y=0.72m. Re-planning.
+[INFO] [1794432211.487252404] [motion_planner]: New goal from RViz: x=5.00m, y=0.72m. Re-planning.
+[INFO] [1794432211.488601258] [motion_planner]: New goal from RViz: x=5.00m, y=0.72m. Re-planning.
+[INFO] [1794432211.538096343] [motion_planner]: Start: world=(4.17,-3.73) -> pixel=(325,592) value=0
+[INFO] [1794432211.538433256] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794432211.581253733] [motion_planner]: Goal (5.00,0.72) is only 0.32 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.84,0.80) instead (0.18 m away, 0.48 m of room).
+[INFO] [1794432211.604182478] [motion_planner]: Path found: 369 cells, smoothed to 44 waypoints in 52 ms (48023 ML obstacle cells on the map)
+[INFO] [1794432211.605788475] [motion_planner]: Path published on /planned_path with 44 waypoints.
+[WARN] [1794432216.879347900] [motion_planner]: ML model: obstacle on the path at (1.93,-2.59). Re-planning.
+[INFO] [1794432216.938529314] [motion_planner]: Start: world=(3.49,-3.39) -> pixel=(342,558) value=0
+[INFO] [1794432216.938971465] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432217.024101337] [motion_planner]: Path found: 330 cells, smoothed to 59 waypoints in 62 ms (45896 ML obstacle cells on the map)
+[INFO] [1794432217.027043481] [motion_planner]: Path published on /planned_path with 59 waypoints.
+[WARN] [1794432217.467562858] [motion_planner]: ML model: obstacle on the path at (2.02,-2.76). Re-planning.
+[INFO] [1794432217.538246220] [motion_planner]: Start: world=(3.30,-3.31) -> pixel=(346,549) value=0
+[INFO] [1794432217.538646485] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432217.614359747] [motion_planner]: Path found: 323 cells, smoothed to 63 waypoints in 63 ms (43533 ML obstacle cells on the map)
+[INFO] [1794432217.616946759] [motion_planner]: Path published on /planned_path with 63 waypoints.
+[WARN] [1794432218.150410493] [motion_planner]: ML model: obstacle on the path at (1.86,-2.64). Re-planning.
+[INFO] [1794432218.151105267] [motion_planner]: Start: world=(3.12,-3.23) -> pixel=(350,540) value=0
+[INFO] [1794432218.151368867] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432218.238223605] [motion_planner]: Path found: 316 cells, smoothed to 63 waypoints in 73 ms (43753 ML obstacle cells on the map)
+[INFO] [1794432218.240889525] [motion_planner]: Path published on /planned_path with 63 waypoints.
+[WARN] [1794432218.725197689] [motion_planner]: ML model: obstacle on the path at (1.74,-2.38). Re-planning.
+[INFO] [1794432218.738415802] [motion_planner]: Start: world=(2.94,-3.14) -> pixel=(354,531) value=0
+[INFO] [1794432218.739041538] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432218.831603906] [motion_planner]: Path found: 307 cells, smoothed to 63 waypoints in 72 ms (42656 ML obstacle cells on the map)
+[INFO] [1794432218.834443624] [motion_planner]: Path published on /planned_path with 63 waypoints.
+[WARN] [1794432219.304726234] [motion_planner]: ML model: obstacle on the path at (1.70,-1.92). Re-planning.
+[INFO] [1794432219.338164127] [motion_planner]: Start: world=(2.76,-3.06) -> pixel=(358,521) value=0
+[INFO] [1794432219.338540248] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432219.405982832] [motion_planner]: Path found: 296 cells, smoothed to 66 waypoints in 41 ms (41107 ML obstacle cells on the map)
+[INFO] [1794432219.407712400] [motion_planner]: Path published on /planned_path with 66 waypoints.
+[WARN] [1794432219.960659482] [motion_planner]: ML model: obstacle on the path at (1.66,-1.80). Re-planning.
+[INFO] [1794432220.138355694] [motion_planner]: Start: world=(2.52,-2.95) -> pixel=(364,509) value=0
+[INFO] [1794432220.138772732] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432220.194800991] [motion_planner]: Path found: 283 cells, smoothed to 59 waypoints in 36 ms (41401 ML obstacle cells on the map)
+[INFO] [1794432220.197327086] [motion_planner]: Path published on /planned_path with 59 waypoints.
+[WARN] [1794432220.733932025] [motion_planner]: ML model: obstacle on the path at (1.64,-1.70). Re-planning.
+[INFO] [1794432220.737997500] [motion_planner]: Start: world=(2.34,-2.87) -> pixel=(368,500) value=0
+[INFO] [1794432220.738285239] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432220.819741063] [motion_planner]: Path found: 283 cells, smoothed to 42 waypoints in 60 ms (39863 ML obstacle cells on the map)
+[INFO] [1794432220.820986440] [motion_planner]: Path published on /planned_path with 42 waypoints.
+[WARN] [1794432221.300155640] [motion_planner]: ML model: obstacle on the path at (1.56,-0.98). Re-planning.
+[INFO] [1794432221.338949138] [motion_planner]: Start: world=(2.15,-2.80) -> pixel=(372,491) value=0
+[INFO] [1794432221.339460770] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432221.414974248] [motion_planner]: Path found: 283 cells, smoothed to 53 waypoints in 61 ms (37382 ML obstacle cells on the map)
+[INFO] [1794432221.417377636] [motion_planner]: Path published on /planned_path with 53 waypoints.
+[WARN] [1794432221.877916450] [motion_planner]: ML model: obstacle on the path at (1.48,-0.70). Re-planning.
+[INFO] [1794432221.938590478] [motion_planner]: Start: world=(1.97,-2.68) -> pixel=(377,482) value=0
+[INFO] [1794432221.939149002] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432221.993623724] [motion_planner]: Path found: 295 cells, smoothed to 23 waypoints in 41 ms (37692 ML obstacle cells on the map)
+[INFO] [1794432221.994607049] [motion_planner]: Path published on /planned_path with 23 waypoints.
+[WARN] [1794432222.496761469] [motion_planner]: ML model: obstacle on the path at (1.75,-2.25). Re-planning.
+[INFO] [1794432222.538224810] [motion_planner]: Start: world=(1.90,-2.63) -> pixel=(380,479) value=0
+[INFO] [1794432222.538708755] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432222.595540940] [motion_planner]: Path found: 291 cells, smoothed to 33 waypoints in 43 ms (36356 ML obstacle cells on the map)
+[INFO] [1794432222.596803974] [motion_planner]: Path published on /planned_path with 33 waypoints.
+[WARN] [1794432223.089697608] [motion_planner]: ML model: obstacle on the path at (1.42,-0.74). Re-planning.
+[INFO] [1794432223.138497576] [motion_planner]: Start: world=(1.79,-2.46) -> pixel=(388,473) value=0
+[INFO] [1794432223.139292820] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432223.203136516] [motion_planner]: Path found: 283 cells, smoothed to 24 waypoints in 47 ms (36906 ML obstacle cells on the map)
+[INFO] [1794432223.204469847] [motion_planner]: Path published on /planned_path with 24 waypoints.
+[WARN] [1794432223.702691741] [motion_planner]: ML model: obstacle on the path at (1.40,-1.08). Re-planning.
+[INFO] [1794432223.738287199] [motion_planner]: Start: world=(1.68,-2.27) -> pixel=(398,467) value=0
+[INFO] [1794432223.738660609] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432223.793330500] [motion_planner]: Path found: 283 cells, smoothed to 35 waypoints in 40 ms (36029 ML obstacle cells on the map)
+[INFO] [1794432223.794556442] [motion_planner]: Path published on /planned_path with 35 waypoints.
+[WARN] [1794432224.284348863] [motion_planner]: ML model: obstacle on the path at (1.32,-0.80). Re-planning.
+[INFO] [1794432224.338719763] [motion_planner]: Start: world=(1.60,-2.08) -> pixel=(407,464) value=0
+[INFO] [1794432224.339374790] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432224.399267813] [motion_planner]: Path found: 279 cells, smoothed to 23 waypoints in 37 ms (34675 ML obstacle cells on the map)
+[INFO] [1794432224.400306660] [motion_planner]: Path published on /planned_path with 23 waypoints.
+[WARN] [1794432224.900011184] [motion_planner]: ML model: obstacle on the path at (1.36,-1.14). Re-planning.
+[INFO] [1794432224.938543009] [motion_planner]: Start: world=(1.53,-1.88) -> pixel=(417,460) value=0
+[INFO] [1794432224.939209078] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432225.012579995] [motion_planner]: Path found: 272 cells, smoothed to 24 waypoints in 48 ms (35159 ML obstacle cells on the map)
+[INFO] [1794432225.013471786] [motion_planner]: Path published on /planned_path with 24 waypoints.
+[WARN] [1794432225.575930454] [motion_planner]: ML model: obstacle on the path at (1.24,-0.72). Re-planning.
+[INFO] [1794432225.738303112] [motion_planner]: Start: world=(1.44,-1.62) -> pixel=(430,456) value=100
+[INFO] [1794432225.739588256] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432225.794508643] [motion_planner]: Path found: 265 cells, smoothed to 24 waypoints in 35 ms (33830 ML obstacle cells on the map)
+[INFO] [1794432225.795490651] [motion_planner]: Path published on /planned_path with 24 waypoints.
+[WARN] [1794432226.338740726] [motion_planner]: ML model: obstacle on the path at (1.14,-0.46). Re-planning.
+[INFO] [1794432226.339411511] [motion_planner]: Start: world=(1.38,-1.43) -> pixel=(440,453) value=0
+[INFO] [1794432226.339717300] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432226.422715648] [motion_planner]: Path found: 260 cells, smoothed to 28 waypoints in 63 ms (33854 ML obstacle cells on the map)
+[INFO] [1794432226.424326683] [motion_planner]: Path published on /planned_path with 28 waypoints.
+[WARN] [1794432226.940638583] [motion_planner]: ML model: obstacle on the path at (1.10,-0.36). Re-planning.
+[INFO] [1794432226.941866030] [motion_planner]: Start: world=(1.31,-1.24) -> pixel=(450,449) value=0
+[INFO] [1794432226.942505406] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432227.022395564] [motion_planner]: Path found: 252 cells, smoothed to 27 waypoints in 59 ms (32287 ML obstacle cells on the map)
+[INFO] [1794432227.023405223] [motion_planner]: Path published on /planned_path with 27 waypoints.
+[WARN] [1794432227.536799652] [motion_planner]: ML model: obstacle on the path at (1.08,-0.32). Re-planning.
+[INFO] [1794432227.538273628] [motion_planner]: Start: world=(1.25,-1.05) -> pixel=(459,446) value=0
+[INFO] [1794432227.538787828] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432227.618492765] [motion_planner]: Path found: 246 cells, smoothed to 30 waypoints in 60 ms (30662 ML obstacle cells on the map)
+[INFO] [1794432227.620097919] [motion_planner]: Path published on /planned_path with 30 waypoints.
+[WARN] [1794432228.136260651] [motion_planner]: ML model: obstacle on the path at (1.31,0.30). Re-planning.
+[INFO] [1794432228.137977667] [motion_planner]: Start: world=(1.19,-0.87) -> pixel=(468,443) value=0
+[INFO] [1794432228.138296130] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432228.186754894] [motion_planner]: Path found: 238 cells, smoothed to 27 waypoints in 36 ms (30561 ML obstacle cells on the map)
+[INFO] [1794432228.188124252] [motion_planner]: Path published on /planned_path with 27 waypoints.
+[WARN] [1794432228.750928446] [motion_planner]: ML model: obstacle on the path at (1.06,-0.27). Re-planning.
+[INFO] [1794432228.938293709] [motion_planner]: Start: world=(1.10,-0.61) -> pixel=(481,438) value=0
+[INFO] [1794432228.938708699] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432228.990564473] [motion_planner]: Path found: 231 cells, smoothed to 31 waypoints in 32 ms (28852 ML obstacle cells on the map)
+[INFO] [1794432228.991676292] [motion_planner]: Path published on /planned_path with 31 waypoints.
+[WARN] [1794432229.475156083] [motion_planner]: ML model: obstacle on the path at (1.02,-0.04). Re-planning.
+[INFO] [1794432229.538380059] [motion_planner]: Start: world=(1.04,-0.42) -> pixel=(491,436) value=0
+[INFO] [1794432229.538878960] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794432229.648497858] [motion_planner]: Path crosses 0.88 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794432229.650252458] [motion_planner]: Path found: 230 cells, smoothed to 34 waypoints in 96 ms (28199 ML obstacle cells on the map)
+[INFO] [1794432229.651410336] [motion_planner]: Path published on /planned_path with 34 waypoints.
+[WARN] [1794432230.070360288] [motion_planner]: ML model: obstacle on the path at (1.07,0.15). Re-planning.
+[INFO] [1794432230.138252892] [motion_planner]: Start: world=(0.99,-0.23) -> pixel=(500,433) value=0
+[INFO] [1794432230.138634392] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794432230.238175927] [motion_planner]: Path crosses 0.78 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794432230.240186773] [motion_planner]: Path found: 221 cells, smoothed to 10 waypoints in 89 ms (28692 ML obstacle cells on the map)
+[INFO] [1794432230.242231544] [motion_planner]: Path published on /planned_path with 10 waypoints.
+[WARN] [1794432230.654342453] [motion_planner]: ML model: obstacle on the path at (1.22,0.24). Re-planning.
+[INFO] [1794432230.738620625] [motion_planner]: Start: world=(0.97,-0.07) -> pixel=(508,432) value=0
+[INFO] [1794432230.739048151] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794432230.849202334] [motion_planner]: Path crosses 0.66 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794432230.850654617] [motion_planner]: Path found: 210 cells, smoothed to 12 waypoints in 98 ms (27934 ML obstacle cells on the map)
+[INFO] [1794432230.852640223] [motion_planner]: Path published on /planned_path with 12 waypoints.
+[WARN] [1794432231.335583741] [motion_planner]: ML model: obstacle on the path at (1.26,0.31). Re-planning.
+[INFO] [1794432231.349940994] [motion_planner]: Start: world=(1.01,0.01) -> pixel=(512,434) value=0
+[INFO] [1794432231.350291691] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794432231.396685558] [motion_planner]: Goal (5.00,0.72) is only 0.32 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.86,0.86) instead (0.20 m away, 0.43 m of room).
+[WARN] [1794432231.417817915] [motion_planner]: Path crosses 0.18 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[WARN] [1794432231.419073889] [motion_planner]: Robot at (1.01,0.01) is within 0.35 m of a wall: leaving straight to (1.24,0.40) first.
+[INFO] [1794432231.420250201] [motion_planner]: Path found: 186 cells, smoothed to 13 waypoints in 55 ms (27791 ML obstacle cells on the map)
+[INFO] [1794432231.421278720] [motion_planner]: Path published on /planned_path with 13 waypoints.
+[WARN] [1794432231.919505140] [motion_planner]: ML model: obstacle on the path at (2.44,1.04). Re-planning.
+[INFO] [1794432231.938409821] [motion_planner]: Start: world=(1.09,0.15) -> pixel=(519,438) value=0
+[INFO] [1794432231.938887032] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794432232.056890954] [motion_planner]: Path crosses 1.44 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[WARN] [1794432232.058946973] [motion_planner]: Robot at (1.09,0.15) is within 0.35 m of a wall: leaving straight to (1.38,0.50) first.
+[INFO] [1794432232.061056185] [motion_planner]: Path found: 243 cells, smoothed to 9 waypoints in 108 ms (28607 ML obstacle cells on the map)
+[INFO] [1794432232.062141892] [motion_planner]: Path published on /planned_path with 9 waypoints.
+[WARN] [1794432232.482177295] [motion_planner]: ML model: obstacle on the path at (2.67,1.16). Re-planning.
+[INFO] [1794432232.538489638] [motion_planner]: Start: world=(1.19,0.29) -> pixel=(526,443) value=0
+[INFO] [1794432232.539095551] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794432232.591238036] [motion_planner]: Goal (5.00,0.72) is only 0.32 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.94,0.76) instead (0.07 m away, 0.38 m of room).
+[WARN] [1794432232.684860896] [motion_planner]: Path crosses 1.68 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[WARN] [1794432232.686821422] [motion_planner]: Robot at (1.19,0.29) is within 0.35 m of a wall: leaving straight to (1.50,0.62) first.
+[INFO] [1794432232.688200144] [motion_planner]: Path found: 249 cells, smoothed to 8 waypoints in 130 ms (28854 ML obstacle cells on the map)
+[INFO] [1794432232.689068878] [motion_planner]: Path published on /planned_path with 8 waypoints.
+[WARN] [1794432233.195573273] [motion_planner]: ML model: obstacle on the path at (5.35,1.55). Re-planning.
+[INFO] [1794432233.339356354] [motion_planner]: Start: world=(1.34,0.45) -> pixel=(534,451) value=0
+[INFO] [1794432233.339925075] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794432233.413918369] [motion_planner]: Goal (5.00,0.72) is only 0.32 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.96,0.72) instead (0.04 m away, 0.36 m of room).
+[WARN] [1794432233.493641047] [motion_planner]: Path crosses 1.48 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794432233.495215005] [motion_planner]: Path found: 254 cells, smoothed to 8 waypoints in 126 ms (29544 ML obstacle cells on the map)
+[INFO] [1794432233.496823992] [motion_planner]: Path published on /planned_path with 8 waypoints.
+[WARN] [1794432233.928516462] [motion_planner]: ML model: obstacle on the path at (4.94,1.58). Re-planning.
+[INFO] [1794432233.938158824] [motion_planner]: Start: world=(1.47,0.54) -> pixel=(539,457) value=0
+[INFO] [1794432233.938496819] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[WARN] [1794432234.078146644] [motion_planner]: Path crosses 1.54 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794432234.079969449] [motion_planner]: Path found: 257 cells, smoothed to 7 waypoints in 124 ms (30758 ML obstacle cells on the map)
+[INFO] [1794432234.081488707] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794432234.549730993] [motion_planner]: ML model: obstacle on the path at (5.16,1.60). Re-planning.
+[INFO] [1794432234.550394257] [motion_planner]: Start: world=(1.62,0.62) -> pixel=(542,464) value=0
+[INFO] [1794432234.550679635] [motion_planner]: Goal:  world=(5.00,0.72) -> pixel=(548,634) value=0
+[INFO] [1794432234.717620013] [motion_planner]: Path found: 144 cells, smoothed to 5 waypoints in 152 ms (31914 ML obstacle cells on the map)
+[INFO] [1794432234.718917363] [motion_planner]: Path published on /planned_path with 5 waypoints.
+[INFO] [1794432361.511322331] [motion_planner]: New goal from RViz: x=-3.74m, y=5.32m. Re-planning.
+[INFO] [1794432361.512809914] [motion_planner]: New goal from RViz: x=-3.74m, y=5.32m. Re-planning.
+[INFO] [1794432361.514892380] [motion_planner]: New goal from RViz: x=-3.74m, y=5.32m. Re-planning.
+[INFO] [1794432361.538289880] [motion_planner]: Start: world=(4.36,1.24) -> pixel=(573,602) value=0
+[INFO] [1794432361.538684488] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432361.611088592] [motion_planner]: Path found: 448 cells, smoothed to 44 waypoints in 54 ms (15158 ML obstacle cells on the map)
+[INFO] [1794432361.612266518] [motion_planner]: Path published on /planned_path with 44 waypoints.
+[WARN] [1794432363.276322058] [motion_planner]: ML model: obstacle on the path at (0.62,1.66). Re-planning.
+[INFO] [1794432363.338468202] [motion_planner]: Start: world=(4.35,1.16) -> pixel=(570,601) value=0
+[INFO] [1794432363.339138444] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432363.402716909] [motion_planner]: Path found: 454 cells, smoothed to 43 waypoints in 43 ms (22906 ML obstacle cells on the map)
+[INFO] [1794432363.404385415] [motion_planner]: Path published on /planned_path with 43 waypoints.
+[WARN] [1794432363.904082649] [motion_planner]: ML model: obstacle on the path at (0.25,1.98). Re-planning.
+[INFO] [1794432363.938157634] [motion_planner]: Start: world=(4.35,1.14) -> pixel=(568,601) value=0
+[INFO] [1794432363.938503007] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432364.023935738] [motion_planner]: Path found: 452 cells, smoothed to 43 waypoints in 67 ms (23897 ML obstacle cells on the map)
+[INFO] [1794432364.026046547] [motion_planner]: Path published on /planned_path with 43 waypoints.
+[WARN] [1794432364.528382690] [motion_planner]: ML model: obstacle on the path at (0.52,1.66). Re-planning.
+[INFO] [1794432364.538355174] [motion_planner]: Start: world=(4.34,1.11) -> pixel=(567,600) value=0
+[INFO] [1794432364.538774761] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432364.596238945] [motion_planner]: Path found: 471 cells, smoothed to 43 waypoints in 44 ms (24515 ML obstacle cells on the map)
+[INFO] [1794432364.597887073] [motion_planner]: Path published on /planned_path with 43 waypoints.
+[WARN] [1794432366.868789589] [motion_planner]: ML model: obstacle on the path at (-0.09,2.17). Re-planning.
+[INFO] [1794432366.938255269] [motion_planner]: Start: world=(3.74,1.00) -> pixel=(562,571) value=0
+[INFO] [1794432366.938647068] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432367.009841990] [motion_planner]: Path found: 431 cells, smoothed to 43 waypoints in 58 ms (26816 ML obstacle cells on the map)
+[INFO] [1794432367.011796452] [motion_planner]: Path published on /planned_path with 43 waypoints.
+[WARN] [1794432367.997931876] [motion_planner]: ML model: obstacle on the path at (2.54,1.15). Re-planning.
+[INFO] [1794432368.138493948] [motion_planner]: Start: world=(3.36,1.01) -> pixel=(562,551) value=0
+[INFO] [1794432368.139060259] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432368.215530240] [motion_planner]: Path found: 412 cells, smoothed to 43 waypoints in 51 ms (28296 ML obstacle cells on the map)
+[INFO] [1794432368.216764147] [motion_planner]: Path published on /planned_path with 43 waypoints.
+[WARN] [1794432369.403465968] [motion_planner]: ML model: obstacle on the path at (0.04,1.94). Re-planning.
+[INFO] [1794432369.538618426] [motion_planner]: Start: world=(2.90,1.03) -> pixel=(563,528) value=0
+[INFO] [1794432369.539085401] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432369.614226381] [motion_planner]: Path found: 392 cells, smoothed to 44 waypoints in 53 ms (29746 ML obstacle cells on the map)
+[INFO] [1794432369.615463389] [motion_planner]: Path published on /planned_path with 44 waypoints.
+[WARN] [1794432370.093043839] [motion_planner]: ML model: obstacle on the path at (0.21,1.81). Re-planning.
+[INFO] [1794432370.138358179] [motion_planner]: Start: world=(2.71,1.04) -> pixel=(564,519) value=0
+[INFO] [1794432370.138783314] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432370.217048916] [motion_planner]: Path found: 388 cells, smoothed to 44 waypoints in 57 ms (30226 ML obstacle cells on the map)
+[INFO] [1794432370.219026356] [motion_planner]: Path published on /planned_path with 44 waypoints.
+[WARN] [1794432370.728738625] [motion_planner]: ML model: obstacle on the path at (-0.04,1.86). Re-planning.
+[INFO] [1794432370.738051412] [motion_planner]: Start: world=(2.50,1.06) -> pixel=(565,508) value=0
+[INFO] [1794432370.738375776] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432370.797118625] [motion_planner]: Path found: 380 cells, smoothed to 43 waypoints in 46 ms (30812 ML obstacle cells on the map)
+[INFO] [1794432370.799572132] [motion_planner]: Path published on /planned_path with 43 waypoints.
+[WARN] [1794432371.809874220] [motion_planner]: ML model: obstacle on the path at (-0.18,1.94). Re-planning.
+[INFO] [1794432371.938355359] [motion_planner]: Start: world=(2.14,1.14) -> pixel=(569,490) value=0
+[INFO] [1794432371.938905593] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432372.014976305] [motion_planner]: Path found: 364 cells, smoothed to 45 waypoints in 54 ms (32075 ML obstacle cells on the map)
+[INFO] [1794432372.016972408] [motion_planner]: Path published on /planned_path with 45 waypoints.
+[WARN] [1794432372.474147556] [motion_planner]: ML model: obstacle on the path at (-0.30,2.10). Re-planning.
+[INFO] [1794432372.538249901] [motion_planner]: Start: world=(1.97,1.20) -> pixel=(572,482) value=0
+[INFO] [1794432372.538663414] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432372.606946928] [motion_planner]: Path found: 357 cells, smoothed to 47 waypoints in 46 ms (32571 ML obstacle cells on the map)
+[INFO] [1794432372.608191200] [motion_planner]: Path published on /planned_path with 47 waypoints.
+[WARN] [1794432376.015100809] [motion_planner]: ML model: obstacle on the path at (-0.32,2.30). Re-planning.
+[INFO] [1794432376.138457150] [motion_planner]: Start: world=(0.97,1.60) -> pixel=(592,432) value=0
+[INFO] [1794432376.139026461] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432376.207215099] [motion_planner]: Path found: 286 cells, smoothed to 15 waypoints in 48 ms (36643 ML obstacle cells on the map)
+[INFO] [1794432376.208376541] [motion_planner]: Path published on /planned_path with 15 waypoints.
+[WARN] [1794432376.716766079] [motion_planner]: ML model: obstacle on the path at (-1.56,3.42). Re-planning.
+[INFO] [1794432376.738769373] [motion_planner]: Start: world=(0.81,1.66) -> pixel=(595,424) value=0
+[INFO] [1794432376.739501374] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432376.821412202] [motion_planner]: Path found: 277 cells, smoothed to 10 waypoints in 60 ms (37000 ML obstacle cells on the map)
+[INFO] [1794432376.822149537] [motion_planner]: Path published on /planned_path with 10 waypoints.
+[WARN] [1794432377.292663277] [motion_planner]: ML model: obstacle on the path at (-1.51,3.35). Re-planning.
+[INFO] [1794432377.338259014] [motion_planner]: Start: world=(0.64,1.71) -> pixel=(597,415) value=0
+[INFO] [1794432377.338772929] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432377.394096768] [motion_planner]: Path found: 273 cells, smoothed to 10 waypoints in 42 ms (36918 ML obstacle cells on the map)
+[INFO] [1794432377.394867446] [motion_planner]: Path published on /planned_path with 10 waypoints.
+[WARN] [1794432377.871696485] [motion_planner]: ML model: obstacle on the path at (-1.46,4.13). Re-planning.
+[INFO] [1794432377.938318347] [motion_planner]: Start: world=(0.48,1.77) -> pixel=(600,408) value=0
+[INFO] [1794432377.938799140] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432377.993187510] [motion_planner]: Path found: 267 cells, smoothed to 9 waypoints in 39 ms (37379 ML obstacle cells on the map)
+[INFO] [1794432377.993978590] [motion_planner]: Path published on /planned_path with 9 waypoints.
+[WARN] [1794432378.571722326] [motion_planner]: ML model: obstacle on the path at (-1.46,3.58). Re-planning.
+[INFO] [1794432378.738672568] [motion_planner]: Start: world=(0.28,1.86) -> pixel=(604,398) value=0
+[INFO] [1794432378.739253059] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432378.792553830] [motion_planner]: Path found: 258 cells, smoothed to 10 waypoints in 38 ms (37576 ML obstacle cells on the map)
+[INFO] [1794432378.793339867] [motion_planner]: Path published on /planned_path with 10 waypoints.
+[WARN] [1794432379.273260293] [motion_planner]: ML model: obstacle on the path at (-0.13,2.18). Re-planning.
+[INFO] [1794432379.338929859] [motion_planner]: Start: world=(0.14,1.92) -> pixel=(608,391) value=0
+[INFO] [1794432379.339903411] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432379.394836870] [motion_planner]: Path found: 251 cells, smoothed to 10 waypoints in 37 ms (37576 ML obstacle cells on the map)
+[INFO] [1794432379.395696496] [motion_planner]: Path published on /planned_path with 10 waypoints.
+[WARN] [1794432379.870456911] [motion_planner]: ML model: obstacle on the path at (-1.38,4.14). Re-planning.
+[INFO] [1794432379.938101349] [motion_planner]: Start: world=(0.02,2.04) -> pixel=(614,384) value=0
+[INFO] [1794432379.938608820] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432379.989766982] [motion_planner]: Path found: 246 cells, smoothed to 11 waypoints in 37 ms (38334 ML obstacle cells on the map)
+[INFO] [1794432379.990492773] [motion_planner]: Path published on /planned_path with 11 waypoints.
+[WARN] [1794432380.462793447] [motion_planner]: ML model: obstacle on the path at (-1.36,3.84). Re-planning.
+[INFO] [1794432380.538282658] [motion_planner]: Start: world=(-0.09,2.18) -> pixel=(620,379) value=0
+[INFO] [1794432380.538677115] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432380.584145740] [motion_planner]: Path found: 243 cells, smoothed to 11 waypoints in 33 ms (38715 ML obstacle cells on the map)
+[INFO] [1794432380.584969706] [motion_planner]: Path published on /planned_path with 11 waypoints.
+[WARN] [1794432381.178183100] [motion_planner]: ML model: obstacle on the path at (-1.29,4.02). Re-planning.
+[INFO] [1794432381.338834220] [motion_planner]: Start: world=(-0.25,2.36) -> pixel=(629,371) value=0
+[INFO] [1794432381.339386121] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794432381.387775325] [motion_planner]: Goal (-3.74,5.32) is only 0.75 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.74,5.38) instead (0.06 m away, 0.81 m of room).
+[INFO] [1794432381.397970454] [motion_planner]: Path found: 239 cells, smoothed to 9 waypoints in 38 ms (39141 ML obstacle cells on the map)
+[INFO] [1794432381.398741140] [motion_planner]: Path published on /planned_path with 9 waypoints.
+[WARN] [1794432381.978409965] [motion_planner]: ML model: obstacle on the path at (-1.24,4.51). Re-planning.
+[INFO] [1794432382.138518135] [motion_planner]: Start: world=(-0.35,2.55) -> pixel=(639,366) value=0
+[INFO] [1794432382.138942658] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794432382.206739331] [motion_planner]: Goal (-3.74,5.32) is only 0.64 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.90,5.40) instead (0.18 m away, 0.81 m of room).
+[WARN] [1794432382.242555078] [motion_planner]: Path crosses 0.50 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794432382.244882327] [motion_planner]: Path found: 251 cells, smoothed to 8 waypoints in 84 ms (40193 ML obstacle cells on the map)
+[INFO] [1794432382.246512555] [motion_planner]: Path published on /planned_path with 8 waypoints.
+[WARN] [1794432382.685667987] [motion_planner]: ML model: obstacle on the path at (-1.18,4.45). Re-planning.
+[INFO] [1794432382.738218295] [motion_planner]: Start: world=(-0.41,2.73) -> pixel=(648,363) value=0
+[INFO] [1794432382.738700550] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794432382.787258340] [motion_planner]: Goal (-3.74,5.32) is only 0.57 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.74,5.48) instead (0.16 m away, 0.73 m of room).
+[WARN] [1794432382.813878788] [motion_planner]: Path crosses 0.40 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794432382.815320192] [motion_planner]: Path found: 233 cells, smoothed to 10 waypoints in 63 ms (40667 ML obstacle cells on the map)
+[INFO] [1794432382.815962595] [motion_planner]: Path published on /planned_path with 10 waypoints.
+[WARN] [1794432383.272998708] [motion_planner]: ML model: obstacle on the path at (-1.14,4.46). Re-planning.
+[INFO] [1794432383.339320951] [motion_planner]: Start: world=(-0.47,2.90) -> pixel=(657,360) value=0
+[INFO] [1794432383.339998254] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794432383.409783500] [motion_planner]: Path crosses 0.40 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794432383.411619635] [motion_planner]: Path found: 224 cells, smoothed to 10 waypoints in 54 ms (40869 ML obstacle cells on the map)
+[INFO] [1794432383.412603312] [motion_planner]: Path published on /planned_path with 10 waypoints.
+[WARN] [1794432383.860948997] [motion_planner]: ML model: obstacle on the path at (-1.12,4.62). Re-planning.
+[INFO] [1794432383.938179352] [motion_planner]: Start: world=(-0.52,3.09) -> pixel=(666,357) value=0
+[INFO] [1794432383.938522317] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794432384.007884909] [motion_planner]: Path crosses 0.40 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794432384.009076856] [motion_planner]: Path found: 216 cells, smoothed to 10 waypoints in 58 ms (41327 ML obstacle cells on the map)
+[INFO] [1794432384.009961007] [motion_planner]: Path published on /planned_path with 10 waypoints.
+[WARN] [1794432384.539313840] [motion_planner]: ML model: obstacle on the path at (-1.10,4.61). Re-planning.
+[INFO] [1794432384.540037096] [motion_planner]: Start: world=(-0.57,3.27) -> pixel=(675,355) value=0
+[INFO] [1794432384.540304750] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794432384.612015804] [motion_planner]: Path crosses 0.40 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794432384.613253262] [motion_planner]: Path found: 207 cells, smoothed to 10 waypoints in 60 ms (41940 ML obstacle cells on the map)
+[INFO] [1794432384.614070554] [motion_planner]: Path published on /planned_path with 10 waypoints.
+[WARN] [1794432385.124690137] [motion_planner]: ML model: obstacle on the path at (-1.02,4.49). Re-planning.
+[INFO] [1794432385.138338272] [motion_planner]: Start: world=(-0.61,3.45) -> pixel=(684,353) value=0
+[INFO] [1794432385.138892389] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794432385.207936958] [motion_planner]: Path crosses 0.38 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794432385.209064133] [motion_planner]: Path found: 205 cells, smoothed to 11 waypoints in 56 ms (43022 ML obstacle cells on the map)
+[INFO] [1794432385.209912631] [motion_planner]: Path published on /planned_path with 11 waypoints.
+[WARN] [1794432385.751055188] [motion_planner]: ML model: obstacle on the path at (-0.98,4.64). Re-planning.
+[INFO] [1794432385.938424224] [motion_planner]: Start: world=(-0.67,3.68) -> pixel=(696,350) value=0
+[INFO] [1794432385.939226870] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794432385.995516349] [motion_planner]: Path crosses 0.34 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794432385.996480316] [motion_planner]: Path found: 199 cells, smoothed to 12 waypoints in 44 ms (44097 ML obstacle cells on the map)
+[INFO] [1794432385.997308177] [motion_planner]: Path published on /planned_path with 12 waypoints.
+[WARN] [1794432386.467545502] [motion_planner]: ML model: obstacle on the path at (-0.94,4.65). Re-planning.
+[INFO] [1794432386.538212936] [motion_planner]: Start: world=(-0.71,3.87) -> pixel=(705,348) value=0
+[INFO] [1794432386.538567401] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794432386.603723736] [motion_planner]: Path crosses 0.28 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794432386.604850409] [motion_planner]: Path found: 191 cells, smoothed to 14 waypoints in 47 ms (44675 ML obstacle cells on the map)
+[INFO] [1794432386.606035343] [motion_planner]: Path published on /planned_path with 14 waypoints.
+[WARN] [1794432387.079015108] [motion_planner]: ML model: obstacle on the path at (-0.92,4.67). Re-planning.
+[INFO] [1794432387.138316905] [motion_planner]: Start: world=(-0.74,4.06) -> pixel=(714,347) value=0
+[INFO] [1794432387.139639660] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432387.191798897] [motion_planner]: Path found: 183 cells, smoothed to 22 waypoints in 33 ms (45331 ML obstacle cells on the map)
+[INFO] [1794432387.192817792] [motion_planner]: Path published on /planned_path with 22 waypoints.
+[WARN] [1794432387.693274767] [motion_planner]: ML model: obstacle on the path at (-0.92,4.77). Re-planning.
+[INFO] [1794432387.738164039] [motion_planner]: Start: world=(-0.76,4.24) -> pixel=(724,345) value=0
+[INFO] [1794432387.738511155] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432387.801782561] [motion_planner]: Path found: 174 cells, smoothed to 22 waypoints in 45 ms (45632 ML obstacle cells on the map)
+[INFO] [1794432387.803360764] [motion_planner]: Path published on /planned_path with 22 waypoints.
+[WARN] [1794432388.279654163] [motion_planner]: ML model: obstacle on the path at (-0.92,4.79). Re-planning.
+[INFO] [1794432388.338696053] [motion_planner]: Start: world=(-0.80,4.43) -> pixel=(733,343) value=0
+[INFO] [1794432388.339258025] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794432388.402045717] [motion_planner]: Goal (-3.62,5.44) is only 0.37 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.44,5.60) instead (0.24 m away, 0.59 m of room).
+[INFO] [1794432388.412495142] [motion_planner]: Path found: 153 cells, smoothed to 22 waypoints in 53 ms (46124 ML obstacle cells on the map)
+[INFO] [1794432388.414448635] [motion_planner]: Path published on /planned_path with 22 waypoints.
+[WARN] [1794432388.949555864] [motion_planner]: ML model: obstacle on the path at (-0.97,4.98). Re-planning.
+[INFO] [1794432388.950826137] [motion_planner]: Start: world=(-0.82,4.61) -> pixel=(742,342) value=0
+[INFO] [1794432388.951382793] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[INFO] [1794432389.007314013] [motion_planner]: Path found: 146 cells, smoothed to 19 waypoints in 43 ms (46477 ML obstacle cells on the map)
+[INFO] [1794432389.008485095] [motion_planner]: Path published on /planned_path with 19 waypoints.
+[WARN] [1794432389.517534510] [motion_planner]: ML model: obstacle on the path at (-1.08,5.00). Re-planning.
+[INFO] [1794432389.538299732] [motion_planner]: Start: world=(-0.82,4.70) -> pixel=(747,343) value=0
+[INFO] [1794432389.538804046] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794432389.609230980] [motion_planner]: Goal (-3.80,5.38) is only 0.37 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-4.10,5.56) instead (0.35 m away, 0.65 m of room).
+[INFO] [1794432389.619305956] [motion_planner]: Path found: 175 cells, smoothed to 24 waypoints in 57 ms (46811 ML obstacle cells on the map)
+[INFO] [1794432389.621019335] [motion_planner]: Path published on /planned_path with 24 waypoints.
+[WARN] [1794432390.113236782] [motion_planner]: ML model: obstacle on the path at (-1.14,5.16). Re-planning.
+[INFO] [1794432390.138185750] [motion_planner]: Start: world=(-0.88,4.87) -> pixel=(755,340) value=0
+[INFO] [1794432390.139004707] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794432390.206983494] [motion_planner]: Robot at (-0.88,4.87) is within 0.35 m of a wall: leaving straight to (-1.14,5.24) first.
+[INFO] [1794432390.207834902] [motion_planner]: Path found: 151 cells, smoothed to 20 waypoints in 41 ms (47525 ML obstacle cells on the map)
+[INFO] [1794432390.208767690] [motion_planner]: Path published on /planned_path with 20 waypoints.
+[WARN] [1794432390.691398700] [motion_planner]: ML model: obstacle on the path at (-1.79,5.93). Re-planning.
+[INFO] [1794432390.738514304] [motion_planner]: Start: world=(-0.96,5.02) -> pixel=(763,336) value=0
+[INFO] [1794432390.739119400] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794432390.802766077] [motion_planner]: Robot at (-0.96,5.02) is within 0.35 m of a wall: leaving straight to (-1.24,5.40) first.
+[INFO] [1794432390.803655829] [motion_planner]: Path found: 144 cells, smoothed to 7 waypoints in 46 ms (47670 ML obstacle cells on the map)
+[INFO] [1794432390.804321254] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794432391.276028752] [motion_planner]: ML model: obstacle on the path at (-1.80,5.96). Re-planning.
+[INFO] [1794432391.338591637] [motion_planner]: Start: world=(-1.04,5.16) -> pixel=(769,331) value=0
+[INFO] [1794432391.339227370] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794432391.393970599] [motion_planner]: Goal (-3.82,5.40) is only 0.38 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.74,5.76) instead (0.37 m away, 0.71 m of room).
+[WARN] [1794432391.402537467] [motion_planner]: Robot at (-1.04,5.16) is within 0.35 m of a wall: leaving straight to (-1.34,5.50) first.
+[INFO] [1794432391.403853792] [motion_planner]: Path found: 122 cells, smoothed to 9 waypoints in 41 ms (47356 ML obstacle cells on the map)
+[INFO] [1794432391.405161758] [motion_planner]: Path published on /planned_path with 9 waypoints.
+[WARN] [1794432392.473994522] [motion_planner]: ML model: obstacle on the path at (-2.89,6.26). Re-planning.
+[INFO] [1794432392.538470857] [motion_planner]: Start: world=(-1.27,5.41) -> pixel=(782,320) value=0
+[INFO] [1794432392.538943343] [motion_planner]: Goal:  world=(-3.74,5.32) -> pixel=(778,197) value=0
+[WARN] [1794432392.586555855] [motion_planner]: Goal (-3.82,5.40) is only 0.38 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.94,5.80) instead (0.42 m away, 0.80 m of room).
+[INFO] [1794432392.592843255] [motion_planner]: Path found: 137 cells, smoothed to 7 waypoints in 34 ms (47314 ML obstacle cells on the map)
+[INFO] [1794432392.593557801] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[INFO] [1794432404.365430184] [motion_planner]: New goal from RViz: x=-3.33m, y=-4.04m. Re-planning.
+[INFO] [1794432404.367134569] [motion_planner]: New goal from RViz: x=-3.33m, y=-4.04m. Re-planning.
+[INFO] [1794432404.369490537] [motion_planner]: New goal from RViz: x=-3.33m, y=-4.04m. Re-planning.
+[INFO] [1794432404.538338884] [motion_planner]: Start: world=(-3.85,5.81) -> pixel=(802,191) value=0
+[INFO] [1794432404.538746090] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[WARN] [1794432404.575605948] [motion_planner]: Goal (-3.34,-4.04) is only 0.34 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.38,-3.58) instead (0.46 m away, 0.80 m of room).
+[INFO] [1794432404.611613005] [motion_planner]: Path found: 636 cells, smoothed to 33 waypoints in 60 ms (53332 ML obstacle cells on the map)
+[INFO] [1794432404.613445718] [motion_planner]: Path published on /planned_path with 33 waypoints.
+[WARN] [1794432405.072856182] [motion_planner]: ML model: obstacle on the path at (-2.38,5.79). Re-planning.
+[INFO] [1794432405.138171142] [motion_planner]: Start: world=(-3.85,5.79) -> pixel=(801,191) value=0
+[INFO] [1794432405.138591250] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432405.216811834] [motion_planner]: Path found: 636 cells, smoothed to 34 waypoints in 58 ms (53607 ML obstacle cells on the map)
+[INFO] [1794432405.218950027] [motion_planner]: Path published on /planned_path with 34 waypoints.
+[WARN] [1794432405.767948762] [motion_planner]: ML model: obstacle on the path at (-2.98,5.86). Re-planning.
+[INFO] [1794432405.938285995] [motion_planner]: Start: world=(-3.84,5.76) -> pixel=(799,192) value=0
+[INFO] [1794432405.938922148] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432406.019217606] [motion_planner]: Path found: 635 cells, smoothed to 34 waypoints in 67 ms (54849 ML obstacle cells on the map)
+[INFO] [1794432406.020374303] [motion_planner]: Path published on /planned_path with 34 waypoints.
+[WARN] [1794432406.583079503] [motion_planner]: ML model: obstacle on the path at (-2.13,5.76). Re-planning.
+[INFO] [1794432406.738651690] [motion_planner]: Start: world=(-3.83,5.72) -> pixel=(797,192) value=0
+[INFO] [1794432406.739182075] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432406.831086927] [motion_planner]: Path found: 635 cells, smoothed to 36 waypoints in 72 ms (55492 ML obstacle cells on the map)
+[INFO] [1794432406.832563481] [motion_planner]: Path published on /planned_path with 36 waypoints.
+[WARN] [1794432408.553432868] [motion_planner]: ML model: obstacle on the path at (-2.07,5.73). Re-planning.
+[INFO] [1794432408.738294473] [motion_planner]: Start: world=(-3.59,5.65) -> pixel=(794,204) value=0
+[INFO] [1794432408.738679005] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432408.811836034] [motion_planner]: Path found: 623 cells, smoothed to 33 waypoints in 60 ms (55839 ML obstacle cells on the map)
+[INFO] [1794432408.813280959] [motion_planner]: Path published on /planned_path with 33 waypoints.
+[WARN] [1794432409.253890488] [motion_planner]: ML model: obstacle on the path at (-1.91,5.66). Re-planning.
+[INFO] [1794432409.338445687] [motion_planner]: Start: world=(-3.40,5.68) -> pixel=(795,213) value=0
+[INFO] [1794432409.338919089] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432409.412423096] [motion_planner]: Path found: 617 cells, smoothed to 36 waypoints in 60 ms (56234 ML obstacle cells on the map)
+[INFO] [1794432409.414408102] [motion_planner]: Path published on /planned_path with 36 waypoints.
+[WARN] [1794432409.880722107] [motion_planner]: ML model: obstacle on the path at (-0.96,4.92). Re-planning.
+[INFO] [1794432409.938280117] [motion_planner]: Start: world=(-3.21,5.70) -> pixel=(796,223) value=0
+[INFO] [1794432409.938686207] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[WARN] [1794432410.000900239] [motion_planner]: Robot at (-3.21,5.70) is within 0.35 m of a wall: leaving straight to (-2.76,5.74) first.
+[INFO] [1794432410.002895424] [motion_planner]: Path found: 586 cells, smoothed to 26 waypoints in 51 ms (56036 ML obstacle cells on the map)
+[INFO] [1794432410.004075415] [motion_planner]: Path published on /planned_path with 26 waypoints.
+[WARN] [1794432410.461760226] [motion_planner]: ML model: obstacle on the path at (-0.71,4.67). Re-planning.
+[INFO] [1794432410.538271917] [motion_planner]: Start: world=(-3.03,5.71) -> pixel=(797,232) value=0
+[INFO] [1794432410.538606442] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[WARN] [1794432410.622060189] [motion_planner]: Robot at (-3.03,5.71) is within 0.35 m of a wall: leaving straight to (-2.58,5.66) first.
+[INFO] [1794432410.626619240] [motion_planner]: Path found: 576 cells, smoothed to 32 waypoints in 75 ms (55812 ML obstacle cells on the map)
+[INFO] [1794432410.628760812] [motion_planner]: Path published on /planned_path with 32 waypoints.
+[WARN] [1794432411.941371522] [motion_planner]: ML model: obstacle on the path at (-0.66,4.59). Re-planning.
+[INFO] [1794432411.942411743] [motion_planner]: Start: world=(-2.58,5.65) -> pixel=(794,255) value=0
+[INFO] [1794432411.942723106] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432412.024869931] [motion_planner]: Path found: 576 cells, smoothed to 29 waypoints in 63 ms (55900 ML obstacle cells on the map)
+[INFO] [1794432412.025900542] [motion_planner]: Path published on /planned_path with 29 waypoints.
+[WARN] [1794432412.529683092] [motion_planner]: ML model: obstacle on the path at (-0.64,4.55). Re-planning.
+[INFO] [1794432412.538141325] [motion_planner]: Start: world=(-2.37,5.62) -> pixel=(792,265) value=0
+[INFO] [1794432412.538448390] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432412.634286756] [motion_planner]: Path found: 566 cells, smoothed to 29 waypoints in 77 ms (55936 ML obstacle cells on the map)
+[INFO] [1794432412.635612490] [motion_planner]: Path published on /planned_path with 29 waypoints.
+[WARN] [1794432413.137457835] [motion_planner]: ML model: obstacle on the path at (-0.67,4.62). Re-planning.
+[INFO] [1794432413.138135710] [motion_planner]: Start: world=(-2.18,5.56) -> pixel=(789,274) value=0
+[INFO] [1794432413.138401555] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432413.233832196] [motion_planner]: Path found: 557 cells, smoothed to 29 waypoints in 79 ms (56496 ML obstacle cells on the map)
+[INFO] [1794432413.234892739] [motion_planner]: Path published on /planned_path with 29 waypoints.
+[WARN] [1794432413.716635454] [motion_planner]: ML model: obstacle on the path at (-0.65,4.59). Re-planning.
+[INFO] [1794432413.738560387] [motion_planner]: Start: world=(-1.99,5.48) -> pixel=(785,284) value=0
+[INFO] [1794432413.739126127] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432413.830578047] [motion_planner]: Path found: 546 cells, smoothed to 28 waypoints in 69 ms (56332 ML obstacle cells on the map)
+[INFO] [1794432413.832020314] [motion_planner]: Path published on /planned_path with 28 waypoints.
+[WARN] [1794432414.318780953] [motion_planner]: ML model: obstacle on the path at (-0.54,4.37). Re-planning.
+[INFO] [1794432414.338402504] [motion_planner]: Start: world=(-1.82,5.37) -> pixel=(780,292) value=0
+[INFO] [1794432414.339549621] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432414.428533536] [motion_planner]: Path found: 537 cells, smoothed to 28 waypoints in 67 ms (55817 ML obstacle cells on the map)
+[INFO] [1794432414.429542162] [motion_planner]: Path published on /planned_path with 28 waypoints.
+[WARN] [1794432414.913436894] [motion_planner]: ML model: obstacle on the path at (-0.55,4.45). Re-planning.
+[INFO] [1794432414.938234804] [motion_planner]: Start: world=(-1.66,5.26) -> pixel=(774,301) value=0
+[INFO] [1794432414.938621570] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432415.015385258] [motion_planner]: Path found: 528 cells, smoothed to 28 waypoints in 64 ms (56517 ML obstacle cells on the map)
+[INFO] [1794432415.017055668] [motion_planner]: Path published on /planned_path with 28 waypoints.
+[WARN] [1794432415.527366269] [motion_planner]: ML model: obstacle on the path at (-0.56,4.49). Re-planning.
+[INFO] [1794432415.540303419] [motion_planner]: Start: world=(-1.49,5.13) -> pixel=(768,309) value=0
+[INFO] [1794432415.540921254] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432415.628123591] [motion_planner]: Path found: 520 cells, smoothed to 27 waypoints in 64 ms (55854 ML obstacle cells on the map)
+[INFO] [1794432415.629177381] [motion_planner]: Path published on /planned_path with 27 waypoints.
+[WARN] [1794432416.477295270] [motion_planner]: ML model: obstacle on the path at (-0.46,3.63). Re-planning.
+[INFO] [1794432416.538919564] [motion_planner]: Start: world=(-1.22,4.95) -> pixel=(759,322) value=0
+[INFO] [1794432416.539685888] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432416.627842288] [motion_planner]: Path found: 505 cells, smoothed to 28 waypoints in 68 ms (53715 ML obstacle cells on the map)
+[INFO] [1794432416.630014858] [motion_planner]: Path published on /planned_path with 28 waypoints.
+[WARN] [1794432417.182574348] [motion_planner]: ML model: obstacle on the path at (-0.44,3.73). Re-planning.
+[INFO] [1794432417.338197031] [motion_planner]: Start: world=(-1.00,4.78) -> pixel=(750,334) value=0
+[INFO] [1794432417.338780619] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432417.409629155] [motion_planner]: Path found: 492 cells, smoothed to 29 waypoints in 52 ms (50353 ML obstacle cells on the map)
+[INFO] [1794432417.410714529] [motion_planner]: Path published on /planned_path with 29 waypoints.
+[WARN] [1794432417.913134235] [motion_planner]: ML model: obstacle on the path at (-0.44,3.77). Re-planning.
+[INFO] [1794432417.938663213] [motion_planner]: Start: world=(-0.85,4.67) -> pixel=(745,341) value=0
+[INFO] [1794432417.939168023] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432418.004477932] [motion_planner]: Path found: 483 cells, smoothed to 29 waypoints in 52 ms (51014 ML obstacle cells on the map)
+[INFO] [1794432418.005671223] [motion_planner]: Path published on /planned_path with 29 waypoints.
+[WARN] [1794432419.100201534] [motion_planner]: ML model: obstacle on the path at (-0.49,4.00). Re-planning.
+[INFO] [1794432419.138319766] [motion_planner]: Start: world=(-0.58,4.39) -> pixel=(731,355) value=0
+[INFO] [1794432419.138724800] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432419.211791529] [motion_planner]: Path found: 468 cells, smoothed to 28 waypoints in 50 ms (48727 ML obstacle cells on the map)
+[INFO] [1794432419.212823466] [motion_planner]: Path published on /planned_path with 28 waypoints.
+[WARN] [1794432419.678492125] [motion_planner]: ML model: obstacle on the path at (-0.46,3.89). Re-planning.
+[INFO] [1794432419.739026777] [motion_planner]: Start: world=(-0.52,4.25) -> pixel=(724,357) value=0
+[INFO] [1794432419.739546321] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[WARN] [1794432419.824727122] [motion_planner]: Robot at (-0.52,4.25) is within 0.35 m of a wall: leaving straight to (-0.46,3.78) first.
+[INFO] [1794432419.826872150] [motion_planner]: Path found: 437 cells, smoothed to 24 waypoints in 64 ms (47885 ML obstacle cells on the map)
+[INFO] [1794432419.828338723] [motion_planner]: Path published on /planned_path with 24 waypoints.
+[WARN] [1794432428.619049137] [motion_planner]: ML model: obstacle on the path at (-1.84,-3.01). Re-planning.
+[INFO] [1794432428.738068732] [motion_planner]: Start: world=(-0.40,1.14) -> pixel=(569,364) value=0
+[INFO] [1794432428.738472720] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432428.819918615] [motion_planner]: Path found: 290 cells, smoothed to 7 waypoints in 62 ms (41718 ML obstacle cells on the map)
+[INFO] [1794432428.820681327] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794432429.323205910] [motion_planner]: ML model: obstacle on the path at (-1.75,-2.99). Re-planning.
+[INFO] [1794432429.344597267] [motion_planner]: Start: world=(-0.40,0.94) -> pixel=(558,363) value=0
+[INFO] [1794432429.344979755] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432429.413660081] [motion_planner]: Path found: 285 cells, smoothed to 6 waypoints in 48 ms (41677 ML obstacle cells on the map)
+[INFO] [1794432429.414476396] [motion_planner]: Path published on /planned_path with 6 waypoints.
+[WARN] [1794432429.914812842] [motion_planner]: ML model: obstacle on the path at (-1.68,-2.89). Re-planning.
+[INFO] [1794432429.938378503] [motion_planner]: Start: world=(-0.43,0.73) -> pixel=(548,362) value=0
+[INFO] [1794432429.938812125] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432430.012244060] [motion_planner]: Path found: 281 cells, smoothed to 7 waypoints in 50 ms (42541 ML obstacle cells on the map)
+[INFO] [1794432430.013100720] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794432430.513703351] [motion_planner]: ML model: obstacle on the path at (-1.66,-2.98). Re-planning.
+[INFO] [1794432430.538507296] [motion_planner]: Start: world=(-0.48,0.54) -> pixel=(538,360) value=0
+[INFO] [1794432430.538958117] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432430.600529027] [motion_planner]: Path found: 272 cells, smoothed to 8 waypoints in 42 ms (42760 ML obstacle cells on the map)
+[INFO] [1794432430.601545934] [motion_planner]: Path published on /planned_path with 8 waypoints.
+[WARN] [1794432431.079808662] [motion_planner]: ML model: obstacle on the path at (-1.64,-3.03). Re-planning.
+[INFO] [1794432431.139274176] [motion_planner]: Start: world=(-0.52,0.34) -> pixel=(528,358) value=0
+[INFO] [1794432431.139894710] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432431.191446521] [motion_planner]: Path found: 265 cells, smoothed to 8 waypoints in 34 ms (43482 ML obstacle cells on the map)
+[INFO] [1794432431.192337865] [motion_planner]: Path published on /planned_path with 8 waypoints.
+[WARN] [1794432431.773929267] [motion_planner]: ML model: obstacle on the path at (-1.60,-3.00). Re-planning.
+[INFO] [1794432431.938150843] [motion_planner]: Start: world=(-0.58,0.08) -> pixel=(516,355) value=0
+[INFO] [1794432431.938528033] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432431.994690826] [motion_planner]: Path found: 256 cells, smoothed to 8 waypoints in 41 ms (43947 ML obstacle cells on the map)
+[INFO] [1794432431.995839786] [motion_planner]: Path published on /planned_path with 8 waypoints.
+[WARN] [1794432432.470459037] [motion_planner]: ML model: obstacle on the path at (-1.56,-3.05). Re-planning.
+[INFO] [1794432432.539100360] [motion_planner]: Start: world=(-0.61,-0.10) -> pixel=(506,353) value=0
+[INFO] [1794432432.539425884] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432432.588737753] [motion_planner]: Path found: 247 cells, smoothed to 8 waypoints in 36 ms (44195 ML obstacle cells on the map)
+[INFO] [1794432432.590565480] [motion_planner]: Path published on /planned_path with 8 waypoints.
+[WARN] [1794432433.175868551] [motion_planner]: ML model: obstacle on the path at (-1.40,-2.64). Re-planning.
+[INFO] [1794432433.338498386] [motion_planner]: Start: world=(-0.66,-0.36) -> pixel=(493,350) value=0
+[INFO] [1794432433.339046815] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[WARN] [1794432433.387048124] [motion_planner]: Goal (-3.34,-4.04) is only 0.34 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.44,-3.58) instead (0.47 m away, 0.82 m of room).
+[INFO] [1794432433.398810654] [motion_planner]: Path found: 242 cells, smoothed to 8 waypoints in 46 ms (44662 ML obstacle cells on the map)
+[INFO] [1794432433.400005715] [motion_planner]: Path published on /planned_path with 8 waypoints.
+[WARN] [1794432433.912294702] [motion_planner]: ML model: obstacle on the path at (-1.52,-3.14). Re-planning.
+[INFO] [1794432433.938255068] [motion_planner]: Start: world=(-0.71,-0.55) -> pixel=(484,348) value=0
+[INFO] [1794432433.938602268] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[WARN] [1794432433.998397500] [motion_planner]: Goal (-3.34,-4.04) is only 0.34 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-2.94,-3.76) instead (0.49 m away, 0.67 m of room).
+[INFO] [1794432434.006977783] [motion_planner]: Path found: 211 cells, smoothed to 7 waypoints in 51 ms (45424 ML obstacle cells on the map)
+[INFO] [1794432434.008134250] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794432434.491944808] [motion_planner]: ML model: obstacle on the path at (-1.48,-3.14). Re-planning.
+[INFO] [1794432434.538263044] [motion_planner]: Start: world=(-0.74,-0.74) -> pixel=(474,346) value=0
+[INFO] [1794432434.538768563] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432434.591447013] [motion_planner]: Path found: 202 cells, smoothed to 7 waypoints in 39 ms (45482 ML obstacle cells on the map)
+[INFO] [1794432434.592700187] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794432435.080041991] [motion_planner]: ML model: obstacle on the path at (-1.32,-2.69). Re-planning.
+[INFO] [1794432435.138345751] [motion_planner]: Start: world=(-0.78,-0.93) -> pixel=(465,345) value=0
+[INFO] [1794432435.138885933] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[WARN] [1794432435.183886381] [motion_planner]: Goal (-3.34,-4.04) is only 0.34 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-2.86,-3.92) instead (0.49 m away, 0.59 m of room).
+[INFO] [1794432435.191433983] [motion_planner]: Path found: 190 cells, smoothed to 7 waypoints in 34 ms (46198 ML obstacle cells on the map)
+[INFO] [1794432435.192216011] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794432435.671322894] [motion_planner]: ML model: obstacle on the path at (-1.30,-2.70). Re-planning.
+[INFO] [1794432435.738479823] [motion_planner]: Start: world=(-0.81,-1.11) -> pixel=(456,343) value=0
+[INFO] [1794432435.738995788] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432435.809261580] [motion_planner]: Path found: 186 cells, smoothed to 7 waypoints in 50 ms (46413 ML obstacle cells on the map)
+[INFO] [1794432435.810395428] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794432436.343815316] [motion_planner]: ML model: obstacle on the path at (-1.42,-3.25). Re-planning.
+[INFO] [1794432436.344545931] [motion_planner]: Start: world=(-0.85,-1.31) -> pixel=(446,341) value=0
+[INFO] [1794432436.344818098] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432436.397124929] [motion_planner]: Path found: 178 cells, smoothed to 7 waypoints in 40 ms (46992 ML obstacle cells on the map)
+[INFO] [1794432436.398510300] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794432436.898587557] [motion_planner]: ML model: obstacle on the path at (-1.20,-2.60). Re-planning.
+[INFO] [1794432436.938546251] [motion_planner]: Start: world=(-0.88,-1.50) -> pixel=(437,340) value=0
+[INFO] [1794432436.939147768] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432437.002542225] [motion_planner]: Path found: 171 cells, smoothed to 7 waypoints in 39 ms (47142 ML obstacle cells on the map)
+[INFO] [1794432437.003249559] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794432437.473903484] [motion_planner]: ML model: obstacle on the path at (-1.18,-2.69). Re-planning.
+[INFO] [1794432437.539469130] [motion_planner]: Start: world=(-0.91,-1.68) -> pixel=(427,338) value=0
+[INFO] [1794432437.540032256] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432437.593795304] [motion_planner]: Path found: 163 cells, smoothed to 7 waypoints in 34 ms (47388 ML obstacle cells on the map)
+[INFO] [1794432437.594584652] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794432438.085296577] [motion_planner]: ML model: obstacle on the path at (-1.14,-2.64). Re-planning.
+[INFO] [1794432438.138172494] [motion_planner]: Start: world=(-0.94,-1.86) -> pixel=(418,337) value=0
+[INFO] [1794432438.138521581] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432438.185609426] [motion_planner]: Path found: 155 cells, smoothed to 9 waypoints in 32 ms (47955 ML obstacle cells on the map)
+[INFO] [1794432438.186507718] [motion_planner]: Path published on /planned_path with 9 waypoints.
+[WARN] [1794432438.771462529] [motion_planner]: ML model: obstacle on the path at (-1.14,-2.74). Re-planning.
+[INFO] [1794432438.938710630] [motion_planner]: Start: world=(-0.97,-2.09) -> pixel=(407,335) value=0
+[INFO] [1794432438.939383380] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432439.010115935] [motion_planner]: Path found: 151 cells, smoothed to 8 waypoints in 48 ms (48383 ML obstacle cells on the map)
+[INFO] [1794432439.010945315] [motion_planner]: Path published on /planned_path with 8 waypoints.
+[WARN] [1794432439.491463811] [motion_planner]: ML model: obstacle on the path at (-1.26,-3.41). Re-planning.
+[INFO] [1794432439.538151307] [motion_planner]: Start: world=(-1.01,-2.26) -> pixel=(399,333) value=0
+[INFO] [1794432439.538667784] [motion_planner]: Goal:  world=(-3.33,-4.04) -> pixel=(310,217) value=0
+[INFO] [1794432439.610078693] [motion_planner]: Path found: 144 cells, smoothed to 9 waypoints in 50 ms (48341 ML obstacle cells on the map)
+[INFO] [1794432439.610762546] [motion_planner]: Path published on /planned_path with 9 waypoints.
+[INFO] [1794432451.155641282] [motion_planner]: New goal from RViz: x=-3.84m, y=5.59m. Re-planning.
+[INFO] [1794432451.157421349] [motion_planner]: New goal from RViz: x=-3.84m, y=5.59m. Re-planning.
+[INFO] [1794432451.158748619] [motion_planner]: New goal from RViz: x=-3.84m, y=5.59m. Re-planning.
+[INFO] [1794432451.338519928] [motion_planner]: Start: world=(-2.80,-3.85) -> pixel=(319,244) value=0
+[INFO] [1794432451.339184821] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[INFO] [1794432451.420864242] [motion_planner]: Path found: 586 cells, smoothed to 29 waypoints in 63 ms (51846 ML obstacle cells on the map)
+[INFO] [1794432451.422461029] [motion_planner]: Path published on /planned_path with 29 waypoints.
+[WARN] [1794432456.274694378] [motion_planner]: ML model: obstacle on the path at (-1.26,-2.32). Re-planning.
+[INFO] [1794432456.339594265] [motion_planner]: Start: world=(-2.31,-3.55) -> pixel=(334,268) value=0
+[INFO] [1794432456.340143858] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[INFO] [1794432456.436662814] [motion_planner]: Path found: 558 cells, smoothed to 16 waypoints in 71 ms (52804 ML obstacle cells on the map)
+[INFO] [1794432456.439033663] [motion_planner]: Path published on /planned_path with 16 waypoints.
+[WARN] [1794432456.875904500] [motion_planner]: ML model: obstacle on the path at (-1.20,-2.29). Re-planning.
+[INFO] [1794432456.938473409] [motion_planner]: Start: world=(-2.12,-3.47) -> pixel=(338,278) value=0
+[INFO] [1794432456.938997358] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[INFO] [1794432457.024599339] [motion_planner]: Path found: 547 cells, smoothed to 16 waypoints in 66 ms (52256 ML obstacle cells on the map)
+[INFO] [1794432457.026355800] [motion_planner]: Path published on /planned_path with 16 waypoints.
+[WARN] [1794432457.555294117] [motion_planner]: ML model: obstacle on the path at (-1.45,-2.96). Re-planning.
+[INFO] [1794432457.738623661] [motion_planner]: Start: world=(-1.89,-3.34) -> pixel=(344,289) value=0
+[INFO] [1794432457.739280449] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[INFO] [1794432457.815566221] [motion_planner]: Path found: 536 cells, smoothed to 16 waypoints in 56 ms (51601 ML obstacle cells on the map)
+[INFO] [1794432457.816698723] [motion_planner]: Path published on /planned_path with 16 waypoints.
+[WARN] [1794432458.840392659] [motion_planner]: ML model: obstacle on the path at (-1.41,-2.78). Re-planning.
+[INFO] [1794432458.938204146] [motion_planner]: Start: world=(-1.62,-3.12) -> pixel=(355,303) value=0
+[INFO] [1794432458.938620376] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[INFO] [1794432459.006567651] [motion_planner]: Path found: 522 cells, smoothed to 16 waypoints in 54 ms (50957 ML obstacle cells on the map)
+[INFO] [1794432459.007536125] [motion_planner]: Path published on /planned_path with 16 waypoints.
+[WARN] [1794432461.228562192] [motion_planner]: ML model: obstacle on the path at (-0.40,1.20). Re-planning.
+[INFO] [1794432461.355204156] [motion_planner]: Start: world=(-1.19,-2.40) -> pixel=(392,324) value=0
+[INFO] [1794432461.355772460] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[INFO] [1794432461.427027995] [motion_planner]: Path found: 484 cells, smoothed to 12 waypoints in 52 ms (45962 ML obstacle cells on the map)
+[INFO] [1794432461.427980836] [motion_planner]: Path published on /planned_path with 12 waypoints.
+[WARN] [1794432461.932503720] [motion_planner]: ML model: obstacle on the path at (0.21,1.26). Re-planning.
+[INFO] [1794432461.938049987] [motion_planner]: Start: world=(-1.10,-2.22) -> pixel=(401,328) value=0
+[INFO] [1794432461.938380185] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[INFO] [1794432462.027155078] [motion_planner]: Path found: 475 cells, smoothed to 13 waypoints in 69 ms (46463 ML obstacle cells on the map)
+[INFO] [1794432462.028094987] [motion_planner]: Path published on /planned_path with 13 waypoints.
+[WARN] [1794432462.505628057] [motion_planner]: ML model: obstacle on the path at (0.30,1.90). Re-planning.
+[INFO] [1794432462.538359574] [motion_planner]: Start: world=(-1.02,-2.02) -> pixel=(411,332) value=0
+[INFO] [1794432462.539072021] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[INFO] [1794432462.618355078] [motion_planner]: Path found: 465 cells, smoothed to 12 waypoints in 60 ms (45619 ML obstacle cells on the map)
+[INFO] [1794432462.619801535] [motion_planner]: Path published on /planned_path with 12 waypoints.
+[WARN] [1794432463.171456100] [motion_planner]: ML model: obstacle on the path at (0.32,1.76). Re-planning.
+[INFO] [1794432463.338785526] [motion_planner]: Start: world=(-0.93,-1.77) -> pixel=(423,337) value=0
+[INFO] [1794432463.339399716] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[INFO] [1794432463.416860207] [motion_planner]: Path found: 452 cells, smoothed to 11 waypoints in 56 ms (44025 ML obstacle cells on the map)
+[INFO] [1794432463.417660845] [motion_planner]: Path published on /planned_path with 11 waypoints.
+[WARN] [1794432467.590276944] [motion_planner]: ML model: obstacle on the path at (0.20,2.94). Re-planning.
+[INFO] [1794432467.738493984] [motion_planner]: Start: world=(-0.51,-0.35) -> pixel=(494,358) value=0
+[INFO] [1794432467.739682048] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[INFO] [1794432467.796760972] [motion_planner]: Path found: 400 cells, smoothed to 11 waypoints in 43 ms (37870 ML obstacle cells on the map)
+[INFO] [1794432467.797546082] [motion_planner]: Path published on /planned_path with 11 waypoints.
+[WARN] [1794432469.851302667] [motion_planner]: ML model: obstacle on the path at (0.08,3.68). Re-planning.
+[INFO] [1794432469.938170335] [motion_planner]: Start: world=(-0.23,0.27) -> pixel=(525,372) value=0
+[INFO] [1794432469.938586097] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[INFO] [1794432469.998482641] [motion_planner]: Path found: 368 cells, smoothed to 17 waypoints in 47 ms (35854 ML obstacle cells on the map)
+[INFO] [1794432470.000491028] [motion_planner]: Path published on /planned_path with 17 waypoints.
+[WARN] [1794432470.551684340] [motion_planner]: ML model: obstacle on the path at (0.33,2.62). Re-planning.
+[INFO] [1794432470.738352553] [motion_planner]: Start: world=(-0.14,0.49) -> pixel=(536,376) value=0
+[INFO] [1794432470.739380912] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[WARN] [1794432470.789781329] [motion_planner]: Goal (-3.84,5.58) is only 0.67 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.84,5.44) instead (0.14 m away, 0.81 m of room).
+[INFO] [1794432470.808160459] [motion_planner]: Path found: 403 cells, smoothed to 11 waypoints in 52 ms (35411 ML obstacle cells on the map)
+[INFO] [1794432470.810044675] [motion_planner]: Path published on /planned_path with 11 waypoints.
+[WARN] [1794432471.719069822] [motion_planner]: ML model: obstacle on the path at (0.44,3.54). Re-planning.
+[INFO] [1794432471.738012120] [motion_planner]: Start: world=(-0.05,0.77) -> pixel=(550,381) value=0
+[INFO] [1794432471.738375053] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[WARN] [1794432471.781301019] [motion_planner]: Goal (-3.84,5.58) is only 0.64 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.84,5.40) instead (0.18 m away, 0.82 m of room).
+[INFO] [1794432471.799455781] [motion_planner]: Path found: 389 cells, smoothed to 12 waypoints in 46 ms (35111 ML obstacle cells on the map)
+[INFO] [1794432471.801747479] [motion_planner]: Path published on /planned_path with 12 waypoints.
+[WARN] [1794432472.356812389] [motion_planner]: ML model: obstacle on the path at (0.46,3.73). Re-planning.
+[INFO] [1794432472.538190826] [motion_planner]: Start: world=(0.01,0.99) -> pixel=(561,384) value=0
+[INFO] [1794432472.538621388] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[INFO] [1794432472.594112422] [motion_planner]: Path found: 378 cells, smoothed to 13 waypoints in 42 ms (33743 ML obstacle cells on the map)
+[INFO] [1794432472.595228079] [motion_planner]: Path published on /planned_path with 13 waypoints.
+[WARN] [1794432473.298014858] [motion_planner]: ML model: obstacle on the path at (0.44,4.19). Re-planning.
+[INFO] [1794432473.338412831] [motion_planner]: Start: world=(0.07,1.20) -> pixel=(572,387) value=0
+[INFO] [1794432473.339002008] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[INFO] [1794432473.405664231] [motion_planner]: Path found: 368 cells, smoothed to 12 waypoints in 45 ms (33460 ML obstacle cells on the map)
+[INFO] [1794432473.406455100] [motion_planner]: Path published on /planned_path with 12 waypoints.
+[WARN] [1794432473.876382942] [motion_planner]: ML model: obstacle on the path at (0.45,3.98). Re-planning.
+[INFO] [1794432473.939119303] [motion_planner]: Start: world=(0.13,1.37) -> pixel=(580,390) value=0
+[INFO] [1794432473.939690267] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[INFO] [1794432473.997965819] [motion_planner]: Path found: 361 cells, smoothed to 13 waypoints in 41 ms (34193 ML obstacle cells on the map)
+[INFO] [1794432473.998891617] [motion_planner]: Path published on /planned_path with 13 waypoints.
+[WARN] [1794432474.500635650] [motion_planner]: ML model: obstacle on the path at (-0.58,4.85). Re-planning.
+[INFO] [1794432474.538186379] [motion_planner]: Start: world=(0.17,1.53) -> pixel=(588,392) value=0
+[INFO] [1794432474.538580028] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[INFO] [1794432474.591789161] [motion_planner]: Path found: 353 cells, smoothed to 12 waypoints in 38 ms (33552 ML obstacle cells on the map)
+[INFO] [1794432474.592592213] [motion_planner]: Path published on /planned_path with 12 waypoints.
+[WARN] [1794432478.159322964] [motion_planner]: ML model: obstacle on the path at (-1.19,5.40). Re-planning.
+[INFO] [1794432478.338326985] [motion_planner]: Start: world=(0.36,2.61) -> pixel=(642,402) value=0
+[INFO] [1794432478.338981009] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[INFO] [1794432478.410998623] [motion_planner]: Path found: 292 cells, smoothed to 10 waypoints in 50 ms (33575 ML obstacle cells on the map)
+[INFO] [1794432478.412067402] [motion_planner]: Path published on /planned_path with 10 waypoints.
+[WARN] [1794432480.631513326] [motion_planner]: ML model: obstacle on the path at (-1.35,5.42). Re-planning.
+[INFO] [1794432480.738008137] [motion_planner]: Start: world=(0.30,3.33) -> pixel=(678,398) value=0
+[INFO] [1794432480.738349038] [motion_planner]: Goal:  world=(-3.84,5.59) -> pixel=(791,192) value=0
+[INFO] [1794432480.813254640] [motion_planner]: Path found: 251 cells, smoothed to 12 waypoints in 56 ms (35061 ML obstacle cells on the map)
+[INFO] [1794432480.814631337] [motion_planner]: Path published on /planned_path with 12 waypoints.
+Traceback (most recent call last):
+  File "/home/yug/miniconda3/envs/habitat/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/yug/miniconda3/envs/habitat/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/planning/motion_planner.py", line 559, in <module>
+    main()
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/planning/motion_planner.py", line 549, in main
+    rclpy.spin(node)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+    executor.spin_once()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+    raise ExternalShutdownException()
+rclpy.executors.ExternalShutdownException

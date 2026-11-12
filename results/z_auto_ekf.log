@@ -1,0 +1,26 @@
+=== nodes:
+[fusion_obstacle_node] [fusion_obstacle_node-4] [motion_planner] [python3-5] [runner_node] [runner_node-3] [sketch_pf] [sketch_pf_node-2] 
+  model: /home/yug/robo_project_ws/robo_project_ws/runs/fusion_mid360_e3.0/best.pt
+  odometry: robot_localization EKF
+  PF started at (-4.10, 4.90, 0 deg)
+=== 6 goals (localized pose)
+  goal 0 (  0.00,  0.00): TIMEOUT   150.0 s  dist 0.08 m
+  goal 1 (  4.38, -3.89): TIMEOUT   150.0 s  dist 0.10 m  (parked 0.48 m from the clicked goal: too close to a wall)
+  goal 2 (  5.00,  0.72): TIMEOUT   150.0 s  dist 0.90 m  (parked 1.05 m from the clicked goal: too close to a wall)
+  goal 3 ( -3.74,  5.32): TIMEOUT   150.0 s  dist 0.11 m  (parked 0.39 m from the clicked goal: too close to a wall)
+  goal 4 ( -3.33, -4.04): TIMEOUT   150.0 s  dist 0.10 m  (parked 0.58 m from the clicked goal: too close to a wall)
+  goal 5 ( -3.84,  5.59): TIMEOUT   150.0 s  dist 0.08 m  (parked 0.77 m from the clicked goal: too close to a wall)
+  NO PATH: 20  stalls: 0  sim contacts: 0
+2. BODY OVERLAP (1.15 x 0.60 m footprint inside scene obstacles by > 2 cm)
+   events: 1, time overlapping: 0.2% of the run, max depth 4.4 cm
+   min body clearance when not overlapping: 2.0 cm
+   t=  476.2-  477.8 s  at (4.12,1.19)  max depth 4.4 cm
+
+wrote /home/yug/robo_project_ws/robo_project_ws/results/z_auto_ekf/analysis/collision_report.txt and /home/yug/robo_project_ws/robo_project_ws/results/z_auto_ekf/analysis/collision_map.png
+=== driving smoothness: stops on the way
+ALL    324s  70.0m  0.22m/s    21 (19/2)          21%
+bag /home/yug/robo_project_ws/robo_project_ws/results/z_auto_ekf/bag: 26162 poses over 921 s, robot drove 78.1 m
+LOCALIZATION   position error (m): mean 0.854  median 0.741  p95 1.789  max 1.853
+               heading error (deg): mean 15.621  median 15.082  p95 29.819  max 34.486
+WHEEL ODOMETRY only (no localization), position error (m): mean 1.623  median 0.996  p95 4.109  max 4.162
+all stopped

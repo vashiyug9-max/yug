@@ -1,0 +1,86 @@
+[INFO] [1794429100.344355994] [sketch_pf]: Sketch PF: 600 particles, odometry /wheel_odom, start (-4.10, 4.90, 0 deg). Waiting for /map ...
+[INFO] [1794429100.345353817] [sketch_pf]: PF started at (-4.10, 4.90, 0 deg)
+[WARN] [1794429103.670688437] [sketch_pf]: New publisher discovered on topic '/map', offering incompatible QoS. No messages will be received from it. Last incompatible policy: DURABILITY
+[INFO] [1794429118.789121664] [sketch_pf]: Map 768x1024 @ 0.019999999552965164 m, origin (-7.68, -10.24); sketch blurred with sigma 0.4 m
+[INFO] [1794429129.439737985] [sketch_pf]: PF update 20: (-2.91, 4.88, 21 deg), spread 0.05 m, Neff 515
+[INFO] [1794429134.091533330] [sketch_pf]: PF update 40: (-1.55, 4.69, -28 deg), spread 0.06 m, Neff 268
+[INFO] [1794429138.452833689] [sketch_pf]: PF update 60: (-0.55, 3.92, -65 deg), spread 0.07 m, Neff 526
+[INFO] [1794429143.151990252] [sketch_pf]: PF update 80: (-0.02, 2.60, -84 deg), spread 0.09 m, Neff 290
+[INFO] [1794429148.131513410] [sketch_pf]: PF update 100: (0.15, 1.13, -89 deg), spread 0.09 m, Neff 462
+[INFO] [1794429154.345466493] [sketch_pf]: PF update 120: (0.05, 0.09, -83 deg), spread 0.09 m, Neff 358
+[INFO] [1794429159.149547095] [sketch_pf]: PF update 140: (0.52, -1.34, -61 deg), spread 0.12 m, Neff 398
+[INFO] [1794429163.998950189] [sketch_pf]: PF update 160: (1.34, -2.28, -55 deg), spread 0.12 m, Neff 565
+[INFO] [1794429168.416549379] [sketch_pf]: PF update 180: (2.12, -3.07, -29 deg), spread 0.07 m, Neff 362
+[INFO] [1794429172.753156348] [sketch_pf]: PF update 200: (3.38, -3.02, 7 deg), spread 0.08 m, Neff 409
+[INFO] [1794429177.581998032] [sketch_pf]: PF update 220: (3.90, -3.00, -77 deg), spread 0.07 m, Neff 480
+[INFO] [1794429180.201168383] [sketch_pf]: PF update 240: (3.52, -3.06, 170 deg), spread 0.07 m, Neff 305
+[INFO] [1794429191.518687252] [sketch_pf]: PF update 260: (2.24, -2.41, 135 deg), spread 0.09 m, Neff 446
+[INFO] [1794429196.278340232] [sketch_pf]: PF update 280: (1.37, -1.34, 103 deg), spread 0.07 m, Neff 515
+[INFO] [1794429200.937787111] [sketch_pf]: PF update 300: (1.04, -0.02, 87 deg), spread 0.10 m, Neff 318
+[INFO] [1794429205.048363301] [sketch_pf]: PF update 320: (1.64, 0.61, 24 deg), spread 0.11 m, Neff 423
+[INFO] [1794429209.513829533] [sketch_pf]: PF update 340: (2.85, 0.89, 23 deg), spread 0.13 m, Neff 433
+[INFO] [1794429213.416771068] [sketch_pf]: PF update 360: (3.84, 1.02, 0 deg), spread 0.07 m, Neff 579
+[INFO] [1794429218.308915423] [sketch_pf]: PF update 380: (4.30, 1.03, 77 deg), spread 0.06 m, Neff 582
+[INFO] [1794429221.017510296] [sketch_pf]: PF update 400: (4.00, 1.05, -176 deg), spread 0.05 m, Neff 278
+[INFO] [1794429225.550980206] [sketch_pf]: PF update 420: (2.57, 0.97, 180 deg), spread 0.07 m, Neff 324
+[INFO] [1794429230.539516912] [sketch_pf]: PF update 440: (1.33, 1.44, 151 deg), spread 0.08 m, Neff 373
+[INFO] [1794429235.613672725] [sketch_pf]: PF update 460: (0.55, 2.47, 117 deg), spread 0.06 m, Neff 565
+[INFO] [1794429240.327758831] [sketch_pf]: PF update 480: (0.51, 3.87, 90 deg), spread 0.10 m, Neff 570
+[INFO] [1794429244.496732309] [sketch_pf]: PF update 500: (0.57, 4.78, 81 deg), spread 0.16 m, Neff 254
+[INFO] [1794429247.223337223] [sketch_pf]: PF update 520: (0.47, 4.70, -179 deg), spread 0.05 m, Neff 401
+[INFO] [1794429250.634972003] [sketch_pf]: PF update 540: (0.24, 4.00, -102 deg), spread 0.07 m, Neff 284
+[INFO] [1794429255.351546958] [sketch_pf]: PF update 560: (-0.15, 2.47, -103 deg), spread 0.07 m, Neff 458
+[INFO] [1794429260.105513338] [sketch_pf]: PF update 580: (-0.16, 0.97, -104 deg), spread 0.06 m, Neff 322
+[INFO] [1794429264.865015587] [sketch_pf]: PF update 600: (-0.63, -0.44, -110 deg), spread 0.08 m, Neff 315
+[INFO] [1794429269.552898995] [sketch_pf]: PF update 620: (-1.08, -1.85, -108 deg), spread 0.09 m, Neff 315
+[INFO] [1794429275.219853292] [sketch_pf]: PF update 640: (-1.28, -2.45, -61 deg), spread 0.09 m, Neff 351
+[INFO] [1794429277.798406243] [sketch_pf]: PF update 660: (-1.11, -2.34, 49 deg), spread 0.08 m, Neff 515
+[INFO] [1794429282.296541814] [sketch_pf]: PF update 680: (-0.75, -1.08, 78 deg), spread 0.09 m, Neff 461
+[INFO] [1794429287.078901735] [sketch_pf]: PF update 700: (-0.33, 0.24, 79 deg), spread 0.11 m, Neff 345
+[INFO] [1794429292.075307899] [sketch_pf]: PF update 720: (-0.11, 1.54, 71 deg), spread 0.09 m, Neff 313
+[INFO] [1794429296.559208447] [sketch_pf]: PF update 740: (-0.01, 2.73, 88 deg), spread 0.06 m, Neff 587
+[INFO] [1794429301.023040840] [sketch_pf]: PF update 760: (0.20, 3.97, 87 deg), spread 0.10 m, Neff 380
+[INFO] [1794429304.969621310] [sketch_pf]: PF update 780: (-0.32, 4.64, 148 deg), spread 0.14 m, Neff 577
+[INFO] [1794429309.213194692] [sketch_pf]: PF update 800: (-1.36, 5.20, 158 deg), spread 0.15 m, Neff 326
+[INFO] [1794429313.303652682] [sketch_pf]: PF update 820: (-2.30, 5.31, -177 deg), spread 0.09 m, Neff 308
+[INFO] [1794429318.029749742] [sketch_pf]: PF update 840: (-3.58, 5.26, -167 deg), spread 0.07 m, Neff 523
+[INFO] [1794429321.727335132] [sketch_pf]: PF update 860: (-3.48, 5.26, -62 deg), spread 0.04 m, Neff 582
+[INFO] [1794429325.338106728] [sketch_pf]: PF update 880: (-2.59, 4.96, -10 deg), spread 0.06 m, Neff 500
+[INFO] [1794429329.791633012] [sketch_pf]: PF update 900: (-1.33, 4.48, -28 deg), spread 0.06 m, Neff 576
+[INFO] [1794429333.964125741] [sketch_pf]: PF update 920: (-0.34, 3.74, -58 deg), spread 0.08 m, Neff 597
+[INFO] [1794429338.344313344] [sketch_pf]: PF update 940: (-0.12, 2.41, -90 deg), spread 0.09 m, Neff 591
+[INFO] [1794429342.850175033] [sketch_pf]: PF update 960: (-0.08, 1.07, -102 deg), spread 0.09 m, Neff 406
+[INFO] [1794429347.287017116] [sketch_pf]: PF update 980: (-0.30, -0.18, -102 deg), spread 0.08 m, Neff 395
+[INFO] [1794429351.843035922] [sketch_pf]: PF update 1000: (-0.62, -1.47, -101 deg), spread 0.07 m, Neff 459
+[INFO] [1794429356.346704352] [sketch_pf]: PF update 1020: (-0.94, -2.70, -90 deg), spread 0.07 m, Neff 586
+[INFO] [1794429360.346953920] [sketch_pf]: PF update 1040: (-1.12, -3.61, -131 deg), spread 0.05 m, Neff 564
+[INFO] [1794429364.303008128] [sketch_pf]: PF update 1060: (-2.20, -3.70, -165 deg), spread 0.05 m, Neff 515
+[INFO] [1794429368.646346699] [sketch_pf]: PF update 1080: (-3.23, -3.68, 168 deg), spread 0.07 m, Neff 556
+[INFO] [1794429372.128957832] [sketch_pf]: PF update 1100: (-3.09, -3.62, 54 deg), spread 0.06 m, Neff 581
+[INFO] [1794429376.048370493] [sketch_pf]: PF update 1120: (-2.08, -3.17, 16 deg), spread 0.07 m, Neff 464
+[INFO] [1794429380.457762010] [sketch_pf]: PF update 1140: (-1.09, -2.54, 48 deg), spread 0.08 m, Neff 417
+[INFO] [1794429385.192740818] [sketch_pf]: PF update 1160: (-0.56, -1.24, 70 deg), spread 0.08 m, Neff 364
+[INFO] [1794429390.194927868] [sketch_pf]: PF update 1180: (-0.06, 0.21, 67 deg), spread 0.10 m, Neff 343
+[INFO] [1794429394.617945155] [sketch_pf]: PF update 1200: (0.05, 1.42, 83 deg), spread 0.08 m, Neff 576
+[INFO] [1794429399.376891339] [sketch_pf]: PF update 1220: (0.21, 2.77, 81 deg), spread 0.07 m, Neff 334
+[INFO] [1794429404.579476163] [sketch_pf]: PF update 1240: (0.30, 4.08, 106 deg), spread 0.10 m, Neff 417
+[INFO] [1794429408.840305244] [sketch_pf]: PF update 1260: (-0.62, 4.75, 134 deg), spread 0.09 m, Neff 472
+[INFO] [1794429412.358394226] [sketch_pf]: PF update 1280: (-1.25, 5.23, 175 deg), spread 0.09 m, Neff 389
+[INFO] [1794429417.079768147] [sketch_pf]: PF update 1300: (-2.60, 5.30, -176 deg), spread 0.07 m, Neff 445
+Traceback (most recent call last):
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/robo_project/sketch_pf_node", line 33, in <module>
+    sys.exit(load_entry_point('robo-project==0.1.0', 'console_scripts', 'sketch_pf_node')())
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/localization/sketch_pf_node.py", line 315, in main
+    rclpy.spin(node)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+    executor.spin_once()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 653, in _wait_for_ready_callbacks
+    wait_set = _rclpy.WaitSet(
+rclpy._rclpy_pybind11.RCLError: failed to initialize wait set: the given context is not valid, either rcl_init() was not called or rcl_shutdown() was called., at ./src/rcl/wait.c:130
+[ros2run]: Process exited with failure 1

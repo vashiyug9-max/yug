@@ -1,0 +1,494 @@
+
+==================================================
+🚀 RUNNER NODE INITIALIZING (NO ML / NO LOCALIZATION)...
+==================================================
+
+[WARN] [1794426418.759406012] [runner_node]: New subscription discovered on topic '/map', requesting incompatible QoS. No messages will be sent to it. Last incompatible policy: DURABILITY
+⏳ Loading map in the background...
+[INFO] [1794426433.165670173] [robo_project]: ✅ SUCCESS: Resized and loaded raw physical sketch from /home/yug/robo_project_ws/robo_project_ws/src/resources/sketch_map_imr_lab8.jpeg
+✅ BACKGROUND LOAD COMPLETE! Map is now actively broadcasting.
+🗺️ MAP BROADCAST SUCCESSFUL! Check RViz now.
+Path received from motion_planner: 26 waypoints. Following now.
+Waypoint 1/26 reached.
+[steer] robot=(-4.10,4.90) yaw=-0° -> target=(-3.58,5.30) dist=0.66m angle_to_wp=38° angle_err=38°
+Path received from motion_planner: 27 waypoints. Following now.
+[steer] robot=(-3.71,4.48) yaw=56° -> target=(-3.72,5.16) dist=0.68m angle_to_wp=91° angle_err=35°
+Path received from motion_planner: 25 waypoints. Following now.
+Waypoint 1/25 reached.
+[steer] robot=(-3.60,4.58) yaw=65° -> target=(-3.40,5.06) dist=0.52m angle_to_wp=67° angle_err=1°
+Waypoint 2/25 reached.
+[steer] robot=(-3.45,4.85) yaw=69° -> target=(-3.26,5.20) dist=0.40m angle_to_wp=61° angle_err=-8°
+Path received from motion_planner: 24 waypoints. Following now.
+Path received from motion_planner: 24 waypoints. Following now.
+Waypoint 1/24 reached.
+[steer] robot=(-3.38,4.90) yaw=31° -> target=(-2.80,4.98) dist=0.58m angle_to_wp=7° angle_err=-23°
+Path received from motion_planner: 24 waypoints. Following now.
+[steer] robot=(-3.03,4.96) yaw=7° -> target=(-2.06,4.96) dist=0.97m angle_to_wp=-0° angle_err=-7°
+Path received from motion_planner: 21 waypoints. Following now.
+Waypoint 1/21 reached.
+[steer] robot=(-2.72,4.95) yaw=-5° -> target=(-1.98,4.82) dist=0.76m angle_to_wp=-10° angle_err=-6°
+[steer] robot=(-2.37,4.86) yaw=-9° -> target=(-1.98,4.82) dist=0.39m angle_to_wp=-6° angle_err=3°
+Waypoint 2/21 reached.
+[steer] robot=(-2.06,4.79) yaw=-4° -> target=(-1.78,4.78) dist=0.28m angle_to_wp=-2° angle_err=2°
+Path received from motion_planner: 14 waypoints. Following now.
+[steer] robot=(-1.84,4.68) yaw=-26° -> target=(-0.62,3.92) dist=1.44m angle_to_wp=-32° angle_err=-7°
+[steer] robot=(-1.54,4.49) yaw=-32° -> target=(-0.62,3.92) dist=1.08m angle_to_wp=-32° angle_err=-1°
+[steer] robot=(-1.24,4.30) yaw=-32° -> target=(-0.62,3.92) dist=0.72m angle_to_wp=-32° angle_err=0°
+[steer] robot=(-0.97,4.14) yaw=-32° -> target=(-0.62,3.92) dist=0.42m angle_to_wp=-32° angle_err=-0°
+Waypoint 3/14 reached.
+[steer] robot=(-0.67,3.95) yaw=-37° -> target=(-0.48,3.76) dist=0.27m angle_to_wp=-45° angle_err=-8°
+Waypoint 6/14 reached.
+[steer] robot=(-0.45,3.73) yaw=-63° -> target=(-0.38,3.22) dist=0.52m angle_to_wp=-82° angle_err=-19°
+Waypoint 8/14 reached.
+[steer] robot=(-0.36,3.39) yaw=-83° -> target=(-0.34,3.12) dist=0.27m angle_to_wp=-86° angle_err=-3°
+[steer] robot=(-0.31,3.05) yaw=-84° -> target=(-0.00,-0.00) dist=3.07m angle_to_wp=-84° angle_err=-0°
+[steer] robot=(-0.24,2.72) yaw=-84° -> target=(-0.00,-0.00) dist=2.73m angle_to_wp=-85° angle_err=-1°
+[steer] robot=(-0.20,2.43) yaw=-85° -> target=(-0.00,-0.00) dist=2.44m angle_to_wp=-85° angle_err=-1°
+[steer] robot=(-0.15,2.12) yaw=-85° -> target=(-0.00,-0.00) dist=2.12m angle_to_wp=-86° angle_err=-1°
+[steer] robot=(-0.11,1.82) yaw=-86° -> target=(-0.00,-0.00) dist=1.82m angle_to_wp=-87° angle_err=-1°
+[steer] robot=(-0.06,1.50) yaw=-86° -> target=(-0.00,-0.00) dist=1.50m angle_to_wp=-88° angle_err=-1°
+[steer] robot=(-0.02,1.21) yaw=-88° -> target=(-0.00,-0.00) dist=1.21m angle_to_wp=-89° angle_err=-1°
+[steer] robot=(0.02,0.94) yaw=-89° -> target=(-0.00,-0.00) dist=0.94m angle_to_wp=-91° angle_err=-2°
+[steer] robot=(0.04,0.62) yaw=-92° -> target=(-0.00,-0.00) dist=0.62m angle_to_wp=-93° angle_err=-2°
+[steer] robot=(0.04,0.32) yaw=-95° -> target=(-0.00,-0.00) dist=0.32m angle_to_wp=-98° angle_err=-3°
+[steer] robot=(0.02,0.10) yaw=-100° -> target=(-0.00,-0.00) dist=0.10m angle_to_wp=-101° angle_err=-2°
+Waypoint 14/14 reached.
+GOAL REACHED! Robot stopped at (0.02,0.09).
+🎯 Goal received from RViz: (4.38, -3.89) — waiting for motion_planner to re-plan.
+🎯 Goal received from RViz: (4.38, -3.89) — waiting for motion_planner to re-plan.
+🎯 Goal received from RViz: (4.38, -3.89) — waiting for motion_planner to re-plan.
+Path received from motion_planner: 9 waypoints. Following now.
+Waypoint 1/9 reached.
+[steer] robot=(0.02,0.09) yaw=-100° -> target=(2.00,-3.10) dist=3.75m angle_to_wp=-58° angle_err=42°
+[steer] robot=(0.09,-0.06) yaw=-64° -> target=(2.00,-3.10) dist=3.59m angle_to_wp=-58° angle_err=6°
+[steer] robot=(0.23,-0.32) yaw=-59° -> target=(2.00,-3.10) dist=3.29m angle_to_wp=-58° angle_err=1°
+[steer] robot=(0.35,-0.63) yaw=-58° -> target=(2.00,-3.10) dist=2.97m angle_to_wp=-56° angle_err=2°
+[steer] robot=(0.45,-0.97) yaw=-57° -> target=(2.00,-3.10) dist=2.64m angle_to_wp=-54° angle_err=3°
+Path received from motion_planner: 12 waypoints. Following now.
+Waypoint 1/12 reached.
+Path received from motion_planner: 18 waypoints. Following now.
+[steer] robot=(0.55,-1.31) yaw=-53° -> target=(1.98,-3.12) dist=2.31m angle_to_wp=-52° angle_err=2°
+Path received from motion_planner: 28 waypoints. Following now.
+Waypoint 1/28 reached.
+Path received from motion_planner: 28 waypoints. Following now.
+[steer] robot=(0.66,-1.60) yaw=-56° -> target=(1.68,-3.34) dist=2.01m angle_to_wp=-60° angle_err=-4°
+Path received from motion_planner: 28 waypoints. Following now.
+Waypoint 1/28 reached.
+[steer] robot=(0.80,-1.83) yaw=-58° -> target=(1.62,-3.38) dist=1.76m angle_to_wp=-62° angle_err=-4°
+Path received from motion_planner: 19 waypoints. Following now.
+Path received from motion_planner: 19 waypoints. Following now.
+Waypoint 1/19 reached.
+[steer] robot=(0.98,-2.03) yaw=-62° -> target=(1.62,-3.38) dist=1.49m angle_to_wp=-65° angle_err=-3°
+Path received from motion_planner: 50 waypoints. Following now.
+[steer] robot=(1.15,-2.24) yaw=-64° -> target=(1.64,-3.38) dist=1.24m angle_to_wp=-67° angle_err=-2°
+[steer] robot=(1.29,-2.48) yaw=-67° -> target=(1.64,-3.38) dist=0.97m angle_to_wp=-69° angle_err=-2°
+Path received from motion_planner: 5 waypoints. Following now.
+Waypoint 1/5 reached.
+[steer] robot=(1.40,-2.71) yaw=-58° -> target=(1.72,-3.08) dist=0.49m angle_to_wp=-50° angle_err=8°
+Waypoint 2/5 reached.
+[steer] robot=(1.56,-2.89) yaw=-50° -> target=(1.88,-3.24) dist=0.47m angle_to_wp=-48° angle_err=2°
+Waypoint 3/5 reached.
+[steer] robot=(1.74,-3.04) yaw=-50° -> target=(2.36,-3.48) dist=0.75m angle_to_wp=-35° angle_err=14°
+[steer] robot=(1.99,-3.20) yaw=-37° -> target=(2.36,-3.48) dist=0.46m angle_to_wp=-37° angle_err=-1°
+Waypoint 4/5 reached.
+[steer] robot=(2.19,-3.31) yaw=-33° -> target=(4.38,-3.90) dist=2.27m angle_to_wp=-15° angle_err=18°
+Path received from motion_planner: 2 waypoints. Following now.
+Waypoint 1/2 reached.
+[steer] robot=(2.44,-3.39) yaw=-18° -> target=(4.28,-3.50) dist=1.85m angle_to_wp=-4° angle_err=14°
+[steer] robot=(2.78,-3.36) yaw=-5° -> target=(4.28,-3.50) dist=1.51m angle_to_wp=-5° angle_err=-1°
+[steer] robot=(3.14,-3.32) yaw=-6° -> target=(4.28,-3.50) dist=1.16m angle_to_wp=-9° angle_err=-3°
+Path received from motion_planner: 2 waypoints. Following now.
+Waypoint 1/2 reached.
+[steer] robot=(3.44,-3.32) yaw=-10° -> target=(3.96,-3.24) dist=0.52m angle_to_wp=9° angle_err=19°
+[steer] robot=(3.71,-3.34) yaw=9° -> target=(3.96,-3.24) dist=0.27m angle_to_wp=22° angle_err=13°
+[steer] robot=(3.82,-3.37) yaw=29° -> target=(3.96,-3.24) dist=0.19m angle_to_wp=41° angle_err=13°
+[steer] robot=(3.88,-3.32) yaw=41° -> target=(3.96,-3.24) dist=0.12m angle_to_wp=46° angle_err=4°
+Waypoint 2/2 reached.
+GOAL REACHED! Robot stopped at (3.90,-3.31).
+🎯 Goal received from RViz: (5.00, 0.72) — waiting for motion_planner to re-plan.
+🎯 Goal received from RViz: (5.00, 0.72) — waiting for motion_planner to re-plan.
+🎯 Goal received from RViz: (5.00, 0.72) — waiting for motion_planner to re-plan.
+Path received from motion_planner: 22 waypoints. Following now.
+Waypoint 1/22 reached.
+[steer] robot=(3.88,-3.32) yaw=43° -> target=(1.64,-2.74) dist=2.31m angle_to_wp=166° angle_err=123°
+Path received from motion_planner: 22 waypoints. Following now.
+[steer] robot=(3.79,-3.37) yaw=87° -> target=(1.64,-2.74) dist=2.24m angle_to_wp=164° angle_err=77°
+Path received from motion_planner: 22 waypoints. Following now.
+Waypoint 1/22 reached.
+Path received from motion_planner: 23 waypoints. Following now.
+[steer] robot=(3.74,-3.38) yaw=136° -> target=(1.66,-2.80) dist=2.16m angle_to_wp=164° angle_err=28°
+Path received from motion_planner: 20 waypoints. Following now.
+Waypoint 1/20 reached.
+[steer] robot=(3.51,-3.27) yaw=159° -> target=(1.52,-2.82) dist=2.04m angle_to_wp=167° angle_err=8°
+Path received from motion_planner: 20 waypoints. Following now.
+Path received from motion_planner: 21 waypoints. Following now.
+Waypoint 1/21 reached.
+[steer] robot=(3.17,-3.14) yaw=166° -> target=(1.52,-2.82) dist=1.68m angle_to_wp=169° angle_err=3°
+Path received from motion_planner: 20 waypoints. Following now.
+Path received from motion_planner: 20 waypoints. Following now.
+Waypoint 1/20 reached.
+[steer] robot=(2.89,-3.00) yaw=168° -> target=(1.52,-2.66) dist=1.41m angle_to_wp=166° angle_err=-2°
+Path received from motion_planner: 21 waypoints. Following now.
+[steer] robot=(2.59,-2.87) yaw=165° -> target=(1.60,-2.60) dist=1.03m angle_to_wp=165° angle_err=-0°
+Path received from motion_planner: 19 waypoints. Following now.
+Waypoint 1/19 reached.
+[steer] robot=(2.26,-2.74) yaw=163° -> target=(1.60,-2.54) dist=0.69m angle_to_wp=163° angle_err=0°
+Path received from motion_planner: 17 waypoints. Following now.
+Path received from motion_planner: 20 waypoints. Following now.
+Waypoint 1/20 reached.
+[steer] robot=(1.96,-2.62) yaw=158° -> target=(1.52,-2.42) dist=0.48m angle_to_wp=156° angle_err=-3°
+Path received from motion_planner: 19 waypoints. Following now.
+Waypoint 2/19 reached.
+[steer] robot=(1.67,-2.48) yaw=155° -> target=(1.28,-2.20) dist=0.48m angle_to_wp=144° angle_err=-11°
+Path received from motion_planner: 18 waypoints. Following now.
+Path received from motion_planner: 18 waypoints. Following now.
+[steer] robot=(1.40,-2.32) yaw=137° -> target=(1.22,-2.02) dist=0.35m angle_to_wp=121° angle_err=-16°
+Path received from motion_planner: 17 waypoints. Following now.
+Waypoint 1/17 reached.
+Path received from motion_planner: 20 waypoints. Following now.
+[steer] robot=(1.24,-2.06) yaw=108° -> target=(1.18,-1.56) dist=0.50m angle_to_wp=97° angle_err=-10°
+Path received from motion_planner: 19 waypoints. Following now.
+Waypoint 1/19 reached.
+Path received from motion_planner: 19 waypoints. Following now.
+[steer] robot=(1.17,-1.73) yaw=95° -> target=(1.18,-0.22) dist=1.51m angle_to_wp=90° angle_err=-5°
+Path received from motion_planner: 18 waypoints. Following now.
+Waypoint 1/18 reached.
+[steer] robot=(1.15,-1.39) yaw=90° -> target=(1.16,-0.18) dist=1.21m angle_to_wp=90° angle_err=-1°
+Path received from motion_planner: 17 waypoints. Following now.
+Path received from motion_planner: 20 waypoints. Following now.
+Waypoint 1/20 reached.
+[steer] robot=(1.14,-1.08) yaw=90° -> target=(1.14,0.14) dist=1.22m angle_to_wp=90° angle_err=0°
+Path received from motion_planner: 19 waypoints. Following now.
+Path received from motion_planner: 20 waypoints. Following now.
+Waypoint 1/20 reached.
+[steer] robot=(1.13,-0.74) yaw=90° -> target=(1.14,0.20) dist=0.94m angle_to_wp=90° angle_err=-0°
+Path received from motion_planner: 20 waypoints. Following now.
+[steer] robot=(1.13,-0.41) yaw=89° -> target=(1.14,0.20) dist=0.61m angle_to_wp=89° angle_err=-0°
+Path received from motion_planner: 18 waypoints. Following now.
+Waypoint 1/18 reached.
+[steer] robot=(1.13,-0.06) yaw=88° -> target=(1.14,0.22) dist=0.28m angle_to_wp=87° angle_err=-1°
+Waypoint 3/18 reached.
+[steer] robot=(1.15,0.20) yaw=69° -> target=(1.38,0.52) dist=0.39m angle_to_wp=54° angle_err=-15°
+Waypoint 6/18 reached.
+Path received from motion_planner: 1 waypoints. Following now.
+[steer] robot=(1.24,0.39) yaw=41° -> target=(1.13,-0.11) dist=0.52m angle_to_wp=-103° angle_err=-144°
+[steer] robot=(1.16,0.33) yaw=-4° -> target=(1.13,-0.11) dist=0.44m angle_to_wp=-95° angle_err=-91°
+[steer] robot=(1.13,0.29) yaw=-54° -> target=(1.13,-0.11) dist=0.41m angle_to_wp=-90° angle_err=-37°
+Path received from motion_planner: 5 waypoints. Following now.
+Waypoint 1/5 reached.
+[steer] robot=(1.11,0.27) yaw=-14° -> target=(2.14,1.08) dist=1.31m angle_to_wp=38° angle_err=52°
+[steer] robot=(1.15,0.27) yaw=27° -> target=(2.14,1.08) dist=1.27m angle_to_wp=39° angle_err=12°
+Path received from motion_planner: 3 waypoints. Following now.
+[steer] robot=(1.41,0.44) yaw=33° -> target=(1.74,0.58) dist=0.36m angle_to_wp=23° angle_err=-10°
+Path received from motion_planner: 4 waypoints. Following now.
+Waypoint 1/4 reached.
+[steer] robot=(1.68,0.57) yaw=28° -> target=(2.92,1.26) dist=1.42m angle_to_wp=29° angle_err=1°
+[steer] robot=(1.96,0.64) yaw=29° -> target=(2.92,1.26) dist=1.14m angle_to_wp=33° angle_err=3°
+[steer] robot=(2.26,0.73) yaw=34° -> target=(2.92,1.26) dist=0.85m angle_to_wp=39° angle_err=5°
+[steer] robot=(2.55,0.85) yaw=42° -> target=(2.92,1.26) dist=0.56m angle_to_wp=48° angle_err=5°
+[steer] robot=(2.77,1.04) yaw=50° -> target=(2.92,1.26) dist=0.26m angle_to_wp=56° angle_err=6°
+Waypoint 2/4 reached.
+Path received from motion_planner: 2 waypoints. Following now.
+[steer] robot=(2.84,1.05) yaw=15° -> target=(4.76,1.14) dist=1.92m angle_to_wp=3° angle_err=-13°
+[steer] robot=(3.12,1.08) yaw=4° -> target=(4.76,1.14) dist=1.64m angle_to_wp=2° angle_err=-2°
+[steer] robot=(3.44,1.08) yaw=2° -> target=(4.76,1.14) dist=1.32m angle_to_wp=3° angle_err=0°
+Path received from motion_planner: 2 waypoints. Following now.
+Waypoint 1/2 reached.
+[steer] robot=(3.73,1.05) yaw=-7° -> target=(4.48,0.88) dist=0.77m angle_to_wp=-13° angle_err=-6°
+[steer] robot=(4.00,0.99) yaw=-12° -> target=(4.48,0.88) dist=0.49m angle_to_wp=-13° angle_err=-1°
+[steer] robot=(4.27,0.91) yaw=-11° -> target=(4.48,0.88) dist=0.21m angle_to_wp=-9° angle_err=2°
+Waypoint 2/2 reached.
+GOAL REACHED! Robot stopped at (4.38,0.89).
+🎯 Goal received from RViz: (-3.74, 5.32) — waiting for motion_planner to re-plan.
+🎯 Goal received from RViz: (-3.74, 5.32) — waiting for motion_planner to re-plan.
+🎯 Goal received from RViz: (-3.74, 5.32) — waiting for motion_planner to re-plan.
+Path received from motion_planner: 7 waypoints. Following now.
+Waypoint 1/7 reached.
+[steer] robot=(4.38,0.89) yaw=-8° -> target=(0.60,1.44) dist=3.82m angle_to_wp=172° angle_err=180°
+Path received from motion_planner: 7 waypoints. Following now.
+Waypoint 1/7 reached.
+[steer] robot=(4.34,0.88) yaw=39° -> target=(0.82,1.22) dist=3.54m angle_to_wp=175° angle_err=135°
+Path received from motion_planner: 7 waypoints. Following now.
+[steer] robot=(4.31,0.88) yaw=93° -> target=(1.02,1.02) dist=3.29m angle_to_wp=178° angle_err=85°
+Path received from motion_planner: 7 waypoints. Following now.
+Waypoint 1/7 reached.
+[steer] robot=(4.27,0.88) yaw=145° -> target=(1.10,0.94) dist=3.17m angle_to_wp=179° angle_err=34°
+Path received from motion_planner: 8 waypoints. Following now.
+[steer] robot=(4.11,0.91) yaw=174° -> target=(2.72,0.86) dist=1.39m angle_to_wp=-178° angle_err=8°
+Path received from motion_planner: 13 waypoints. Following now.
+Waypoint 1/13 reached.
+[steer] robot=(3.78,0.92) yaw=-179° -> target=(2.60,0.86) dist=1.19m angle_to_wp=-177° angle_err=2°
+[steer] robot=(3.46,0.93) yaw=-177° -> target=(2.60,0.86) dist=0.86m angle_to_wp=-175° angle_err=2°
+[steer] robot=(3.12,0.92) yaw=-175° -> target=(2.60,0.86) dist=0.53m angle_to_wp=-173° angle_err=2°
+Waypoint 2/13 reached.
+[steer] robot=(2.78,0.91) yaw=-174° -> target=(0.72,0.86) dist=2.06m angle_to_wp=-179° angle_err=-5°
+[steer] robot=(2.45,0.90) yaw=-178° -> target=(0.72,0.86) dist=1.73m angle_to_wp=-179° angle_err=-0°
+[steer] robot=(2.16,0.90) yaw=-179° -> target=(0.72,0.86) dist=1.44m angle_to_wp=-178° angle_err=0°
+[steer] robot=(1.82,0.90) yaw=-178° -> target=(0.72,0.86) dist=1.10m angle_to_wp=-178° angle_err=1°
+[steer] robot=(1.50,0.90) yaw=-178° -> target=(0.72,0.86) dist=0.79m angle_to_wp=-177° angle_err=1°
+[steer] robot=(1.19,0.89) yaw=-177° -> target=(0.72,0.86) dist=0.47m angle_to_wp=-177° angle_err=0°
+Waypoint 3/13 reached.
+[steer] robot=(0.96,0.88) yaw=174° -> target=(-0.06,1.50) dist=1.20m angle_to_wp=149° angle_err=-26°
+[steer] robot=(0.77,0.96) yaw=153° -> target=(-0.06,1.50) dist=0.99m angle_to_wp=147° angle_err=-5°
+[steer] robot=(0.54,1.08) yaw=148° -> target=(-0.06,1.50) dist=0.73m angle_to_wp=145° angle_err=-2°
+[steer] robot=(0.32,1.21) yaw=145° -> target=(-0.06,1.50) dist=0.48m angle_to_wp=143° angle_err=-2°
+[steer] robot=(0.14,1.34) yaw=142° -> target=(-0.06,1.50) dist=0.26m angle_to_wp=140° angle_err=-1°
+Waypoint 4/13 reached.
+Path received from motion_planner: 6 waypoints. Following now.
+Path received from motion_planner: 5 waypoints. Following now.
+[steer] robot=(0.06,1.60) yaw=120° -> target=(-1.32,4.08) dist=2.84m angle_to_wp=119° angle_err=-1°
+Path received from motion_planner: 7 waypoints. Following now.
+Waypoint 1/7 reached.
+[steer] robot=(-0.02,1.92) yaw=117° -> target=(-1.00,3.92) dist=2.23m angle_to_wp=116° angle_err=-0°
+Path received from motion_planner: 6 waypoints. Following now.
+[steer] robot=(-0.10,2.24) yaw=112° -> target=(-0.84,4.28) dist=2.17m angle_to_wp=110° angle_err=-2°
+Path received from motion_planner: 7 waypoints. Following now.
+Waypoint 1/7 reached.
+Path received from motion_planner: 8 waypoints. Following now.
+[steer] robot=(-0.12,2.52) yaw=107° -> target=(-0.56,4.32) dist=1.85m angle_to_wp=104° angle_err=-3°
+Path received from motion_planner: 7 waypoints. Following now.
+Waypoint 1/7 reached.
+Path received from motion_planner: 7 waypoints. Following now.
+[steer] robot=(-0.16,2.84) yaw=104° -> target=(-0.46,4.34) dist=1.53m angle_to_wp=101° angle_err=-3°
+Path received from motion_planner: 7 waypoints. Following now.
+Waypoint 1/7 reached.
+[steer] robot=(-0.22,3.15) yaw=101° -> target=(-0.40,4.28) dist=1.14m angle_to_wp=99° angle_err=-2°
+Path received from motion_planner: 8 waypoints. Following now.
+Path received from motion_planner: 8 waypoints. Following now.
+Waypoint 1/8 reached.
+[steer] robot=(-0.27,3.42) yaw=100° -> target=(-0.38,4.24) dist=0.82m angle_to_wp=97° angle_err=-2°
+Path received from motion_planner: 10 waypoints. Following now.
+Path received from motion_planner: 10 waypoints. Following now.
+Waypoint 1/10 reached.
+[steer] robot=(-0.34,3.72) yaw=97° -> target=(-0.42,4.30) dist=0.59m angle_to_wp=98° angle_err=0°
+Path received from motion_planner: 10 waypoints. Following now.
+[steer] robot=(-0.40,4.01) yaw=97° -> target=(-0.42,4.30) dist=0.29m angle_to_wp=94° angle_err=-3°
+Path received from motion_planner: 12 waypoints. Following now.
+Waypoint 1/12 reached.
+Path received from motion_planner: 11 waypoints. Following now.
+[steer] robot=(-0.49,4.27) yaw=115° -> target=(-0.70,4.56) dist=0.36m angle_to_wp=127° angle_err=12°
+Waypoint 4/11 reached.
+[steer] robot=(-0.68,4.49) yaw=131° -> target=(-1.62,5.42) dist=1.32m angle_to_wp=135° angle_err=4°
+[steer] robot=(-0.93,4.65) yaw=134° -> target=(-1.62,5.42) dist=1.04m angle_to_wp=132° angle_err=-2°
+[steer] robot=(-1.14,4.83) yaw=131° -> target=(-1.62,5.42) dist=0.76m angle_to_wp=129° angle_err=-2°
+[steer] robot=(-1.34,5.01) yaw=127° -> target=(-1.62,5.42) dist=0.50m angle_to_wp=124° angle_err=-4°
+Waypoint 5/11 reached.
+[steer] robot=(-1.54,5.24) yaw=121° -> target=(-1.70,5.48) dist=0.29m angle_to_wp=124° angle_err=3°
+[steer] robot=(-1.72,5.44) yaw=137° -> target=(-2.02,5.58) dist=0.33m angle_to_wp=154° angle_err=16°
+Waypoint 9/11 reached.
+[steer] robot=(-1.92,5.47) yaw=167° -> target=(-3.48,5.58) dist=1.56m angle_to_wp=176° angle_err=9°
+[steer] robot=(-2.24,5.47) yaw=174° -> target=(-3.48,5.58) dist=1.25m angle_to_wp=175° angle_err=1°
+[steer] robot=(-2.56,5.48) yaw=174° -> target=(-3.48,5.58) dist=0.92m angle_to_wp=174° angle_err=-1°
+[steer] robot=(-2.91,5.51) yaw=173° -> target=(-3.48,5.58) dist=0.57m angle_to_wp=173° angle_err=-0°
+[steer] robot=(-3.22,5.55) yaw=172° -> target=(-3.48,5.58) dist=0.26m angle_to_wp=173° angle_err=0°
+Waypoint 10/11 reached.
+[steer] robot=(-3.42,5.51) yaw=-159° -> target=(-3.74,5.32) dist=0.37m angle_to_wp=-149° angle_err=10°
+[steer] robot=(-3.63,5.40) yaw=-147° -> target=(-3.74,5.32) dist=0.14m angle_to_wp=-145° angle_err=2°
+Waypoint 11/11 reached.
+GOAL REACHED! Robot stopped at (-3.66,5.37).
+🎯 Goal received from RViz: (-3.33, -4.04) — waiting for motion_planner to re-plan.
+🎯 Goal received from RViz: (-3.33, -4.04) — waiting for motion_planner to re-plan.
+🎯 Goal received from RViz: (-3.33, -4.04) — waiting for motion_planner to re-plan.
+Path received from motion_planner: 13 waypoints. Following now.
+Waypoint 1/13 reached.
+[steer] robot=(-3.65,5.38) yaw=-146° -> target=(-1.84,4.82) dist=1.89m angle_to_wp=-17° angle_err=129°
+Path received from motion_planner: 12 waypoints. Following now.
+[steer] robot=(-3.57,5.39) yaw=-94° -> target=(-1.76,4.80) dist=1.90m angle_to_wp=-18° angle_err=76°
+Path received from motion_planner: 12 waypoints. Following now.
+Waypoint 1/12 reached.
+Path received from motion_planner: 12 waypoints. Following now.
+[steer] robot=(-3.53,5.40) yaw=-46° -> target=(-1.62,5.00) dist=1.95m angle_to_wp=-12° angle_err=35°
+Path received from motion_planner: 13 waypoints. Following now.
+Waypoint 1/13 reached.
+[steer] robot=(-3.34,5.33) yaw=-18° -> target=(-1.62,5.00) dist=1.75m angle_to_wp=-11° angle_err=7°
+Path received from motion_planner: 14 waypoints. Following now.
+Waypoint 1/14 reached.
+[steer] robot=(-3.00,5.22) yaw=-12° -> target=(-1.74,5.02) dist=1.28m angle_to_wp=-9° angle_err=3°
+Path received from motion_planner: 13 waypoints. Following now.
+[steer] robot=(-2.73,5.12) yaw=-11° -> target=(-1.68,5.00) dist=1.06m angle_to_wp=-6° angle_err=4°
+[steer] robot=(-2.46,5.02) yaw=-6° -> target=(-1.68,5.00) dist=0.78m angle_to_wp=-2° angle_err=4°
+[steer] robot=(-2.15,4.97) yaw=-0° -> target=(-1.68,5.00) dist=0.47m angle_to_wp=4° angle_err=4°
+Waypoint 2/13 reached.
+[steer] robot=(-1.85,4.96) yaw=4° -> target=(-1.56,4.98) dist=0.30m angle_to_wp=4° angle_err=-1°
+[steer] robot=(-1.62,4.94) yaw=-15° -> target=(-0.32,4.32) dist=1.44m angle_to_wp=-25° angle_err=-11°
+[steer] robot=(-1.30,4.79) yaw=-25° -> target=(-0.32,4.32) dist=1.09m angle_to_wp=-26° angle_err=-1°
+[steer] robot=(-1.03,4.65) yaw=-25° -> target=(-0.32,4.32) dist=0.78m angle_to_wp=-25° angle_err=1°
+[steer] robot=(-0.75,4.50) yaw=-24° -> target=(-0.32,4.32) dist=0.47m angle_to_wp=-23° angle_err=1°
+Waypoint 5/13 reached.
+[steer] robot=(-0.47,4.36) yaw=-27° -> target=(-0.14,4.14) dist=0.40m angle_to_wp=-34° angle_err=-8°
+Waypoint 8/13 reached.
+[steer] robot=(-0.25,4.21) yaw=-49° -> target=(-0.10,-0.40) dist=4.62m angle_to_wp=-88° angle_err=-39°
+[steer] robot=(-0.20,4.00) yaw=-83° -> target=(-0.10,-0.40) dist=4.40m angle_to_wp=-89° angle_err=-6°
+[steer] robot=(-0.17,3.71) yaw=-88° -> target=(-0.10,-0.40) dist=4.11m angle_to_wp=-89° angle_err=-1°
+[steer] robot=(-0.15,3.34) yaw=-89° -> target=(-0.10,-0.40) dist=3.74m angle_to_wp=-89° angle_err=-1°
+[steer] robot=(-0.12,3.03) yaw=-89° -> target=(-0.10,-0.40) dist=3.43m angle_to_wp=-90° angle_err=-1°
+[steer] robot=(-0.09,2.68) yaw=-89° -> target=(-0.10,-0.40) dist=3.08m angle_to_wp=-90° angle_err=-1°
+[steer] robot=(-0.08,2.40) yaw=-90° -> target=(-0.10,-0.40) dist=2.80m angle_to_wp=-90° angle_err=-1°
+[steer] robot=(-0.08,2.04) yaw=-90° -> target=(-0.10,-0.40) dist=2.44m angle_to_wp=-90° angle_err=-1°
+[steer] robot=(-0.06,1.71) yaw=-90° -> target=(-0.10,-0.40) dist=2.11m angle_to_wp=-91° angle_err=-1°
+[steer] robot=(-0.04,1.39) yaw=-91° -> target=(-0.10,-0.40) dist=1.79m angle_to_wp=-92° angle_err=-1°
+Path received from motion_planner: 7 waypoints. Following now.
+Waypoint 1/7 reached.
+Path received from motion_planner: 6 waypoints. Following now.
+[steer] robot=(-0.06,1.07) yaw=-106° -> target=(-1.44,-2.72) dist=4.04m angle_to_wp=-110° angle_err=-5°
+Path received from motion_planner: 7 waypoints. Following now.
+Waypoint 1/7 reached.
+[steer] robot=(-0.10,0.78) yaw=-107° -> target=(-1.32,-2.86) dist=3.84m angle_to_wp=-108° angle_err=-1°
+Path received from motion_planner: 7 waypoints. Following now.
+Path received from motion_planner: 6 waypoints. Following now.
+Waypoint 1/6 reached.
+[steer] robot=(-0.17,0.48) yaw=-108° -> target=(-1.42,-3.08) dist=3.77m angle_to_wp=-109° angle_err=-2°
+Path received from motion_planner: 8 waypoints. Following now.
+[steer] robot=(-0.24,0.19) yaw=-106° -> target=(-1.10,-3.22) dist=3.51m angle_to_wp=-104° angle_err=2°
+Path received from motion_planner: 9 waypoints. Following now.
+Waypoint 1/9 reached.
+Path received from motion_planner: 9 waypoints. Following now.
+[steer] robot=(-0.31,-0.14) yaw=-102° -> target=(-0.96,-3.56) dist=3.48m angle_to_wp=-101° angle_err=1°
+Path received from motion_planner: 9 waypoints. Following now.
+Waypoint 1/9 reached.
+Path received from motion_planner: 9 waypoints. Following now.
+[steer] robot=(-0.38,-0.46) yaw=-100° -> target=(-0.90,-3.60) dist=3.18m angle_to_wp=-99° angle_err=1°
+Path received from motion_planner: 9 waypoints. Following now.
+Waypoint 1/9 reached.
+[steer] robot=(-0.44,-0.79) yaw=-100° -> target=(-0.88,-3.56) dist=2.81m angle_to_wp=-99° angle_err=1°
+[steer] robot=(-0.50,-1.08) yaw=-99° -> target=(-0.88,-3.56) dist=2.51m angle_to_wp=-99° angle_err=1°
+[steer] robot=(-0.58,-1.39) yaw=-99° -> target=(-0.88,-3.56) dist=2.19m angle_to_wp=-98° angle_err=1°
+Path received from motion_planner: 10 waypoints. Following now.
+Waypoint 1/10 reached.
+[steer] robot=(-0.68,-1.64) yaw=-98° -> target=(-0.82,-3.08) dist=1.45m angle_to_wp=-95° angle_err=3°
+[steer] robot=(-0.79,-1.90) yaw=-95° -> target=(-0.82,-3.08) dist=1.18m angle_to_wp=-91° angle_err=4°
+[steer] robot=(-0.87,-2.17) yaw=-91° -> target=(-0.82,-3.08) dist=0.92m angle_to_wp=-87° angle_err=4°
+[steer] robot=(-0.91,-2.45) yaw=-86° -> target=(-0.82,-3.08) dist=0.64m angle_to_wp=-82° angle_err=4°
+[steer] robot=(-0.90,-2.74) yaw=-81° -> target=(-0.82,-3.08) dist=0.35m angle_to_wp=-77° angle_err=3°
+Waypoint 2/10 reached.
+[steer] robot=(-0.86,-3.02) yaw=-87° -> target=(-0.88,-3.56) dist=0.54m angle_to_wp=-92° angle_err=-5°
+Waypoint 3/10 reached.
+[steer] robot=(-0.86,-3.31) yaw=-93° -> target=(-0.92,-3.68) dist=0.37m angle_to_wp=-100° angle_err=-7°
+[steer] robot=(-0.77,-3.47) yaw=-110° -> target=(-0.94,-3.72) dist=0.30m angle_to_wp=-125° angle_err=-15°
+Waypoint 5/10 reached.
+[steer] robot=(-0.89,-3.64) yaw=-128° -> target=(-1.08,-3.86) dist=0.29m angle_to_wp=-132° angle_err=-3°
+Waypoint 6/10 reached.
+[steer] robot=(-1.09,-3.79) yaw=-149° -> target=(-3.32,-3.92) dist=2.23m angle_to_wp=-177° angle_err=-27°
+[steer] robot=(-1.38,-3.78) yaw=-173° -> target=(-3.32,-3.92) dist=1.94m angle_to_wp=-176° angle_err=-3°
+[steer] robot=(-1.73,-3.73) yaw=-175° -> target=(-3.32,-3.92) dist=1.60m angle_to_wp=-173° angle_err=2°
+[steer] robot=(-2.11,-3.69) yaw=-172° -> target=(-3.32,-3.92) dist=1.23m angle_to_wp=-169° angle_err=3°
+[steer] robot=(-2.46,-3.70) yaw=-168° -> target=(-3.32,-3.92) dist=0.89m angle_to_wp=-166° angle_err=2°
+[steer] robot=(-2.75,-3.74) yaw=-165° -> target=(-3.32,-3.92) dist=0.60m angle_to_wp=-162° angle_err=2°
+[steer] robot=(-3.03,-3.79) yaw=-160° -> target=(-3.32,-3.92) dist=0.32m angle_to_wp=-156° angle_err=4°
+Waypoint 9/10 reached.
+[steer] robot=(-3.16,-3.77) yaw=-178° -> target=(-3.52,-3.72) dist=0.36m angle_to_wp=172° angle_err=-10°
+[steer] robot=(-3.38,-3.73) yaw=173° -> target=(-3.52,-3.72) dist=0.14m angle_to_wp=175° angle_err=2°
+Waypoint 10/10 reached.
+GOAL REACHED! Robot stopped at (-3.42,-3.72).
+🎯 Goal received from RViz: (-3.84, 5.59) — waiting for motion_planner to re-plan.
+🎯 Goal received from RViz: (-3.84, 5.59) — waiting for motion_planner to re-plan.
+🎯 Goal received from RViz: (-3.84, 5.59) — waiting for motion_planner to re-plan.
+Path received from motion_planner: 15 waypoints. Following now.
+Waypoint 1/15 reached.
+[steer] robot=(-3.41,-3.72) yaw=175° -> target=(-1.32,-2.84) dist=2.27m angle_to_wp=23° angle_err=-152°
+Path received from motion_planner: 15 waypoints. Following now.
+[steer] robot=(-3.37,-3.70) yaw=123° -> target=(-1.24,-2.90) dist=2.28m angle_to_wp=21° angle_err=-102°
+Path received from motion_planner: 15 waypoints. Following now.
+Waypoint 1/15 reached.
+[steer] robot=(-3.33,-3.68) yaw=71° -> target=(-1.18,-2.94) dist=2.27m angle_to_wp=19° angle_err=-52°
+Path received from motion_planner: 15 waypoints. Following now.
+Path received from motion_planner: 15 waypoints. Following now.
+Waypoint 1/15 reached.
+[steer] robot=(-3.21,-3.61) yaw=25° -> target=(-1.02,-3.12) dist=2.25m angle_to_wp=13° angle_err=-13°
+Path received from motion_planner: 15 waypoints. Following now.
+Path received from motion_planner: 15 waypoints. Following now.
+Waypoint 1/15 reached.
+[steer] robot=(-2.87,-3.49) yaw=14° -> target=(-0.96,-3.16) dist=1.94m angle_to_wp=10° angle_err=-4°
+Path received from motion_planner: 15 waypoints. Following now.
+[steer] robot=(-2.53,-3.38) yaw=11° -> target=(-0.96,-3.16) dist=1.59m angle_to_wp=8° angle_err=-3°
+Path received from motion_planner: 16 waypoints. Following now.
+Waypoint 1/16 reached.
+[steer] robot=(-2.26,-3.29) yaw=9° -> target=(-1.08,-3.10) dist=1.19m angle_to_wp=9° angle_err=0°
+Path received from motion_planner: 17 waypoints. Following now.
+[steer] robot=(-1.99,-3.19) yaw=11° -> target=(-0.94,-3.02) dist=1.06m angle_to_wp=9° angle_err=-2°
+Path received from motion_planner: 19 waypoints. Following now.
+Waypoint 1/19 reached.
+[steer] robot=(-1.78,-3.06) yaw=14° -> target=(-1.04,-2.90) dist=0.76m angle_to_wp=12° angle_err=-2°
+Path received from motion_planner: 16 waypoints. Following now.
+[steer] robot=(-1.53,-2.96) yaw=18° -> target=(-1.16,-2.84) dist=0.39m angle_to_wp=18° angle_err=-0°
+Path received from motion_planner: 15 waypoints. Following now.
+Waypoint 1/15 reached.
+[steer] robot=(-1.26,-2.84) yaw=32° -> target=(-0.92,-2.52) dist=0.47m angle_to_wp=43° angle_err=11°
+Waypoint 3/15 reached.
+[steer] robot=(-1.04,-2.64) yaw=49° -> target=(-0.52,-1.78) dist=1.01m angle_to_wp=59° angle_err=10°
+[steer] robot=(-0.88,-2.36) yaw=58° -> target=(-0.52,-1.78) dist=0.69m angle_to_wp=58° angle_err=0°
+[steer] robot=(-0.73,-2.07) yaw=56° -> target=(-0.52,-1.78) dist=0.36m angle_to_wp=53° angle_err=-3°
+Waypoint 4/15 reached.
+Path received from motion_planner: 14 waypoints. Following now.
+[steer] robot=(-0.67,-1.87) yaw=72° -> target=(-0.36,0.86) dist=2.74m angle_to_wp=84° angle_err=11°
+Path received from motion_planner: 8 waypoints. Following now.
+[steer] robot=(-0.61,-1.57) yaw=73° -> target=(0.46,1.70) dist=3.44m angle_to_wp=72° angle_err=-1°
+[steer] robot=(-0.54,-1.24) yaw=72° -> target=(0.46,1.70) dist=3.10m angle_to_wp=71° angle_err=-1°
+[steer] robot=(-0.47,-0.94) yaw=71° -> target=(0.46,1.70) dist=2.80m angle_to_wp=71° angle_err=-1°
+[steer] robot=(-0.39,-0.62) yaw=71° -> target=(0.46,1.70) dist=2.47m angle_to_wp=70° angle_err=-1°
+[steer] robot=(-0.29,-0.33) yaw=70° -> target=(0.46,1.70) dist=2.17m angle_to_wp=70° angle_err=-0°
+Path received from motion_planner: 10 waypoints. Following now.
+Waypoint 1/10 reached.
+[steer] robot=(-0.17,-0.02) yaw=71° -> target=(0.38,1.70) dist=1.81m angle_to_wp=72° angle_err=1°
+Path received from motion_planner: 10 waypoints. Following now.
+Path received from motion_planner: 11 waypoints. Following now.
+Waypoint 1/11 reached.
+[steer] robot=(-0.05,0.26) yaw=72° -> target=(0.38,1.70) dist=1.50m angle_to_wp=73° angle_err=1°
+Path received from motion_planner: 10 waypoints. Following now.
+Path received from motion_planner: 10 waypoints. Following now.
+Waypoint 1/10 reached.
+[steer] robot=(0.05,0.58) yaw=75° -> target=(0.22,1.76) dist=1.19m angle_to_wp=82° angle_err=7°
+Path received from motion_planner: 11 waypoints. Following now.
+[steer] robot=(0.08,0.86) yaw=81° -> target=(0.24,1.86) dist=1.01m angle_to_wp=81° angle_err=-0°
+Path received from motion_planner: 9 waypoints. Following now.
+Waypoint 1/9 reached.
+Path received from motion_planner: 10 waypoints. Following now.
+[steer] robot=(0.06,1.16) yaw=81° -> target=(0.20,1.82) dist=0.67m angle_to_wp=78° angle_err=-3°
+[steer] robot=(0.06,1.47) yaw=75° -> target=(0.20,1.82) dist=0.37m angle_to_wp=68° angle_err=-7°
+Waypoint 2/10 reached.
+[steer] robot=(0.11,1.75) yaw=74° -> target=(0.26,2.30) dist=0.57m angle_to_wp=75° angle_err=1°
+[steer] robot=(0.17,2.06) yaw=73° -> target=(0.26,2.30) dist=0.25m angle_to_wp=70° angle_err=-3°
+Waypoint 3/10 reached.
+Path received from motion_planner: 9 waypoints. Following now.
+[steer] robot=(0.21,2.35) yaw=86° -> target=(0.26,4.04) dist=1.69m angle_to_wp=88° angle_err=3°
+[steer] robot=(0.21,2.65) yaw=88° -> target=(0.26,4.04) dist=1.39m angle_to_wp=88° angle_err=0°
+[steer] robot=(0.22,2.90) yaw=88° -> target=(0.26,4.04) dist=1.14m angle_to_wp=88° angle_err=0°
+[steer] robot=(0.24,3.16) yaw=88° -> target=(0.26,4.04) dist=0.89m angle_to_wp=89° angle_err=1°
+Path received from motion_planner: 7 waypoints. Following now.
+Waypoint 1/7 reached.
+Path received from motion_planner: 7 waypoints. Following now.
+[steer] robot=(0.20,3.27) yaw=117° -> target=(-0.44,4.20) dist=1.13m angle_to_wp=124° angle_err=8°
+[steer] robot=(0.03,3.51) yaw=124° -> target=(-0.44,4.20) dist=0.84m angle_to_wp=125° angle_err=1°
+[steer] robot=(-0.15,3.75) yaw=124° -> target=(-0.44,4.20) dist=0.53m angle_to_wp=123° angle_err=-1°
+Waypoint 2/7 reached.
+[steer] robot=(-0.33,4.00) yaw=122° -> target=(-0.66,4.42) dist=0.54m angle_to_wp=128° angle_err=6°
+[steer] robot=(-0.55,4.25) yaw=128° -> target=(-0.74,4.46) dist=0.28m angle_to_wp=132° angle_err=4°
+Waypoint 4/7 reached.
+[steer] robot=(-0.77,4.39) yaw=146° -> target=(-1.88,5.00) dist=1.26m angle_to_wp=151° angle_err=5°
+[steer] robot=(-1.07,4.53) yaw=150° -> target=(-1.88,5.00) dist=0.94m angle_to_wp=150° angle_err=-1°
+[steer] robot=(-1.36,4.66) yaw=149° -> target=(-1.88,5.00) dist=0.63m angle_to_wp=147° angle_err=-2°
+[steer] robot=(-1.63,4.82) yaw=145° -> target=(-1.88,5.00) dist=0.31m angle_to_wp=144° angle_err=-1°
+Waypoint 5/7 reached.
+[steer] robot=(-1.89,4.98) yaw=159° -> target=(-3.82,5.32) dist=1.96m angle_to_wp=170° angle_err=11°
+[steer] robot=(-2.15,5.07) yaw=168° -> target=(-3.82,5.32) dist=1.69m angle_to_wp=171° angle_err=4°
+[steer] robot=(-2.41,5.15) yaw=171° -> target=(-3.82,5.32) dist=1.42m angle_to_wp=173° angle_err=2°
+[steer] robot=(-2.67,5.23) yaw=173° -> target=(-3.82,5.32) dist=1.16m angle_to_wp=176° angle_err=3°
+[steer] robot=(-2.97,5.30) yaw=176° -> target=(-3.82,5.32) dist=0.85m angle_to_wp=178° angle_err=2°
+[steer] robot=(-3.24,5.34) yaw=179° -> target=(-3.82,5.32) dist=0.58m angle_to_wp=-178° angle_err=3°
+[steer] robot=(-3.49,5.37) yaw=-177° -> target=(-3.82,5.32) dist=0.33m angle_to_wp=-172° angle_err=5°
+[steer] robot=(-3.69,5.36) yaw=-168° -> target=(-3.82,5.32) dist=0.13m angle_to_wp=-164° angle_err=5°
+Waypoint 7/7 reached.
+GOAL REACHED! Robot stopped at (-3.73,5.35).
+Traceback (most recent call last):
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/robo_project/runner_node", line 33, in <module>
+    sys.exit(load_entry_point('robo-project==0.1.0', 'console_scripts', 'runner_node')())
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/ros/runner_node.py", line 502, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241
+[ros2run]: Process exited with failure 1

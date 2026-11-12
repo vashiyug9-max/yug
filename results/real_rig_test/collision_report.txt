@@ -1,0 +1,13 @@
+bag: bags/real_rig_test
+duration 271.6 s, distance driven 60.86 m, goals clicked 15, /blocked_point reports 0
+navmesh agent_radius = 0.10 m (Habitat's collision model of the robot)
+
+1. SIM CONTACT (Habitat clipped the motion: driven < 50% of commanded over 0.5 s)
+   events: 0
+
+2. BODY OVERLAP (1.15 x 0.60 m footprint inside scene obstacles by > 2 cm)
+   events: 3, time overlapping: 0.5% of the run, max depth 6.0 cm
+   min body clearance when not overlapping: 0.0 cm
+   t=  113.5-  116.2 s  at (4.91,0.73)  max depth 6.0 cm
+   t=  157.4-  157.6 s  at (-3.66,5.36)  max depth 4.0 cm
+   t=  158.6-  158.7 s  at (-3.66,5.36)  max depth 4.0 cm

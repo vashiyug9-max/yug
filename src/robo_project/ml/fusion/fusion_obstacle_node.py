@@ -90,6 +90,14 @@ class FusionObstacleNode(Node):
         p("l_max", 7.0)
         p("l_occ", 1.0)
         p("l_free", -1.0)
+        # forget_s > 0: evidence not refreshed fades with this time constant (s) and old cells become unknown.
+        # For localization (estimated pose): obstacles mapped with an earlier, slightly different pose would
+        # otherwise pile up as ghost obstacles and close corridors. 0 = keep everything (default, true pose).
+        p("forget_s", 0.0)
+        # sync_tolerance (s): sensors count as the same frame if their stamps are this close to the front
+        # camera's. 0 = identical stamps (simulation: the bridge stamps all sensors alike). Real robot: ~0.1
+        # (otherwise only the front camera would ever be used - real sensors never share a stamp).
+        p("sync_tolerance", 0.0)
         p("lidar_map", True)
         p("lidar_map_range", 4.0)
         p("lidar_hit", 2.0)
@@ -164,6 +172,10 @@ class FusionObstacleNode(Node):
         self.obst_pub = self.create_publisher(OccupancyGrid, "/fusion/obstacle_map", 2)
         self.create_timer(0.02, self.tick)
         self.create_timer(1.0, self.heartbeat)
+        self.forget_s = float(g("forget_s"))
+        self.sync_tol_ns = int(float(g("sync_tolerance")) * 1e9)
+        if self.forget_s > 0:
+            self.create_timer(1.0, self.forget)
         on = [k for k, v in self.use.items() if v]
         self.get_logger().info(f"Fusion model {path} on {self.model.device}, local grid {self.extent} m, "
                                f"sensors {on}. Waiting for /map ...")
@@ -199,9 +211,11 @@ class FusionObstacleNode(Node):
         if ns == self.last_done_ns:
             return
         # Wait (max 0.1 s) until every enabled sensor delivered this same frame.
-        complete = ((not self.use["cams"] or all(c in self.rgb and self.rgb[c][0] == ns for c in CAM_ORDER))
-                    and (not self.use["lidar"] or (self.cloud is not None and self.cloud[0] == ns))
-                    and (not self.use["depth"] or (self.depth is not None and self.depth[0] == ns)))
+        tol = self.sync_tol_ns
+        same = lambda t: abs(t - ns) <= tol          # simulation: tol 0 = exactly the same frame
+        complete = ((not self.use["cams"] or all(c in self.rgb and same(self.rgb[c][0]) for c in CAM_ORDER))
+                    and (not self.use["lidar"] or (self.cloud is not None and same(self.cloud[0])))
+                    and (not self.use["depth"] or (self.depth is not None and same(self.depth[0]))))
         if not complete:
             if self.waiting_ns != ns:
                 self.waiting_ns, self.waiting_since = ns, time.monotonic()
@@ -215,9 +229,9 @@ class FusionObstacleNode(Node):
         rgb = {}
         if self.use["cams"]:
             # only images of this same frame (the bridge stamps all sensors of a frame alike)
-            rgb = {c: decode_rgb(m) for c, (t, m) in self.rgb.items() if t == ns}
+            rgb = {c: decode_rgb(m) for c, (t, m) in self.rgb.items() if same(t)}
         lidar_grid = depth_grid = pts = None
-        if self.use["lidar"] and self.cloud is not None and self.cloud[0] == ns:
+        if self.use["lidar"] and self.cloud is not None and same(self.cloud[0]):
             cmsg = self.cloud[1]
             pts = read_points_numpy(cmsg, field_names=("x", "y", "z"), skip_nans=True).astype(np.float64)
             if cmsg.header.frame_id not in ("", "base_footprint"):
@@ -232,7 +246,7 @@ class FusionObstacleNode(Node):
                     self.warned_frame = True
             pts = drop_self_hits(pts, self.rig)        # returns from the robot's own masts / mounts
             lidar_grid = self.inputs.lidar_grid(pts)
-        if self.use["depth"] and self.depth is not None and self.depth[0] == ns:
+        if self.use["depth"] and self.depth is not None and same(self.depth[0]):
             depth_grid = self.inputs.depth_grid(decode_depth(self.depth[1]))
 
         t = time.monotonic()
@@ -362,6 +376,19 @@ class FusionObstacleNode(Node):
         occ = np.clip(np.round((1.0 - free[::-1, ::-1].T) * 100.0), 0, 100).astype(np.int8)
         msg.data = occ.ravel().tolist()
         self.grid_pub.publish(msg)
+
+    def forget(self):
+        """Fade all evidence by exp(-1 s / forget_s); cells that drop well inside the thresholds become unknown."""
+        if self.logodds is None:
+            return
+        self.logodds *= math.exp(-1.0 / self.forget_s)
+        old_occ = self.state == 100
+        fade = ((self.state == 100) & (self.logodds < 0.5 * self.l_occ)) | \
+               ((self.state == 0) & (self.logodds > 0.5 * self.l_free))
+        if fade.any():
+            self.state[fade] = -1
+            if (old_occ & fade).any():
+                self.publish_map()
 
     def publish_map(self):
         msg = OccupancyGrid()

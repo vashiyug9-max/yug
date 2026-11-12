@@ -1,0 +1,3 @@
+[INFO] [1794427587.814651069] [fusion_obstacle_node]: Fusion model /home/yug/robo_project_ws/robo_project_ws/runs/fusion_mid360_e3.0/best.pt on cpu, local grid 3.0 m, sensors ['cams', 'lidar', 'depth']. Waiting for /map ...
+[INFO] [1794427588.818041337] [fusion_obstacle_node]: Obstacle map 768x1024 @ 0.019999999552965164 m aligned with /map. Publishing /fusion/obstacle_map
+[INFO] [1794427594.867722634] [fusion_obstacle_node]: 58 predictions (0 with a sensor missing), 73 ms each, 21101 obstacle cells in the map

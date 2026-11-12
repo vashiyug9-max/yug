@@ -1,0 +1,29 @@
+[INFO] [1794429121.044377297] [fusion_obstacle_node]: Fusion model /home/yug/robo_project_ws/robo_project_ws/runs/fusion_mid360_e3.0/best.pt on cpu, local grid 3.0 m, sensors ['cams', 'lidar', 'depth']. Waiting for /map ...
+[INFO] [1794429121.805384308] [fusion_obstacle_node]: Obstacle map 768x1024 @ 0.019999999552965164 m aligned with /map. Publishing /fusion/obstacle_map
+[INFO] [1794429128.098977065] [fusion_obstacle_node]: 54 predictions (0 with a sensor missing), 85 ms each, 13084 obstacle cells in the map
+[INFO] [1794429158.122369131] [fusion_obstacle_node]: 286 predictions (0 with a sensor missing), 85 ms each, 27267 obstacle cells in the map
+[INFO] [1794429189.063151986] [fusion_obstacle_node]: 537 predictions (0 with a sensor missing), 83 ms each, 18642 obstacle cells in the map
+[INFO] [1794429219.145767348] [fusion_obstacle_node]: 786 predictions (0 with a sensor missing), 81 ms each, 34633 obstacle cells in the map
+[INFO] [1794429249.153166047] [fusion_obstacle_node]: 1026 predictions (0 with a sensor missing), 81 ms each, 31096 obstacle cells in the map
+[INFO] [1794429280.054461643] [fusion_obstacle_node]: 1282 predictions (0 with a sensor missing), 81 ms each, 20619 obstacle cells in the map
+[INFO] [1794429310.111189619] [fusion_obstacle_node]: 1534 predictions (0 with a sensor missing), 80 ms each, 25805 obstacle cells in the map
+[INFO] [1794429340.119661726] [fusion_obstacle_node]: 1790 predictions (0 with a sensor missing), 78 ms each, 33388 obstacle cells in the map
+[INFO] [1794429371.068201021] [fusion_obstacle_node]: 2056 predictions (0 with a sensor missing), 77 ms each, 21076 obstacle cells in the map
+[INFO] [1794429401.091601226] [fusion_obstacle_node]: 2299 predictions (0 with a sensor missing), 77 ms each, 24865 obstacle cells in the map
+Traceback (most recent call last):
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/robo_project/fusion_obstacle_node", line 33, in <module>
+    sys.exit(load_entry_point('robo-project==0.1.0', 'console_scripts', 'fusion_obstacle_node')())
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/ml/fusion/fusion_obstacle_node.py", line 409, in main
+    rclpy.spin(node)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+    executor.spin_once()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+    raise ExternalShutdownException()
+rclpy.executors.ExternalShutdownException
+[ros2run]: Process exited with failure 1

@@ -1,0 +1,173 @@
+CMN FULL PIPELINE — SEPARATE TERMINAL COMMANDS
+===========================================
+Workspace: /home/jd1152/robotics_project/robo_project_ws
+ROS 2: Humble | ROS_DOMAIN_ID=77 | ROS_LOCALHOST_ONLY=1
+
+IMPORTANT:
+- First stop any running cmn_full_navigation_preview.launch.py or old individual nodes (Ctrl+C), otherwise duplicate nodes may start.
+- Open a NEW terminal for each numbered section and paste its complete command block.
+- Run terminals in number order. Keep each process terminal open.
+- Motion remains DISABLED (enable_motion:=false). Do NOT change this until localization accuracy and safety are validated.
+- Simulation GT /odom must NOT be substituted for the planner or runner localization-derived /localization/nav_odom.
+
+--------------------------------------------------
+TERMINAL 1 — HABITAT SIMULATION (CAMERAS + LIDAR)
+--------------------------------------------------
+cd /home/jd1152/robotics_project/robo_project_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+export ROS_DOMAIN_ID=77
+export ROS_LOCALHOST_ONLY=1
+export PYTHONPATH="$PWD/src:${PYTHONPATH:-}"
+
+/home/jd1152/miniconda3/envs/habitat_ros310_np1/bin/python \
+  -m robo_project.sim.habitat_bridge \
+  --ros-args \
+  -p gpu_device_id:=-1 \
+  -p show_window:=true \
+  -p publish_lidar:=true \
+  -p lidar_model:=mid360
+
+--------------------------------------------------
+TERMINAL 2 — FUSION ML LOCAL OCCUPANCY
+--------------------------------------------------
+cd /home/jd1152/robotics_project/robo_project_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+export ROS_DOMAIN_ID=77
+export ROS_LOCALHOST_ONLY=1
+export PYTHONPATH="$PWD/src:${PYTHONPATH:-}"
+
+ros2 run robo_project fusion_obstacle_node \
+  --ros-args \
+  -p model_path:=/home/jd1152/robotics_project/robo_project_ws/runs/fusion_mid360_e3.0/best.pt \
+  -p rig:=/home/jd1152/robotics_project/robo_project_ws/src/robo_project/config/vinebot_rig.yaml \
+  -p lidar_map:=false
+
+--------------------------------------------------
+TERMINAL 3 — CMN GLOBAL LOCALIZATION
+--------------------------------------------------
+cd /home/jd1152/robotics_project/robo_project_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+export ROS_DOMAIN_ID=77
+export ROS_LOCALHOST_ONLY=1
+export PYTHONPATH="$PWD/src:${PYTHONPATH:-}"
+
+ros2 run robo_project live_global_pose_node \
+  --ros-args \
+  -r __node:=step361_live_localization
+
+--------------------------------------------------
+TERMINAL 4 — LOCALIZATION GT ERROR MONITOR (SIMULATION ONLY)
+--------------------------------------------------
+cd /home/jd1152/robotics_project/robo_project_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+export ROS_DOMAIN_ID=77
+export ROS_LOCALHOST_ONLY=1
+export PYTHONPATH="$PWD/src:${PYTHONPATH:-}"
+
+ros2 run robo_project localization_error_monitor_node \
+  --ros-args \
+  -r __node:=step364_motion_accuracy
+
+--------------------------------------------------
+TERMINAL 5 — LOCALIZATION NAVIGATION BRIDGE
+--------------------------------------------------
+cd /home/jd1152/robotics_project/robo_project_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+export ROS_DOMAIN_ID=77
+export ROS_LOCALHOST_ONLY=1
+export PYTHONPATH="$PWD/src:${PYTHONPATH:-}"
+
+ros2 run robo_project localization_navigation_bridge \
+  --ros-args \
+  -r __node:=cmn_navigation_bridge
+
+--------------------------------------------------
+TERMINAL 6 — MOTION PLANNER
+--------------------------------------------------
+cd /home/jd1152/robotics_project/robo_project_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+export ROS_DOMAIN_ID=77
+export ROS_LOCALHOST_ONLY=1
+export PYTHONPATH="$PWD/src:${PYTHONPATH:-}"
+
+ros2 run robo_project motion_planner \
+  --ros-args \
+  -r /odom:=/localization/nav_odom \
+  -r /fusion/obstacle_map:=/localization/disabled_world_obstacle_map
+
+--------------------------------------------------
+TERMINAL 7 — RUNNER (PROPOSED COMMANDS ONLY)
+--------------------------------------------------
+cd /home/jd1152/robotics_project/robo_project_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+export ROS_DOMAIN_ID=77
+export ROS_LOCALHOST_ONLY=1
+export PYTHONPATH="$PWD/src:${PYTHONPATH:-}"
+
+ros2 run robo_project runner_node \
+  --ros-args \
+  -r /odom:=/localization/nav_odom \
+  -r /cmd_vel:=/localization/proposed_cmd_vel \
+  -r /fusion/obstacle_map:=/localization/disabled_world_obstacle_map
+
+--------------------------------------------------
+TERMINAL 8 — SIMULATION MOTION SAFETY GATE (DISABLED)
+--------------------------------------------------
+cd /home/jd1152/robotics_project/robo_project_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+export ROS_DOMAIN_ID=77
+export ROS_LOCALHOST_ONLY=1
+export PYTHONPATH="$PWD/src:${PYTHONPATH:-}"
+
+ros2 run robo_project localization_motion_gate \
+  --ros-args \
+  -r __node:=cmn_simulation_motion_gate \
+  -p enable_motion:=false
+
+--------------------------------------------------
+TERMINAL 9 — RVIZ VISUALIZATION
+--------------------------------------------------
+cd /home/jd1152/robotics_project/robo_project_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+export ROS_DOMAIN_ID=77
+export ROS_LOCALHOST_ONLY=1
+
+rviz2 -d \
+  /home/jd1152/robotics_project/robo_project_ws/localization_debug_manual/cmn_navigation_debug.rviz
+
+--------------------------------------------------
+TERMINAL 10 — OPTIONAL DEBUGGING / SAFETY VERIFICATION
+--------------------------------------------------
+cd /home/jd1152/robotics_project/robo_project_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+export ROS_DOMAIN_ID=77
+export ROS_LOCALHOST_ONLY=1
+
+ros2 node list | sort
+ros2 topic info /fusion/local_grid
+ros2 topic info /localization/provisional_pose
+ros2 topic info /localization/nav_odom
+ros2 topic info /planned_path
+ros2 topic info /cmd_vel
+ros2 node info /motion_planner
+ros2 node info /runner_node
+
+EXPECTED:
+- Motion planner and runner subscribe to /localization/nav_odom (NOT simulator /odom).
+- Runner publishes to /localization/proposed_cmd_vel (NOT /cmd_vel).
+- /cmd_vel has 0 publishers while motion gate enable_motion is false.
+- Map, ML, localization and planned path should have publishers and live messages.
+
+To stop: Ctrl+C in each process terminal.
+
+NOTE: This is a simulation-based navigation PREVIEW. Global map alignment and localization accuracy have not yet been validated; do not enable autonomous movement.

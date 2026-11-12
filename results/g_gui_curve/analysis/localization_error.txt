@@ -1,0 +1,4 @@
+bag results/g_gui_curve/bag: 9682 poses over 275 s, robot drove 67.4 m
+LOCALIZATION   position error (m): mean 0.475  median 0.448  p95 0.975  max 1.034
+               heading error (deg): mean 5.379  median 5.372  p95 9.593  max 11.177
+WHEEL ODOMETRY only (no localization), position error (m): mean 0.293  median 0.301  p95 0.524  max 0.546

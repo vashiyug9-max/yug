@@ -1,0 +1,21 @@
+[goal 0] -> (0.00,0.00)
+[goal 0] REACHED after 31.0 s (final distance 0.10 m)
+[goal 1] -> (4.38,-3.89)
+[goal 1] REACHED after 23.9 s (final distance 0.09 m)
+[goal 2] -> (5.00,0.72)
+[goal 2] REACHED after 83.3 s (final distance 0.10 m)
+[goal 3] -> (-3.74,5.32)
+[goal 3] REACHED after 48.0 s (final distance 0.09 m)
+[goal 4] -> (-3.33,-4.04)
+[goal 4] REACHED after 62.0 s (final distance 0.09 m)
+[goal 5] -> (-3.84,5.59)
+[goal 5] REACHED after 98.9 s (final distance 0.10 m)
+
+SUMMARY
+  goal 0 (  0.00,  0.00): REACHED    31.0 s  dist 0.10 m
+  goal 1 (  4.38, -3.89): REACHED    23.9 s  dist 0.09 m  (parked 0.35 m from the clicked goal: too close to a wall)
+  goal 2 (  5.00,  0.72): REACHED    83.3 s  dist 0.10 m  (parked 0.24 m from the clicked goal: too close to a wall)
+  goal 3 ( -3.74,  5.32): REACHED    48.0 s  dist 0.09 m
+  goal 4 ( -3.33, -4.04): REACHED    62.0 s  dist 0.09 m  (parked 0.43 m from the clicked goal: too close to a wall)
+  goal 5 ( -3.84,  5.59): REACHED    98.9 s  dist 0.10 m  (parked 0.27 m from the clicked goal: too close to a wall)
+SEQUENCE DONE

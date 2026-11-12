@@ -3,9 +3,14 @@ VineBot – Habitat simulation with ML obstacle avoidance
 
 Before you start (once)
 # - the workspace is at ~/robo_project_ws (otherwise change the "cd" lines below)
+#   NOTE 2026-11-12: on this PC it is currently one level deeper, ~/robo_project_ws/robo_project_ws. Either
+#   use that path in the cd lines, or move it up once (no terminals running), then rebuild:
+#     mv ~/robo_project_ws/robo_project_ws ~/rpw_tmp && rmdir ~/robo_project_ws && mv ~/rpw_tmp ~/robo_project_ws
+#     cd ~/robo_project_ws && rm -rf build install && colcon build --cmake-args -DPython3_EXECUTABLE=/usr/bin/python3
 # - conda env "habitat" with habitat_sim, torch and numba; ROS 2 Humble in /opt/ros/humble
 # - the ML checkpoint at ~/robo_project_ws/runs/fusion_mid360_e3.0/best.pt (not in git, 72 MB)
 # - the scene src/environment/IMR_lab8.glb + .navmesh and the map src/resources/sketch_map_imr_lab8.jpeg
+# Simulation: the terminals below. Real robot (motors + PS4): section "REAL ROBOT" near the end.
 
 Run order: build once -> Habitat -> robot model -> RViz -> runner (map) -> ML model -> planner.
 Wait for each step's "ready" line before starting the next one. Stop everything with Ctrl+C.
@@ -119,6 +124,53 @@ python3 src/robo_project/ml/tools/eval_model.py bags/my_run src/environment/IMR_
 # analyze_collisions: contacts in Habitat + robot body overlapping obstacles, with a map image
 # eval_model: ML model accuracy vs ground truth, compared with LiDAR alone
 
+LOCALIZATION  (sketch particle filter - localization/sketch_pf_node.py)
+
+# The filter tracks the pose on the hand-drawn /map with odometry + the ML grid (/fusion/local_grid) and
+# publishes /localization/odom. Runner, planner and ML node then use it INSTEAD of the true /odom by a
+# remap only:  --ros-args -r /odom:=/localization/odom   (no code change in those nodes)
+# Start pose: -p init_x/init_y/init_yaw (default = simulation spawn -4.10 4.90 0) or RViz "2D Pose Estimate".
+# Accuracy (simulation): 4 cm on a perfect map; ~0.7 m mean (max ~1.2 m) on the hand-drawn sketch, because
+#   the sketch itself is drawn up to ~0.8 m off reality (on the real robot the sketch IS the map).
+# Defaults = wheels + IMU odometry (EKF). Wheel odometry ONLY: add
+#   -p noise_trans_per_m:=0.08 -p noise_rot_per_rad:=0.10 -p corr_rot_per_rad:=0.15 -p corr_rot_per_m:=0.05
+#   (tracks slip in turns -> heading errors up to ~25 deg -> an IMU is needed for safe autonomous driving)
+# RViz: "Localization Particles" (green arrows) and "Localization Pose" (yellow, with uncertainty).
+
+simulation with localization: terminals 2-4 as above, then instead of terminals 5-7:
+
+terminal L1  (simulated odometry - the real robot does not need this)
+conda activate habitat
+cd ~/robo_project_ws
+source install/setup.bash
+python3 src/robo_project/sim/tools/wheel_odom_sim.py --ros-args -p rot_scale:=1.01 -p rot_noise:=0.01
+# publishes /wheel_odom like wheels + IMU (1% turn error). Without the -p: wheels only (3% distance,
+#   8% turn error) - then start the filter with the wheel-only settings above.
+
+terminal L2  (particle filter)
+conda activate habitat
+cd ~/robo_project_ws
+source install/setup.bash
+ros2 run robo_project sketch_pf_node
+# ready when: "Map 768x1024 ..." and "PF started at (-4.10, 4.90, 0 deg)"; logs every 20 updates
+# other start: -p init_x:=... -p init_y:=... -p init_yaw:=...   (or "2D Pose Estimate" in RViz)
+
+terminals L3-L5  (runner, ML, planner on the localized pose - start in this order, as terminals 5-7)
+ros2 run robo_project runner_node --ros-args -r /odom:=/localization/odom
+ros2 run robo_project fusion_obstacle_node --ros-args -r /odom:=/localization/odom -p forget_s:=20.0
+python3 -m robo_project.planning.motion_planner --ros-args -r /odom:=/localization/odom
+# forget_s: old obstacle evidence fades (pose corrections would otherwise leave ghost obstacles that close
+#   corridors). The planner parks with 0.80 m of room from obstacles (robot corner radius 0.65 m).
+
+# whole test headless:  src/robo_project/sim/tools/run_regression.sh results/my_loc_test "" loc_imu
+#   (loc = wheel odometry only; loc_imu = wheels + IMU) - prints goals / contacts / overlap and the
+#   localization error vs the true pose (sim/tools/loc_error.py)
+# tune offline on a recording (seconds per try, also with seed=N to check robustness):
+#   python3 src/robo_project/sim/tools/pf_replay.py results/my_test/bag rot_scale=1.01 rot_noise=0.01
+# Your friend's first version (live_global_pose_node, localization_navigation_bridge, localization_motion_gate,
+#   cmn_*.launch.py) is kept unchanged for reference; it searches the whole map every 10 s at 4 headings
+#   and was 1.8-9.3 m off - use sketch_pf_node instead.
+
 regression test  (whole stack headless: 6 goals + the former freeze spot, recorded and analysed, ~10 min)
 
 conda activate habitat
@@ -165,6 +217,95 @@ python -m robo_project.ml.fusion.train_fusion --data data/fusion_mid360 --extent
 # writes best.pt, report.json (validation scores incl. LiDAR-only baseline) and examples.png.
 # fusion_obstacle_node picks runs/fusion_mid360_e3.0/best.pt automatically (else fusion_real_rig_e3.0, fusion_full_e1.2),
 # and warns when the model was trained for another rig than config/vinebot_rig.yaml.
+
+REAL ROBOT  (motors + PS4 joystick - packages serial, ps4_ros2, roboteq_controller_ros2, vinebot_bringup)
+
+# once: system packages, then build (system python, no conda needed)
+sudo apt install ros-humble-ros2-control ros-humble-ros2-controllers ros-humble-diagnostic-updater ros-humble-twist-mux
+cd ~/robo_project_ws
+source /opt/ros/humble/setup.bash
+colcon build --packages-select serial roboteq ps4_ros2 vinebot_bringup
+# whole workspace at once (7 packages): colcon build --cmake-args -DPython3_EXECUTABLE=/usr/bin/python3
+
+robot terminal 1  (motors, joystick, who-drives logic, robot model for TF)
+
+cd ~/robo_project_ws
+source install/setup.bash
+ros2 launch vinebot_bringup real_robot.launch.py
+# ready when: "Configured and activated roboteq_controller" and "... joint_state_broadcaster"
+# options: serial_port:=/dev/ttyUSB0  baud_rate:=115200  joystick:=false  enable_button:=4 (L1)
+#          confirm_moves:=true (default; autonomy only via robot terminal 1b)
+#          use_mock_hardware:=true  (no robot attached: test the whole chain on a laptop)
+# before driving: release the ORANGE e-stop remote (unscrew the black button, press green) and keep it
+#   in your hand - it is the real emergency stop.
+# PS4: calibrate first (follow the ps4_ros2 prints). Drive only while holding L1:
+#   R2/L2 = forward/back (1/10 speed; with Square 1/5, with X full), left stick = turn.
+#   O = stop everything (/emergency lock in twist_mux). Release L1 -> one stop, then autonomy may drive.
+# who drives (twist_mux, vinebot_bringup/config/twist_mux.yaml):
+#   joystick /cmd_vel_joy (only while L1 held) > autonomy /cmd_vel (our runner_node) ; /emergency blocks all
+#   -> /roboteq_controller/cmd_vel_unstamped. Odometry: /odom + TF odom -> base_footprint (wheel encoders).
+# robot model for TF = our vinebot_description (base_footprint at the track centre, sensors as in
+#   config/vinebot_rig.yaml); the roboteq model is only used inside the controller_manager.
+# check:  ros2 control list_controllers   (both "active")
+
+robot terminal 1b  (move confirmation - run it in its OWN terminal, it asks here)
+
+cd ~/robo_project_ws
+source install/setup.bash
+ros2 run vinebot_bringup motion_confirm
+# with confirm_moves:=true (default of real_robot.launch.py) the autonomy (/cmd_vel of runner_node)
+# reaches the motors ONLY through this node. For every new goal it prints goal, park position,
+# path length, waypoints and asks "Move? [y/N]":  y = drive,  anything else = stay,  s = stop any time.
+# Re-plans to the same goal do not ask again. Without this terminal the robot never drives autonomously.
+# answer from another terminal instead:  ros2 topic pub --once /motion_confirm std_msgs/msg/Bool "{data: true}"
+# switch it off: ros2 launch vinebot_bringup real_robot.launch.py confirm_moves:=false
+# test it in the SIMULATION: start the bridge with  --ros-args -r /cmd_vel:=/cmd_vel_confirmed
+
+robot terminals 2-4  sensors (drivers not in this workspace - install them once on the robot PC with
+  bash ~/robo_project_ws/install_robot_drivers.sh     (asks for the sudo password; Livox is built in ~/drivers_ws)
+  then: echo 'source ~/drivers_ws/install/setup.bash' >> ~/.bashrc )
+# Livox network: PC wired IPv4 manual 192.168.1.5/24 (default MID360_config.json); Mid-360 = 192.168.1.1XX
+#   (XX = last 2 serial digits; default config: .12). Other IP: edit "ip" in
+#   ~/drivers_ws/src/livox_ros_driver2/config/MID360_config.json, then (conda OFF, system python):
+#   cd ~/drivers_ws && colcon build --packages-select livox_ros_driver2 --cmake-args -DROS_EDITION=ROS2 -DDISTRO_ROS=humble -DPython3_EXECUTABLE=/usr/bin/python3
+ros2 launch livox_ros_driver2 rviz_MID360_launch.py                       # /livox/lidar PointCloud2
+ros2 launch realsense2_camera rs_launch.py enable_color:=true enable_depth:=true align_depth.enable:=true
+#   -> /camera/camera/color/image_raw + /camera/camera/aligned_depth_to_color/image_raw (16UC1 mm: supported)
+# side / back cameras -> /camera/left/image_raw, /camera/right/image_raw, /camera/back/image_raw (or pass
+#   other names to autonomy.launch.py). IMU (BNO055 or D455 IMU + imu_filter_madgwick) -> /imu/data
+#   (only the gyro z rate is used; the robot must stand still for the first 2 s: gyro bias)
+
+robot terminal 5  (AUTONOMY: localization + ML + planner + path follower)
+# odometry = vinebot_bringup wheel_imu_odom (started by autonomy.launch.py): distance from the wheels, turn from
+#   the IMU gyro, gyro bias learned whenever the robot stands still (leave it still for 2 s after start).
+#   odometry:=ekf uses robot_localization instead (installed; 15 deg vs 4 deg mean heading error in the test,
+#   because the EKF cannot remove the gyro bias)
+cd ~/robo_project_ws
+source install/setup.bash
+ros2 launch vinebot_bringup real_robot.launch.py odom_topic:=/wheel_odom     # (= robot terminal 1, with this option)
+ros2 launch vinebot_bringup autonomy.launch.py init_x:=<x> init_y:=<y> init_yaw:=<rad> python:=$(which python3)
+# start pose = where the robot stands on the sketch map (or "2D Pose Estimate" in RViz afterwards).
+# python: an interpreter with numba (fast A*), e.g. the conda env. use_ekf:=false = wheels only (worse).
+# odometry:=builtin (default) | ekf | auto (ekf if installed)
+# imu_yaw_sign:=-1.0 if the IMU is mounted upside down (check: "ros2 topic echo /imu/data" - turning LEFT
+#   with the joystick must give a POSITIVE angular_velocity.z). imu_topic:=... if the driver uses another name.
+# path follower (runner_node): corners up to 75 deg are driven (40-75 deg as a slow tight curve, if the live ML
+#   grid shows room), sharper ones turned on the spot. Before turning
+#   on the spot it checks the area the body sweeps on the live ML grid; if blocked it turns the other way
+#   round or does a multi-point turn ("manoeuvre: ..." in the log). Obstacle within 12 cm of the front
+#   bumper -> it stops and the planner re-plans.
+# Moves only after "y" in robot terminal 1b (motion_confirm), joystick (L1) always overrides, O = stop.
+# Same launch tested end to end in the simulation: src/robo_project/sim/tools/run_autonomy_test.sh results/x
+
+notes for the real robot
+# - Livox: use rviz_MID360_launch.py (PointCloud2); msg_MID360_launch.py publishes Livox CustomMsg, which
+#   fusion_obstacle_node cannot read. Keep the extrinsic in MID360_config.json at 0: our rig rotates the
+#   points (lidar yaw_deg 90). Check with ml/tools/real_lidar_check.py on a recording ("yaw OK").
+# - still to check ON the robot (cannot be tested in simulation): motor directions (drive slowly with the
+#   joystick first), the IMU topic name, side/back camera topics and fields of view, and the start pose.
+#   First autonomous runs: motion_confirm on, low speed, orange e-stop in hand.
+# - to simulate the real controller limits: bridge -p drive_model:=tracked -p track_lin_accel:=0.5
+#   -p track_ang_accel:=0.5  (roboteq control.yaml: max 1.0 m/s, 1.0 rad/s, accel 0.5)
 
 notes
 # build error "No module named 'catkin_pkg'" (conda python): use the --cmake-args flag above.

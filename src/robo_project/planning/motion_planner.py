@@ -28,6 +28,7 @@ INFLATION_M = 0.35
 # Obstacles reported by runner_node on /blocked_point (things that exist in
 # Habitat but not on the hand-drawn map) are added as discs of this radius.
 BLOCKED_RADIUS_M = 0.25
+BLOCKED_EXPIRE_S = 60.0     # reported obstacles are forgotten after this (a wrong report must not close a passage)
 
 # Obstacles seen by the fusion ML model (fusion_obstacle_node, /fusion/obstacle_map, aligned with
 # /map) are added to the A* map like walls.  When one lies on the remaining path, re-plan at once.
@@ -60,8 +61,17 @@ SOFT_WALL_BAND_M = 1.0
 # than that to an obstacle makes the body hit it when the robot turns / parks there (seen in the tests at
 # goals 0.5-0.6 m from a wall). Such goals are moved up to GOAL_SHIFT_MAX_M to the nearest spot with
 # GOAL_CLEARANCE_M of room (or the roomiest spot nearby).
-GOAL_CLEARANCE_M = 0.70
+# Turning room: the 1.15 x 0.60 m body sweeps a 0.65 m circle when it turns on the spot, but paths only keep
+# INFLATION_M (0.35) from walls so that the robot fits through corridors. Cells closer than PROX_RANGE_M to an
+# obstacle cost up to PROX_COST extra (paths keep to the middle when there is room), and the path smoothing
+# keeps its corners SMOOTH_CLEARANCE_M from walls where possible (corners are where the robot turns).
+PROX_RANGE_M = 0.65
+PROX_COST = 3.0
+SMOOTH_CLEARANCE_M = 0.55
+GOAL_CLEARANCE_M = 0.80     # corner radius 0.65 + 0.15 m (ML map near walls misses ~4% of obstacle cells)
 GOAL_SHIFT_MAX_M = 0.50
+GOAL_SHIFT_FAR_M = 0.50     # = GOAL_SHIFT_MAX_M: searching further (1.5 m tested) picked spots that only the SKETCH showed
+#                             as roomy (unseen by the ML) - in the tests that was worse, so it is off
 SOFT_WALL_COST = 20.0
 
 
@@ -69,6 +79,10 @@ class MotionPlanner(Node):
 
     def __init__(self):
         super().__init__('motion_planner')
+        # room needed at a parking spot (m); larger with localization (estimated pose, sketch ~0.7 m off)
+        self.goal_clearance = float(self.declare_parameter('goal_clearance', GOAL_CLEARANCE_M).value)
+        self.wait_for_ml_s = float(self.declare_parameter('wait_for_ml_s', 8.0).value)
+        self.start_time = time.monotonic()
 
         path_qos = QoSProfile(
             depth=1,
@@ -183,7 +197,7 @@ class MotionPlanner(Node):
             self.planned = True
             self._publish_stop()
             return
-        self.blocked_points.append((px, py))
+        self.blocked_points.append((px, py, time.monotonic()))
         self.get_logger().warn(
             f"Obstacle reported at ({msg.point.x:.2f},{msg.point.y:.2f}) "
             f"[{len(self.blocked_points)} total]. Re-planning from the current pose.")
@@ -270,6 +284,12 @@ class MotionPlanner(Node):
             return
         if self.grid is None or self.robot_x is None:
             return
+        # Do not plan blind: if the ML node is running, wait (max wait_for_ml_s) for its first obstacle map.
+        # A first path drawn on the sketch alone can lead straight into an obstacle the model sees a moment
+        # later, and the re-plan then turns the long robot on the spot next to it.
+        if self.ml_occ is None and time.monotonic() - self.start_time < self.wait_for_ml_s:
+            if self.count_publishers('/fusion/obstacle_map') > 0:
+                return
         self.planned = True
         self.run_astar_and_publish()
 
@@ -304,7 +324,8 @@ class MotionPlanner(Node):
             n_ml = int(self.ml_occ.sum())
         disc = np.zeros_like(free)         # obstacles reported by runner_node (robot got stuck)
         b_px = int(round(BLOCKED_RADIUS_M / self.map_resolution))
-        for bx, by in self.blocked_points:
+        self.blocked_points = [b for b in self.blocked_points if time.monotonic() - b[2] < BLOCKED_EXPIRE_S]
+        for bx, by, _ in self.blocked_points:
             b_row, b_col = self.world_to_pixel(bx, by)
             cv2.circle(disc, (b_col, b_row), b_px, 1, -1)
         free[disc > 0] = 0
@@ -340,9 +361,19 @@ class MotionPlanner(Node):
                     f"real; the planner re-plans if so.")
         else:
             # without numba there is no cost-map search: plain A* on the drawn map + model view
+            # (also used when the parking spot is not reachable on the cost map: plain A* to the nearest free
+            #  cell of the inflated map, starting from the chosen spot - and announce that goal)
             s_row, s_col = self._snap_to_free(astar_map, start_row, start_col)
-            g_row, g_col = self._snap_to_free(astar_map, goal_row, goal_col)
+            sg_row, sg_col = g_row, g_col
+            g_row, g_col = self._snap_to_free(astar_map, sg_row, sg_col)
             path = run_astar(astar_map, PosePixels(s_row, s_col), PosePixels(g_row, g_col), include_diagonals=True)
+            if path and (g_row, g_col) != (sg_row, sg_col):
+                ox, oy = self.pixel_to_world(sg_row, sg_col)
+                nx, ny = self.pixel_to_world(g_row, g_col)
+                self.get_logger().warn(
+                    f"Parking spot ({ox:.2f},{oy:.2f}) is not reachable with the robot's clearance; driving to the "
+                    f"nearest reachable spot ({nx:.2f},{ny:.2f}) instead ({math.hypot(nx - ox, ny - oy):.2f} m away).")
+                self._publish_effective_goal(g_row, g_col)
 
         if not path:
             self.get_logger().error(
@@ -370,7 +401,13 @@ class MotionPlanner(Node):
         # step.  smooth_path() keeps only the corners that are needed
         # (line-of-sight on the inflated map), so the robot drives straight
         # segments instead of a 2 cm staircase.
-        smoothed = smooth_path(nav_map, path)
+        # shortcuts keep SMOOTH_CLEARANCE_M from walls where possible (the A* cells themselves stay allowed)
+        rs = max(1, int(round(SMOOTH_CLEARANCE_M / self.map_resolution)))
+        wide = cv2.erode(free, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * rs + 1, 2 * rs + 1)))
+        smooth_map = (wide & nav_map).astype(np.uint8)
+        for p in path:
+            smooth_map[int(p.r), int(p.c)] = 1
+        smoothed = smooth_path(smooth_map, path)
         waypoints_px = list(reversed(smoothed))  # start -> goal order
 
         self.get_logger().info(
@@ -407,6 +444,12 @@ class MotionPlanner(Node):
         any_inf = cv2.erode(free, kernel) == 0
         cost = np.ones(free.shape, np.float64)
         cost[any_inf] = SOFT_WALL_COST
+        # keep away from obstacles when there is room (turning on the spot needs PROX_RANGE_M)
+        obst = ((free == 0) | hard).astype(np.uint8)
+        d = cv2.distanceTransform(1 - obst, cv2.DIST_L2, 5) * self.map_resolution
+        near = (d < PROX_RANGE_M) & ~any_inf
+        frac = np.clip((PROX_RANGE_M - d[near]) / (PROX_RANGE_M - INFLATION_M), 0.0, 1.0)
+        cost[near] += PROX_COST * frac ** 2
         cost[hard_inf] = np.inf
         return cost
 
@@ -459,42 +502,73 @@ class MotionPlanner(Node):
         self.goal_pub.publish(self.goal_msg)
 
     def _safe_goal(self, free, passable, r, c):
-        """Move the goal cell (r, c) to where the whole robot body fits (GOAL_CLEARANCE_M from every
-        obstacle), at most GOAL_SHIFT_MAX_M away; else to the roomiest reachable cell in that radius."""
+        """Parking cell for the clicked goal. The spot chosen earlier for the same goal is KEPT while it is
+        passable and still has (nearly) as much room as the best spot now - re-plans must not move the target
+        the runner is driving to (with localization the ML obstacle map shifts slightly) - but it is replaced
+        when the ML view shows that it is clearly more cramped than another spot (5 cm hysteresis)."""
+        key = (round(self.goal_x, 3), round(self.goal_y, 3))
+        cached = getattr(self, "_goal_cache", None)
+        prefer = cached[1] if cached and cached[0] == key else None
+        nr, nc = self._safe_goal_compute(free, passable, r, c, prefer)
+        self._goal_cache = (key, (nr, nc))
+        return nr, nc
+
+    def _safe_goal_compute(self, free, passable, r, c, prefer=None):
+        """Move the goal cell (r, c) to where the whole robot body fits (goal_clearance, default GOAL_CLEARANCE_M, from every
+        obstacle), at most GOAL_SHIFT_MAX_M away; else to the roomiest reachable cell in that radius.
+        prefer: earlier choice, kept if it is passable and has the full self.goal_clearance (or, when no spot
+        has it, at least the best room - 0.05 m)."""
         res = self.map_resolution
-        R = int(round(GOAL_SHIFT_MAX_M / res))
+        R = int(round(GOAL_SHIFT_FAR_M / res))
         H, W = free.shape
         r0, r1, c0, c1 = max(0, r - R), min(H, r + R + 1), max(0, c - R), min(W, c + R + 1)
         # clearance of each cell, computed on a padded window so obstacles just outside count too
-        pad = int(round(GOAL_CLEARANCE_M / res)) + 1
+        pad = int(round(self.goal_clearance / res)) + 1
         pr0, pr1, pc0, pc1 = max(0, r0 - pad), min(H, r1 + pad), max(0, c0 - pad), min(W, c1 + pad)
         clear = cv2.distanceTransform(free[pr0:pr1, pc0:pc1], cv2.DIST_L2, 5) * res
         clear = clear[r0 - pr0:r1 - pr0, c0 - pc0:c1 - pc0]
         here = float(clear[r - r0, c - c0])
-        if here >= GOAL_CLEARANCE_M:
-            return r, c
         rr, cc = np.mgrid[r0:r1, c0:c1]
         dist = np.hypot(rr - r, cc - c) * res
-        ok = (dist <= GOAL_SHIFT_MAX_M) & (passable[r0:r1, c0:c1] > 0)
-        good = ok & (clear >= GOAL_CLEARANCE_M)
-        if good.any():
-            k = np.argmin(np.where(good, dist, np.inf))
-        elif ok.any():
-            k = np.argmax(np.where(ok, clear - 0.1 * dist, -np.inf))
+        reach = passable[r0:r1, c0:c1] > 0
+        ok = (dist <= GOAL_SHIFT_MAX_M) & reach
+        # best spot now: full room nearby; else full room further away (outside a narrow alcove - the body
+        # cannot fit in it without touching); else the roomiest spot nearby
+        if here >= self.goal_clearance:
+            nr, nc, room, moved = r, c, here, 0.0
         else:
-            return r, c
-        nr, nc = int(rr.flat[k]), int(cc.flat[k])
-        if float(clear.flat[k]) <= here + 0.02:
+            good = ok & (clear >= self.goal_clearance)
+            good_far = reach & (dist <= GOAL_SHIFT_FAR_M) & (clear >= self.goal_clearance)
+            if good.any():
+                k = np.argmin(np.where(good, dist, np.inf))
+            elif good_far.any():
+                k = np.argmin(np.where(good_far, dist, np.inf))
+            elif ok.any():
+                k = np.argmax(np.where(ok, clear - 0.1 * dist, -np.inf))
+            else:
+                k = None
+            if k is None or float(clear.flat[k]) <= here + 0.02:
+                nr, nc, room, moved = r, c, here, 0.0
+            else:
+                nr, nc, room, moved = int(rr.flat[k]), int(cc.flat[k]), float(clear.flat[k]), float(dist.flat[k])
+        # keep the earlier choice unless it is clearly worse
+        if prefer is not None and r0 <= prefer[0] < r1 and c0 <= prefer[1] < c1:
+            pr, pc = prefer
+            if reach[pr - r0, pc - c0] or (pr, pc) == (r, c):
+                # full room if any spot has it; hysteresis (5 cm) only when no spot reaches self.goal_clearance
+                need = self.goal_clearance if room >= self.goal_clearance else room - 0.05
+                if float(clear[pr - r0, pc - c0]) >= need:
+                    return pr, pc
+        if (nr, nc) == (r, c):
             return r, c
         gx, gy = self.pixel_to_world(r, c)
         nx, ny = self.pixel_to_world(nr, nc)
-        if getattr(self, "_goal_shift_logged", None) == (r, c, nr, nc):
-            return nr, nc
-        self._goal_shift_logged = (r, c, nr, nc)
-        self.get_logger().warn(
-            f"Goal ({gx:.2f},{gy:.2f}) is only {here:.2f} m from an obstacle - the 1.15 x 0.60 m robot needs "
-            f"{GOAL_CLEARANCE_M:.2f} m to park and turn there. Driving to ({nx:.2f},{ny:.2f}) instead "
-            f"({float(dist.flat[k]):.2f} m away, {float(clear.flat[k]):.2f} m of room).")
+        if getattr(self, "_goal_shift_logged", None) != (r, c, nr, nc):
+            self._goal_shift_logged = (r, c, nr, nc)
+            self.get_logger().warn(
+                f"Goal ({gx:.2f},{gy:.2f}) is only {here:.2f} m from an obstacle - the 1.15 x 0.60 m robot needs "
+                f"{self.goal_clearance:.2f} m to park and turn there. Driving to ({nx:.2f},{ny:.2f}) instead "
+                f"({moved:.2f} m away, {room:.2f} m of room).")
         return nr, nc
 
     def _snap_to_free(self, astar_map, r, c, max_radius=100):

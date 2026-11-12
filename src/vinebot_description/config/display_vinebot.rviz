@@ -438,6 +438,61 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /rig_markers
       Value: true
+    - Alpha: 1
+      Arrow Length: 0.25
+      Axes Length: 0.3
+      Axes Radius: 0.01
+      Class: rviz_default_plugins/PoseArray
+      Color: 0; 255; 127
+      Enabled: true
+      Head Length: 0.07
+      Head Radius: 0.03
+      Name: Localization Particles
+      Shaft Length: 0.18
+      Shaft Radius: 0.01
+      Shape: Arrow (Flat)
+      Topic:
+        Depth: 2
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /localization/particles
+      Value: true
+    - Alpha: 1
+      Axes Length: 1
+      Axes Radius: 0.1
+      Class: rviz_default_plugins/PoseWithCovariance
+      Color: 255; 255; 0
+      Covariance:
+        Orientation:
+          Alpha: 0.5
+          Color: 255; 255; 127
+          Color Style: Unique
+          Frame: Local
+          Offset: 1
+          Scale: 1
+          Value: true
+        Position:
+          Alpha: 0.3
+          Color: 204; 51; 204
+          Scale: 1
+          Value: true
+        Value: true
+      Enabled: true
+      Head Length: 0.2
+      Head Radius: 0.12
+      Name: Localization Pose
+      Shaft Length: 0.5
+      Shaft Radius: 0.05
+      Shape: Arrow
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /localization/pose
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48

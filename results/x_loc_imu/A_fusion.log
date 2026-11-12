@@ -1,0 +1,27 @@
+[INFO] [1794436900.754483913] [fusion_obstacle_node]: Fusion model /home/yug/robo_project_ws/robo_project_ws/runs/fusion_mid360_e3.0/best.pt on cpu, local grid 3.0 m, sensors ['cams', 'lidar', 'depth']. Waiting for /map ...
+[INFO] [1794436901.313546274] [fusion_obstacle_node]: Obstacle map 768x1024 @ 0.019999999552965164 m aligned with /map. Publishing /fusion/obstacle_map
+[INFO] [1794436906.813927441] [fusion_obstacle_node]: 50 predictions (0 with a sensor missing), 72 ms each, 10658 obstacle cells in the map
+[INFO] [1794436937.771858108] [fusion_obstacle_node]: 314 predictions (0 with a sensor missing), 72 ms each, 39082 obstacle cells in the map
+[INFO] [1794436968.832561813] [fusion_obstacle_node]: 579 predictions (0 with a sensor missing), 72 ms each, 37368 obstacle cells in the map
+[INFO] [1794436998.836862334] [fusion_obstacle_node]: 835 predictions (0 with a sensor missing), 72 ms each, 49760 obstacle cells in the map
+[INFO] [1794437028.870048301] [fusion_obstacle_node]: 1088 predictions (0 with a sensor missing), 72 ms each, 50283 obstacle cells in the map
+[INFO] [1794437059.794442246] [fusion_obstacle_node]: 1352 predictions (0 with a sensor missing), 72 ms each, 39392 obstacle cells in the map
+[INFO] [1794437089.804973578] [fusion_obstacle_node]: 1607 predictions (0 with a sensor missing), 73 ms each, 47240 obstacle cells in the map
+[INFO] [1794437119.814016213] [fusion_obstacle_node]: 1861 predictions (0 with a sensor missing), 73 ms each, 36233 obstacle cells in the map
+Traceback (most recent call last):
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/robo_project/fusion_obstacle_node", line 33, in <module>
+    sys.exit(load_entry_point('robo-project==0.1.0', 'console_scripts', 'fusion_obstacle_node')())
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/ml/fusion/fusion_obstacle_node.py", line 416, in main
+    rclpy.spin(node)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+    executor.spin_once()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+    raise ExternalShutdownException()
+rclpy.executors.ExternalShutdownException
+[ros2run]: Process exited with failure 1

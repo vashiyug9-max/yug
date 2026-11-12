@@ -46,6 +46,13 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'localization_navigation_bridge = robo_project.ros.localization_navigation_bridge:main',
+            'localization_motion_gate = robo_project.ros.localization_motion_gate:main',
+
+            'live_global_pose_node = robo_project.localization.live_global_pose_node:main',
+            'localization_error_monitor_node = robo_project.localization.localization_error_monitor_node:main',
+            'sketch_pf_node = robo_project.localization.sketch_pf_node:main',
+
             # One folder per team task: sim/, ml/, localization/, cmn/, planning/;
             # ros/ holds the glue nodes, common/ the shared helpers.
 
@@ -62,12 +69,8 @@ setup(
             # ml/: fusion obstacle model, ML pose estimation
             'fusion_obstacle_node = robo_project.ml.fusion.fusion_obstacle_node:main',
             'ml_pose_node = robo_project.ml.pose_estimation.ml_pose_node:main',
-            'pose_monitor_node = robo_project.ml.pose_estimation.pose_monitor_node:main',
 
             # localization/: particle filter validation (Jay Week-10)
-            'dataset_gt_replay_node = robo_project.localization.dataset_gt_replay_node:main',
-            'ground_truth_local_occ_node = robo_project.localization.dataset_gt_replay_node:main',
-            'particle_filter_validation_node = robo_project.localization.particle_filter_validation_node:main',
         ],
     },
 )

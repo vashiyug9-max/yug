@@ -1,0 +1,19 @@
+stdin is not a terminal device. Keyboard handling disabled.[INFO] [1794516215.841893956] [rosbag2_recorder]: Press SPACE for pausing/resuming
+[INFO] [1794516215.843434272] [rosbag2_storage]: Opened database '/home/yug/robo_project_ws/robo_project_ws/results/f_loc_imu/bag/bag_0.db3' for READ_WRITE.
+[INFO] [1794516215.844880556] [rosbag2_recorder]: Listening for topics...
+[INFO] [1794516215.844891440] [rosbag2_recorder]: Event publisher thread: Starting
+[INFO] [1794516215.847200528] [rosbag2_recorder]: Subscribed to topic '/localization/odom'
+[INFO] [1794516215.847903946] [rosbag2_recorder]: Subscribed to topic '/fusion/local_grid'
+[INFO] [1794516215.848033867] [rosbag2_recorder]: Recording...
+[INFO] [1794516215.849756760] [rosbag2_recorder]: Subscribed to topic '/cmd_vel'
+[INFO] [1794516215.850655060] [rosbag2_recorder]: Subscribed to topic '/fusion/obstacle_map'
+[INFO] [1794516215.852703202] [rosbag2_recorder]: Subscribed to topic '/livox/lidar'
+[INFO] [1794516215.853701681] [rosbag2_recorder]: Subscribed to topic '/odom'
+[INFO] [1794516215.854184767] [rosbag2_recorder]: Subscribed to topic '/map'
+[INFO] [1794516215.856547010] [rosbag2_recorder]: Subscribed to topic '/tf'
+[INFO] [1794516215.857458712] [rosbag2_recorder]: Subscribed to topic '/wheel_odom'
+[INFO] [1794516217.877003843] [rosbag2_recorder]: Subscribed to topic '/goal_pose'
+[INFO] [1794516217.978987976] [rosbag2_recorder]: Subscribed to topic '/planned_path'
+[INFO] [1794516464.156145934] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1794516464.158306264] [rosbag2_recorder]: Event publisher thread: Exiting
+[INFO] [1794516464.158483511] [rosbag2_recorder]: Recording stopped

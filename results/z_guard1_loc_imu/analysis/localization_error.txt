@@ -1,0 +1,4 @@
+bag /home/yug/robo_project_ws/robo_project_ws/results/z_guard1_loc_imu/bag: 10292 poses over 251 s, robot drove 62.7 m
+LOCALIZATION   position error (m): mean 0.585  median 0.575  p95 1.029  max 1.102
+               heading error (deg): mean 4.019  median 3.561  p95 8.792  max 10.051
+WHEEL ODOMETRY only (no localization), position error (m): mean 0.414  median 0.379  p95 0.882  max 0.887

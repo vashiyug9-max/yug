@@ -1,0 +1,17 @@
+stdin is not a terminal device. Keyboard handling disabled.[INFO] [1794436566.374845416] [rosbag2_recorder]: Press SPACE for pausing/resuming
+[INFO] [1794436566.376161003] [rosbag2_storage]: Opened database '/home/yug/robo_project_ws/robo_project_ws/results/x_normal/bag/bag_0.db3' for READ_WRITE.
+[INFO] [1794436566.377005085] [rosbag2_recorder]: Listening for topics...
+[INFO] [1794436566.377011094] [rosbag2_recorder]: Event publisher thread: Starting
+[INFO] [1794436566.379188663] [rosbag2_recorder]: Subscribed to topic '/tf'
+[INFO] [1794436566.380833423] [rosbag2_recorder]: Subscribed to topic '/map'
+[INFO] [1794436566.382078269] [rosbag2_recorder]: Subscribed to topic '/cmd_vel'
+[INFO] [1794436566.382382265] [rosbag2_recorder]: Recording...
+[INFO] [1794436568.096912228] [rosbag2_recorder]: Subscribed to topic '/livox/lidar'
+[INFO] [1794436568.097909945] [rosbag2_recorder]: Subscribed to topic '/odom'
+[INFO] [1794436568.401841216] [rosbag2_recorder]: Subscribed to topic '/fusion/local_grid'
+[INFO] [1794436568.402558982] [rosbag2_recorder]: Subscribed to topic '/fusion/obstacle_map'
+[INFO] [1794436568.707510537] [rosbag2_recorder]: Subscribed to topic '/goal_pose'
+[INFO] [1794436568.708414832] [rosbag2_recorder]: Subscribed to topic '/planned_path'
+[INFO] [1794436803.952281418] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1794436803.954077658] [rosbag2_recorder]: Event publisher thread: Exiting
+[INFO] [1794436803.954175761] [rosbag2_recorder]: Recording stopped

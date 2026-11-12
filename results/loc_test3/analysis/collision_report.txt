@@ -1,0 +1,13 @@
+bag: /home/yug/robo_project_ws/robo_project_ws/results/loc_test3/bag
+duration 258.4 s, distance driven 62.92 m, goals clicked 15, /blocked_point reports 0
+navmesh agent_radius = 0.10 m (Habitat's collision model of the robot)
+
+1. SIM CONTACT (Habitat clipped the motion: driven < 50% of commanded over 0.5 s)
+   events: 0
+
+2. BODY OVERLAP (1.15 x 0.60 m footprint inside scene obstacles by > 2 cm)
+   events: 3, time overlapping: 2.8% of the run, max depth 28.0 cm
+   min body clearance when not overlapping: 0.0 cm
+   t=    4.0-   10.1 s  at (-3.78,4.89)  max depth 28.0 cm
+   t=  102.3-  103.9 s  at (4.75,1.06)  max depth 5.6 cm
+   t=  143.4-  143.6 s  at (-3.21,6.36)  max depth 4.0 cm

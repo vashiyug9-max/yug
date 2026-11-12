@@ -2,8 +2,8 @@
 """Replay a goal sequence on /goal_pose: next goal once the robot is within TOL of the current one
 and has stopped, or after TIMEOUT. The first goal is motion_planner's default (0, 0), not sent.
 "Current one" = where motion_planner says it drives to (/motion_planner_goal): a clicked goal too close
-to a wall for the robot's body is moved up to 0.5 m (planner _safe_goal). The distance to the clicked
-goal is reported too."""
+to a wall for the robot's body is moved up to 0.5 m (planner _safe_goal), a goal inside an obstacle is first
+snapped to the nearest free cell. The distance to the clicked goal is reported too."""
 import math
 import sys
 import time
@@ -20,7 +20,7 @@ TOL, TIMEOUT = 0.30, 150.0
 rclpy.init()
 node = rclpy.create_node("goal_sequencer")
 pub = node.create_publisher(PoseStamped, "/goal_pose", 10)
-state = {"x": None, "y": None, "v": 0.0, "w": 0.0, "goal": None}
+state = {"x": None, "y": None, "v": 0.0, "w": 0.0, "goal": None, "goal_t": 0.0}
 
 
 def odom(m):
@@ -30,7 +30,8 @@ def odom(m):
 node.create_subscription(Odometry, "/odom", odom, 10)
 qos = QoSProfile(depth=1, durability=QoSDurabilityPolicy.TRANSIENT_LOCAL, reliability=QoSReliabilityPolicy.RELIABLE)
 node.create_subscription(PoseStamped, "/motion_planner_goal",
-                         lambda m: state.update(goal=(m.pose.position.x, m.pose.position.y)), qos)
+                         lambda m: state.update(goal=(m.pose.position.x, m.pose.position.y),
+                                                goal_t=time.monotonic()), qos)
 while state["x"] is None:
     rclpy.spin_once(node, timeout_sec=0.5)
 
@@ -46,15 +47,18 @@ for i, (gx, gy, send) in enumerate(GOALS):
             pub.publish(msg)
             rclpy.spin_once(node, timeout_sec=0.1)
     t0 = time.monotonic()
+    t_sent = t0
     print(f"[goal {i}] -> ({gx:.2f},{gy:.2f})", flush=True)
     still_since = None
     while True:
         rclpy.spin_once(node, timeout_sec=0.1)
         tx, ty = gx, gy
-        if state["goal"] and math.hypot(state["goal"][0] - gx, state["goal"][1] - gy) <= 0.6:
-            tx, ty = state["goal"]                       # the planner's effective goal for this click
+        # the planner's answer for THIS goal: its effective goal published after the goal was sent
+        # (snapped out of an obstacle and / or moved so the body fits - can be > 0.5 m from the click)
+        if state["goal"] and (not send or state["goal_t"] > t_sent + 0.3):
+            tx, ty = state["goal"]
         d = math.hypot(state["x"] - tx, state["y"] - ty)
-        stopped = abs(state["v"]) < 1e-3 and abs(state["w"]) < 1e-3
+        stopped = abs(state["v"]) < 0.02 and abs(state["w"]) < 0.05   # real odometry is never exactly 0 (gyro noise)
         still_since = (still_since or time.monotonic()) if (d < TOL and stopped) else None
         if still_since and time.monotonic() - still_since > 1.0:
             results.append((i, gx, gy, "REACHED", time.monotonic() - t0, d,

@@ -1,0 +1,13 @@
+bag: /home/yug/robo_project_ws/robo_project_ws/results/final_loc_imu/bag
+model grid: 3.0 m
+frames evaluated: 2030 (skipped 2 without pose/LiDAR match)
+ground truth: navmesh top-down, same label pipeline as training (fusion_data.py)
+
+                           cell3    IoU*  IoU obst  missed obst.  false alarm
+FusionOccNet (all)         98.9%   92.3%     92.3%         4.73%        0.86%
+LiDAR only (no ML)         93.9%   69.7%     69.7%        24.76%        1.57%
+LiDAR+depth rule           93.9%   69.7%     69.7%        24.76%        1.57%
+
+IoU* = training-style (all frames, empty frames count 1.0, comparable to report.json)
+IoU obst = averaged over frames with an obstacle in view (2030 of 2030)
+missed obst. = share of truly occupied cells predicted free; false alarm = share of free cells predicted occupied

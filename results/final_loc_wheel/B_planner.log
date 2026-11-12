@@ -1,0 +1,77 @@
+[INFO] [1794430778.959026940] [motion_planner]: motion_planner started. Waiting for /map and /odom...
+[INFO] [1794430778.959488745] [motion_planner]: Goal: x=0.0m, y=0.0m
+[INFO] [1794430779.287015471] [motion_planner]: Map received: 768x1024 res=0.019999999552965164m origin=(-7.68,-10.24)
+[INFO] [1794430779.325719369] [motion_planner]: Start: world=(-4.29,2.12) -> pixel=(618,169) value=100
+[INFO] [1794430779.326655028] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[INFO] [1794430779.613341566] [motion_planner]: Path found: 471 cells, smoothed to 54 waypoints in 265 ms (9484 ML obstacle cells on the map)
+[INFO] [1794430779.615549894] [motion_planner]: Path published on /planned_path with 54 waypoints.
+[WARN] [1794430779.960114256] [motion_planner]: ML model: obstacle on the path at (-4.34,2.52). Re-planning.
+[INFO] [1794430780.125473973] [motion_planner]: Start: world=(-4.28,2.12) -> pixel=(618,170) value=100
+[INFO] [1794430780.125912224] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[INFO] [1794430780.183533950] [motion_planner]: Path found: 471 cells, smoothed to 52 waypoints in 39 ms (11179 ML obstacle cells on the map)
+[INFO] [1794430780.185470501] [motion_planner]: Path published on /planned_path with 52 waypoints.
+[WARN] [1794430780.776228140] [motion_planner]: ML model: obstacle on the path at (-4.33,2.52). Re-planning.
+[INFO] [1794430780.925277153] [motion_planner]: Start: world=(-4.23,2.12) -> pixel=(618,172) value=100
+[INFO] [1794430780.925650897] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[INFO] [1794430780.997727300] [motion_planner]: Path found: 470 cells, smoothed to 51 waypoints in 55 ms (16332 ML obstacle cells on the map)
+[INFO] [1794430780.999376465] [motion_planner]: Path published on /planned_path with 51 waypoints.
+[WARN] [1794430781.444212088] [motion_planner]: ML model: obstacle on the path at (-4.44,3.42). Re-planning.
+[INFO] [1794430781.525653763] [motion_planner]: Start: world=(-4.21,2.13) -> pixel=(618,173) value=100
+[INFO] [1794430781.526080318] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[INFO] [1794430781.597772626] [motion_planner]: Path found: 470 cells, smoothed to 52 waypoints in 59 ms (16563 ML obstacle cells on the map)
+[INFO] [1794430781.600416818] [motion_planner]: Path published on /planned_path with 52 waypoints.
+[INFO] [1794430781.813063645] [motion_planner]: New goal from RViz: x=-3.84m, y=-0.78m. Re-planning.
+[INFO] [1794430781.855828188] [motion_planner]: New goal from RViz: x=-3.84m, y=-0.78m. Re-planning.
+[INFO] [1794430781.886227629] [motion_planner]: New goal from RViz: x=-3.84m, y=-0.78m. Re-planning.
+[INFO] [1794430781.925521774] [motion_planner]: Start: world=(-4.18,2.13) -> pixel=(618,174) value=0
+[INFO] [1794430781.926106585] [motion_planner]: Goal:  world=(-3.84,-0.78) -> pixel=(473,192) value=0
+[WARN] [1794430781.986517320] [motion_planner]: Goal (-3.84,-0.78) is only 0.56 m from an obstacle - the 1.15 x 0.60 m robot needs 0.70 m to park and turn there. Driving to (-3.98,-0.84) instead (0.15 m away, 0.70 m of room).
+[INFO] [1794430781.994725721] [motion_planner]: Path found: 149 cells, smoothed to 3 waypoints in 51 ms (16357 ML obstacle cells on the map)
+[INFO] [1794430781.995388660] [motion_planner]: Path published on /planned_path with 3 waypoints.
+[WARN] [1794430783.254343235] [motion_planner]: ML model: obstacle on the path at (-4.14,1.73). Re-planning.
+[INFO] [1794430783.325580624] [motion_planner]: Start: world=(-4.12,2.13) -> pixel=(618,178) value=0
+[INFO] [1794430783.326209599] [motion_planner]: Goal:  world=(-3.84,-0.78) -> pixel=(473,192) value=0
+[INFO] [1794430783.384762664] [motion_planner]: Path found: 149 cells, smoothed to 4 waypoints in 40 ms (17342 ML obstacle cells on the map)
+[INFO] [1794430783.385429598] [motion_planner]: Path published on /planned_path with 4 waypoints.
+[WARN] [1794430783.855234807] [motion_planner]: ML model: obstacle on the path at (-4.09,1.73). Re-planning.
+[INFO] [1794430783.926581404] [motion_planner]: Start: world=(-4.08,2.13) -> pixel=(618,179) value=0
+[INFO] [1794430783.927271237] [motion_planner]: Goal:  world=(-3.84,-0.78) -> pixel=(473,192) value=0
+[INFO] [1794430783.975514158] [motion_planner]: Path found: 149 cells, smoothed to 5 waypoints in 31 ms (17717 ML obstacle cells on the map)
+[INFO] [1794430783.976147751] [motion_planner]: Path published on /planned_path with 5 waypoints.
+[WARN] [1794430784.462215449] [motion_planner]: ML model: obstacle on the path at (-4.17,1.23). Re-planning.
+[INFO] [1794430784.525268081] [motion_planner]: Start: world=(-4.05,2.14) -> pixel=(618,181) value=0
+[INFO] [1794430784.525728425] [motion_planner]: Goal:  world=(-3.84,-0.78) -> pixel=(473,192) value=0
+[INFO] [1794430784.585166335] [motion_planner]: Path found: 149 cells, smoothed to 6 waypoints in 37 ms (17756 ML obstacle cells on the map)
+[INFO] [1794430784.585897811] [motion_planner]: Path published on /planned_path with 6 waypoints.
+[WARN] [1794430785.729916254] [motion_planner]: ML model: obstacle on the path at (-4.24,-0.13). Re-planning.
+[INFO] [1794430785.730703849] [motion_planner]: Start: world=(-4.00,2.04) -> pixel=(613,183) value=0
+[INFO] [1794430785.730967941] [motion_planner]: Goal:  world=(-3.84,-0.78) -> pixel=(473,192) value=0
+[WARN] [1794430785.771898361] [motion_planner]: Goal (-3.84,-0.78) is only 0.55 m from an obstacle - the 1.15 x 0.60 m robot needs 0.70 m to park and turn there. Driving to (-3.84,-0.94) instead (0.16 m away, 0.70 m of room).
+[INFO] [1794430785.780145693] [motion_planner]: Path found: 149 cells, smoothed to 7 waypoints in 37 ms (19076 ML obstacle cells on the map)
+[INFO] [1794430785.781303061] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[WARN] [1794430786.287236638] [motion_planner]: ML model: obstacle on the path at (-4.22,-0.56). Re-planning.
+[INFO] [1794430786.325823535] [motion_planner]: Start: world=(-4.02,1.86) -> pixel=(604,182) value=0
+[INFO] [1794430786.326617055] [motion_planner]: Goal:  world=(-3.84,-0.78) -> pixel=(473,192) value=0
+[WARN] [1794430786.373213042] [motion_planner]: Goal (-3.68,-0.96) is only 0.36 m from an obstacle - the 1.15 x 0.60 m robot needs 0.70 m to park and turn there. Driving to (-4.14,-1.14) instead (0.49 m away, 0.57 m of room).
+[INFO] [1794430786.379707405] [motion_planner]: Path found: 151 cells, smoothed to 9 waypoints in 34 ms (19946 ML obstacle cells on the map)
+[INFO] [1794430786.380626363] [motion_planner]: Path published on /planned_path with 9 waypoints.
+Traceback (most recent call last):
+  File "/home/yug/miniconda3/envs/habitat/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/yug/miniconda3/envs/habitat/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/planning/motion_planner.py", line 557, in <module>
+    main()
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/planning/motion_planner.py", line 547, in main
+    rclpy.spin(node)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+    executor.spin_once()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 653, in _wait_for_ready_callbacks
+    wait_set = _rclpy.WaitSet(
+rclpy._rclpy_pybind11.RCLError: failed to initialize wait set: the given context is not valid, either rcl_init() was not called or rcl_shutdown() was called., at ./src/rcl/wait.c:130

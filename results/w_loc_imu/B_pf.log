@@ -1,0 +1,34 @@
+[INFO] [1794436118.065858176] [sketch_pf]: Sketch PF: 600 particles, odometry /wheel_odom, start (-4.29, 2.12, -47 deg). Waiting for /map ...
+[INFO] [1794436118.067001981] [sketch_pf]: PF started at (-4.29, 2.12, -47 deg)
+[WARN] [1794436119.041330764] [sketch_pf]: New publisher discovered on topic '/map', offering incompatible QoS. No messages will be received from it. Last incompatible policy: DURABILITY
+[INFO] [1794436134.156671374] [sketch_pf]: Map 768x1024 @ 0.019999999552965164 m, origin (-7.68, -10.24); sketch blurred with sigma 0.4 m
+[INFO] [1794436141.251104452] [sketch_pf]: PF update 20: (-3.63, 2.17, 65 deg), spread 0.03 m, Neff 570
+[INFO] [1794436143.565468144] [sketch_pf]: PF update 40: (-3.54, 2.19, 171 deg), spread 0.04 m, Neff 303
+[INFO] [1794436146.567622817] [sketch_pf]: PF update 60: (-3.79, 1.91, -100 deg), spread 0.06 m, Neff 462
+[INFO] [1794436151.129687261] [sketch_pf]: PF update 80: (-3.83, 0.49, -95 deg), spread 0.06 m, Neff 590
+[INFO] [1794436154.986488975] [sketch_pf]: PF update 100: (-3.99, -0.41, -68 deg), spread 0.06 m, Neff 513
+Traceback (most recent call last):
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/robo_project/sketch_pf_node", line 33, in <module>
+    sys.exit(load_entry_point('robo-project==0.1.0', 'console_scripts', 'sketch_pf_node')())
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/localization/sketch_pf_node.py", line 321, in main
+    rclpy.spin(node)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+    executor.spin_once()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 805, in _spin_once_impl
+    raise handler.exception()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/task.py", line 272, in _execute_coroutine_step
+    result = coro.send(None)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 488, in handler
+    await call_coroutine(entity, arg)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 407, in _execute_subscription
+    await await_or_execute(sub.callback, msg)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 110, in await_or_execute
+    return callback(*args)
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/localization/sketch_pf_node.py", line 240, in on_odom
+    self.odom_pub.publish(out)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/publisher.py", line 70, in publish
+    self.__publisher.publish(msg)
+rclpy._rclpy_pybind11.RCLError: Failed to publish: publisher's context is invalid, at ./src/rcl/publisher.c:389
+[ros2run]: Process exited with failure 1

@@ -1,0 +1,61 @@
+[INFO] [1794516492.769703118] [motion_planner]: motion_planner started. Waiting for /map and /odom...
+[INFO] [1794516492.770356102] [motion_planner]: Goal: x=0.0m, y=0.0m
+[INFO] [1794516493.106035643] [motion_planner]: Map received: 768x1024 res=0.019999999552965164m origin=(-7.68,-10.24)
+[INFO] [1794516493.129172638] [motion_planner]: Start: world=(-4.29,2.12) -> pixel=(618,169) value=100
+[INFO] [1794516493.129728570] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[WARN] [1794516493.413928451] [motion_planner]: Path crosses 2.26 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794516493.444908580] [motion_planner]: Path found: 492 cells, smoothed to 18 waypoints in 292 ms (0 ML obstacle cells on the map)
+[INFO] [1794516493.445816716] [motion_planner]: Path published on /planned_path with 18 waypoints.
+[WARN] [1794516494.643988704] [motion_planner]: ML model: obstacle on the path at (-4.00,2.15). Re-planning.
+[INFO] [1794516494.737665285] [motion_planner]: Start: world=(-4.41,2.22) -> pixel=(623,163) value=100
+[INFO] [1794516494.737985486] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[WARN] [1794516494.800047487] [motion_planner]: Path crosses 3.14 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794516494.831606282] [motion_planner]: Path found: 498 cells, smoothed to 15 waypoints in 82 ms (11823 ML obstacle cells on the map)
+[INFO] [1794516494.832762946] [motion_planner]: Path published on /planned_path with 15 waypoints.
+[WARN] [1794516495.354858975] [motion_planner]: ML model: obstacle on the path at (-3.58,4.74). Re-planning.
+[INFO] [1794516495.528655849] [motion_planner]: Start: world=(-4.50,2.29) -> pixel=(626,159) value=100
+[INFO] [1794516495.529132468] [motion_planner]: Goal:  world=(0.00,0.00) -> pixel=(512,384) value=0
+[WARN] [1794516495.605879757] [motion_planner]: Path crosses 2.74 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794516495.649925317] [motion_planner]: Path found: 510 cells, smoothed to 7 waypoints in 99 ms (12050 ML obstacle cells on the map)
+[INFO] [1794516495.651036316] [motion_planner]: Path published on /planned_path with 7 waypoints.
+[INFO] [1794516495.720342043] [motion_planner]: New goal from RViz: x=-3.84m, y=-0.78m. Re-planning.
+[INFO] [1794516495.728251720] [motion_planner]: Start: world=(-4.52,2.31) -> pixel=(627,157) value=100
+[INFO] [1794516495.728583844] [motion_planner]: Goal:  world=(-3.84,-0.78) -> pixel=(473,192) value=0
+[WARN] [1794516495.805191910] [motion_planner]: Goal (-4.08,-0.56) is only 0.38 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-4.52,-0.54) instead (0.44 m away, 0.80 m of room).
+[WARN] [1794516495.811059146] [motion_planner]: Path crosses 1.12 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794516495.838084916] [motion_planner]: Path found: 143 cells, smoothed to 2 waypoints in 91 ms (12219 ML obstacle cells on the map)
+[INFO] [1794516495.838639912] [motion_planner]: Path published on /planned_path with 2 waypoints.
+[INFO] [1794516495.839453535] [motion_planner]: New goal from RViz: x=-3.84m, y=-0.78m. Re-planning.
+[INFO] [1794516495.852011838] [motion_planner]: New goal from RViz: x=-3.84m, y=-0.78m. Re-planning.
+[INFO] [1794516495.928723441] [motion_planner]: Start: world=(-4.55,2.32) -> pixel=(628,156) value=100
+[INFO] [1794516495.929787594] [motion_planner]: Goal:  world=(-3.84,-0.78) -> pixel=(473,192) value=0
+[WARN] [1794516496.002780028] [motion_planner]: Path crosses 1.10 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794516496.043259052] [motion_planner]: Path found: 144 cells, smoothed to 2 waypoints in 91 ms (12290 ML obstacle cells on the map)
+[INFO] [1794516496.043959996] [motion_planner]: Path published on /planned_path with 2 waypoints.
+[WARN] [1794516508.904722718] [motion_planner]: Obstacle reported at (-4.90,-0.84) [1 total]. Re-planning from the current pose.
+[INFO] [1794516508.928531094] [motion_planner]: Start: world=(-4.42,-0.34) -> pixel=(494,163) value=100
+[INFO] [1794516508.929136359] [motion_planner]: Goal:  world=(-3.84,-0.78) -> pixel=(473,192) value=0
+[WARN] [1794516508.982456945] [motion_planner]: Goal (-3.84,-0.78) is only 0.45 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-4.10,-0.36) instead (0.49 m away, 0.70 m of room).
+[WARN] [1794516508.988356712] [motion_planner]: Path crosses 0.26 m of drawn wall the ML model has not seen yet (the drawing can be off). The model will show on the way whether it is real; the planner re-plans if so.
+[INFO] [1794516509.021989283] [motion_planner]: Path found: 17 cells, smoothed to 2 waypoints in 79 ms (29283 ML obstacle cells on the map)
+[INFO] [1794516509.022723359] [motion_planner]: Path published on /planned_path with 2 waypoints.
+Traceback (most recent call last):
+  File "/home/yug/miniconda3/envs/habitat/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/yug/miniconda3/envs/habitat/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/planning/motion_planner.py", line 605, in <module>
+    main()
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/planning/motion_planner.py", line 595, in main
+    rclpy.spin(node)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+    executor.spin_once()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+    raise ExternalShutdownException()
+rclpy.executors.ExternalShutdownException

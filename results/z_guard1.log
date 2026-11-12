@@ -1,0 +1,47 @@
+=== A: 6 goals  (bridge args: none, localization)
+  goal 0 (  0.00,  0.00): REACHED    30.4 s  dist 0.10 m
+  goal 1 (  4.38, -3.89): REACHED    24.2 s  dist 0.10 m  (parked 0.26 m from the clicked goal: too close to a wall)
+  goal 2 (  5.00,  0.72): REACHED    37.4 s  dist 0.10 m  (parked 0.67 m from the clicked goal: too close to a wall)
+  goal 3 ( -3.74,  5.32): REACHED    49.6 s  dist 0.09 m
+  goal 4 ( -3.33, -4.04): REACHED    52.9 s  dist 0.10 m
+  goal 5 ( -3.84,  5.59): REACHED    53.9 s  dist 0.11 m  (parked 0.26 m from the clicked goal: too close to a wall)
+  runner stalls: 0  NO PATH: 0  stuck: 0  sim contacts: 0  goal shifted: 13
+  model: /home/yug/robo_project_ws/robo_project_ws/runs/fusion_mid360_e3.0/best.pt
+  shifted: Goal (4.38,-3.90) is only 0.54 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.40,-3.52) instead (0.38 m away, 0.64 m of room).
+  shifted: Goal (4.38,-3.90) is only 0.54 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.30,-3.42) instead (0.49 m away, 0.72 m of room).
+  shifted: Goal (4.38,-3.90) is only 0.64 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.22,-3.84) instead (0.17 m away, 0.81 m of room).
+  shifted: Goal (5.00,0.72) is only 0.32 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.84,0.80) instead (0.18 m away, 0.48 m of room).
+  shifted: Goal (5.00,0.72) is only 0.32 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.58,0.98) instead (0.49 m away, 0.48 m of room).
+  shifted: Goal (4.82,0.86) is only 0.38 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.64,1.32) instead (0.49 m away, 0.72 m of room).
+  shifted: Goal (-3.74,5.32) is only 0.68 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.86,5.40) instead (0.14 m away, 0.81 m of room).
+  shifted: Goal (-3.34,-4.04) is only 0.34 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.38,-3.58) instead (0.46 m away, 0.80 m of room).
+  shifted: Goal (-3.34,-4.04) is only 0.34 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.68,-3.70) instead (0.48 m away, 0.57 m of room).
+  shifted: Goal (-3.34,-4.04) is only 0.66 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.38,-4.18) instead (0.15 m away, 0.80 m of room).
+  shifted: Goal (-3.84,5.58) is only 0.73 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.82,5.50) instead (0.08 m away, 0.80 m of room).
+  shifted: Goal (-3.84,5.58) is only 0.70 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.82,5.48) instead (0.10 m away, 0.80 m of room).
+  shifted: Goal (-3.84,5.58) is only 0.64 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.84,5.40) instead (0.18 m away, 0.82 m of room).
+=== B: former freeze spot (-4.29,2.12) -> goal (-3.84,-0.78)
+  robot at (-4.22,-0.67) after 11 s, 0.39 m from the clicked goal, drove 3.3 m
+  runner stalls: 0  NO PATH: 0  stuck: 0  sim contacts: 0  goal shifted: 3
+  model: /home/yug/robo_project_ws/robo_project_ws/runs/fusion_mid360_e3.0/best.pt
+=== analysis (A)
+1. SIM CONTACT (Habitat clipped the motion: driven < 50% of commanded over 0.5 s)
+   events: 0
+
+2. BODY OVERLAP (1.15 x 0.60 m footprint inside scene obstacles by > 2 cm)
+   events: 1, time overlapping: 0.5% of the run, max depth 8.0 cm
+   min body clearance when not overlapping: 0.0 cm
+   t=   99.5-  101.3 s  at (4.25,0.86)  max depth 8.0 cm
+
+wrote /home/yug/robo_project_ws/robo_project_ws/results/z_guard1_loc_imu/analysis/collision_report.txt and /home/yug/robo_project_ws/robo_project_ws/results/z_guard1_loc_imu/analysis/collision_map.png
+                           cell3    IoU*  IoU obst  missed obst.  false alarm
+FusionOccNet (all)         98.7%   92.7%     92.7%         4.62%        0.76%
+LiDAR only (no ML)         91.0%   68.9%     68.9%        27.75%        0.74%
+=== driving smoothness (A): stops on the way
+goal  time   dist  speed   stops(turn/halt)  paused
+ALL    201s  54.8m  0.27m/s     9 (9/0)           5%
+bag /home/yug/robo_project_ws/robo_project_ws/results/z_guard1_loc_imu/bag: 10292 poses over 251 s, robot drove 62.7 m
+LOCALIZATION   position error (m): mean 0.585  median 0.575  p95 1.029  max 1.102
+               heading error (deg): mean 4.019  median 3.561  p95 8.792  max 10.051
+WHEEL ODOMETRY only (no localization), position error (m): mean 0.414  median 0.379  p95 0.882  max 0.887
+all stopped

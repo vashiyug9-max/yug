@@ -1,0 +1,21 @@
+[goal 0] -> (0.00,0.00)
+[goal 0] TIMEOUT after 150.0 s (final distance 0.08 m)
+[goal 1] -> (4.38,-3.89)
+[goal 1] TIMEOUT after 150.0 s (final distance 0.10 m)
+[goal 2] -> (5.00,0.72)
+[goal 2] TIMEOUT after 150.0 s (final distance 0.90 m)
+[goal 3] -> (-3.74,5.32)
+[goal 3] TIMEOUT after 150.0 s (final distance 0.11 m)
+[goal 4] -> (-3.33,-4.04)
+[goal 4] TIMEOUT after 150.0 s (final distance 0.10 m)
+[goal 5] -> (-3.84,5.59)
+[goal 5] TIMEOUT after 150.0 s (final distance 0.08 m)
+
+SUMMARY
+  goal 0 (  0.00,  0.00): TIMEOUT   150.0 s  dist 0.08 m
+  goal 1 (  4.38, -3.89): TIMEOUT   150.0 s  dist 0.10 m  (parked 0.48 m from the clicked goal: too close to a wall)
+  goal 2 (  5.00,  0.72): TIMEOUT   150.0 s  dist 0.90 m  (parked 1.05 m from the clicked goal: too close to a wall)
+  goal 3 ( -3.74,  5.32): TIMEOUT   150.0 s  dist 0.11 m  (parked 0.39 m from the clicked goal: too close to a wall)
+  goal 4 ( -3.33, -4.04): TIMEOUT   150.0 s  dist 0.10 m  (parked 0.58 m from the clicked goal: too close to a wall)
+  goal 5 ( -3.84,  5.59): TIMEOUT   150.0 s  dist 0.08 m  (parked 0.77 m from the clicked goal: too close to a wall)
+SEQUENCE DONE

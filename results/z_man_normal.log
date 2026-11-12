@@ -1,0 +1,34 @@
+=== A: 6 goals  (bridge args: none)
+  goal 0 (  0.00,  0.00): REACHED    33.0 s  dist 0.09 m
+  goal 1 (  4.38, -3.89): REACHED    23.4 s  dist 0.10 m  (parked 0.46 m from the clicked goal: too close to a wall)
+  goal 2 (  5.00,  0.72): REACHED    38.2 s  dist 0.09 m  (parked 0.26 m from the clicked goal: too close to a wall)
+  goal 3 ( -3.74,  5.32): REACHED    55.3 s  dist 0.09 m
+  goal 4 ( -3.33, -4.04): REACHED    48.1 s  dist 0.10 m  (parked 0.49 m from the clicked goal: too close to a wall)
+  goal 5 ( -3.84,  5.59): REACHED    49.4 s  dist 0.10 m
+  runner stalls: 0  NO PATH: 0  stuck: 0  sim contacts: 0  goal shifted: 4
+  model: /home/yug/robo_project_ws/robo_project_ws/runs/fusion_mid360_e3.0/best.pt
+  shifted: Goal (4.38,-3.90) is only 0.54 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.40,-3.52) instead (0.38 m away, 0.64 m of room).
+  shifted: Goal (5.00,0.72) is only 0.32 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (4.84,0.80) instead (0.18 m away, 0.48 m of room).
+  shifted: Goal (-3.74,5.32) is only 0.63 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.90,5.40) instead (0.18 m away, 0.80 m of room).
+  shifted: Goal (-3.34,-4.04) is only 0.34 m from an obstacle - the 1.15 x 0.60 m robot needs 0.80 m to park and turn there. Driving to (-3.38,-3.58) instead (0.46 m away, 0.80 m of room).
+=== B: former freeze spot (-4.29,2.12) -> goal (-3.84,-0.78)
+  robot at (-4.64,-0.41) after 11 s, 0.88 m from the clicked goal, drove 2.7 m
+  runner stalls: 0  NO PATH: 0  stuck: 0  sim contacts: 0  goal shifted: 1
+  model: /home/yug/robo_project_ws/robo_project_ws/runs/fusion_mid360_e3.0/best.pt
+=== analysis (A)
+1. SIM CONTACT (Habitat clipped the motion: driven < 50% of commanded over 0.5 s)
+   events: 0
+
+2. BODY OVERLAP (1.15 x 0.60 m footprint inside scene obstacles by > 2 cm)
+   events: 1, time overlapping: 0.5% of the run, max depth 7.2 cm
+   min body clearance when not overlapping: 0.0 cm
+   t=   99.7-  100.8 s  at (4.59,0.84)  max depth 7.2 cm
+
+wrote /home/yug/robo_project_ws/robo_project_ws/results/z_man_normal/analysis/collision_report.txt and /home/yug/robo_project_ws/robo_project_ws/results/z_man_normal/analysis/collision_map.png
+                           cell3    IoU*  IoU obst  missed obst.  false alarm
+FusionOccNet (all)         99.1%   91.5%     91.5%         4.92%        0.86%
+LiDAR only (no ML)         92.1%   67.9%     67.9%        27.25%        1.00%
+=== driving smoothness (A): stops on the way
+goal  time   dist  speed   stops(turn/halt)  paused
+ALL    196s  53.3m  0.27m/s     8 (8/0)           5%
+all stopped

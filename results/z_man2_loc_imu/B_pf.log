@@ -1,0 +1,24 @@
+[INFO] [1794512201.369446886] [sketch_pf]: Sketch PF: 600 particles, odometry /wheel_odom, start (-4.29, 2.12, -47 deg). Waiting for /map ...
+[INFO] [1794512201.370841379] [sketch_pf]: PF started at (-4.29, 2.12, -47 deg)
+[WARN] [1794512202.417028548] [sketch_pf]: New publisher discovered on topic '/map', offering incompatible QoS. No messages will be received from it. Last incompatible policy: DURABILITY
+[INFO] [1794512217.545161230] [sketch_pf]: Map 768x1024 @ 0.019999999552965164 m, origin (-7.68, -10.24); sketch blurred with sigma 0.4 m
+[INFO] [1794512228.499744242] [sketch_pf]: PF update 20: (-3.86, 2.05, -124 deg), spread 0.03 m, Neff 561
+[INFO] [1794512233.001839543] [sketch_pf]: PF update 40: (-3.95, 0.73, -80 deg), spread 0.06 m, Neff 588
+[INFO] [1794512237.921408476] [sketch_pf]: PF update 60: (-3.86, -0.65, -100 deg), spread 0.08 m, Neff 368
+Traceback (most recent call last):
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/robo_project/sketch_pf_node", line 33, in <module>
+    sys.exit(load_entry_point('robo-project==0.1.0', 'console_scripts', 'sketch_pf_node')())
+  File "/home/yug/robo_project_ws/robo_project_ws/install/robo_project/lib/python3.10/site-packages/robo_project/localization/sketch_pf_node.py", line 321, in main
+    rclpy.spin(node)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+    executor.spin_once()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+    raise ExternalShutdownException()
+rclpy.executors.ExternalShutdownException
+[ros2run]: Process exited with failure 1

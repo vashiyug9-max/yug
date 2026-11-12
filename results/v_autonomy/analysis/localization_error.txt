@@ -1,0 +1,4 @@
+bag /home/yug/robo_project_ws/robo_project_ws/results/v_autonomy/bag: 12352 poses over 300 s, robot drove 69.8 m
+LOCALIZATION   position error (m): mean 0.780  median 0.767  p95 1.628  max 1.690
+               heading error (deg): mean 7.196  median 4.957  p95 19.003  max 24.044
+WHEEL ODOMETRY only (no localization), position error (m): mean 0.318  median 0.291  p95 0.828  max 0.876

@@ -1,0 +1,21 @@
+# Who drives the tracks. Highest priority wins while its topic is active (messages within timeout).
+#   joystick  : /cmd_vel_joy - PS4 via joy_gate, only while L1 is held           priority 100
+#   navigation: /cmd_vel     - our autonomous stack (ros/runner_node.py), unchanged priority 10
+# Lock: /emergency (PS4 O button, from ps4_ros2) blocks everything while true; the Roboteq controller
+# then stops by itself after its cmd_vel_timeout (0.25 s). The orange e-stop remote stays the real e-stop.
+twist_mux:
+  ros__parameters:
+    topics:
+      navigation:
+        topic: /cmd_vel
+        timeout: 0.5
+        priority: 10
+      joystick:
+        topic: /cmd_vel_joy
+        timeout: 0.5
+        priority: 100
+    locks:
+      emergency:
+        topic: /emergency
+        timeout: 0.0
+        priority: 255

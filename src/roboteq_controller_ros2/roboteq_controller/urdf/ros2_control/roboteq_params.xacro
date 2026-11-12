@@ -1,0 +1,223 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <xacro:macro name="roboteq_params" params="roboteq_params_yaml_file serial_port baud_rate">
+        <xacro:property name="_roboteq_params" value="${xacro.load_yaml(roboteq_params_yaml_file)}" />
+        <param name="serial_port">${serial_port}</param>
+        <param name="baud_rate">${baud_rate}</param>
+        <param name="mixing">${_roboteq_params["mixing"]}</param>
+        <param name="break_delay">${_roboteq_params["break_delay"]}</param>
+        <param name="over_voltage_limit">${_roboteq_params["over_voltage_limit"]}</param>
+        <param name="over_voltage_hysteresis">${_roboteq_params["over_voltage_hysteresis"]}</param>
+        <param name="under_voltage_limit">${_roboteq_params["under_voltage_limit"]}</param>
+        <param name="pwm_frequency">${_roboteq_params["pwm_frequency"]}</param>
+        <param name="joint">${_roboteq_params["joint"]}</param>
+        <param name="InOut_analog_1_conversion">${_roboteq_params["InOut"]["analog"]["1"]["conversion"]}</param>
+        <param name="InOut_analog_1_conversionPolarity">${_roboteq_params["InOut"]["analog"]["1"]["conversion_polarity"]}</param>
+        <param name="InOut_analog_1_inputDeadband">${_roboteq_params["InOut"]["analog"]["1"]["input_deadband"]}</param>
+        <param name="InOut_analog_1_inputMotorOne">${_roboteq_params["InOut"]["analog"]["1"]["input_motor_one"]}</param>
+        <param name="InOut_analog_1_inputMotorTwo">${_roboteq_params["InOut"]["analog"]["1"]["input_motor_two"]}</param>
+        <param name="InOut_analog_1_inputUse">${_roboteq_params["InOut"]["analog"]["1"]["input_use"]}</param>
+        <param name="InOut_analog_1_rangeInputCenter">${_roboteq_params["InOut"]["analog"]["1"]["range_input_center"]}</param>
+        <param name="InOut_analog_1_rangeInputMax">${_roboteq_params["InOut"]["analog"]["1"]["range_input_max"]}</param>
+        <param name="InOut_analog_1_rangeInputMin">${_roboteq_params["InOut"]["analog"]["1"]["range_input_min"]}</param>
+
+        <param name="InOut_analog_2_conversion">${_roboteq_params["InOut"]["analog"]["2"]["conversion"]}</param>
+        <param name="InOut_analog_2_conversionPolarity">${_roboteq_params["InOut"]["analog"]["2"]["conversion_polarity"]}</param>
+        <param name="InOut_analog_2_inputDeadband">${_roboteq_params["InOut"]["analog"]["2"]["input_deadband"]}</param>
+        <param name="InOut_analog_2_inputMotorOne">${_roboteq_params["InOut"]["analog"]["2"]["input_motor_one"]}</param>
+        <param name="InOut_analog_2_inputMotorTwo">${_roboteq_params["InOut"]["analog"]["2"]["input_motor_two"]}</param>
+        <param name="InOut_analog_2_inputUse">${_roboteq_params["InOut"]["analog"]["2"]["input_use"]}</param>
+        <param name="InOut_analog_2_rangeInputCenter">${_roboteq_params["InOut"]["analog"]["2"]["range_input_center"]}</param>
+        <param name="InOut_analog_2_rangeInputMax">${_roboteq_params["InOut"]["analog"]["2"]["range_input_max"]}</param>
+        <param name="InOut_analog_2_rangeInputMin">${_roboteq_params["InOut"]["analog"]["2"]["range_input_min"]}</param>
+
+        <param name="InOut_analog_3_conversion">${_roboteq_params["InOut"]["analog"]["3"]["conversion"]}</param>
+        <param name="InOut_analog_3_conversionPolarity">${_roboteq_params["InOut"]["analog"]["3"]["conversion_polarity"]}</param>
+        <param name="InOut_analog_3_inputDeadband">${_roboteq_params["InOut"]["analog"]["3"]["input_deadband"]}</param>
+        <param name="InOut_analog_3_inputMotorOne">${_roboteq_params["InOut"]["analog"]["3"]["input_motor_one"]}</param>
+        <param name="InOut_analog_3_inputMotorTwo">${_roboteq_params["InOut"]["analog"]["3"]["input_motor_two"]}</param>
+        <param name="InOut_analog_3_inputUse">${_roboteq_params["InOut"]["analog"]["3"]["input_use"]}</param>
+        <param name="InOut_analog_3_rangeInputCenter">${_roboteq_params["InOut"]["analog"]["3"]["range_input_center"]}</param>
+        <param name="InOut_analog_3_rangeInputMax">${_roboteq_params["InOut"]["analog"]["3"]["range_input_max"]}</param>
+        <param name="InOut_analog_3_rangeInputMin">${_roboteq_params["InOut"]["analog"]["3"]["range_input_min"]}</param>
+
+        <param name="InOut_analog_4_conversion">${_roboteq_params["InOut"]["analog"]["4"]["conversion"]}</param>
+        <param name="InOut_analog_4_conversionPolarity">${_roboteq_params["InOut"]["analog"]["4"]["conversion_polarity"]}</param>
+        <param name="InOut_analog_4_inputDeadband">${_roboteq_params["InOut"]["analog"]["4"]["input_deadband"]}</param>
+        <param name="InOut_analog_4_inputMotorOne">${_roboteq_params["InOut"]["analog"]["4"]["input_motor_one"]}</param>
+        <param name="InOut_analog_4_inputMotorTwo">${_roboteq_params["InOut"]["analog"]["4"]["input_motor_two"]}</param>
+        <param name="InOut_analog_4_inputUse">${_roboteq_params["InOut"]["analog"]["4"]["input_use"]}</param>
+        <param name="InOut_analog_4_rangeInputCenter">${_roboteq_params["InOut"]["analog"]["4"]["range_input_center"]}</param>
+        <param name="InOut_analog_4_rangeInputMax">${_roboteq_params["InOut"]["analog"]["4"]["range_input_max"]}</param>
+        <param name="InOut_analog_4_rangeInputMin">${_roboteq_params["InOut"]["analog"]["4"]["range_input_min"]}</param>
+
+        <param name="InOut_analog_5_conversion">${_roboteq_params["InOut"]["analog"]["5"]["conversion"]}</param>
+        <param name="InOut_analog_5_conversionPolarity">${_roboteq_params["InOut"]["analog"]["5"]["conversion_polarity"]}</param>
+        <param name="InOut_analog_5_inputDeadband">${_roboteq_params["InOut"]["analog"]["5"]["input_deadband"]}</param>
+        <param name="InOut_analog_5_inputMotorOne">${_roboteq_params["InOut"]["analog"]["5"]["input_motor_one"]}</param>
+        <param name="InOut_analog_5_inputMotorTwo">${_roboteq_params["InOut"]["analog"]["5"]["input_motor_two"]}</param>
+        <param name="InOut_analog_5_inputUse">${_roboteq_params["InOut"]["analog"]["5"]["input_use"]}</param>
+        <param name="InOut_analog_5_rangeInputCenter">${_roboteq_params["InOut"]["analog"]["5"]["range_input_center"]}</param>
+        <param name="InOut_analog_5_rangeInputMax">${_roboteq_params["InOut"]["analog"]["5"]["range_input_max"]}</param>
+        <param name="InOut_analog_5_rangeInputMin">${_roboteq_params["InOut"]["analog"]["5"]["range_input_min"]}</param>
+
+        <param name="InOut_analog_6_conversion">${_roboteq_params["InOut"]["analog"]["6"]["conversion"]}</param>
+        <param name="InOut_analog_6_conversionPolarity">${_roboteq_params["InOut"]["analog"]["6"]["conversion_polarity"]}</param>
+        <param name="InOut_analog_6_inputDeadband">${_roboteq_params["InOut"]["analog"]["6"]["input_deadband"]}</param>
+        <param name="InOut_analog_6_inputMotorOne">${_roboteq_params["InOut"]["analog"]["6"]["input_motor_one"]}</param>
+        <param name="InOut_analog_6_inputMotorTwo">${_roboteq_params["InOut"]["analog"]["6"]["input_motor_two"]}</param>
+        <param name="InOut_analog_6_inputUse">${_roboteq_params["InOut"]["analog"]["6"]["input_use"]}</param>
+        <param name="InOut_analog_6_rangeInputCenter">${_roboteq_params["InOut"]["analog"]["6"]["range_input_center"]}</param>
+        <param name="InOut_analog_6_rangeInputMax">${_roboteq_params["InOut"]["analog"]["6"]["range_input_max"]}</param>
+        <param name="InOut_analog_6_rangeInputMin">${_roboteq_params["InOut"]["analog"]["6"]["range_input_min"]}</param>
+
+
+        <param name="InOut_pulse_1_conversion">${_roboteq_params["InOut"]["pulse"]["1"]["conversion"]}</param>
+        <param name="InOut_pulse_1_conversionPolarity">${_roboteq_params["InOut"]["pulse"]["1"]["conversion_polarity"]}</param>
+        <param name="InOut_pulse_1_inputDeadband">${_roboteq_params["InOut"]["pulse"]["1"]["input_deadband"]}</param>
+        <param name="InOut_pulse_1_inputMotorOne">${_roboteq_params["InOut"]["pulse"]["1"]["input_motor_one"]}</param>
+        <param name="InOut_pulse_1_inputMotorTwo">${_roboteq_params["InOut"]["pulse"]["1"]["input_motor_two"]}</param>
+        <param name="InOut_pulse_1_inputUse">${_roboteq_params["InOut"]["pulse"]["1"]["input_use"]}</param>
+        <param name="InOut_pulse_1_rangeInputCenter">${_roboteq_params["InOut"]["pulse"]["1"]["range_input_center"]}</param>
+        <param name="InOut_pulse_1_rangeInputMax">${_roboteq_params["InOut"]["pulse"]["1"]["range_input_max"]}</param>
+        <param name="InOut_pulse_1_rangeInputMin">${_roboteq_params["InOut"]["pulse"]["1"]["range_input_min"]}</param>
+
+        <param name="InOut_pulse_2_conversion">${_roboteq_params["InOut"]["pulse"]["2"]["conversion"]}</param>
+        <param name="InOut_pulse_2_conversionPolarity">${_roboteq_params["InOut"]["pulse"]["2"]["conversion_polarity"]}</param>
+        <param name="InOut_pulse_2_inputDeadband">${_roboteq_params["InOut"]["pulse"]["2"]["input_deadband"]}</param>
+        <param name="InOut_pulse_2_inputMotorOne">${_roboteq_params["InOut"]["pulse"]["2"]["input_motor_one"]}</param>
+        <param name="InOut_pulse_2_inputMotorTwo">${_roboteq_params["InOut"]["pulse"]["2"]["input_motor_two"]}</param>
+        <param name="InOut_pulse_2_inputUse">${_roboteq_params["InOut"]["pulse"]["2"]["input_use"]}</param>
+        <param name="InOut_pulse_2_rangeInputCenter">${_roboteq_params["InOut"]["pulse"]["2"]["range_input_center"]}</param>
+        <param name="InOut_pulse_2_rangeInputMax">${_roboteq_params["InOut"]["pulse"]["2"]["range_input_max"]}</param>
+        <param name="InOut_pulse_2_rangeInputMin">${_roboteq_params["InOut"]["pulse"]["2"]["range_input_min"]}</param>
+
+        <param name="InOut_pulse_3_conversion">${_roboteq_params["InOut"]["pulse"]["3"]["conversion"]}</param>
+        <param name="InOut_pulse_3_conversionPolarity">${_roboteq_params["InOut"]["pulse"]["3"]["conversion_polarity"]}</param>
+        <param name="InOut_pulse_3_inputDeadband">${_roboteq_params["InOut"]["pulse"]["3"]["input_deadband"]}</param>
+        <param name="InOut_pulse_3_inputMotorOne">${_roboteq_params["InOut"]["pulse"]["3"]["input_motor_one"]}</param>
+        <param name="InOut_pulse_3_inputMotorTwo">${_roboteq_params["InOut"]["pulse"]["3"]["input_motor_two"]}</param>
+        <param name="InOut_pulse_3_inputUse">${_roboteq_params["InOut"]["pulse"]["3"]["input_use"]}</param>
+        <param name="InOut_pulse_3_rangeInputCenter">${_roboteq_params["InOut"]["pulse"]["3"]["range_input_center"]}</param>
+        <param name="InOut_pulse_3_rangeInputMax">${_roboteq_params["InOut"]["pulse"]["3"]["range_input_max"]}</param>
+        <param name="InOut_pulse_3_rangeInputMin">${_roboteq_params["InOut"]["pulse"]["3"]["range_input_min"]}</param>
+
+        <param name="InOut_pulse_4_conversion">${_roboteq_params["InOut"]["pulse"]["4"]["conversion"]}</param>
+        <param name="InOut_pulse_4_conversionPolarity">${_roboteq_params["InOut"]["pulse"]["4"]["conversion_polarity"]}</param>
+        <param name="InOut_pulse_4_inputDeadband">${_roboteq_params["InOut"]["pulse"]["4"]["input_deadband"]}</param>
+        <param name="InOut_pulse_4_inputMotorOne">${_roboteq_params["InOut"]["pulse"]["4"]["input_motor_one"]}</param>
+        <param name="InOut_pulse_4_inputMotorTwo">${_roboteq_params["InOut"]["pulse"]["4"]["input_motor_two"]}</param>
+        <param name="InOut_pulse_4_inputUse">${_roboteq_params["InOut"]["pulse"]["4"]["input_use"]}</param>
+        <param name="InOut_pulse_4_rangeInputCenter">${_roboteq_params["InOut"]["pulse"]["4"]["range_input_center"]}</param>
+        <param name="InOut_pulse_4_rangeInputMax">${_roboteq_params["InOut"]["pulse"]["4"]["range_input_max"]}</param>
+        <param name="InOut_pulse_4_rangeInputMin">${_roboteq_params["InOut"]["pulse"]["4"]["range_input_min"]}</param>
+
+        <param name="InOut_pulse_5_conversion">${_roboteq_params["InOut"]["pulse"]["5"]["conversion"]}</param>
+        <param name="InOut_pulse_5_conversionPolarity">${_roboteq_params["InOut"]["pulse"]["5"]["conversion_polarity"]}</param>
+        <param name="InOut_pulse_5_inputDeadband">${_roboteq_params["InOut"]["pulse"]["5"]["input_deadband"]}</param>
+        <param name="InOut_pulse_5_inputMotorOne">${_roboteq_params["InOut"]["pulse"]["5"]["input_motor_one"]}</param>
+        <param name="InOut_pulse_5_inputMotorTwo">${_roboteq_params["InOut"]["pulse"]["5"]["input_motor_two"]}</param>
+        <param name="InOut_pulse_5_inputUse">${_roboteq_params["InOut"]["pulse"]["5"]["input_use"]}</param>
+        <param name="InOut_pulse_5_rangeInputCenter">${_roboteq_params["InOut"]["pulse"]["5"]["range_input_center"]}</param>
+        <param name="InOut_pulse_5_rangeInputMax">${_roboteq_params["InOut"]["pulse"]["5"]["range_input_max"]}</param>
+        <param name="InOut_pulse_5_rangeInputMin">${_roboteq_params["InOut"]["pulse"]["5"]["range_input_min"]}</param>
+
+        <param name="InOut_pulse_6_conversion">${_roboteq_params["InOut"]["pulse"]["6"]["conversion"]}</param>
+        <param name="InOut_pulse_6_conversionPolarity">${_roboteq_params["InOut"]["pulse"]["6"]["conversion_polarity"]}</param>
+        <param name="InOut_pulse_6_inputDeadband">${_roboteq_params["InOut"]["pulse"]["6"]["input_deadband"]}</param>
+        <param name="InOut_pulse_6_inputMotorOne">${_roboteq_params["InOut"]["pulse"]["6"]["input_motor_one"]}</param>
+        <param name="InOut_pulse_6_inputMotorTwo">${_roboteq_params["InOut"]["pulse"]["6"]["input_motor_two"]}</param>
+        <param name="InOut_pulse_6_inputUse">${_roboteq_params["InOut"]["pulse"]["6"]["input_use"]}</param>
+        <param name="InOut_pulse_6_rangeInputCenter">${_roboteq_params["InOut"]["pulse"]["6"]["range_input_center"]}</param>
+        <param name="InOut_pulse_6_rangeInputMax">${_roboteq_params["InOut"]["pulse"]["6"]["range_input_max"]}</param>
+        <param name="InOut_pulse_6_rangeInputMin">${_roboteq_params["InOut"]["pulse"]["6"]["range_input_min"]}</param>
+
+        <param name="InOut_encoder_1_PPR">${_roboteq_params["InOut"]["encoder"]["1"]["PPR"]}</param>
+        <param name="InOut_encoder_1_configuration">${_roboteq_params["InOut"]["encoder"]["1"]["configuration"]}</param>
+        <param name="InOut_encoder_1_encoderHighCountLimit">${_roboteq_params["InOut"]["encoder"]["1"]["encoder_high_count_limit"]}</param>
+        <param name="InOut_encoder_1_encoderHomeCount">${_roboteq_params["InOut"]["encoder"]["1"]["encoder_home_count"]}</param>
+        <param name="InOut_encoder_1_encoderLowCountLimit">${_roboteq_params["InOut"]["encoder"]["1"]["encoder_low_count_limit"]}</param>
+        <param name="InOut_encoder_1_inputMotorOne">${_roboteq_params["InOut"]["encoder"]["1"]["input_motor_one"]}</param>
+        <param name="InOut_encoder_1_inputMotorTwo">${_roboteq_params["InOut"]["encoder"]["1"]["input_motor_two"]}</param>
+        <param name="InOut_encoder_1_position">${_roboteq_params["InOut"]["encoder"]["1"]["position"]}</param>
+
+        <param name="InOut_encoder_2_PPR">${_roboteq_params["InOut"]["encoder"]["2"]["PPR"]}</param>
+        <param name="InOut_encoder_2_configuration">${_roboteq_params["InOut"]["encoder"]["2"]["configuration"]}</param>
+        <param name="InOut_encoder_2_encoderHighCountLimit">${_roboteq_params["InOut"]["encoder"]["2"]["encoder_high_count_limit"]}</param>
+        <param name="InOut_encoder_2_encoderHomeCount">${_roboteq_params["InOut"]["encoder"]["2"]["encoder_home_count"]}</param>
+        <param name="InOut_encoder_2_encoderLowCountLimit">${_roboteq_params["InOut"]["encoder"]["2"]["encoder_low_count_limit"]}</param>
+        <param name="InOut_encoder_2_inputMotorOne">${_roboteq_params["InOut"]["encoder"]["2"]["input_motor_one"]}</param>
+        <param name="InOut_encoder_2_inputMotorTwo">${_roboteq_params["InOut"]["encoder"]["2"]["input_motor_two"]}</param>
+        <param name="InOut_encoder_2_position">${_roboteq_params["InOut"]["encoder"]["2"]["position"]}</param>
+
+        <param name="left_joint_number">${_roboteq_params["left_joint"]["number"]}</param>
+        <param name="left_joint_ratio">${_roboteq_params["left_joint"]["ratio"]}</param>
+        <param name="left_joint_rotation">${_roboteq_params["left_joint"]["rotation"]}</param>
+        <param name="left_joint_stallDetection">${_roboteq_params["left_joint"]["stall_detection"]}</param>
+        <param name="left_joint_amperLimit">${_roboteq_params["left_joint"]["amper_limit"]}</param>
+        <param name="left_joint_maxSpeed">${_roboteq_params["left_joint"]["max_speed"]}</param>
+        <param name="left_joint_maxAcceleration">${_roboteq_params["left_joint"]["max_acceleration"]}</param>
+        <param name="left_joint_maxDeceleration">${_roboteq_params["left_joint"]["max_deceleration"]}</param>
+        <param name="left_joint_maxForward">${_roboteq_params["left_joint"]["max_forward"]}</param>
+        <param name="left_joint_maxReverse">${_roboteq_params["left_joint"]["max_reverse"]}</param>
+        <param name="left_joint_pid_closedLoopPosition">${_roboteq_params["left_joint"]["pid"]["closed_loop_position"]}</param>
+        <param name="left_joint_pid_closedLoopVelocity">${_roboteq_params["left_joint"]["pid"]["closed_loop_velocity"]}</param>
+        <param name="left_joint_pid_position_Kp">${_roboteq_params["left_joint"]["pid"]["position"]["Kp"]}</param>
+        <param name="left_joint_pid_position_Ki">${_roboteq_params["left_joint"]["pid"]["position"]["Ki"]}</param>
+        <param name="left_joint_pid_position_Kd">${_roboteq_params["left_joint"]["pid"]["position"]["Kd"]}</param>
+        <param name="left_joint_pid_position_integratorLimit">${_roboteq_params["left_joint"]["pid"]["position"]["integrator_limit"]}</param>
+        <param name="left_joint_pid_position_loopErrorDetection">${_roboteq_params["left_joint"]["pid"]["position"]["loop_error_detection"]}</param>
+        <param name="left_joint_pid_position_positionModeVelocity">${_roboteq_params["left_joint"]["pid"]["position"]["position_mode_velocity"]}</param>
+        <param name="left_joint_pid_position_turnMinToMax">${_roboteq_params["left_joint"]["pid"]["position"]["turn_min_to_max"]}</param>
+        <param name="left_joint_pid_torque_Kp">${_roboteq_params["left_joint"]["pid"]["torque"]["Kp"]}</param>
+        <param name="left_joint_pid_torque_Ki">${_roboteq_params["left_joint"]["pid"]["torque"]["Ki"]}</param>
+        <param name="left_joint_pid_torque_Kd">${_roboteq_params["left_joint"]["pid"]["torque"]["Kd"]}</param>
+        <param name="left_joint_pid_torque_integratorLimit">${_roboteq_params["left_joint"]["pid"]["torque"]["integrator_limit"]}</param>
+        <param name="left_joint_pid_torque_loopErrorDetection">${_roboteq_params["left_joint"]["pid"]["torque"]["loop_error_detection"]}</param>
+        <param name="left_joint_pid_torque_positionModeVelocity">${_roboteq_params["left_joint"]["pid"]["torque"]["position_mode_velocity"]}</param>
+        <param name="left_joint_pid_torque_turnMinToMax">${_roboteq_params["left_joint"]["pid"]["torque"]["turn_min_to_max"]}</param>
+        <param name="left_joint_pid_velocity_Kp">${_roboteq_params["left_joint"]["pid"]["velocity"]["Kp"]}</param>
+        <param name="left_joint_pid_velocity_Ki">${_roboteq_params["left_joint"]["pid"]["velocity"]["Ki"]}</param>
+        <param name="left_joint_pid_velocity_Kd">${_roboteq_params["left_joint"]["pid"]["velocity"]["Kd"]}</param>
+        <param name="left_joint_pid_velocity_integratorLimit">${_roboteq_params["left_joint"]["pid"]["velocity"]["integrator_limit"]}</param>
+        <param name="left_joint_pid_velocity_loopErrorDetection">${_roboteq_params["left_joint"]["pid"]["velocity"]["loop_error_detection"]}</param>
+        <param name="left_joint_pid_velocity_positionModeVelocity">${_roboteq_params["left_joint"]["pid"]["velocity"]["position_mode_velocity"]}</param>
+        <param name="left_joint_pid_velocity_turnMinToMax">${_roboteq_params["left_joint"]["pid"]["velocity"]["turn_min_to_max"]}</param>
+
+        <param name="right_joint_number">${_roboteq_params["right_joint"]["number"]}</param>
+        <param name="right_joint_ratio">${_roboteq_params["right_joint"]["ratio"]}</param>
+        <param name="right_joint_rotation">${_roboteq_params["right_joint"]["rotation"]}</param>
+        <param name="right_joint_stallDetection">${_roboteq_params["right_joint"]["stall_detection"]}</param>
+        <param name="right_joint_amperLimit">${_roboteq_params["right_joint"]["amper_limit"]}</param>
+        <param name="right_joint_maxSpeed">${_roboteq_params["right_joint"]["max_speed"]}</param>
+        <param name="right_joint_maxAcceleration">${_roboteq_params["right_joint"]["max_acceleration"]}</param>
+        <param name="right_joint_maxDeceleration">${_roboteq_params["right_joint"]["max_deceleration"]}</param>
+        <param name="right_joint_maxForward">${_roboteq_params["right_joint"]["max_forward"]}</param>
+        <param name="right_joint_maxReverse">${_roboteq_params["right_joint"]["max_reverse"]}</param>
+        <param name="right_joint_pid_closedLoopPosition">${_roboteq_params["right_joint"]["pid"]["closed_loop_position"]}</param>
+        <param name="right_joint_pid_closedLoopVelocity">${_roboteq_params["right_joint"]["pid"]["closed_loop_velocity"]}</param>
+        <param name="right_joint_pid_position_Kp">${_roboteq_params["right_joint"]["pid"]["position"]["Kp"]}</param>
+        <param name="right_joint_pid_position_Ki">${_roboteq_params["right_joint"]["pid"]["position"]["Ki"]}</param>
+        <param name="right_joint_pid_position_Kd">${_roboteq_params["right_joint"]["pid"]["position"]["Kd"]}</param>
+        <param name="right_joint_pid_position_integratorLimit">${_roboteq_params["right_joint"]["pid"]["position"]["integrator_limit"]}</param>
+        <param name="right_joint_pid_position_loopErrorDetection">${_roboteq_params["right_joint"]["pid"]["position"]["loop_error_detection"]}</param>
+        <param name="right_joint_pid_position_positionModeVelocity">${_roboteq_params["right_joint"]["pid"]["position"]["position_mode_velocity"]}</param>
+        <param name="right_joint_pid_position_turnMinToMax">${_roboteq_params["right_joint"]["pid"]["position"]["turn_min_to_max"]}</param>
+        <param name="right_joint_pid_torque_Kp">${_roboteq_params["right_joint"]["pid"]["torque"]["Kp"]}</param>
+        <param name="right_joint_pid_torque_Ki">${_roboteq_params["right_joint"]["pid"]["torque"]["Ki"]}</param>
+        <param name="right_joint_pid_torque_Kd">${_roboteq_params["right_joint"]["pid"]["torque"]["Kd"]}</param>
+        <param name="right_joint_pid_torque_integratorLimit">${_roboteq_params["right_joint"]["pid"]["torque"]["integrator_limit"]}</param>
+        <param name="right_joint_pid_torque_loopErrorDetection">${_roboteq_params["right_joint"]["pid"]["torque"]["loop_error_detection"]}</param>
+        <param name="right_joint_pid_torque_positionModeVelocity">${_roboteq_params["right_joint"]["pid"]["torque"]["position_mode_velocity"]}</param>
+        <param name="right_joint_pid_torque_turnMinToMax">${_roboteq_params["right_joint"]["pid"]["torque"]["turn_min_to_max"]}</param>
+        <param name="right_joint_pid_velocity_Kp">${_roboteq_params["right_joint"]["pid"]["velocity"]["Kp"]}</param>
+        <param name="right_joint_pid_velocity_Ki">${_roboteq_params["right_joint"]["pid"]["velocity"]["Ki"]}</param>
+        <param name="right_joint_pid_velocity_Kd">${_roboteq_params["right_joint"]["pid"]["velocity"]["Kd"]}</param>
+        <param name="right_joint_pid_velocity_integratorLimit">${_roboteq_params["right_joint"]["pid"]["velocity"]["integrator_limit"]}</param>
+        <param name="right_joint_pid_velocity_loopErrorDetection">${_roboteq_params["right_joint"]["pid"]["velocity"]["loop_error_detection"]}</param>
+        <param name="right_joint_pid_velocity_positionModeVelocity">${_roboteq_params["right_joint"]["pid"]["velocity"]["position_mode_velocity"]}</param>
+        <param name="right_joint_pid_velocity_turnMinToMax">${_roboteq_params["right_joint"]["pid"]["velocity"]["turn_min_to_max"]}</param>
+
+    </xacro:macro>
+</robot>
