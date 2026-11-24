@@ -248,15 +248,26 @@ ros2 launch vinebot_bringup real_robot.launch.py
 #   config/vinebot_rig.yaml); the roboteq model is only used inside the controller_manager.
 # check:  ros2 control list_controllers   (both "active")
 
+robot terminals 1c / 1d  (OPTIONAL: joystick as two separate terminals instead of inside terminal 1)
+# start terminal 1 with joystick:=false, then:
+ros2 run joy joy_node                                                          # 1c: reads the PS4 pad -> /joy
+ros2 run ps4_ros2 ps4_ros2 --ros-args -p pub_topic:=/cmd_vel_joy_raw           # 1d: /joy -> speeds
+ros2 run vinebot_bringup joy_gate                                              # 1e: drives only while L1 is held
+# WARNING: "ros2 run ps4_ros2 ps4_ros2" WITHOUT -p pub_topic sends straight to the motors
+#   (/roboteq_controller/cmd_vel_unstamped): no L1 deadman, no twist_mux priority, no move confirmation.
+#   That is how the original Vinebot_ros2 repo drives; only use it with the robot lifted / in an open space.
+
 robot terminal 1b  (move confirmation - run it in its OWN terminal, it asks here)
 
 cd ~/robo_project_ws
 source install/setup.bash
 ros2 run vinebot_bringup motion_confirm
 # with confirm_moves:=true (default of real_robot.launch.py) the autonomy (/cmd_vel of runner_node)
-# reaches the motors ONLY through this node. For every new goal it prints goal, park position,
-# path length, waypoints and asks "Move? [y/N]":  y = drive,  anything else = stay,  s = stop any time.
-# Re-plans to the same goal do not ask again. Without this terminal the robot never drives autonomously.
+# reaches the motors ONLY through this node. It asks before EVERY waypoint: the robot is held, the terminal shows
+#   "NEXT WAYPOINT - robot held: waypoint 2/5 at (1.20, 3.40): 2.35 m away, 37 deg to the left"
+#   and asks "Move to this waypoint? [y/N]":  y = drive to this waypoint,  a = all remaining waypoints of this
+#   goal,  s = stop any time,  anything else = stay. A re-plan that moves a waypoint < 0.30 m keeps its approval.
+# Without this terminal the robot never drives autonomously.
 # answer from another terminal instead:  ros2 topic pub --once /motion_confirm std_msgs/msg/Bool "{data: true}"
 # switch it off: ros2 launch vinebot_bringup real_robot.launch.py confirm_moves:=false
 # test it in the SIMULATION: start the bridge with  --ros-args -r /cmd_vel:=/cmd_vel_confirmed
@@ -283,8 +294,12 @@ robot terminal 5  (AUTONOMY: localization + ML + planner + path follower)
 cd ~/robo_project_ws
 source install/setup.bash
 ros2 launch vinebot_bringup real_robot.launch.py odom_topic:=/wheel_odom     # (= robot terminal 1, with this option)
-ros2 launch vinebot_bringup autonomy.launch.py init_x:=<x> init_y:=<y> init_yaw:=<rad> python:=$(which python3)
-# start pose = where the robot stands on the sketch map (or "2D Pose Estimate" in RViz afterwards).
+ros2 launch vinebot_bringup autonomy.launch.py python:=$(which python3)
+# start pose UNKNOWN (default): the robot localizes itself on the sketch. Drive it a few metres with the joystick
+#   (hold L1) until the log says "LOCALIZED at (x, y, yaw)" (also: ros2 topic echo /localization/status).
+#   In the simulation test it needed 3.6-4.2 m of driving. Before that no pose is published, so the planner and
+#   path follower wait and nothing moves autonomously. RViz "Localization Particles" shows the cloud shrinking.
+# start pose known: add init_x:=<x> init_y:=<y> init_yaw:=<rad> (sketch map), or "2D Pose Estimate" in RViz.
 # python: an interpreter with numba (fast A*), e.g. the conda env. use_ekf:=false = wheels only (worse).
 # odometry:=builtin (default) | ekf | auto (ekf if installed)
 # imu_yaw_sign:=-1.0 if the IMU is mounted upside down (check: "ros2 topic echo /imu/data" - turning LEFT

@@ -3,8 +3,13 @@
 Sketch-map particle filter: tracks the robot pose on the hand-drawn map (/map) with odometry and the
 ML local occupancy grid (/fusion/local_grid). Continuous heading, no global search jumps.
 
-  ros2 run robo_project sketch_pf_node --ros-args -p odom_topic:=/wheel_odom
-  (start pose: parameters init_x / init_y / init_yaw, or "2D Pose Estimate" in RViz = /initialpose)
+  ros2 run robo_project sketch_pf_node --ros-args -p odom_topic:=/wheel_odom -p global_init:=true
+  Start pose UNKNOWN (global_init:=true): particles are spread over all free space of the sketch with random
+  headings. Drive the robot (joystick) - after >= conv_dist m the cloud converges to one pose
+  ("LOCALIZED" in the log, /localization/status). Before that NO pose is published, so planner and path
+  follower wait. Then the filter tracks as below.
+  Start pose known: parameters init_x / init_y / init_yaw, or "2D Pose Estimate" in RViz = /initialpose
+  (also overrides a running global search).
 
 Inputs
   /map                 runner_node's map (0.02 m/cell, origin and size from msg.info, ROS row order)
@@ -38,6 +43,7 @@ from geometry_msgs.msg import Pose, PoseArray, PoseWithCovarianceStamped
 from nav_msgs.msg import OccupancyGrid, Odometry
 from rclpy.node import Node
 from rclpy.qos import DurabilityPolicy, QoSProfile, ReliabilityPolicy
+from std_msgs.msg import String
 
 
 def wrap(a):
@@ -77,10 +83,13 @@ class PFCore:
     """The particle filter without ROS (used by the node and by sim/tools/pf_replay.py)."""
 
     def __init__(self, n=600, sigma_m=0.40, p_floor=0.10, effective_cells=5.0, noise=(0.05, 0.03, 0.05, 0.02),
-                 init_xy_std=0.20, init_yaw_std=0.10, seed=0):
+                 init_xy_std=0.20, init_yaw_std=0.10, seed=0, robot_radius=0.30):
         self.n, self.sigma_m, self.p_floor, self.eff_obs = n, sigma_m, p_floor, effective_cells
         self.a_tt, self.a_rr, self.a_rt, self.a_tr = noise
         self.init_xy_std, self.init_yaw_std = init_xy_std, init_yaw_std
+        self.robot_radius = robot_radius
+        self.free_xy = None
+        self.fit = 0.0
         self.rng = np.random.default_rng(seed)
         self.logp = self.log1mp = None
         self.origin = self.res = self.shape = None
@@ -95,6 +104,12 @@ class PFCore:
         p_occ = np.clip(p_occ, self.p_floor, 1.0 - self.p_floor)
         self.logp, self.log1mp = np.log(p_occ).astype(np.float32), np.log(1 - p_occ).astype(np.float32)
         self.origin, self.res, self.shape = (float(origin_xy[0]), float(origin_xy[1])), float(res), p_occ.shape
+        # free space where the robot body fits (for the global start): drawn free cells, eroded by robot_radius
+        r = max(1, int(round(self.robot_radius / res)))
+        free = cv2.erode((~np.asarray(occ, bool)).astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE,
+                                                                                            (2 * r + 1, 2 * r + 1)))
+        rows, cols = np.nonzero(free)
+        self.free_xy = np.column_stack([self.origin[0] + (cols + 0.5) * res, self.origin[1] + (rows + 0.5) * res])
 
     def reset(self, pose):
         self.parts = np.column_stack([
@@ -103,10 +118,33 @@ class PFCore:
             wrap(self.rng.normal(pose[2], self.init_yaw_std, self.n))])
         self.w = np.full(self.n, 1.0 / self.n)
 
+    def reset_global(self, n_global):
+        """Unknown start: n_global particles spread uniformly over the free space of the sketch, random heading."""
+        i = self.rng.integers(0, len(self.free_xy), n_global)
+        jit = self.rng.uniform(-0.5, 0.5, (n_global, 2)) * self.res
+        self.parts = np.column_stack([self.free_xy[i] + jit, self.rng.uniform(-np.pi, np.pi, n_global)])
+        self.w = np.full(n_global, 1.0 / n_global)
+        self.neff = float(n_global)
+
+    def shrink(self, n):
+        """Resample down to n particles (after the global start has converged)."""
+        pos = (self.rng.random() + np.arange(n)) / n
+        idx = np.minimum(np.searchsorted(np.cumsum(self.w), pos), len(self.w) - 1)
+        self.parts = self.parts[idx].copy()
+        self.w = np.full(n, 1.0 / n)
+        self.neff = float(n)
+
+    def yaw_spread(self):
+        """Circular standard deviation of the heading (rad)."""
+        c = float(np.sum(self.w * np.cos(self.parts[:, 2])))
+        s = float(np.sum(self.w * np.sin(self.parts[:, 2])))
+        r = min(1.0, max(1e-9, math.hypot(c, s)))
+        return math.sqrt(-2.0 * math.log(r))
+
     def predict(self, o0, o1):
         d = compose(inverse(o0), o1)                       # body-frame motion from odometry
         trans, rot = math.hypot(d[0], d[1]), abs(d[2])
-        n = self.n
+        n = len(self.parts)
         st = self.a_tt * trans + self.a_tr * rot + 0.005
         sr = self.a_rr * rot + self.a_rt * trans + 0.005
         dx = d[0] + self.rng.normal(0, st, n)
@@ -119,7 +157,24 @@ class PFCore:
 
     def update(self, fx, ly, is_occ):
         """Observed cells in the robot frame (forward, left) and their state (True = occupied)."""
-        P = self.parts
+        ll = np.concatenate([self._loglik(self.parts[i:i + 2000], fx, ly, is_occ)
+                             for i in range(0, len(self.parts), 2000)])   # chunks: global start has many particles
+        # fit: how well the observed cells match the sketch at the best hypotheses (mean log-likelihood per cell,
+        # weighted by the prior weights) - low for a wrong pose even when the cloud is tight
+        self.fit = float(np.sum(self.w * ll) / len(fx))
+        lw = np.log(self.w + 1e-300) + (self.eff_obs / len(fx)) * ll
+        lw -= lw.max()
+        w = np.exp(lw)
+        self.w = w / w.sum()
+        self.neff = 1.0 / np.sum(self.w ** 2)
+        n = len(self.parts)
+        if self.neff < 0.5 * n:
+            pos = (self.rng.random() + np.arange(n)) / n
+            idx = np.minimum(np.searchsorted(np.cumsum(self.w), pos), n - 1)
+            self.parts = self.parts[idx].copy()
+            self.w = np.full(n, 1.0 / n)
+
+    def _loglik(self, P, fx, ly, is_occ):
         c, s = np.cos(P[:, 2])[:, None], np.sin(P[:, 2])[:, None]
         wx = P[:, 0:1] + c * fx[None] - s * ly[None]
         wy = P[:, 1:2] + s * fx[None] + c * ly[None]
@@ -129,17 +184,7 @@ class PFCore:
         inside = (row >= 0) & (row < h) & (col >= 0) & (col < w)
         row, col = np.clip(row, 0, h - 1), np.clip(col, 0, w - 1)
         ll = np.where(is_occ[None], self.logp[row, col], self.log1mp[row, col])
-        ll = np.where(inside, ll, math.log(0.5)).sum(axis=1)
-        lw = np.log(self.w + 1e-300) + (self.eff_obs / len(fx)) * ll
-        lw -= lw.max()
-        w = np.exp(lw)
-        self.w = w / w.sum()
-        self.neff = 1.0 / np.sum(self.w ** 2)
-        if self.neff < 0.5 * self.n:
-            pos = (self.rng.random() + np.arange(self.n)) / self.n
-            idx = np.minimum(np.searchsorted(np.cumsum(self.w), pos), self.n - 1)
-            self.parts = self.parts[idx].copy()
-            self.w = np.full(self.n, 1.0 / self.n)
+        return np.where(inside, ll, math.log(0.5)).sum(axis=1)
 
     def estimate(self):
         w = self.w
@@ -169,6 +214,13 @@ class SketchPF(Node):
         self.n = int(p("particles", 600).value)
         self.odom_topic = str(p("odom_topic", "/wheel_odom").value)
         self.init = (float(p("init_x", -4.10).value), float(p("init_y", 4.90).value), float(p("init_yaw", 0.0).value))
+        self.global_init = bool(p("global_init", False).value)
+        self.n_global = int(p("global_particles", 20000).value)
+        self.conv_xy = float(p("conv_xy", 0.35).value)              # m: cloud spread to accept the global result
+        self.conv_yaw = math.radians(float(p("conv_yaw_deg", 12.0).value))
+        self.conv_dist = float(p("conv_dist", 1.0).value)           # m driven before accepting it
+        self.searching = False
+        self.travelled = 0.0
         self.init_xy_std = float(p("init_xy_std", 0.20).value)
         self.init_yaw_std = float(p("init_yaw_std", 0.10).value)
         self.stride = int(p("cell_stride", 2).value)
@@ -206,9 +258,11 @@ class SketchPF(Node):
         self.odom_pub = self.create_publisher(Odometry, "/localization/odom", 20)
         self.pose_pub = self.create_publisher(PoseWithCovarianceStamped, "/localization/pose", 5)
         self.parts_pub = self.create_publisher(PoseArray, "/localization/particles", 2)
+        self.status_pub = self.create_publisher(String, "/localization/status", 2)
         self.create_timer(0.5, self.publish_particles)
-        self.get_logger().info(f"Sketch PF: {self.n} particles, odometry {self.odom_topic}, start "
-                               f"({self.init[0]:.2f}, {self.init[1]:.2f}, {math.degrees(self.init[2]):.0f} deg). "
+        start = ("UNKNOWN - global localization: drive the robot a few metres" if self.global_init else
+                 f"({self.init[0]:.2f}, {self.init[1]:.2f}, {math.degrees(self.init[2]):.0f} deg)")
+        self.get_logger().info(f"Sketch PF: {self.n} particles, odometry {self.odom_topic}, start {start}. "
                                f"Waiting for /map ...")
 
     # ── map ────────────────────────────────────────────────────────────────
@@ -221,12 +275,20 @@ class SketchPF(Node):
         self.info = msg.info
         self.get_logger().info(f"Map {w}x{h} @ {msg.info.resolution} m, origin ({msg.info.origin.position.x:.2f}, "
                                f"{msg.info.origin.position.y:.2f}); sketch blurred with sigma {self.core.sigma_m} m")
+        if self.global_init and not self.started:
+            self.core.reset_global(self.n_global)
+            self.searching, self.travelled, self.last_update_odom = True, 0.0, None
+            self.get_logger().warn(f"Start pose unknown: {self.n_global} particles over the whole sketch "
+                                   f"({len(self.core.free_xy)} free cells). Drive the robot a few metres "
+                                   f"(joystick, L1) until LOCALIZED - nothing moves autonomously before that.")
 
     # ── odometry ───────────────────────────────────────────────────────────
     def on_odom(self, msg: Odometry):
         t = msg.header.stamp.sec + msg.header.stamp.nanosec * 1e-9
         o = (msg.pose.pose.position.x, msg.pose.pose.position.y, yaw_of(msg.pose.pose.orientation))
         self.odom_buf.append((t, o))
+        if self.searching or (self.global_init and self.info is None and not self.started):
+            return                                   # global search: no pose until localized
         if not self.started:
             self.reset(self.init, o)
         est = compose(self.corr, o)
@@ -247,7 +309,10 @@ class SketchPF(Node):
 
     # ── filter ─────────────────────────────────────────────────────────────
     def reset(self, pose, odom):
+        if len(self.core.parts if self.core.parts is not None else []) != self.n:
+            self.core.parts = None
         self.core.reset(pose)
+        self.searching = False
         self.started = True
         self.last_update_odom = odom
         self.corr = compose(pose, inverse(odom))
@@ -260,6 +325,9 @@ class SketchPF(Node):
         self.reset((q.position.x, q.position.y, yaw_of(q.orientation)), self.odom_buf[-1][1])
 
     def on_grid(self, msg: OccupancyGrid):
+        if self.searching:
+            self.search_step(msg)
+            return
         if self.info is None or not self.started:
             return
         t = msg.header.stamp.sec + msg.header.stamp.nanosec * 1e-9
@@ -287,6 +355,41 @@ class SketchPF(Node):
                                    f"{math.degrees(est[2]):.0f} deg), spread {self.core.spread():.2f} m, "
                                    f"Neff {self.core.neff:.0f}")
 
+    def search_step(self, msg: OccupancyGrid):
+        """Global localization: update the spread-out cloud (first grid at once, then after each motion) until it
+        has converged to one pose after >= conv_dist m of driving; then track from there."""
+        t = msg.header.stamp.sec + msg.header.stamp.nanosec * 1e-9
+        o = self.odom_at(t)
+        if o is None:
+            return
+        if self.last_update_odom is not None:
+            d = compose(inverse(self.last_update_odom), o)
+            if math.hypot(d[0], d[1]) < self.min_trans and abs(d[2]) < self.min_rot:
+                return
+        fx, ly, is_occ = grid_cells(msg.info, msg.data, self.stride)
+        if len(fx) < 20:
+            return
+        if self.last_update_odom is not None:
+            self.core.predict(self.last_update_odom, o)
+            self.travelled += math.hypot(d[0], d[1])
+        self.last_update_odom = o
+        self.core.update(fx, ly, is_occ)
+        spread, yaw_sp = self.core.spread(), self.core.yaw_spread()
+        text = (f"searching: cloud {spread:.2f} m / {math.degrees(yaw_sp):.0f} deg wide, driven {self.travelled:.1f} m "
+                f"(need < {self.conv_xy:.2f} m, < {math.degrees(self.conv_yaw):.0f} deg, >= {self.conv_dist:.1f} m)")
+        if spread < self.conv_xy and yaw_sp < self.conv_yaw and self.travelled >= self.conv_dist:
+            self.core.shrink(self.n)
+            est = self.core.estimate()
+            self.corr = compose(est, inverse(o))
+            self.searching, self.started = False, True
+            text = f"LOCALIZED at ({est[0]:.2f}, {est[1]:.2f}, {math.degrees(est[2]):.0f} deg) after {self.travelled:.1f} m"
+            self.get_logger().warn(text + " - pose published on /localization/odom, autonomy can start.")
+            self.publish_pose(msg.header.stamp, est)
+        elif self.n_updates % 5 == 0:
+            self.get_logger().info(text)
+        self.n_updates += 1
+        self.status_pub.publish(String(data=text))
+
     # ── outputs ────────────────────────────────────────────────────────────
     def publish_pose(self, stamp, est):
         m = PoseWithCovarianceStamped()
@@ -301,12 +404,12 @@ class SketchPF(Node):
         self.pose_pub.publish(m)
 
     def publish_particles(self):
-        if not self.started:
+        if not (self.started or self.searching):
             return
         pa = PoseArray()
         pa.header.stamp = self.get_clock().now().to_msg()
         pa.header.frame_id = "map"
-        for x, y, th in self.core.parts[::max(1, self.n // 200)]:
+        for x, y, th in self.core.parts[::max(1, len(self.core.parts) // (1000 if self.searching else 200))]:
             q = Pose()
             q.position.x, q.position.y = float(x), float(y)
             q.orientation.z, q.orientation.w = math.sin(th / 2), math.cos(th / 2)

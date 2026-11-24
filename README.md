@@ -27,6 +27,32 @@ the robot. What the model and the LiDAR see overrides the sketch (the drawing ca
 On the realistic-LiDAR validation set the new model reaches 93.5% IoU; the previous model
 (`fusion_real_rig_e3.0`, trained with a flat simulated LiDAR) drops to 80.4% there.
 
+## Occupancy model with 1 / 0 / -1 and real LiDAR data (2026-11-24)
+Target per cell: **1 = free, 0 = occupied, -1 = unknown**. The target is the `label` array of each `.npz` sample
+(120 x 120 at 5 cm, robot in the centre), cut to the middle 3 x 3 m and resized to the 64 x 64 output grid.
+| data | samples | inputs | target (`label`) |
+|---|---|---|---|
+| Habitat simulation (IMR Lab 8 + Denmark) | 35,933 train | 4 cameras + front depth + simulated Mid-360 | exact map of the 3D scene; -1 = no sensor can see the cell (`ml/fusion/visibility.py`) |
+| **real Mid-360 recording** (`ml/tools/real_lidar_dataset.py`) | 488 train (x6), 140 test | real LiDAR scans, cameras missing | map built from the real recording (scan matching): 1 = beams passed, 0 = hits, -1 = never covered |
+
+| model (`runs/`) | output | loss | sim IMR mIoU (3 classes, all cells) | real LiDAR mIoU |
+|---|---|---|---|---|
+| `fusion_mid360_e3.0` (old) | free probability | BCE, all cells, 1 / 0 | 76.7 % | 41.5 % |
+| `fusion_sim_real_e3.0` | free probability | BCE on known cells, sim + real | 78.0 % | 52.6 % |
+| **`fusion_3class_e3.0`** | **3 classes: 1 / 0 / -1** | cross-entropy on ALL cells (occupied weight 5), sim + real | **79.0 %** | 48.2 % |
+
+The 3-class model misses fewest obstacles in the simulation (12 % vs 27 % of the visible obstacle cells).
+`FusionPredictor.predict_grid()` and the ROS topic `/fusion/local_occupancy` give the 64 x 64 grid as 1 / 0 / -1.
+Compare models: `ml/tools/eval_testset.py` (`--save DIR` writes target / prediction pairs, see `results/3class_examples`).
+The robot node still loads `fusion_mid360_e3.0` by default (`model_path:=` selects another).
+
+## Other changes (2026-11-24)
+- `motion_confirm` asks before EVERY waypoint, with its distance and direction (e.g. "2.50 m away, 37 deg to the left").
+- `autonomy.launch.py`: start pose optional; without it the localization searches the whole sketch (global
+  localization). Offline test: 8 / 10 start points correct after 4-7 m of driving, 2 / 10 locked on a wrong
+  place - **experimental, give init_x / init_y / init_yaw on the real robot** until a re-localization watchdog is added.
+- Debug / audit files and intermediate test results were removed from the repository.
+
 ## Navigation test (`sim/tools/run_regression.sh`, `sim/tools/run_autonomy_test.sh`; results in `results/f_*`)
 Six goals around the lab (incl. the narrow goal-2 alcove), judged against the TRUE simulator pose.
 | run | goals | contacts | body overlap | closest | stops on the way | localization error |
@@ -83,7 +109,9 @@ scene + navmesh), `src/resources/sketch_map_imr_lab8.jpeg` (the hand-drawn map).
 `runs/*/`: training reports and example predictions.
 
 ## Not included (too large for this repo) – share separately, e.g. via Drive
-- **Fusion model `runs/fusion_mid360_e3.0/best.pt` (72 MB)** – or retrain it (see below).
+- **Fusion models `runs/*/best.pt` (69 MB each)**: `fusion_mid360_e3.0` (used by default), `fusion_3class_e3.0`,
+  `fusion_sim_real_e3.0`, `fusion_mid360_unk_e3.0` – or retrain them (see below).
+- Training data `data/real_lidar` (from the real recording, rebuild with `ml/tools/real_lidar_dataset.py`)
   Fallbacks: `runs/fusion_real_rig_e3.0/best.pt`, `runs/fusion_full_e1.2/best.pt`
 - ML pose estimator weights `src/robo_project/ml/pose_estimation/*.pth` (2 x 43 MB)
 - Training data `data/fusion_mid360` (2.4 GB, regenerate with `collect_data.py`)

@@ -16,7 +16,11 @@ obstacles to its A* map and re-plans as soon as one lies on the current path.
 
 Subscribes:  /camera/{front,right,back,left}/image_raw, /camera/front/depth/image_raw (32FC1),
              /livox/lidar (PointCloud2 in base_footprint), /odom, /map
-Publishes:   /fusion/local_grid   (OccupancyGrid in base_footprint: the raw prediction, for RViz)
+Publishes:   /fusion/local_grid   (OccupancyGrid in base_footprint: the raw prediction, 0..100 occupied, and
+                                  -1 = unknown: no sensor can see the cell (visibility.py), for models
+                                  trained with the 1 / 0 / -1 target; unknown cells are not fused into the map)
+             /fusion/local_occupancy (std_msgs/Int8MultiArray 64 x 64, row 0 = front, column 0 = left:
+                                  1 = free, 0 = occupied, -1 = unknown - the same values as the training target)
              /fusion/obstacle_map (OccupancyGrid in map, aligned with /map)
 
 Parameters:
@@ -42,12 +46,14 @@ from collections import deque
 import numpy as np
 import rclpy
 from nav_msgs.msg import OccupancyGrid, Odometry
+from std_msgs.msg import Int8MultiArray, MultiArrayDimension
 from rclpy.node import Node
 from rclpy.qos import qos_profile_sensor_data
 from sensor_msgs.msg import Image, PointCloud2
 from sensor_msgs_py.point_cloud2 import read_points_numpy
 
-from robo_project.ml.fusion.fusion_model import FusionInputs, FusionPredictor, default_fusion_model
+from robo_project.ml.fusion.fusion_model import FusionInputs, FusionPredictor, default_fusion_model, to_occupancy
+from robo_project.ml.fusion.visibility import Visibility, body_half, sensor_views
 from robo_project.common.rig import CAM_ORDER, load_rig, rig_signature, lidar_to_base, drop_self_hits
 
 
@@ -112,6 +118,11 @@ class FusionObstacleNode(Node):
         self.extent = self.model.extent
         self.rig = load_rig(str(g("rig")))
         self.inputs = FusionInputs(self.rig, self.extent)
+        # 1 / 0 / -1 models: cells no sensor can see are published as -1 and left out of the obstacle map
+        # 3-class models predict -1 themselves; 1-output models trained with -1 get it from the rig's visibility
+        self.mark_unknown = self.model.n_classes == 3 or "-1" in str(self.model.cfg.get("target", ""))
+        self.vis = Visibility(64, self.extent, sensor_views(self.rig), body_half(self.rig)) \
+            if self.mark_unknown and self.model.n_classes == 1 else None
         trained_for = self.model.cfg.get("rig_sensors")
         if trained_for is None:
             self.get_logger().warn("This checkpoint does not record its sensor rig (old model): it was trained "
@@ -169,6 +180,7 @@ class FusionObstacleNode(Node):
         self.create_subscription(OccupancyGrid, "/map", self.map_cb, 10)
 
         self.grid_pub = self.create_publisher(OccupancyGrid, "/fusion/local_grid", 2)
+        self.occ_pub = self.create_publisher(Int8MultiArray, "/fusion/local_occupancy", 2)
         self.obst_pub = self.create_publisher(OccupancyGrid, "/fusion/obstacle_map", 2)
         self.create_timer(0.02, self.tick)
         self.create_timer(1.0, self.heartbeat)
@@ -250,21 +262,26 @@ class FusionObstacleNode(Node):
             depth_grid = self.inputs.depth_grid(decode_depth(self.depth[1]))
 
         t = time.monotonic()
-        free = self.model.predict(rgb, lidar_grid, depth_grid)
+        free, seen = self.model.predict_full(rgb, lidar_grid, depth_grid)
+        if seen is None and self.vis is not None:
+            seen = self.vis.visible(free)
+        if not self.mark_unknown:
+            seen = None
         self.t_pred += time.monotonic() - t
         self.n_pred += 1
-        self.publish_local(free, self.rgb["front"][1].header.stamp)
+        self.publish_local(free, self.rgb["front"][1].header.stamp, seen)
 
         pose = self.pose_at(ns)
         if pose is not None and self.logodds is not None:
-            changed = self.integrate(free, pose)
+            changed = self.integrate(free, pose, seen)
             if self.lidar_map and pts is not None:
                 changed = self.integrate_lidar(pts, pose) or changed
             if changed:
                 self.publish_map()
 
-    def integrate(self, free: np.ndarray, pose) -> bool:
-        """Fuse one prediction into the world log-odds map. Returns True if an obstacle cell changed."""
+    def integrate(self, free: np.ndarray, pose, seen: np.ndarray = None) -> bool:
+        """Fuse one prediction into the world log-odds map (only cells a sensor can see, if `seen` is given).
+        Returns True if an obstacle cell changed."""
         info = self.map_info
         res, ox, oy = info.resolution, info.origin.position.x, info.origin.position.y
         H, W = self.logodds.shape
@@ -288,6 +305,8 @@ class FusionObstacleNode(Node):
         gi = np.clip(((half - fx) / self.res).astype(int), 0, self.n - 1)
         gj = np.clip(((half - ly) / self.res).astype(int), 0, self.n - 1)
         p_free = free[gi, gj]
+        if seen is not None:
+            inside &= seen[gi, gj]
         l = np.clip(np.log(np.clip(1.0 - p_free, 1e-6, 1.0) / np.clip(p_free, 1e-6, 1.0)), -self.l_cap, self.l_cap)
 
         win = self.logodds[r0:r1, c0:c1]
@@ -363,7 +382,7 @@ class FusionObstacleNode(Node):
         st[:] = np.where(win > self.l_occ, 100, np.where(win < self.l_free, 0, st)).astype(np.int8)
         return bool(((st == 100) != old_occ).any())
 
-    def publish_local(self, free: np.ndarray, stamp):
+    def publish_local(self, free: np.ndarray, stamp, seen: np.ndarray = None):
         msg = OccupancyGrid()
         msg.header.stamp = stamp
         msg.header.frame_id = "base_footprint"
@@ -373,9 +392,18 @@ class FusionObstacleNode(Node):
         msg.info.origin.position.y = -self.extent / 2
         msg.info.origin.orientation.w = 1.0
         # data[iy, ix]: x = ix (forward), y = iy (left)  <-  free[row, col] with row 0 = front, col 0 = left
-        occ = np.clip(np.round((1.0 - free[::-1, ::-1].T) * 100.0), 0, 100).astype(np.int8)
+        occ = np.clip(np.round((1.0 - free) * 100.0), 0, 100).astype(np.int8)
+        if seen is not None:
+            occ[~seen] = -1                                   # unknown: no sensor can see the cell
+        occ = occ[::-1, ::-1].T
         msg.data = occ.ravel().tolist()
         self.grid_pub.publish(msg)
+        # the same grid with the training target's values: 1 free, 0 occupied, -1 unknown
+        arr = Int8MultiArray()
+        arr.layout.dim = [MultiArrayDimension(label="rows_front_to_back", size=self.n, stride=self.n * self.n),
+                          MultiArrayDimension(label="cols_left_to_right", size=self.n, stride=self.n)]
+        arr.data = to_occupancy(free, seen).ravel().tolist()
+        self.occ_pub.publish(arr)
 
     def forget(self):
         """Fade all evidence by exp(-1 s / forget_s); cells that drop well inside the thresholds become unknown."""

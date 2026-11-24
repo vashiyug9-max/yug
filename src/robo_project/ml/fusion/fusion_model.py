@@ -7,7 +7,9 @@ Inputs
                         channel 1: front depth grid (same encoding; 0.5 outside the camera FOV)
                         channel 2: LiDAR available  (1 / 0)
 Output
-  logits (B, 1, G, G)   free-space logit of the egocentric local grid (forward = top row), G = 64
+  n_classes = 1: logits (B, 1, G, G)  free-space logit of the egocentric local grid (forward = top row), G = 64
+  n_classes = 3: logits (B, 3, G, G)  class scores per cell: 0 = occupied, 1 = free, 2 = unknown (target -1);
+                 trained with cross-entropy on ALL cells, the output is the most likely class -> 1 / 0 / -1
 
 Architecture
   camera branch: ResNet-18 trunk on the panorama -> pooled to 2 x 8 (8 horizontal sectors of 45 deg)
@@ -35,8 +37,9 @@ def up_bn(cin, cout):
 
 
 class FusionOccNet(nn.Module):
-    def __init__(self, grid: int = 64, pretrained: bool = True, dropout: float = 0.3):
+    def __init__(self, grid: int = 64, pretrained: bool = True, dropout: float = 0.3, n_classes: int = 1):
         super().__init__()
+        self.n_classes = n_classes
         assert grid == 64, "decoder is built for 64 x 64 output"
         r = resnet18(weights="IMAGENET1K_V1" if pretrained else None)
         self.trunk = nn.Sequential(r.conv1, r.bn1, r.relu, r.maxpool, r.layer1, r.layer2, r.layer3, r.layer4)
@@ -46,7 +49,7 @@ class FusionOccNet(nn.Module):
                                         nn.Dropout(dropout), nn.Linear(1024, 64 * 8 * 8), nn.ReLU(inplace=True))
         self.geo = nn.Sequential(conv_bn(3, 32, 2), conv_bn(32, 64, 2), conv_bn(64, 64, 2))   # 64 -> 8
         self.fuse = conv_bn(128, 128)
-        self.decoder = nn.Sequential(up_bn(128, 64), up_bn(64, 32), up_bn(32, 16), nn.Conv2d(16, 1, 1))
+        self.decoder = nn.Sequential(up_bn(128, 64), up_bn(64, 32), up_bn(32, 16), nn.Conv2d(16, n_classes, 1))
 
     def forward(self, pano, geo):
         cam = self.cam_to_map(self.cam_reduce(self.trunk(pano))).view(-1, 64, 8, 8)
@@ -163,21 +166,72 @@ def rule_fuse(lidar_grid, depth_grid):
     return out
 
 
-class FusionPredictor:
-    """Load a trained FusionOccNet checkpoint and predict a free-probability grid."""
+FREE, OCCUPIED, UNKNOWN = 1, 0, -1
+CLS_OCC, CLS_FREE, CLS_UNK = 0, 1, 2          # class indices of the 3-class model
+CLASS_TO_VALUE = np.array([OCCUPIED, FREE, UNKNOWN], np.int8)
 
-    def __init__(self, path: str, device: str = None):
-        ckpt = torch.load(path, map_location="cpu", weights_only=False)
-        self.cfg = ckpt["config"]
+
+def target_classes(label: np.ndarray) -> np.ndarray:
+    """1 / 0 / -1 target grid (free values may be fractional after resizing) -> class index per cell."""
+    lab = np.asarray(label)
+    return np.where(lab < 0, CLS_UNK, np.where(lab >= 0.5, CLS_FREE, CLS_OCC)).astype(np.int64)
+
+
+def load_fusion_net(path: str):
+    """Checkpoint -> (FusionOccNet with the right number of outputs, config)."""
+    ckpt = torch.load(path, map_location="cpu", weights_only=False)
+    cfg = ckpt["config"]
+    net = FusionOccNet(pretrained=False, n_classes=int(cfg.get("n_classes", 1)))
+    net.load_state_dict(ckpt["model_state"])
+    return net, cfg
+
+
+def to_occupancy(free: np.ndarray, seen: np.ndarray = None) -> np.ndarray:
+    """Free-probability grid (+ mask of the cells a sensor can see) -> int8 occupancy grid with the same
+    values as the training target: 1 = free (p >= 0.5), 0 = occupied, -1 = unknown (no sensor sees it)."""
+    out = np.where(np.asarray(free) >= 0.5, FREE, OCCUPIED).astype(np.int8)
+    if seen is not None:
+        out[~np.asarray(seen, bool)] = UNKNOWN
+    return out
+
+
+class FusionPredictor:
+    """Load a trained FusionOccNet checkpoint and predict the local grid:
+    predict()      -> free probability per cell (0..1), the raw network output after a sigmoid
+    predict_grid() -> occupancy grid 1 = free, 0 = occupied, -1 = unknown (same values as the target)"""
+
+    def __init__(self, path: str, device: str = None, rig: dict = None):
+        self.model, self.cfg = load_fusion_net(path)
         self.device = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
-        self.model = FusionOccNet(pretrained=False)
-        self.model.load_state_dict(ckpt["model_state"])
         self.model.to(self.device).eval()
+        self.n_classes = self.model.n_classes
         self.extent = float(self.cfg["extent"])
         self.image_size = int(self.cfg["image_size"])
+        self.vis = None
+        if rig is not None:
+            from robo_project.ml.fusion.visibility import Visibility, body_half, sensor_views
+            self.vis = Visibility(64, self.extent, sensor_views(rig), body_half(rig))
 
     @torch.no_grad()
-    def predict(self, rgb: dict, lidar_grid, depth_grid) -> np.ndarray:
+    def predict_full(self, rgb: dict, lidar_grid, depth_grid):
+        """-> (free probability per cell, seen mask or None). 3-class model: free probability among the known
+        classes, seen = the model's most likely class is not 'unknown'. 1-output model: sigmoid, seen from the
+        rig's visibility if rig= was given (else None)."""
         pano = torch.from_numpy(make_pano(rgb, self.image_size))[None].to(self.device)
         geo = torch.from_numpy(make_geo(lidar_grid, depth_grid))[None].to(self.device)
-        return torch.sigmoid(self.model(pano, geo))[0, 0].cpu().numpy()
+        out = self.model(pano, geo)[0]
+        if self.n_classes == 3:
+            p = torch.softmax(out, dim=0).cpu().numpy()
+            free = p[CLS_FREE] / np.maximum(p[CLS_FREE] + p[CLS_OCC], 1e-6)
+            return free, p.argmax(axis=0) != CLS_UNK
+        free = torch.sigmoid(out[0]).cpu().numpy()
+        return free, (self.vis.visible(free) if self.vis is not None else None)
+
+    def predict(self, rgb: dict, lidar_grid, depth_grid) -> np.ndarray:
+        return self.predict_full(rgb, lidar_grid, depth_grid)[0]
+
+    def predict_grid(self, rgb: dict, lidar_grid, depth_grid) -> np.ndarray:
+        """64 x 64 int8: 1 = free, 0 = occupied, -1 = unknown (cells none of the rig's sensors can see,
+        computed with the predicted obstacles; needs rig= in the constructor, else no -1 cells)."""
+        free, seen = self.predict_full(rgb, lidar_grid, depth_grid)
+        return to_occupancy(free, seen)

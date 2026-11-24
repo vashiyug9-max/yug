@@ -7,6 +7,9 @@ Each sample (one .npz) stores the raw sensors of the VineBot rig at a random pos
   depth_front                                   float16 metres (front RGB-D camera)
   scan                                          float32 LiDAR ranges, n_rays bearings over 360 deg (inf = none)
   label                                         uint8 egocentric free-space map, 6 m x 6 m at 5 cm (1 = free)
+Target given to the model (label_grid): the middle extent x extent of the label, resized to grid x grid, with
+  1 = free, 0 = occupied, -1 = unknown: no sensor of the rig can see the cell (outside every camera's and the
+  LiDAR's field of view, or behind an occupied cell; visibility.py). Unknown cells are left out of the loss.
 The geometric grids are computed from scan/depth at training time with the same code the robot runs,
 so the grid extent (3 x coarse cell size) can be chosen per training run without re-collecting.
 """
@@ -20,6 +23,7 @@ import numpy as np
 
 from robo_project.ml.fusion.lidar_local_occ import RangeLocalOcc, depth_to_points, scan_to_points
 from robo_project.common.rig import CAM_ORDER, load_rig
+from robo_project.ml.fusion.visibility import UNKNOWN, Visibility, body_half, sensor_views
 
 LABEL_EXTENT = 6.0
 LABEL_RES = 0.05
@@ -47,7 +51,8 @@ class FusionDataset:
     """
 
     def __init__(self, files, extent: float, rig: dict, grid: int = 64, augment: bool = False,
-                 drop=(), p_drop_lidar=0.25, p_drop_depth=0.2, p_drop_cams=0.15, seed: int = 0):
+                 drop=(), p_drop_lidar=0.25, p_drop_depth=0.2, p_drop_cams=0.15, seed: int = 0,
+                 unknown: bool = True):
         self.files = list(files)
         self.extent, self.grid, self.rig, self.augment, self.drop = extent, grid, rig, augment, set(drop)
         self.p = dict(lidar=p_drop_lidar, depth=p_drop_depth, cams=p_drop_cams)
@@ -58,12 +63,20 @@ class FusionDataset:
         self.front = front
         self.depth_occ = RangeLocalOcc(grid, extent, band[0], band[1], float(rig["depth_max"]), fov=front["hfov"])
         self.seed = seed
+        self.unknown = unknown          # False: old 1 / 0 target over all cells (for comparisons)
+        # unknown = not visible to any sensor; computed on the label crop (5 cm), rig sensors are left/right
+        # symmetric, so the same rays also hold for mirrored samples
+        self.vis = Visibility(int(round(extent / LABEL_RES)), extent, sensor_views(rig), body_half(rig))
 
     def __len__(self):
         return len(self.files)
 
     def raw(self, i):
+        """Real-LiDAR samples (ml/tools/real_lidar_dataset.py) have no camera / depth fields: rgb, depth = None."""
         d = np.load(self.files[i])
+        if "rgb_front" not in d.files:
+            origin = d["scan_origin"].astype(np.float64)
+            return None, None, d["scan"].astype(np.float32), d["label"], origin
         rgb = {c: cv2.cvtColor(cv2.imdecode(d[f"rgb_{c}"], cv2.IMREAD_COLOR), cv2.COLOR_BGR2RGB) for c in CAM_ORDER}
         # scan_origin: LiDAR position (x, y) the scan is measured from (new data: the real front mount);
         # old data has no origin = scan from the robot centre
@@ -71,10 +84,19 @@ class FusionDataset:
         return rgb, d["depth_front"].astype(np.float32), d["scan"].astype(np.float32), d["label"], origin
 
     def label_grid(self, label):
+        """grid x grid target: 1 free, 0 occupied, -1 unknown (not visible to any sensor)."""
         n = int(round(self.extent / LABEL_RES))
         c0 = (label.shape[0] - n) // 2
         crop = label[c0:c0 + n, c0:c0 + n].astype(np.float32)
-        return cv2.resize(crop, (self.grid, self.grid), interpolation=cv2.INTER_AREA)
+        unk = crop < 0                                   # real-LiDAR labels: -1 = never covered by the LiDAR
+        crop = np.where(unk, 1.0, crop).astype(np.float32)   # unknown cells do not block the view
+        free = cv2.resize(crop, (self.grid, self.grid), interpolation=cv2.INTER_AREA)
+        if not self.unknown and not unk.any():
+            return free
+        seen = ((self.vis.visible(crop) if self.unknown else True) & ~unk).astype(np.float32)
+        seen = cv2.resize(seen, (self.grid, self.grid), interpolation=cv2.INTER_AREA) > 0.5
+        free[~seen] = UNKNOWN
+        return free
 
     def __getitem__(self, i):
         from robo_project.ml.fusion.fusion_model import make_geo, make_pano
@@ -82,16 +104,20 @@ class FusionDataset:
         rgb, depth, scan, label, origin = self.raw(i)
         angles = np.linspace(-np.pi, np.pi, len(scan), endpoint=False)
         drop = set(self.drop)
+        real = rgb is None                               # real LiDAR sample: LiDAR only
+        if real:
+            drop |= {"cams", "depth"}
         if self.augment:
             for k, pk in self.p.items():
-                if rng.random() < pk:
+                if rng.random() < pk and not (real and k == "lidar"):
                     drop.add(k)
             if "lidar" in drop and "cams" in drop:      # never remove both main sensors
                 drop.discard("cams")
             if rng.random() < 0.5:                      # mirror left <-> right
-                rgb = {"front": rgb["front"][:, ::-1], "back": rgb["back"][:, ::-1],
-                       "left": rgb["right"][:, ::-1], "right": rgb["left"][:, ::-1]}
-                depth = depth[:, ::-1]
+                if not real:
+                    rgb = {"front": rgb["front"][:, ::-1], "back": rgb["back"][:, ::-1],
+                           "left": rgb["right"][:, ::-1], "right": rgb["left"][:, ::-1]}
+                    depth = depth[:, ::-1]
                 scan = np.interp(-angles, angles, scan, period=2 * np.pi)
                 origin[1] = -origin[1]
                 label = label[:, ::-1]
@@ -100,10 +126,11 @@ class FusionDataset:
                     c, w = rng.uniform(-np.pi, np.pi), np.deg2rad(rng.uniform(15, 60))
                     scan[np.abs(np.angle(np.exp(1j * (angles - c)))) < w / 2] = np.inf
             scan = scan + rng.normal(0, 0.02, scan.shape)
-            depth = depth * rng.normal(1.0, 0.01, depth.shape)
-            depth[rng.random(depth.shape) < 0.05] = 0.0
-            gain = rng.uniform(0.8, 1.2)
-            rgb = {c: np.clip(im.astype(np.float32) * gain, 0, 255).astype(np.uint8) for c, im in rgb.items()}
+            if not real:
+                depth = depth * rng.normal(1.0, 0.01, depth.shape)
+                depth[rng.random(depth.shape) < 0.05] = 0.0
+                gain = rng.uniform(0.8, 1.2)
+                rgb = {c: np.clip(im.astype(np.float32) * gain, 0, 255).astype(np.uint8) for c, im in rgb.items()}
 
         # sensor_z: the blind-zone filter uses the 3D distance from the LiDAR (at the rig height), as on
         # the robot. Without it, wall hits 10-15 cm away (Habitat's agent is thin) were dropped.
@@ -114,7 +141,7 @@ class FusionDataset:
         depth_grid = None if "depth" in drop else self.depth_occ.compute(
             depth_to_points(depth, self.front["hfov"], float(self.front["height"]), cam_x=cam_x,
                             max_depth=float(self.rig["depth_max"])), (cam_x, 0.0))[0]
-        pano = make_pano({} if "cams" in drop else rgb, self.size)
+        pano = make_pano({} if "cams" in drop or rgb is None else rgb, self.size)
         geo = make_geo(lidar_grid, depth_grid, self.grid)
         return pano, geo, self.label_grid(np.ascontiguousarray(label))[None]
 

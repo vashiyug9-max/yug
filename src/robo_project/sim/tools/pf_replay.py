@@ -61,6 +61,9 @@ def wheel_odometry(odom, trans_scale=1.03, rot_scale=1.08, trans_noise=0.02, rot
 
 
 def run(odom, grids, the_map, cfg):
+    if cfg.get("global"):
+        return run_global(odom, grids, the_map, cfg)
+
     core = PFCore(n=int(cfg.get("n", 600)), sigma_m=cfg.get("sigma_m", 0.40), p_floor=cfg.get("p_floor", 0.10),
                   effective_cells=cfg.get("effective_cells", 5.0),
                   noise=(cfg.get("ntt", 0.05), cfg.get("nrr", 0.03), cfg.get("nrt", 0.05), cfg.get("ntr", 0.02)),
@@ -111,6 +114,70 @@ def run(odom, grids, the_map, cfg):
     return np.array(errs), np.array(yerrs), wheel
 
 
+def run_global(odom, grids, the_map, cfg):
+    """Unknown start: particles over the whole sketch; localized when the cloud has converged (spread below
+    conv_xy m and conv_yaw_deg) after at least conv_dist m of driving. Then tracking as in the node."""
+    k0 = int(np.searchsorted([t for t, _ in odom], odom[0][0] + cfg.get("start_s", 0.0)))
+    odom = odom[k0:]
+    core = PFCore(n=int(cfg.get("n", 600)), sigma_m=cfg.get("sigma_m", 0.40), p_floor=cfg.get("p_floor", 0.10),
+                  effective_cells=cfg.get("effective_cells", 5.0),
+                  noise=(cfg.get("ntt", 0.05), cfg.get("nrr", 0.03), cfg.get("nrt", 0.05), cfg.get("ntr", 0.02)),
+                  seed=int(cfg.get("seed", 0)))
+    info = the_map.info
+    occ = np.asarray(the_map.data, np.int16).reshape(info.height, info.width) != 0
+    core.set_map(occ, (info.origin.position.x, info.origin.position.y), info.resolution)
+    core.reset_global(int(cfg.get("n_global", 20000)))
+    wheel = wheel_odometry(odom, cfg.get("trans_scale", 1.03), cfg.get("rot_scale", 1.08),
+                           cfg.get("trans_noise", 0.02), cfg.get("rot_noise", 0.03), int(cfg.get("odom_seed", 1)))
+    wt = np.array([t for t, _ in wheel])
+    last, corr, travelled, first = wheel[0][1], None, 0.0, True
+    gi = int(np.searchsorted([g[0] for g in grids], odom[0][0]))
+    res = dict(t_loc=None, dist_loc=None, err_loc=None, errs=[], fit_loc=None, fits=[])
+    conv_since = None
+    for k, (t, w) in enumerate(wheel):
+        while gi < len(grids) and grids[gi][0] <= t:
+            gt_, ginfo, gdata = grids[gi]
+            gi += 1
+            j = int(np.argmin(np.abs(wt - gt_)))
+            if abs(wt[j] - gt_) > 0.15:
+                continue
+            o = wheel[j][1]
+            d = compose(inverse(last), o)
+            moved = math.hypot(d[0], d[1]) >= cfg.get("min_trans", 0.05) or abs(d[2]) >= cfg.get("min_rot", 0.05)
+            if not moved and not first:
+                continue
+            fx, ly, is_occ = grid_cells(ginfo, gdata, 2)
+            if len(fx) < 20:
+                continue
+            if not first:
+                core.predict(last, o)
+            travelled += math.hypot(d[0], d[1])
+            last, first = o, False
+            core.update(fx, ly, is_occ)
+            if corr is None:
+                tight = core.spread() < cfg.get("conv_xy", 0.35) and core.yaw_spread() < math.radians(cfg.get("conv_yaw_deg", 12))
+                conv_since = (travelled if conv_since is None else conv_since) if tight else None
+                if tight and travelled >= cfg.get("conv_dist", 1.0) and travelled - conv_since >= cfg.get("conv_hold", 0.0) \
+                        and core.fit >= cfg.get("min_fit", -99):
+                    res["fit_loc"] = core.fit
+                    core.shrink(core.n)
+                    corr = compose(core.estimate(), inverse(o))
+                    g = odom[k][1]
+                    e = core.estimate()
+                    res.update(t_loc=t - wheel[0][0], dist_loc=travelled, err_loc=math.hypot(e[0] - g[0], e[1] - g[1]))
+            else:
+                g, e = odom[k][1], core.estimate()
+                res["fits"].append((core.fit, math.hypot(e[0] - g[0], e[1] - g[1])))
+                target = compose(core.estimate(), inverse(o))
+                dist, turn = math.hypot(d[0], d[1]), abs(d[2])
+                corr = limit_step(corr, target, o, 0.10 * dist + 0.05 * turn + 0.001,
+                                  0.02 * turn + 0.005 * dist + math.radians(0.05))
+        if corr is not None:
+            est, g = compose(corr, w), odom[k][1]
+            res["errs"].append(math.hypot(est[0] - g[0], est[1] - g[1]))
+    return res
+
+
 def dead_reckoning_error(odom, wheel):
     corr = compose(odom[0][1], inverse(wheel[0][1]))
     e = [math.hypot(compose(corr, w)[0] - g[0], compose(corr, w)[1] - g[1]) for (_, g), (_, w) in zip(odom, wheel)]
@@ -127,13 +194,33 @@ def main():
     for a in sys.argv[2:]:
         if "=" in a:
             k, v = a.split("=", 1)
-            cfg[k] = v if k == "map_npy" else float(v)
+            cfg[k] = v if k in ("map_npy", "starts") else float(v)
     odom, grids, the_map = read(bag)
     path = sum(math.hypot(b[1][0] - a[1][0], b[1][1] - a[1][1]) for a, b in zip(odom, odom[1:]))
     print(f"{len(odom)} poses, {len(grids)} ML grids, {odom[-1][0] - odom[0][0]:.0f} s, {path:.1f} m driven")
     sweep = [{}] if "--sweep" not in sys.argv else [
         dict(sigma_m=s, effective_cells=e, ntt=nt, nrr=nr)
         for s in (0.25, 0.4, 0.6) for e in (10, 25, 60) for nt, nr in ((0.10, 0.10), (0.15, 0.25))]
+    if cfg.get("global"):
+        allfits = []
+        for st in [float(x) for x in str(cfg.get("starts", "0,40,80,120,160")).split(",")]:
+            r = run(odom, grids, the_map, dict(cfg, start_s=st))
+            e = np.array(r["errs"]) if r["errs"] else np.array([np.nan])
+            if r["t_loc"] is None:
+                print(f"start at {st:3d} s: NOT localized", flush=True)
+            else:
+                print(f"start at {st:3.0f} s: localized after {r['t_loc']:5.1f} s / {r['dist_loc']:4.1f} m driven, "
+                      f"error then {r['err_loc']:.2f} m (fit {r['fit_loc']:.3f}); afterwards mean {np.nanmean(e):.2f} "
+                      f"max {np.nanmax(e):.2f} m", flush=True)
+                allfits += r["fits"]
+        if allfits:
+            f = np.array(allfits)
+            for lo, hi in ((0, 1.0), (1.0, 2.0), (2.0, 99)):
+                sel = (f[:, 1] >= lo) & (f[:, 1] < hi)
+                if sel.any():
+                    print(f"fit while tracking, pose error {lo}-{hi} m: n={sel.sum():5d}  fit p5 {np.percentile(f[sel, 0], 5):.3f}  "
+                          f"median {np.median(f[sel, 0]):.3f}")
+        return
     for extra in sweep:
         c = dict(cfg, **extra)
         e, y, wheel = run(odom, grids, the_map, c)

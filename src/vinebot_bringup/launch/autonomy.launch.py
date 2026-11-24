@@ -4,7 +4,7 @@ Start it AFTER real_robot.launch.py (motors / joystick / twist_mux) and the sens
 
   ros2 launch vinebot_bringup real_robot.launch.py odom_topic:=/wheel_odom          # terminal 1
   ros2 run vinebot_bringup motion_confirm                                            # terminal 1b
-  ros2 launch vinebot_bringup autonomy.launch.py init_x:=... init_y:=... init_yaw:=...   # this file
+  ros2 launch vinebot_bringup autonomy.launch.py python:=$(which python3)               # this file
 
 What runs (our nodes unchanged, connected by remaps / parameters - the same as the tested simulation setup
 "run_regression.sh ... loc_imu"):
@@ -18,7 +18,10 @@ What runs (our nodes unchanged, connected by remaps / parameters - the same as t
                         (sensor stamps matched within sync_tolerance; Livox points moved to base_footprint
                         with the rig mounting; forget_s fades old obstacles)
   motion_planner      A* on sketch + ML obstacles (run with the python that has numba: python3 -m ...)
-Start pose: init_x / init_y / init_yaw on the sketch map, or "2D Pose Estimate" in RViz (/initialpose).
+Start pose: UNKNOWN by default - the robot localizes itself on the sketch (global localization): drive it a few
+metres with the joystick until the localization terminal says LOCALIZED (/localization/status); before that no
+pose is published and nothing moves autonomously. Known start pose: init_x:=.. init_y:=.. init_yaw:=.. (sketch
+map, m / rad), or "2D Pose Estimate" in RViz (/initialpose) at any time.
 """
 from launch import LaunchDescription
 from ament_index_python.packages import PackageNotFoundError, get_package_share_directory
@@ -33,9 +36,10 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
     L = LaunchConfiguration
     args = [
-        DeclareLaunchArgument("init_x", default_value="0.0", description="start pose on the sketch map (m)"),
-        DeclareLaunchArgument("init_y", default_value="0.0"),
-        DeclareLaunchArgument("init_yaw", default_value="0.0", description="rad, 0 = +x of the map"),
+        DeclareLaunchArgument("init_x", default_value="",
+                              description="start pose on the sketch map (m); empty = unknown, the robot localizes itself"),
+        DeclareLaunchArgument("init_y", default_value=""),
+        DeclareLaunchArgument("init_yaw", default_value="", description="rad, 0 = +x of the map"),
         DeclareLaunchArgument("use_ekf", default_value="true",
                               description="true: wheels + IMU (needs ros-humble-robot-localization and /imu/data); "
                                           "false: wheel odometry only (larger heading errors)"),
@@ -63,6 +67,8 @@ def generate_launch_description():
     rot_k, rot_m = sel(0.02, 0.15), sel(0.005, 0.05)
     n_t, n_r = sel(0.05, 0.08), sel(0.03, 0.10)
     to_loc = ("/odom", "/localization/odom")
+    unknown_start = PythonExpression(["'", L("init_x"), "' == ''"])
+    num = lambda name: PythonExpression(["float('", L(name), "' or 0.0)"])
 
     try:
         get_package_share_directory("robot_localization")
@@ -86,9 +92,10 @@ def generate_launch_description():
                        + ("" if have_rl == "true" else " - robot_localization is not installed"))
     pf = Node(package="robo_project", executable="sketch_pf_node", output="screen",
               parameters=[{"odom_topic": ParameterValue(odom_in, value_type=str),
-                           "init_x": ParameterValue(L("init_x"), value_type=float),
-                           "init_y": ParameterValue(L("init_y"), value_type=float),
-                           "init_yaw": ParameterValue(L("init_yaw"), value_type=float),
+                           "global_init": ParameterValue(unknown_start, value_type=bool),
+                           "init_x": ParameterValue(num("init_x"), value_type=float),
+                           "init_y": ParameterValue(num("init_y"), value_type=float),
+                           "init_yaw": ParameterValue(num("init_yaw"), value_type=float),
                            "corr_rot_per_rad": ParameterValue(rot_k, value_type=float),
                            "corr_rot_per_m": ParameterValue(rot_m, value_type=float),
                            "noise_trans_per_m": ParameterValue(n_t, value_type=float),
